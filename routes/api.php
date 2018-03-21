@@ -5,4 +5,8 @@ Route::group([
     'prefix'     => 'api',
     'as'         => 'api.',
 ], function () {
+    //Route::resource('callbacks', 'CallbacksController');
+    //Route::resource('schedules', 'SchedulesController');
+    Route::resource('events', 'EventsController');
+    //Route::resource('event_types', 'EventTypesController');
 });

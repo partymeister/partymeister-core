@@ -86,6 +86,18 @@ class PartymeisterServiceProvider extends ServiceProvider
 
     public function routeModelBindings()
     {
+        Route::bind('callback', function($id){
+            return \Partymeister\Core\Models\Callback::findOrFail($id);
+        });
+        Route::bind('schedule', function($id){
+            return \Partymeister\Core\Models\Schedule::findOrFail($id);
+        });
+        Route::bind('event', function($id){
+            return \Partymeister\Core\Models\Event::findOrFail($id);
+        });
+        Route::bind('event_type', function($id){
+            return \Partymeister\Core\Models\EventType::findOrFail($id);
+        });
     }
 
 
