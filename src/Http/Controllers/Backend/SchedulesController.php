@@ -81,9 +81,9 @@ class SchedulesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Schedule $record)
     {
-        //
+        return view('partymeister-core::backend.schedules.show', compact('record'));
     }
 
 

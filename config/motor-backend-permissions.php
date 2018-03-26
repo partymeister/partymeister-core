@@ -33,4 +33,20 @@ return [
             'delete'
         ]
     ],
+    'guests'      => [
+        'name'   => 'partymeister-core::backend/guests.guests',
+        'values' => [
+            'read',
+            'write',
+            'delete'
+        ]
+    ],
+    'visitors'    => [
+        'name'   => 'partymeister-core::backend/visitors.visitors',
+        'values' => [
+            'read',
+            'write',
+            'delete'
+        ]
+    ],
 ];

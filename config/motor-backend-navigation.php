@@ -42,6 +42,22 @@ return [
                     'roles'       => [ 'SuperAdmin' ],
                     'permissions' => [ 'event_types.read' ],
                 ],
+                500 => [ // <-- !!! replace 332 with your own sort position !!!
+                    'slug'        => 'guests',
+                    'name'        => 'partymeister-core::backend/guests.guests',
+                    'icon'        => 'fa fa-plus',
+                    'route'       => 'backend.guests.index',
+                    'roles'       => [ 'SuperAdmin' ],
+                    'permissions' => [ 'guests.read' ],
+                ],
+                600 => [ // <-- !!! replace 226 with your own sort position !!!
+                    'slug'        => 'visitors',
+                    'name'        => 'partymeister-core::backend/visitors.visitors',
+                    'icon'        => 'fa fa-plus',
+                    'route'       => 'backend.visitors.index',
+                    'roles'       => [ 'SuperAdmin' ],
+                    'permissions' => [ 'visitors.read' ],
+                ],
             ],
         ],
     ]

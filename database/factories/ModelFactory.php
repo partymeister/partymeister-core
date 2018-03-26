@@ -35,3 +35,21 @@ $factory->define(Partymeister\Core\Models\EventType::class, function (Faker\Gene
         'name' => $faker->word
     ];
 });
+
+$factory->define(Partymeister\Core\Models\Guest::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word
+    ];
+});
+
+$factory->define(Partymeister\Competitions\Models\AccessKey::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word
+    ];
+});
+
+$factory->define(Partymeister\Core\Models\Visitor::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word
+    ];
+});

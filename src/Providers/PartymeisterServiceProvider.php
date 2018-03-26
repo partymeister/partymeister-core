@@ -4,6 +4,7 @@ namespace Partymeister\Core\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Partymeister\Core\Console\Commands\PartymeisterCoreImportTicketsCommand;
 
 class PartymeisterServiceProvider extends ServiceProvider
 {
@@ -35,7 +36,7 @@ class PartymeisterServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                // add commands here
+                PartymeisterCoreImportTicketsCommand::class,
             ]);
         }
     }
@@ -97,6 +98,12 @@ class PartymeisterServiceProvider extends ServiceProvider
         });
         Route::bind('event_type', function($id){
             return \Partymeister\Core\Models\EventType::findOrFail($id);
+        });
+        Route::bind('guest', function($id){
+            return \Partymeister\Core\Models\Guest::findOrFail($id);
+        });
+        Route::bind('visitor', function($id){
+            return \Partymeister\Core\Models\Visitor::findOrFail($id);
         });
     }
 

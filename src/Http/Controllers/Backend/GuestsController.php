@@ -4,19 +4,17 @@ namespace Partymeister\Core\Http\Controllers\Backend;
 
 use Motor\Backend\Http\Controllers\Controller;
 
-use Partymeister\Core\Models\Event;
-use Partymeister\Core\Http\Requests\Backend\EventRequest;
-use Partymeister\Core\Services\EventService;
-use Partymeister\Core\Grids\EventGrid;
-use Partymeister\Core\Forms\Backend\EventForm;
+use Partymeister\Core\Models\Guest;
+use Partymeister\Core\Http\Requests\Backend\GuestRequest;
+use Partymeister\Core\Services\GuestService;
+use Partymeister\Core\Grids\GuestGrid;
+use Partymeister\Core\Forms\Backend\GuestForm;
 
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 
-class EventsController extends Controller
+class GuestsController extends Controller
 {
-
     use FormBuilderTrait;
-
 
     /**
      * Display a listing of the resource.
@@ -25,13 +23,13 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $grid = new EventGrid(Event::class);
+        $grid = new GuestGrid(Guest::class);
 
-        $service      = EventService::collection($grid);
+        $service = GuestService::collection($grid);
         $grid->filter = $service->getFilter();
         $paginator    = $service->getPaginator();
 
-        return view('partymeister-core::backend.events.index', compact('paginator', 'grid'));
+        return view('partymeister-core::backend.guests.index', compact('paginator', 'grid'));
     }
 
 
@@ -40,16 +38,15 @@ class EventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Event $record)
+    public function create()
     {
-        $form = $this->form(EventForm::class, [
+        $form = $this->form(GuestForm::class, [
             'method'  => 'POST',
-            'route'   => 'backend.events.store',
-            'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'route'   => 'backend.guests.store',
+            'enctype' => 'multipart/form-data'
         ]);
 
-        return view('partymeister-core::backend.events.create', compact('form'));
+        return view('partymeister-core::backend.guests.create', compact('form'));
     }
 
 
@@ -60,32 +57,20 @@ class EventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(EventRequest $request)
+    public function store(GuestRequest $request)
     {
-        $form = $this->form(EventForm::class);
+        $form = $this->form(GuestForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
         if ( ! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        EventService::createWithForm($request, $form);
+        GuestService::createWithForm($request, $form);
 
-        flash()->success(trans('partymeister-core::backend/events.created'));
+        flash()->success(trans('partymeister-core::backend/guests.created'));
 
-        return redirect('backend/events');
-    }
-
-
-    /**
-     * @param Event $record
-     */
-    public function duplicate(Event $record)
-    {
-        $newRecord       = $record->replicate();
-        $newRecord->name = 'Duplicate of ' . $newRecord->name;
-
-        return $this->create($newRecord);
+        return redirect('backend/guests');
     }
 
 
@@ -109,16 +94,16 @@ class EventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Event $record)
+    public function edit(Guest $record)
     {
-        $form = $this->form(EventForm::class, [
+        $form = $this->form(GuestForm::class, [
             'method'  => 'PATCH',
-            'url'     => route('backend.events.update', [ $record->id ]),
+            'url'     => route('backend.guests.update', [ $record->id ]),
             'enctype' => 'multipart/form-data',
             'model'   => $record
         ]);
 
-        return view('partymeister-core::backend.events.edit', compact('form'));
+        return view('partymeister-core::backend.guests.edit', compact('form'));
     }
 
 
@@ -130,20 +115,20 @@ class EventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(EventRequest $request, Event $record)
+    public function update(GuestRequest $request, Guest $record)
     {
-        $form = $this->form(EventForm::class);
+        $form = $this->form(GuestForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
         if ( ! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        EventService::updateWithForm($record, $request, $form);
+        GuestService::updateWithForm($record, $request, $form);
 
-        flash()->success(trans('partymeister-core::backend/events.updated'));
+        flash()->success(trans('partymeister-core::backend/guests.updated'));
 
-        return redirect('backend/events');
+        return redirect('backend/guests');
     }
 
 
@@ -154,12 +139,12 @@ class EventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Event $record)
+    public function destroy(Guest $record)
     {
-        EventService::delete($record);
+        GuestService::delete($record);
 
-        flash()->success(trans('partymeister-core::backend/events.deleted'));
+        flash()->success(trans('partymeister-core::backend/guests.deleted'));
 
-        return redirect('backend/events');
+        return redirect('backend/guests');
     }
 }

@@ -2,17 +2,21 @@
 
 namespace Partymeister\Core\Transformers;
 
+use Carbon\Carbon;
 use League\Fractal;
 use Partymeister\Core\Models\Event;
 
 class EventTransformer extends Fractal\TransformerAbstract
 {
+
     /**
      * List of resources possible to include
      *
      * @var array
      */
-    protected $availableIncludes = [];
+    protected $availableIncludes = [ 'event_type' ];
+
+    protected $defaultIncludes = [ 'event_type' ];
 
 
     /**
@@ -25,7 +29,18 @@ class EventTransformer extends Fractal\TransformerAbstract
     public function transform(Event $record)
     {
         return [
-            'id'        => (int) $record->id
+            'id'                => (int) $record->id,
+            'name'              => $record->name,
+            'starts_at'         => Carbon::createFromTimestamp(strtotime($record->starts_at))->toIso8601String(),
+            'ends_at'           => $record->ends_at,
+            'is_visible'        => (bool) $record->is_visible,
+            'is_organizer_only' => (bool) $record->is_organizer_only
         ];
+    }
+
+
+    public function includeEventType(Event $record)
+    {
+        return $this->item($record->event_type, new EventTypeTransformer());
     }
 }

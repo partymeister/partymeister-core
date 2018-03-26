@@ -9,7 +9,7 @@ use Partymeister\Core\Http\Requests\Backend\ScheduleRequest;
 use Partymeister\Core\Services\ScheduleService;
 use Partymeister\Core\Transformers\ScheduleTransformer;
 
-class SchedulesController extends Controller
+class   SchedulesController extends Controller
 {
     /**
      * Display a listing of the resource.

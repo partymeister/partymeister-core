@@ -3,11 +3,10 @@
 namespace Partymeister\Core\Transformers;
 
 use League\Fractal;
-use Partymeister\Core\Models\Callback;
+use Partymeister\Core\Models\Visitor;
 
-class CallbackTransformer extends Fractal\TransformerAbstract
+class VisitorTransformer extends Fractal\TransformerAbstract
 {
-
     /**
      * List of resources possible to include
      *
@@ -19,16 +18,14 @@ class CallbackTransformer extends Fractal\TransformerAbstract
     /**
      * Transform record to array
      *
-     * @param Callback $record
+     * @param Visitor $record
      *
      * @return array
      */
-    public function transform(Callback $record)
+    public function transform(Visitor $record)
     {
         return [
-            'id'   => (int) $record->id,
-            'hash' => $record->hash,
-            'name' => $record->name
+            'id'        => (int) $record->id
         ];
     }
 }

@@ -7,6 +7,7 @@ use Partymeister\Core\Models\EventType;
 
 class EventTypeTransformer extends Fractal\TransformerAbstract
 {
+
     /**
      * List of resources possible to include
      *
@@ -25,7 +26,10 @@ class EventTypeTransformer extends Fractal\TransformerAbstract
     public function transform(EventType $record)
     {
         return [
-            'id'        => (int) $record->id
+            'id'          => (int) $record->id,
+            'name'        => $record->name,
+            'web_color'   => $record->web_color,
+            'slide_color' => $record->slide_color
         ];
     }
 }

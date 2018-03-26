@@ -18,6 +18,6 @@ class EventForm extends Form
             ->add('is_visible', 'checkbox', ['label' => trans('partymeister-core::backend/events.is_visible')])
             ->add('is_organizer_only', 'checkbox', ['label' => trans('partymeister-core::backend/events.is_organizer_only')])
             ->add('sort_position', 'text', ['label' => trans('partymeister-core::backend/events.sort_position')])
-            ->add('submit', 'submit', ['attr' => ['class' => 'btn btn-primary'], 'label' => trans('partymeister-core::backend/event_types.save')]);
+            ->add('submit', 'submit', ['attr' => ['class' => 'btn btn-primary'], 'label' => trans('partymeister-core::backend/events.save')]);
     }
 }

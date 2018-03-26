@@ -7,12 +7,15 @@ use Partymeister\Core\Models\Schedule;
 
 class ScheduleTransformer extends Fractal\TransformerAbstract
 {
+
     /**
      * List of resources possible to include
      *
      * @var array
      */
-    protected $availableIncludes = [];
+    protected $availableIncludes = [ 'events' ];
+
+    protected $defaultIncludes = [ 'events' ];
 
 
     /**
@@ -25,7 +28,24 @@ class ScheduleTransformer extends Fractal\TransformerAbstract
     public function transform(Schedule $record)
     {
         return [
-            'id'        => (int) $record->id
+            'id'   => (int) $record->id,
+            'name' => $record->name
         ];
+    }
+
+
+    public function includeEvents(Schedule $record)
+    {
+        $collection = $record->events()
+            ->orderBy('starts_at', 'ASC')
+            ->orderBy('sort_position',
+            'ASC')
+            ->orderBy('event_type_id', 'ASC')
+            ->orderBy('name', 'ASC')
+            ->get();
+
+        if ( ! is_null($collection)) {
+            return $this->collection($collection, new EventTransformer());
+        }
     }
 }
