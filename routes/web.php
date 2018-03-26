@@ -35,9 +35,3 @@ Route::group([
 ], function () {
     Route::get('callbacks', 'CallbacksController@index')->name('callbacks.index');
 });
-
-Route::get('stuhl/test', function() {
-    $result = \Partymeister\Core\Services\StuhlService::send('Test 1, 2, 3');
-
-    return response()->json($result);
-});
