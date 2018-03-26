@@ -1,0 +1,30 @@
+{
+  "name": "partymeister/core",
+  "description": "Partymeister core package",
+  "license": "MIT",
+  "keywords": [
+    "motor"
+  ],
+  "authors": [
+    {
+      "name": "Reza Esmaili",
+      "email": "me@dfox.info"
+    }
+  ],
+  "require": {
+    "motor-cms/motor-backend": "0.4.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Partymeister\\Core\\": "src"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Partymeister\\Core\\Providers\\PartymeisterServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev"
+}
