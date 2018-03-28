@@ -21,6 +21,7 @@ return [
     'comment'                     => 'Comment',
     'has_badge'                   => 'Has badge',
     'has_arrived'                 => 'Has arrived',
+    'arrived_at'                  => 'Arrived at',
     'ticket_code_scanned'         => 'Ticket code scanned',
     'mark_as_arrived'             => 'Mark guest as \'arrived\'',
     'badge_info_vue'              => 'Remember to give {{name}} his/her badge!',

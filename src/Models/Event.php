@@ -30,7 +30,7 @@ class Event extends Model
      * @var array
      */
     protected $searchableColumns = [
-        'name',
+        'events.name',
         'event_type.name'
     ];
 

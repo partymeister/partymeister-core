@@ -18,7 +18,7 @@
 @section('contentheader_title')
     {{ trans('partymeister-core::backend/schedules.slides_preview') }}
     <button class="btn btn-sm btn-success float-right schedule-slides-save">{{trans('partymeister-core::backend/schedules.save_slides')}}</button>
-    {!! link_to_route('backend.competitions.index', trans('motor-backend::backend/global.back'), [], ['class' => 'pull-right btn btn-sm btn-danger']) !!}
+    {!! link_to_route('backend.schedules.index', trans('motor-backend::backend/global.back'), [], ['class' => 'pull-right btn btn-sm btn-danger']) !!}
 @endsection
 
 @section('main-content')

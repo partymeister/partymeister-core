@@ -15,7 +15,7 @@ class EventGrid extends Grid
         $this->addColumn('name', trans('motor-backend::backend/global.name'), true);
 
         $this->addColumn('event_type.name',
-            trans('partymeister-core::backend/event_types.event_type'), true)->renderer(BladeRenderer::class, ['template' => 'partymeister-core::grid.event_type']);
+            trans('partymeister-core::backend/event_types.event_type'))->renderer(BladeRenderer::class, ['template' => 'partymeister-core::grid.event_type']);
 
         $this->addColumn('starts_at', trans('partymeister-core::backend/events.starts_at'), true)->renderer(DateRenderer::class);
 

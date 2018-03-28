@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Motor\Core\Traits\Searchable;
 use Motor\Core\Traits\Filterable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Partymeister\Competitions\Models\Entry;
+use Partymeister\Competitions\Models\Vote;
 
 class Visitor extends Authenticatable
 {
@@ -13,14 +15,14 @@ class Visitor extends Authenticatable
     use Searchable;
     use Filterable;
 
-    protected $guard_name = 'visitor';
+    protected $guard = 'visitor';
 
     /**
      * Searchable columns for the searchable trait
      *
      * @var array
      */
-    protected $searchableColumns = [ 'name', 'group', 'country_iso_3166_1' ];
+    protected $searchableColumns = [ 'name' ];
 
     /**
      * The attributes that are mass assignable.
@@ -56,5 +58,17 @@ class Visitor extends Authenticatable
     public function username()
     {
         return 'name';
+    }
+
+
+    public function entries()
+    {
+        return $this->hasMany(Entry::class);
+    }
+
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
     }
 }

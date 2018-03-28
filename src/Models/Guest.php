@@ -31,14 +31,14 @@ class Guest extends Model
      * @var array
      */
     protected $searchableColumns = [
-        'name',
-        'handle',
-        'email',
-        'company',
-        'country',
-        'ticket_code',
-        'ticket_type',
-        'ticket_order_number',
+        'guests.name',
+        'guests.handle',
+        'guests.email',
+        'guests.company',
+        'guests.country',
+        'guests.ticket_code',
+        'guests.ticket_type',
+        'guests.ticket_order_number',
     ];
 
     /**

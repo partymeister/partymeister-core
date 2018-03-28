@@ -11,7 +11,7 @@ class GuestGrid extends Grid
 
     protected function setup()
     {
-        $this->addColumn('category.name', trans('motor-backend::backend/categories.category'), true);
+        $this->addColumn('category.name', trans('motor-backend::backend/categories.category'));
         $this->addColumn('name', trans('partymeister-core::backend/guests.name'), true);
         $this->addColumn('handle', trans('partymeister-core::backend/guests.handle'), true);
         $this->addColumn('company', trans('partymeister-core::backend/guests.company'), true);
