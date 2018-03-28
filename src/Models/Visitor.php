@@ -22,7 +22,7 @@ class Visitor extends Authenticatable
      *
      * @var array
      */
-    protected $searchableColumns = [ 'name' ];
+    protected $searchableColumns = [ 'name', 'group' ];
 
     /**
      * The attributes that are mass assignable.

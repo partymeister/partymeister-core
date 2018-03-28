@@ -6,7 +6,7 @@
 
 @section('contentheader_title')
     {{ trans('partymeister-core::backend/visitors.edit') }}
-    {!! link_to_route('backend.visitors.index', trans('motor-backend::backend/global.back'), [], ['class' => 'pull-right btn btn-sm btn-danger']) !!}
+    {!! link_to_route('backend.visitors.index', trans('motor-backend::backend/global.back'), [], ['class' => 'pull-right float-right btn btn-sm btn-danger']) !!}
 @endsection
 
 @section('main-content')

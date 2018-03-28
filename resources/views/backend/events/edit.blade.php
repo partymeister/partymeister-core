@@ -6,7 +6,7 @@
 
 @section('contentheader_title')
     {{ trans('partymeister-core::backend/events.edit') }}
-    {!! link_to_route('backend.events.index', trans('motor-backend::backend/global.back'), [], ['class' => 'pull-right btn btn-sm btn-danger']) !!}
+    {!! link_to_route('backend.events.index', trans('motor-backend::backend/global.back'), [], ['class' => 'pull-right float-right btn btn-sm btn-danger']) !!}
 @endsection
 
 @section('main-content')

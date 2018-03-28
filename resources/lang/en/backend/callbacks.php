@@ -32,7 +32,7 @@ return [
     'destination'  => 'Destination',
     'destinations' => [
         'orga'         => 'Orga (#revisionorga / slack)',
-        'nowplaying'   => 'IRC (#revision)',
+        'nowplaying'   => 'Now playing (IRC #revision)',
         'general'      => 'General (public)',
         'competitions' => 'Competitions (public)',
         'seminars'     => 'Seminars (public)',
