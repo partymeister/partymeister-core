@@ -25,6 +25,6 @@ class CallbackService extends BaseService
     public function beforeCreate()
     {
         $this->record->hash = hash_hmac('sha256',
-            $this->record->payload . $this->record->name . $this->record->title . $this->record->body, 20);
+            $this->request->get('payload') . $this->request->get('name') . $this->request->get('title') . $this->request->get('body') . $this->request->get('embargo_until'), 20);
     }
 }

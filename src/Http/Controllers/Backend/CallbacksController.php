@@ -2,6 +2,7 @@
 
 namespace Partymeister\Core\Http\Controllers\Backend;
 
+use Grpc\Call;
 use Motor\Backend\Http\Controllers\Controller;
 
 use Partymeister\Core\Models\Callback;
@@ -34,16 +35,29 @@ class CallbacksController extends Controller
 
 
     /**
+     * @param Event $record
+     */
+    public function duplicate(Callback $record)
+    {
+        $newRecord       = $record->replicate();
+        $newRecord->name = 'Duplicate of ' . $newRecord->name;
+        $newRecord->hash = '';
+
+        return $this->create($newRecord);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Callback $record)
     {
         $form = $this->form(CallbackForm::class, [
             'method'  => 'POST',
             'route'   => 'backend.callbacks.store',
-            'enctype' => 'multipart/form-data'
+            'enctype' => 'multipart/form-data',
+            'model'   => $record,
         ]);
 
         return view('partymeister-core::backend.callbacks.create', compact('form'));

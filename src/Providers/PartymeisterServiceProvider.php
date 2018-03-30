@@ -4,6 +4,7 @@ namespace Partymeister\Core\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Partymeister\Core\Console\Commands\PartymeisterCoreCheckCallbacksCommand;
 use Partymeister\Core\Console\Commands\PartymeisterCoreImportTicketsCommand;
 
 class PartymeisterServiceProvider extends ServiceProvider
@@ -37,6 +38,7 @@ class PartymeisterServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 PartymeisterCoreImportTicketsCommand::class,
+                PartymeisterCoreCheckCallbacksCommand::class,
             ]);
         }
     }

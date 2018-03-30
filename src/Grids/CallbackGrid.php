@@ -19,6 +19,7 @@ class CallbackGrid extends Grid
         $this->addColumn('has_fired', trans('partymeister-core::backend/callbacks.has_fired'), true)->renderer(BooleanRenderer::class);
         $this->addColumn('is_timed', trans('partymeister-core::backend/callbacks.is_timed'), true)->renderer(BooleanRenderer::class);
         $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.callbacks.edit');
+        $this->addDuplicateAction(trans('motor-backend::backend/global.duplicate'), 'backend.callbacks.duplicate')->needsPermissionTo('callbacks.write');
         $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.callbacks.destroy');
     }
 }

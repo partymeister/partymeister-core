@@ -20,6 +20,7 @@ Route::group([
 
 	Route::group(['middleware' => ['permission']], function () {
 		Route::resource('callbacks', 'CallbacksController');
+        Route::get('callbacks/{callback}/duplicate', 'CallbacksController@duplicate')->name('callbacks.duplicate');
 		Route::resource('schedules', 'SchedulesController');
 		Route::get('schedules/{schedule}/slides', 'Schedules\SlidesController@index')->name('schedules.slides.index');
 		Route::post('schedules/{schedule}/slides', 'Schedules\SlidesController@store')->name('schedules.slides.store');

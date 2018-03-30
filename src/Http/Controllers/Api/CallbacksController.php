@@ -18,7 +18,8 @@ class CallbacksController extends Controller
      */
     public function index()
     {
-        $paginator = CallbackService::collection()->getPaginator();
+        $paginator = Callback::where('action', 'notification')->orderBy('name', 'ASC')->where('is_timed', false)->paginate(100);
+//        $paginator = CallbackService::collection()->getPaginator();
         $resource = $this->transformPaginator($paginator, CallbackTransformer::class);
 
         return $this->respondWithJson('Callback collection read', $resource);

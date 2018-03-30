@@ -14,6 +14,16 @@ Route::group([
 });
 
 Route::group([
+    'middleware' => [ 'bindings' ],
+    'namespace'  => 'Partymeister\Core\Http\Controllers\Api',
+    'prefix'     => 'api',
+    'as'         => 'api.',
+], function () {
+    Route::post('callback/single', 'Callbacks\SendController@single')->name('api.callback.single');
+    Route::get('callback/{hash}', 'Callbacks\SendController@callback')->name('api.callback.callback');
+});
+
+Route::group([
     'middleware' => [ 'web', 'web_auth', 'bindings', 'permission' ],
     'namespace'  => 'Partymeister\Core\Http\Controllers\Api',
     'prefix'     => 'ajax',
