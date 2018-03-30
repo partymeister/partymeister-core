@@ -24,7 +24,7 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => [ 'web', 'web_auth', 'bindings', 'permission' ],
+    'middleware' => [ 'web', 'web_auth', 'bindings' ],
     'namespace'  => 'Partymeister\Core\Http\Controllers\Api',
     'prefix'     => 'ajax',
     'as'         => 'ajax.',
