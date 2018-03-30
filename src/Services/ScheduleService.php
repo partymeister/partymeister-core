@@ -49,7 +49,22 @@ class ScheduleService extends BaseService
             $slide->save();
 
             // 7. generate slides
-            event(new SlideSaved($slide, 'slides'));
+			// 7. generate slides
+			// Convert PNG to actual file
+			$pngData = array_get($data, 'final.' . $slideName);
+			$pngData = substr($pngData, 22);
+			file_put_contents(storage_path().'/final_'.$slideName.'.png', base64_decode($pngData));
+
+			$pngData = array_get($data, 'preview.' . $slideName);
+			$pngData = substr($pngData, 22);
+			file_put_contents(storage_path().'/preview_'.$slideName.'.png', base64_decode($pngData));
+
+			$slide->clearMediaCollection('preview');
+			$slide->clearMediaCollection('final');
+			$slide->addMedia(storage_path().'/preview_'.$slideName.'.png')->toMediaCollection('preview', 'media');
+			$slide->addMedia(storage_path().'/final_'.$slideName.'.png')->toMediaCollection('final', 'media');
+
+//            event(new SlideSaved($slide, 'slides'));
         }
     }
 }
