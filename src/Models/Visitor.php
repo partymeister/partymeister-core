@@ -61,6 +61,16 @@ class Visitor extends Authenticatable
     }
 
 
+    public function getNewCommentsAttribute()
+    {
+        $numberOfComments = 0;
+        foreach ($this->entries()->get() as $entry) {
+            $numberOfComments += $entry->comments()->where('read_by_visitor', false)->count();
+        }
+        return $numberOfComments;
+    }
+
+
     public function entries()
     {
         return $this->hasMany(Entry::class);
