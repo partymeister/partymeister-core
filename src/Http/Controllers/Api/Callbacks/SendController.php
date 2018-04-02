@@ -5,6 +5,8 @@ namespace Partymeister\Core\Http\Controllers\Api\Callbacks;
 use Illuminate\Http\Request;
 use Motor\Backend\Http\Controllers\Controller;
 
+use Partymeister\Competitions\Events\CompetitionSaved;
+use Partymeister\Competitions\Events\LiveVoteUpdated;
 use Partymeister\Competitions\Models\Competition;
 use Partymeister\Competitions\Models\Entry;
 use Partymeister\Competitions\Models\LiveVote;
@@ -29,6 +31,19 @@ class SendController extends Controller
         }
 
         switch ($callback->action) {
+            case 'competition_ends':
+                $payload = json_decode($callback->payload);
+                $competition = Competition::find($payload->competition_id);
+                if (is_null($competition)) {
+                    return response('Competition does not exist', 403);
+                }
+
+                $competition->voting_enabled = true;
+                $competition->save();
+
+                event(new CompetitionSaved($competition));
+
+                break;
             case 'notification':
                 $status = StuhlService::send($callback->body, $callback->title, '', EVENT_LEVEL_BORING, $callback->destination);
                 break;
@@ -49,6 +64,8 @@ class SendController extends Controller
                 $l->save();
 
                 $status = StuhlService::send($callback->body, $callback->title, '', EVENT_LEVEL_GOOD, $callback->destination);
+
+                event(new LiveVoteUpdated($l));
 
                 break;
         }

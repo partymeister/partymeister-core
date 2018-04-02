@@ -1,4 +1,5 @@
 @extends('motor-backend::layouts.backend')
+<div class="loading-overlay"></div>
 
 @section('view_styles')
     @include('partymeister-slides::layouts.partials.slide_fonts')
@@ -35,11 +36,13 @@
                         <div id="slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}"
                              class="slidemeister-instance"></div>
 
+                    <div class="render d-none">
                         <div id="slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}-preview"
                              class="slidemeister-instance"></div>
 
                         <div id="slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}-final"
                              class="slidemeister-instance"></div>
+                    </div>
 
                         <input type="hidden" name="slide[{{$dayIndex}}-{{$eventBlockIndex}}]">
                         <input type="hidden" name="name[{{$dayIndex}}-{{$eventBlockIndex}}]"
@@ -80,6 +83,9 @@
 
                 var tasks = [];
 
+                $('.loading-overlay').addClass('loading');
+                $('.render').removeClass('d-none');
+
                 Object.keys(sm).forEach(function (key) {
                     $('input[name="slide[' + key + ']"]').val(JSON.stringify(sm[key].data.save(true)));
 
@@ -88,13 +94,16 @@
 
                 });
 
-                workMyCollection(tasks)
-                    .then(() => {
-                        for (let r of final) {
-                            $('input[name="' + r[0] + '[' + r[1] + ']"]').val(r[2]);
-                        }
-                        $('form#schedule-slides-save').submit();
-                    });
+                window.setTimeout(function() {
+                    workMyCollection(tasks)
+                        .then(() => {
+                            for (let r of final) {
+                                $('input[name="' + r[0] + '[' + r[1] + ']"]').val(r[2]);
+                            }
+                            $('form#schedule-slides-save').submit();
+                        });
+                }, 1000);
+
                 return;
             });
 
