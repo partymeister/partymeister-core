@@ -1,5 +1,6 @@
 @extends('motor-backend::layouts.backend')
-<div class="loading-overlay"></div>
+<div class="loader loader-default"
+     data-text="&hearts; Generating slide previews and hiding the ugliness &hearts;"></div>
 
 @section('view_styles')
     @include('partymeister-slides::layouts.partials.slide_fonts')
@@ -10,6 +11,7 @@
             margin-right: 15px;
             margin-bottom: 15px;
         }
+
         .weg {
             display: none !important;
         }
@@ -21,7 +23,8 @@
 
 @section('contentheader_title')
     {{ trans('partymeister-core::backend/schedules.slides_preview') }}
-    <button class="btn btn-sm btn-success float-right schedule-slides-save">{{trans('partymeister-core::backend/schedules.save_slides')}}</button>
+    <button class="btn btn-sm btn-success float-right schedule-slides-save"
+            disabled>{{trans('partymeister-core::backend/schedules.save_slides')}}</button>
     {!! link_to_route('backend.schedules.index', trans('motor-backend::backend/global.back'), [], ['class' => 'pull-right float-right btn btn-sm btn-danger']) !!}
 @endsection
 
@@ -36,19 +39,13 @@
                         <div id="slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}"
                              class="slidemeister-instance"></div>
 
-                    <div class="render d-none">
-                        <div id="slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}-preview"
-                             class="slidemeister-instance"></div>
-
-                        <div id="slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}-final"
-                             class="slidemeister-instance"></div>
-                    </div>
-
                         <input type="hidden" name="slide[{{$dayIndex}}-{{$eventBlockIndex}}]">
                         <input type="hidden" name="name[{{$dayIndex}}-{{$eventBlockIndex}}]"
                                value="Timetable {{$dayIndex}} {{$eventBlockIndex}}">
                         <input type="hidden" name="preview[{{$dayIndex}}-{{$eventBlockIndex}}]">
                         <input type="hidden" name="final[{{$dayIndex}}-{{$eventBlockIndex}}]">
+                        <input type="hidden" name="cached_html_preview[{{$dayIndex}}-{{$eventBlockIndex}}]">
+                        <input type="hidden" name="cached_html_final[{{$dayIndex}}-{{$eventBlockIndex}}]">
                     @endforeach
                 @endforeach
             </div>
@@ -61,50 +58,55 @@
     <script>
         $(document).ready(function () {
             var sm = [];
-            var preview_slides = [];
-            var final_slides = [];
+
             @foreach ($days as $dayIndex => $day)
                     @foreach ($day as $eventBlockIndex => $eventBlock)
                 sm['{{$dayIndex}}-{{$eventBlockIndex}}'] = $('#slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}').slidemeister('#slidemeister-properties', slidemeisterProperties);
             sm['{{$dayIndex}}-{{$eventBlockIndex}}'].data.load({!! $timetableTemplate->definitions !!}, {'day': '{{strtoupper($dayIndex)}}'}, false, true);
             sm['{{$dayIndex}}-{{$eventBlockIndex}}'].data.populateTimetable({!! json_encode($eventBlock) !!});
 
-            preview_slides['{{$dayIndex}}-{{$eventBlockIndex}}'] = $('#slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}-preview').slidemeister('#slidemeister-properties', slidemeisterProperties);
-            preview_slides['{{$dayIndex}}-{{$eventBlockIndex}}'].data.load({!! $timetableTemplate->definitions !!}, {'day': '{{strtoupper($dayIndex)}}'}, false, true);
-            preview_slides['{{$dayIndex}}-{{$eventBlockIndex}}'].data.populateTimetable({!! json_encode($eventBlock) !!});
+            @endforeach
+            @endforeach
 
-            final_slides['{{$dayIndex}}-{{$eventBlockIndex}}'] = $('#slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}-final').slidemeister('#slidemeister-properties', slidemeisterProperties);
-            final_slides['{{$dayIndex}}-{{$eventBlockIndex}}'].data.load({!! $timetableTemplate->definitions !!}, {'day': '{{strtoupper($dayIndex)}}'}, false, true);
-            final_slides['{{$dayIndex}}-{{$eventBlockIndex}}'].data.populateTimetable({!! json_encode($eventBlock) !!});
-            @endforeach
-            @endforeach
+            $('.schedule-slides-save').prop('disabled', false);
 
             $('.schedule-slides-save').on('click', function (e) {
 
+                $('.loader').addClass('is-active');
+
                 var tasks = [];
 
-                $('.loading-overlay').addClass('loading');
-                $('.render').removeClass('d-none');
+                sm['{{$dayIndex}}-{{$eventBlockIndex}}'].data.export('preview', '{{$dayIndex}}-{{$eventBlockIndex}}').then(result => {
+                    Object.keys(sm).forEach(function (key) {
+                        console.log('Processing ' + key);
+                        $('input[name="slide[' + key + ']"]').val(JSON.stringify(sm[key].data.save(true)));
 
-                Object.keys(sm).forEach(function (key) {
-                    $('input[name="slide[' + key + ']"]').val(JSON.stringify(sm[key].data.save(true)));
+                        tasks.push(
+                            sm[key].data.export('preview', key).then(result => {
+                                console.log('Rendering preview of ' + key);
+                                $('input[name="preview[' + key + ']"]').val(result[2]);
+                                $('input[name="cached_html_preview[' + key + ']"]').val($(sm[key].data.getTargetElement()).html());
 
-                    tasks.push(final_slides[key].data.export('final', key));
-                    tasks.push(preview_slides[key].data.export('preview', key));
 
+                                return sm[key].data.export('final', key).then(result => {
+                                    console.log('Rendering final of ' + key);
+                                    $('input[name="final[' + key + ']"]').val(result[2]);
+                                    $('input[name="cached_html_final[' + key + ']"]').val($(sm[key].data.getTargetElement()).html());
+                                })
+
+                            })
+                        );
+
+                    });
+
+                    window.setTimeout(function () {
+                        // cache embedded fonts
+                        workMyCollection(tasks)
+                            .then(() => {
+                                $('form#schedule-slides-save').submit();
+                            });
+                    }, 1000);
                 });
-
-                window.setTimeout(function() {
-                    workMyCollection(tasks)
-                        .then(() => {
-                            for (let r of final) {
-                                $('input[name="' + r[0] + '[' + r[1] + ']"]').val(r[2]);
-                            }
-                            $('form#schedule-slides-save').submit();
-                        });
-                }, 1000);
-
-                return;
             });
 
             function asyncFunc(e) {
@@ -119,8 +121,6 @@
                 return arr.reduce((promise, item) => {
                     return promise
                         .then((result) => {
-                            // console.log(result);
-                            // console.log(`item ${item}`);
                             return asyncFunc(item).then(result => final.push(result));
                         })
                         .catch(console.error);

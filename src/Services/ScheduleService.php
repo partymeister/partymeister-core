@@ -45,6 +45,8 @@ class ScheduleService extends BaseService
             $slide->name        = $name;
             $slide->slide_type  = $slideType;
             $slide->definitions = $definitions;
+            $slide->cached_html_preview = array_get($data, 'cached_html_preview.' . $slideName, '');
+            $slide->cached_html_final   = array_get($data, 'cached_html_final.' . $slideName, '');
 
             $slide->save();
 
