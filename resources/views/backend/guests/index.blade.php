@@ -245,4 +245,4 @@
             }
         });
     </script>
-@endsection
+@append

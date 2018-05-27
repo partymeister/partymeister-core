@@ -88,7 +88,7 @@
         </table>
     </div>
 </div>
-<script src="{{asset('js/app.js')}}"></script>
+<script src="{{mix('js/motor-backend.js')}}"></script>
 <script>
     var Clock = {
         template: "<div>@{{hours}}:@{{minutes}}:@{{seconds}}</div>",
