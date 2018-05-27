@@ -26,12 +26,25 @@ class PartymeisterServiceProvider extends ServiceProvider
         $this->permissions();
         $this->registerCommands();
         $this->migrations();
+        $this->publishResourceAssets();
     }
+
+
+    public function publishResourceAssets()
+    {
+        $assets = [
+            __DIR__ . '/../../resources/assets/images' => resource_path('assets/images'),
+        ];
+
+        $this->publishes($assets, 'partymeister-core-install-resources');
+    }
+
 
     public function config()
     {
 
     }
+
 
     public function registerCommands()
     {
@@ -54,9 +67,9 @@ class PartymeisterServiceProvider extends ServiceProvider
     {
         $config = $this->app['config']->get('motor-backend-permissions', []);
         $this->app['config']->set('motor-backend-permissions',
-            array_replace_recursive(require __DIR__ . '/../../config/motor-backend-permissions.php',
-                $config));
+            array_replace_recursive(require __DIR__ . '/../../config/motor-backend-permissions.php', $config));
     }
+
 
     public function routes()
     {
@@ -89,22 +102,22 @@ class PartymeisterServiceProvider extends ServiceProvider
 
     public function routeModelBindings()
     {
-        Route::bind('callback', function($id){
+        Route::bind('callback', function ($id) {
             return \Partymeister\Core\Models\Callback::findOrFail($id);
         });
-        Route::bind('schedule', function($id){
+        Route::bind('schedule', function ($id) {
             return \Partymeister\Core\Models\Schedule::findOrFail($id);
         });
-        Route::bind('event', function($id){
+        Route::bind('event', function ($id) {
             return \Partymeister\Core\Models\Event::findOrFail($id);
         });
-        Route::bind('event_type', function($id){
+        Route::bind('event_type', function ($id) {
             return \Partymeister\Core\Models\EventType::findOrFail($id);
         });
-        Route::bind('guest', function($id){
+        Route::bind('guest', function ($id) {
             return \Partymeister\Core\Models\Guest::findOrFail($id);
         });
-        Route::bind('visitor', function($id){
+        Route::bind('visitor', function ($id) {
             return \Partymeister\Core\Models\Visitor::findOrFail($id);
         });
     }
