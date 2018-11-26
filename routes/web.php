@@ -176,3 +176,19 @@ Route::get('timetable.json', function () {
 
 	return response()->json($response);
 })->name('timetable');
+
+// Only add the route group if you don't already have one for the given namespace
+Route::group([
+    'as'         => 'component.',
+    'prefix'     => 'component',
+    'namespace'  => 'Partymeister\Core\Http\Controllers\Backend\Component',
+    'middleware' => [
+        'web',
+    ]
+], function () {
+    // You only need this part if you already have a component group for the given namespace
+    Route::get('schedules', 'ComponentSchedulesController@create')->name('schedules.create');
+    Route::post('schedules', 'ComponentSchedulesController@store')->name('schedules.store');
+    Route::get('schedules/{component_schedule}', 'ComponentSchedulesController@edit')->name('schedules.edit');
+    Route::patch('schedules/{component_schedule}', 'ComponentSchedulesController@update')->name('schedules.update');
+});

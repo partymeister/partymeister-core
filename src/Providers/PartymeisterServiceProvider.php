@@ -27,8 +27,16 @@ class PartymeisterServiceProvider extends ServiceProvider
         $this->registerCommands();
         $this->migrations();
         $this->publishResourceAssets();
+        $this->components();
     }
 
+
+    public function components()
+    {
+        $config = $this->app['config']->get('motor-cms-page-components', []);
+        $this->app['config']->set('motor-cms-page-components',
+            array_replace_recursive(require __DIR__ . '/../../config/motor-cms-page-components.php', $config));
+    }
 
     public function publishResourceAssets()
     {
@@ -102,6 +110,7 @@ class PartymeisterServiceProvider extends ServiceProvider
 
     public function routeModelBindings()
     {
+        // Modules
         Route::bind('callback', function ($id) {
             return \Partymeister\Core\Models\Callback::findOrFail($id);
         });
@@ -119,6 +128,11 @@ class PartymeisterServiceProvider extends ServiceProvider
         });
         Route::bind('visitor', function ($id) {
             return \Partymeister\Core\Models\Visitor::findOrFail($id);
+        });
+
+        // Components
+        Route::bind('component_schedule', function ($id) {
+            return \Partymeister\Core\Models\Component\ComponentSchedule::findOrFail($id);
         });
     }
 
