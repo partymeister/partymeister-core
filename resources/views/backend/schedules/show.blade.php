@@ -62,9 +62,12 @@
             color: white;
         }
     </style>
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
+<div id="app"></div>
 <div id="schedule-container">
     <div id="clock">
         <clock></clock>

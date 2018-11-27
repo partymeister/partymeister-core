@@ -44,36 +44,7 @@
             @include('motor-backend::grid.table')
         @endif
     </div>
-    <div class="modal fade" id="guest-modal" tabindex="-1" role="dialog" aria-labelledby="">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">
-                        {{trans('partymeister-core::backend/guests.mark_as_arrived')}}
-                    </h4>
-                    <div class="float-right">
-                        <button class="btn btn-default outline-secondary" data-dismiss="modal" aria-label="Close">
-                            Cancel
-                        </button>
-                        <button class="btn btn-success" @click="confirm()" data-dismiss="modal">Confirm</button>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <div v-if="comment != ''" v-html="'<p>'+nl2br(comment)+'</p>'"></div>
-                    <div class="alert alert-info">
-                        <p v-if="has_badge" style="margin-bottom: 0; padding: 1rem 0;font-size: 20px;">
-                            {!! trans('partymeister-core::backend/guests.badge_info_vue') !!}
-                        </p>
-                        <p v-if="ticket_code != ''" style="margin-bottom: 0; padding: 1rem 0;font-size: 20px;">
-                            {!! trans('partymeister-core::backend/guests.ticket_code_info_vue') !!}
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
+    <partymeister-core-guest-modal :api-token="'{{Auth::user()->api_token}}'"></partymeister-core-guest-modal>
     <div class="modal fade" id="scan-tickets-modal" tabindex="-1" role="dialog" aria-labelledby="">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -173,8 +144,6 @@
             $('[data-toggle="tooltip"]').tooltip()
         });
 
-        var apiToken = '{{Auth::user()->api_token}}';
-
         var switchCssClass = function (that, value, cssClass1, cssClass2) {
             if (value == true) {
                 $(that).removeClass(cssClass2);
@@ -187,62 +156,7 @@
 
         $('.change-has-arrived').click(function (e) {
             e.preventDefault();
-            element = this;
-
-            axios.get('{{action('\Partymeister\Core\Http\Controllers\Api\GuestsController@index')}}/' + $(this).data('record') + '?api_token=' + apiToken).then(function (response) {
-
-                showModal = app.update(element, response.data.data);
-
-                if (!showModal) {
-                    app.confirm();
-                } else {
-                    $('#guest-modal').modal('show')
-                }
-
-            });
-
-        });
-
-        app = new window.Vue({
-            el: '#guest-modal',
-            data: {
-                id: '',
-                element: '',
-                ticket_code: '',
-                comment: '',
-                name: '',
-                has_badge: false
-            },
-            methods: {
-                nl2br: function (string) {
-                    return (string + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br>$2');
-                },
-                update: function (element, data) {
-                    this.element = element;
-                    this.id = data.id;
-                    this.ticket_code = data.ticket_code;
-                    this.name = data.name;
-                    this.has_badge = data.has_badge;
-                    this.comment = data.comment;
-
-                    if (data.has_arrived) {
-                        return false
-                    }
-
-                    if (this.has_badge || this.comment != '' || this.ticket_code != '') {
-                        return true;
-                    }
-
-                    return false;
-                },
-                confirm: function () {
-                    axios.patch('{{action('\Partymeister\Core\Http\Controllers\Api\GuestsController@index')}}/' + this.id + '?api_token=' + apiToken, {arrived_at: new Date().toISOString(), has_arrived: $(this.element).data('has-arrived')})
-                        .then(function (response) {
-                            switchCssClass(app.element, response.data.data.has_arrived, $(app.element).data('class'), $(app.element).data('class-alternate'));
-                            $(app.element).data('has-arrived', response.data.data.has_arrived ? 0 : 1);
-                        });
-                }
-            }
+            Vue.prototype.$eventHub.$emit('partymeister-core:update-guest-modal', { element: this, record: $(this).data('record')});
         });
     </script>
 @append
