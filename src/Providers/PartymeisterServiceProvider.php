@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Partymeister\Core\Console\Commands\PartymeisterCoreCheckCallbacksCommand;
 use Partymeister\Core\Console\Commands\PartymeisterCoreImportTicketsCommand;
+use Partymeister\Core\Http\Middleware\Frontend\Visitor;
 
 class PartymeisterServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,8 @@ class PartymeisterServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $result = app('router')->pushMiddlewareToGroup('frontend', Visitor::class);
+
         $this->config();
         $this->routes();
         $this->routeModelBindings();
@@ -37,6 +40,7 @@ class PartymeisterServiceProvider extends ServiceProvider
         $this->app['config']->set('motor-cms-page-components',
             array_replace_recursive(require __DIR__ . '/../../config/motor-cms-page-components.php', $config));
     }
+
 
     public function publishResourceAssets()
     {
@@ -133,6 +137,10 @@ class PartymeisterServiceProvider extends ServiceProvider
         // Components
         Route::bind('component_schedule', function ($id) {
             return \Partymeister\Core\Models\Component\ComponentSchedule::findOrFail($id);
+        });
+
+        Route::bind('component_visitor_login', function ($id) {
+            return \Partymeister\Core\Models\Component\ComponentVisitorLogin::findOrFail($id);
         });
     }
 
