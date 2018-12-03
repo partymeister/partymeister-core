@@ -18,7 +18,7 @@
         </div>
         <div class="cell small-6 text-center">
             @if (!is_null($component->visitor_registration_page))
-            <a href="{{route('frontend.pages.index', ['slug' => $component->visitor_registration_page->full_slug])}}">or register!</a>
+                <a href="{{route('frontend.pages.index', ['slug' => $component->visitor_registration_page->full_slug])}}">or register!</a>
             @endif
         </div>
     </div>
@@ -38,35 +38,35 @@
     <form id="logout" method="POST" class="form-inline">
         {{ csrf_field() }}
         <input type="hidden" name="logout" value="1">
-        <ul class="no-bullet">
+        <ul class="vertical menu">
             @if (!is_null($component->entries_page))
                 <li>
                     <a href="{{route('frontend.pages.index', ['slug' => $component->entries_page->full_slug])}}">
                         <i class="fa fa-cloud-upload-alt"></i>
-                        My entries
+                        <span>My entries</span>
                     </a>
                 </li>
             @endif
             @if (!is_null($component->voting_page))
-            <li>
-                <a href="{{route('frontend.pages.index', ['slug' => $component->voting_page->full_slug])}}">
-                    <i class="fa fa-trophy"></i>
-                    Vote for the compos
-                </a>
-            </li>
+                <li>
+                    <a href="{{route('frontend.pages.index', ['slug' => $component->voting_page->full_slug])}}">
+                        <i class="fa fa-trophy"></i>
+                        <span>Vote for the compos</span>
+                    </a>
+                </li>
             @endif
             @if (!is_null($component->comments_page))
-            <li class="nav-item">
-                <a href="{{route('frontend.pages.index', ['slug' => $component->comments_page->full_slug])}}">
-                    <i class="fa fa-comment"></i>
-                    Write a message
-                </a>
-            </li>
+                <li class="nav-item">
+                    <a href="{{route('frontend.pages.index', ['slug' => $component->comments_page->full_slug])}}">
+                        <i class="fa fa-comment"></i>
+                        <span>Write a message</span>
+                    </a>
+                </li>
             @endif
             <li>
                 <a class="logout" href="#">
                     <i class="fa fa-lock"></i>
-                    {{ trans('motor-backend::backend/login.sign_out') }}
+                    <span>{{ trans('motor-backend::backend/login.sign_out') }}</span>
                 </a>
             </li>
         </ul>
