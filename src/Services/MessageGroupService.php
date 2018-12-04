@@ -20,6 +20,11 @@ class MessageGroupService extends BaseService
         }
     }
 
+    public function beforeCreate()
+    {
+        $this->record->uuid = uniqid();
+    }
+
 
     public function afterCreate()
     {

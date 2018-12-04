@@ -39,6 +39,7 @@ class MessageGroup extends Model
      */
     protected $fillable = [
         'name',
+        'uniqid'
     ];
 
 
