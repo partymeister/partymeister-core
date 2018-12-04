@@ -58,6 +58,14 @@ return [
                     'roles'       => [ 'SuperAdmin' ],
                     'permissions' => [ 'visitors.read' ],
                 ],
+                700 => [ // <-- !!! replace 701 with your own sort position !!!
+                    'slug'        => 'message_groups',
+                    'name'        => 'partymeister-core::backend/message-groups.message_groups',
+                    'icon'        => 'fa fa-plus',
+                    'route'       => 'backend.message-groups.index',
+                    'roles'       => [ 'SuperAdmin' ],
+                    'permissions' => [ 'message_groups.read' ],
+                ],
             ],
         ],
     ]

@@ -11,6 +11,7 @@ Route::group([
     //Route::resource('event_types', 'EventTypesController');
     Route::resource('guests', 'GuestsController');
     //Route::resource('visitors', 'VisitorsController');
+    Route::resource('message-groups', 'MessageGroupsController');
 });
 
 Route::group([

@@ -133,6 +133,9 @@ class PartymeisterServiceProvider extends ServiceProvider
         Route::bind('visitor', function ($id) {
             return \Partymeister\Core\Models\Visitor::findOrFail($id);
         });
+        Route::bind('message_group', function ($id) {
+            return \Partymeister\Core\Models\MessageGroup::findOrFail($id);
+        });
 
         // Components
         Route::bind('component_schedule', function ($id) {

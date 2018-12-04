@@ -29,3 +29,8 @@ function create_test_visitor($count = 1)
 {
     return factory(Partymeister\Core\Models\Visitor::class, $count)->create();
 }
+
+function create_test_message_group($count = 1)
+{
+    return factory(Partymeister\Core\Models\MessageGroup::class, $count)->create();
+}

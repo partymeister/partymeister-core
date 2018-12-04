@@ -18,7 +18,7 @@ Route::group([
     ]
 ], function () {
 
-    Route::group(['middleware' => ['permission']], function () {
+    Route::group([ 'middleware' => [ 'permission' ] ], function () {
         Route::resource('callbacks', 'CallbacksController');
         Route::get('callbacks/{callback}/duplicate', 'CallbacksController@duplicate')->name('callbacks.duplicate');
         Route::resource('schedules', 'SchedulesController');
@@ -32,6 +32,7 @@ Route::group([
         Route::resource('guests', 'GuestsController');
 
         Route::resource('visitors', 'VisitorsController');
+        Route::resource('message-groups', 'MessageGroupsController');
     });
 });
 
@@ -87,7 +88,8 @@ Route::get('infodesk.json', function () {
 })->name('infodesk');
 
 Route::get('visitors.json', function () {
-    $data = fractal(\Partymeister\Core\Models\Visitor::orderBy('created_at', 'DESC')->get(), \Partymeister\Core\Transformers\VisitorTransformer::class)->toArray();
+    $data = fractal(\Partymeister\Core\Models\Visitor::orderBy('created_at', 'DESC')->get(),
+        \Partymeister\Core\Transformers\VisitorTransformer::class)->toArray();
 
     $visitors = [];
 
@@ -189,6 +191,8 @@ Route::group([
 
     Route::get('visitor-logins', 'ComponentVisitorLoginsController@create')->name('visitor-logins.create');
     Route::post('visitor-logins', 'ComponentVisitorLoginsController@store')->name('visitor-logins.store');
-    Route::get('visitor-logins/{component_visitor_login}', 'ComponentVisitorLoginsController@edit')->name('visitor-logins.edit');
-    Route::patch('visitor-logins/{component_visitor_login}', 'ComponentVisitorLoginsController@update')->name('visitor-logins.update');
+    Route::get('visitor-logins/{component_visitor_login}', 'ComponentVisitorLoginsController@edit')
+         ->name('visitor-logins.edit');
+    Route::patch('visitor-logins/{component_visitor_login}', 'ComponentVisitorLoginsController@update')
+         ->name('visitor-logins.update');
 });

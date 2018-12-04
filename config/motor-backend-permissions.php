@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'partymeister' => [
+    'partymeister'   => [
         'name'   => 'partymeister-core::backend/partymeister.partymeister',
         'values' => [
             'read'
         ]
     ],
-    'callbacks'    => [
+    'callbacks'      => [
         'name'   => 'partymeister-core::backend/callbacks.callbacks',
         'values' => [
             'read',
@@ -15,7 +15,7 @@ return [
             'delete'
         ]
     ],
-    'schedules'    => [
+    'schedules'      => [
         'name'   => 'partymeister-core::backend/schedules.schedules',
         'values' => [
             'read',
@@ -23,7 +23,7 @@ return [
             'delete'
         ]
     ],
-    'events'       => [
+    'events'         => [
         'name'   => 'partymeister-core::backend/events.events',
         'values' => [
             'read',
@@ -31,7 +31,7 @@ return [
             'delete'
         ]
     ],
-    'event_types'  => [
+    'event_types'    => [
         'name'   => 'partymeister-core::backend/event_types.event_types',
         'values' => [
             'read',
@@ -39,7 +39,7 @@ return [
             'delete'
         ]
     ],
-    'guests'       => [
+    'guests'         => [
         'name'   => 'partymeister-core::backend/guests.guests',
         'values' => [
             'read',
@@ -47,8 +47,16 @@ return [
             'delete'
         ]
     ],
-    'visitors'     => [
+    'visitors'       => [
         'name'   => 'partymeister-core::backend/visitors.visitors',
+        'values' => [
+            'read',
+            'write',
+            'delete'
+        ]
+    ],
+    'message_groups' => [
+        'name'   => 'partymeister-core::backend/message_groups.message_groups',
         'values' => [
             'read',
             'write',

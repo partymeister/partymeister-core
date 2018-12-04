@@ -53,3 +53,9 @@ $factory->define(Partymeister\Core\Models\Visitor::class, function (Faker\Genera
         'name' => $faker->word
     ];
 });
+
+$factory->define(Partymeister\Core\Models\MessageGroup::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word
+    ];
+});
