@@ -2,12 +2,28 @@
 
 return [
     'groups'     => [
-        'partymeister-core' => [
+        'partymeister-core'    => [
             'name' => 'Partymeister core',
         ],
+        'partymeister-website' => [
+            'name' => 'Partymeister website'
+        ]
     ],
     'components' => [
-        'schedule'             => [
+        'visitor-website-registrations' => [
+            'name'            => 'VisitorWebsiteRegistration',
+            'description'     => 'Show VisitorWebsiteRegistration component',
+            'view'            => 'partymeister-core::frontend.components.visitor-website-registration',
+            'component_class' => 'Partymeister\Core\Components\ComponentVisitorWebsiteRegistrations',
+            'compatibility'   => [
+
+            ],
+            'permissions'     => [
+
+            ],
+            'group'           => 'partymeister-website'
+        ],
+        'schedule'                      => [
             'name'            => 'Schedule',
             'description'     => 'Show Schedule component',
             'view'            => 'partymeister-core::frontend.components.schedule',
@@ -21,7 +37,7 @@ return [
             ],
             'group'           => 'partymeister-core'
         ],
-        'visitor-list'         => [
+        'visitor-list'                  => [
             'name'            => 'VisitorList',
             'description'     => 'Show VisitorList component',
             'view'            => 'partymeister-core::frontend.components.visitor-list',
@@ -34,7 +50,7 @@ return [
             ],
             'group'           => 'partymeister-core'
         ],
-        'visitor-login'        => [
+        'visitor-login'                 => [
             'name'            => 'VisitorLogin',
             'description'     => 'Show VisitorLogin component',
             'view'            => 'partymeister-core::frontend.components.visitor-login',
@@ -48,7 +64,7 @@ return [
             ],
             'group'           => 'partymeister-core'
         ],
-        'visitor-registration' => [
+        'visitor-registration'          => [
             'name'            => 'VisitorRegistration',
             'description'     => 'Show VisitorRegistration component',
             'view'            => 'partymeister-core::frontend.components.visitor-registration',

@@ -18,11 +18,20 @@ class Visitor extends Authenticatable
     protected $guard = 'visitor';
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'additional_data' => 'array',
+    ];
+
+    /**
      * Searchable columns for the searchable trait
      *
      * @var array
      */
-    protected $searchableColumns = [ 'name', 'group' ];
+    protected $searchableColumns = ['name', 'group'];
 
     /**
      * The attributes that are mass assignable.
@@ -35,7 +44,8 @@ class Visitor extends Authenticatable
         'country_iso_3166_1',
         'email',
         'password',
-        'api_token'
+        'api_token',
+        'additional_data',
     ];
 
     /**
@@ -67,6 +77,7 @@ class Visitor extends Authenticatable
         foreach ($this->entries()->get() as $entry) {
             $numberOfComments += $entry->comments()->where('read_by_visitor', false)->count();
         }
+
         return $numberOfComments;
     }
 
