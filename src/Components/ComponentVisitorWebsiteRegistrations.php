@@ -58,6 +58,8 @@ class ComponentVisitorWebsiteRegistrations {
         }
 
         VisitorWebsiteRegistrationService::register($this->request->get('visitor-website-registration'));
+        flash()->success('Thank you for registering - see you at the party!');
+
         return redirect()->back();
     }
 

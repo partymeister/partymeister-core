@@ -1,4 +1,13 @@
 <h4>Register for the party</h4>
+@foreach (session('flash_notification', collect())->toArray() as $message)
+    <div class="callout success">
+        <p>
+            {{$message['message']}}
+        </p>
+    </div>
+    {{ session()->forget('flash_notification') }}
+@endforeach
+
 {!! form_start($visitorWebsiteRegistrationForm) !!}
 <div class="grid-x grid-margin-x">
     <div class="cell small-12 medium-6 large-3">
