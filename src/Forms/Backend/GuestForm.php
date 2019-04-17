@@ -10,7 +10,7 @@ class GuestForm extends Form
     public function buildForm()
     {
         $this
-            ->add('category_id', 'select', ['label' => trans('motor-backend::backend/categories.category'), 'rules' => 'required', 'choices' => Category::where('scope', 'guest')->where('_lft', '>', 1)->orderBy('_lft', 'ASC')->pluck('name', 'id')->toArray()])
+            ->add('category_id', 'select', ['label' => trans('motor-backend::backend/categories.category'), 'rules' => 'required', 'choices' => Category::where('scope', 'guest')->where('_lft', '>', 1)->orderBy('name', 'ASC')->pluck('name', 'id')->toArray()])
             ->add('name', 'text', ['label' => trans('motor-backend::backend/global.name'), 'rules' => 'required'])
             ->add('handle', 'text', ['label' => trans('partymeister-core::backend/guests.handle')])
             ->add('email', 'text', ['label' => trans('partymeister-core::backend/guests.email')])

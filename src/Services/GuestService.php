@@ -14,7 +14,7 @@ class GuestService extends BaseService
 
     public function filters()
     {
-        $categories = Category::where('scope', 'guest')->where('_lft', '>', 1)->orderBy('_lft', 'ASC')->pluck('name', 'id');
+        $categories = Category::where('scope', 'guest')->where('_lft', '>', 1)->orderBy('name', 'ASC')->pluck('name', 'id');
         $this->filter->add(new SelectRenderer('category_id'))->setEmptyOption('-- '.trans('motor-backend::backend/categories.categories').' --')->setOptions($categories);
 
         $this->filter->add(new SelectRenderer('has_arrived'))->setOptionPrefix(trans('partymeister-core::backend/guests.has_arrived'))->setEmptyOption('-- ' . trans('partymeister-core::backend/guests.has_arrived') . ' --')->setOptions([
