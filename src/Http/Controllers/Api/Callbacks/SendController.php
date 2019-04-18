@@ -17,6 +17,9 @@ class SendController extends Controller
 {
     public function callback($hash)
     {
+        if ($hash == 'single') {
+            return $this->single(request());
+        }
         $callback = Callback::where('hash', $hash)->first();
         if (is_null($callback)) {
             return response(404);
