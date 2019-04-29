@@ -29,6 +29,8 @@ class SendController extends Controller
             return response('Already fired', 403);
         }
 
+        $status = 'THIS SHOULD NOT HAPPEN';
+
         if ($callback->is_timed && strtotime($callback->embargo_until) > time()) {
             return response('Embargo time ' . $callback->embargo_until . ' not reached', 403);
         }

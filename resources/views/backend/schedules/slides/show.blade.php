@@ -89,7 +89,7 @@
 
                                 return sm[key].data.export('final', key).then(result => {
                                     console.log('Rendering final of ' + key);
-                                    $('input[name="final[' + key + ']"]').val(result[2]);
+                                    // $('input[name="final[' + key + ']"]').val(result[2]);
                                     $('input[name="cached_html_final[' + key + ']"]').val($(sm[key].data.getTargetElement()).html());
                                 })
 
