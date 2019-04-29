@@ -9,6 +9,42 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Partymeister\Competitions\Models\Entry;
 use Partymeister\Competitions\Models\Vote;
 
+/**
+ * Partymeister\Core\Models\Visitor
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $group
+ * @property string $country_iso_3166_1
+ * @property array $additional_data
+ * @property string|null $email
+ * @property string $password
+ * @property string $api_token
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Partymeister\Competitions\Models\Entry[] $entries
+ * @property-read mixed $new_comments
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Partymeister\Competitions\Models\Vote[] $votes
+ * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor filteredBy(\Motor\Core\Filter\Filter $filter, $column)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor filteredByMultiple(\Motor\Core\Filter\Filter $filter)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor search($q, $full_text = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor whereAdditionalData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor whereApiToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor whereCountryIso31661($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor whereGroup($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Visitor extends Authenticatable
 {
 
