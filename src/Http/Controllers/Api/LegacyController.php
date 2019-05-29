@@ -2,6 +2,7 @@
 
 namespace Partymeister\Core\Http\Controllers\Api;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Motor\Backend\Http\Controllers\Controller;
 use Partymeister\Accounting\Models\ItemType;
@@ -55,7 +56,7 @@ class LegacyController extends Controller
 
         $visitors = [];
 
-        foreach (array_get($data, 'data') as $visitor) {
+        foreach (Arr::get($data, 'data') as $visitor) {
             $visitors[] = [
                 'handle'       => $visitor['handle'],
                 'groups'       => $visitor['groups'],
@@ -88,8 +89,8 @@ class LegacyController extends Controller
 
         $days = [];
 
-        foreach (array_get($data, 'data.events.data') as $key => $event) {
-            $date    = Carbon::createFromTimestamp(strtotime(array_get($event, 'starts_at')));
+        foreach (Arr::get($data, 'data.events.data') as $key => $event) {
+            $date    = Carbon::createFromTimestamp(strtotime(Arr::get($event, 'starts_at')));
             $dayKey  = $date->format('Y-m-d') . ' - ' . $date->format('l');
             $timeKey = $date->format('H:i');
             if ( ! isset($days[$dayKey])) {
@@ -100,12 +101,12 @@ class LegacyController extends Controller
                 $days[$dayKey][$timeKey] = [];
             }
             $days[$dayKey][$timeKey][] = [
-                "web_color"   => array_get($event, 'event_type.data.web_color'),
-                "slide_color" => array_get($event, 'event_type.data.slide_color'),
-                "id"          => array_get($event, 'id'),
-                "typeid"      => array_get($event, 'event_type_id'),
-                "type"        => array_get($event, 'event_type.data.name'),
-                "name"        => array_get($event, 'name'),
+                "web_color"   => Arr::get($event, 'event_type.data.web_color'),
+                "slide_color" => Arr::get($event, 'event_type.data.slide_color'),
+                "id"          => Arr::get($event, 'id'),
+                "typeid"      => Arr::get($event, 'event_type_id'),
+                "type"        => Arr::get($event, 'event_type.data.name'),
+                "name"        => Arr::get($event, 'name'),
                 "description" => "",
                 "link"        => "",
                 "starttime"   => $date->format('Y-m-d H:i'),

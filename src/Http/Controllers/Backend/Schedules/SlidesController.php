@@ -4,6 +4,7 @@ namespace Partymeister\Core\Http\Controllers\Backend\Schedules;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Motor\Backend\Http\Controllers\Controller;
 
 use Partymeister\Core\Models\Schedule;
@@ -33,16 +34,16 @@ class SlidesController extends Controller
 
         $days = [];
 
-        foreach (array_get($data, 'data.events.data') as $key => $event) {
-            $date = Carbon::createFromTimestamp(strtotime(array_get($event, 'starts_at')));
+        foreach (Arr::get($data, 'data.events.data') as $key => $event) {
+            $date = Carbon::createFromTimestamp(strtotime(Arr::get($event, 'starts_at')));
             if ( ! isset($days[$date->format('l')])) {
                 $days[$date->format('l')] = [];
             }
 
             $days[$date->format('l')][] = [
-                'name'  => array_get($event, 'name'),
-                'type'  => array_get($event, 'event_type.data.name'),
-                'color' => array_get($event, 'event_type.data.slide_color'),
+                'name'  => Arr::get($event, 'name'),
+                'type'  => Arr::get($event, 'event_type.data.name'),
+                'color' => Arr::get($event, 'event_type.data.slide_color'),
                 'time'  => $date->format('H:i')
             ];
         }

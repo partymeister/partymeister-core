@@ -4,6 +4,7 @@ namespace Partymeister\Core\Services;
 
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Client;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 
 define('EVENT_LEVEL_GOOD', 'GOOD');
@@ -34,9 +35,9 @@ class StuhlService
     ) {
         $config = config('partymeister-core-stuhl');
 
-        self::$debug    = array_get($config, 'debug', false);
-        self::$host     = array_get($config, 'server', '');
-        self::$password = array_get($config, 'password', '');
+        self::$debug    = Arr::get($config, 'debug', false);
+        self::$host     = Arr::get($config, 'server', '');
+        self::$password = Arr::get($config, 'password', '');
 
         if (self::$debug) {
             $destination = 'testing';

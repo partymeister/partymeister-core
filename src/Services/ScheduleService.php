@@ -2,6 +2,7 @@
 
 namespace Partymeister\Core\Services;
 
+use Illuminate\Support\Arr;
 use Motor\Backend\Models\Category;
 use Partymeister\Core\Models\Schedule;
 use Motor\Backend\Services\BaseService;
@@ -32,8 +33,8 @@ class ScheduleService extends BaseService
         // 3. save slides
         $slideType            = config('partymeister-core-slides.timetable.slide_type', 'default');
 
-        foreach (array_get($data, 'slide', []) as $slideName => $definitions) {
-            $name = array_get($data, 'name.' . $slideName);
+        foreach (Arr::get($data, 'slide', []) as $slideName => $definitions) {
+            $name = Arr::get($data, 'name.' . $slideName);
 
             // 2. look for existing slides with the same name
             $slide = Slide::where('name', $name)->where('category_id', $timetableCategory->id)->first();
@@ -45,8 +46,8 @@ class ScheduleService extends BaseService
             $slide->name        = $name;
             $slide->slide_type  = $slideType;
             $slide->definitions = $definitions;
-            $slide->cached_html_preview = array_get($data, 'cached_html_preview.' . $slideName, '');
-            $slide->cached_html_final   = array_get($data, 'cached_html_final.' . $slideName, '');
+            $slide->cached_html_preview = Arr::get($data, 'cached_html_preview.' . $slideName, '');
+            $slide->cached_html_final   = Arr::get($data, 'cached_html_final.' . $slideName, '');
 
             $slide->save();
 
@@ -57,7 +58,7 @@ class ScheduleService extends BaseService
 			//$pngData = substr($pngData, 22);
 			//file_put_contents(storage_path().'/final_'.$slideName.'.png', base64_decode($pngData));
 
-			$pngData = array_get($data, 'preview.' . $slideName);
+			$pngData = Arr::get($data, 'preview.' . $slideName);
 			$pngData = substr($pngData, 22);
 			file_put_contents(storage_path().'/preview_'.$slideName.'.png', base64_decode($pngData));
 

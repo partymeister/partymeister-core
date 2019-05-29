@@ -2,6 +2,7 @@
 
 namespace Partymeister\Core\Services\Component;
 
+use Illuminate\Support\Str;
 use Partymeister\Core\Events\VisitorRegistered;
 use Partymeister\Core\Models\Visitor;
 
@@ -14,7 +15,7 @@ class VisitorWebsiteRegistrationService
             'name'               => $data['name'],
             'group'              => $data['group'],
             'country_iso_3166_1' => $data['country_iso_3166_1'],
-            'api_token'          => str_random(60),
+            'api_token'          => Str::random(60),
         ]);
 
         event(new VisitorRegistered($visitor));
