@@ -6,7 +6,7 @@ Route::group([
     'as'         => 'api.',
 ], function () {
     //Route::resource('callbacks', 'CallbacksController');
-    //Route::resource('schedules', 'SchedulesController');
+    Route::resource('schedules', 'SchedulesController');
     Route::resource('events', 'EventsController');
     //Route::resource('event_types', 'EventTypesController');
     Route::resource('guests', 'GuestsController');
