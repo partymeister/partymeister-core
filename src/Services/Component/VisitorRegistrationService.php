@@ -20,11 +20,13 @@ class VisitorRegistrationService
             'password'           => bcrypt($data['password']),
             'api_token'          => Str::random(60),
         ]);
-        $accessKey                = AccessKey::where('access_key', $data['access_key'])->first();
-        $accessKey->visitor_id    = $visitor->id;
-        $accessKey->ip_address    = \Request::ip();
-        $accessKey->registered_at = date('Y-m-d H:i:s');
-        $accessKey->save();
+        if (config('partymeister-core-visitor-registration.access_key_required')) {
+            $accessKey                = AccessKey::where('access_key', $data['access_key'])->first();
+            $accessKey->visitor_id    = $visitor->id;
+            $accessKey->ip_address    = \Request::ip();
+            $accessKey->registered_at = date('Y-m-d H:i:s');
+            $accessKey->save();
+        }
 
         event(new Registered($visitor));
 

@@ -47,7 +47,7 @@
                     </a>
                 </li>
             @endif
-            @if (!is_null($component->voting_page))
+            @if (config('partymeister-competitions-voting.party_has_voting') && !is_null($component->voting_page))
                 <li>
                     <a href="{{route('frontend.pages.index', ['slug' => $component->voting_page->full_slug])}}">
                         <i class="fa fa-trophy"></i>
