@@ -26,6 +26,9 @@ class ComponentSchedules {
 
         foreach (Arr::get($data, 'data.events.data') as $key => $event)
         {
+            if (Arr::get($event, 'is_visible') == false) {
+                continue;
+            }
             $date = Carbon::createFromTimestamp(strtotime(Arr::get($event, 'starts_at')));
             $dayKey = $date->format('l');
             $timeKey = $date->format('H:i');
