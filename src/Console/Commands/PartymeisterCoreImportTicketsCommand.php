@@ -71,7 +71,7 @@ class PartymeisterCoreImportTicketsCommand extends Command
                 }
 
                 // Save row
-                $record = new Guest();;
+                $record = new Guest();
                 $record->ticket_order_number = $row[1];
                 $record->company = utf8_encode($row[2]);
                 $record->name = utf8_encode($row[4].' '.$row[5]);
