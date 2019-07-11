@@ -15,7 +15,7 @@ class MessageGroupService extends BaseService
 
     protected function addUsers()
     {
-        foreach (Arr::get($this->data, 'users', []) as $key => $user) {
+        foreach (Arr::get($this->data, 'users', []) as $user) {
             $this->record->users()->attach($user);
         }
     }

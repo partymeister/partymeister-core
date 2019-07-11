@@ -18,7 +18,7 @@ class PartymeisterServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $result = app('router')->pushMiddlewareToGroup('frontend', Visitor::class);
+        app('router')->pushMiddlewareToGroup('frontend', Visitor::class);
 
         $this->config();
         $this->routes();

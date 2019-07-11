@@ -24,7 +24,7 @@ class ComponentSchedules {
     {
         $data = fractal($this->component->schedule, \Partymeister\Core\Transformers\ScheduleTransformer::class)->toArray();
 
-        foreach (Arr::get($data, 'data.events.data') as $key => $event)
+        foreach (Arr::get($data, 'data.events.data') as $event)
         {
             if (Arr::get($event, 'is_visible') == false) {
                 continue;

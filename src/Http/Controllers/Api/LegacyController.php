@@ -89,7 +89,7 @@ class LegacyController extends Controller
 
         $days = [];
 
-        foreach (Arr::get($data, 'data.events.data') as $key => $event) {
+        foreach (Arr::get($data, 'data.events.data') as $event) {
             $date    = Carbon::createFromTimestamp(strtotime(Arr::get($event, 'starts_at')));
             $dayKey  = $date->format('Y-m-d') . ' - ' . $date->format('l');
             $timeKey = $date->format('H:i');

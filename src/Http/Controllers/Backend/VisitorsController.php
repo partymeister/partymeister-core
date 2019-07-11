@@ -14,7 +14,9 @@ use Kris\LaravelFormBuilder\FormBuilderTrait;
 
 class VisitorsController extends Controller
 {
+
     use FormBuilderTrait;
+
 
     /**
      * Display a listing of the resource.
@@ -26,8 +28,8 @@ class VisitorsController extends Controller
         $grid = new VisitorGrid(Visitor::class);
 
         $service = VisitorService::collection($grid);
-        $grid->filter = $service->getFilter();
-        $paginator    = $service->getPaginator();
+        $grid->setFilter($service->getFilter());
+        $paginator = $service->getPaginator();
 
         return view('partymeister-core::backend.visitors.index', compact('paginator', 'grid'));
     }
@@ -44,7 +46,7 @@ class VisitorsController extends Controller
             'method'  => 'POST',
             'route'   => 'backend.visitors.store',
             'enctype' => 'multipart/form-data',
-            'model' => ['country_iso_3166_1' => 'DE']
+            'model'   => [ 'country_iso_3166_1' => 'DE' ]
         ]);
 
         return view('partymeister-core::backend.visitors.create', compact('form'));
@@ -54,7 +56,7 @@ class VisitorsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -78,7 +80,7 @@ class VisitorsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -91,7 +93,7 @@ class VisitorsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -111,8 +113,8 @@ class VisitorsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -136,7 +138,7 @@ class VisitorsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */

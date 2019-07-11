@@ -49,7 +49,7 @@ class PartymeisterCoreCheckCallbacksCommand extends Command
             Log::info('Firing callback '.$callback->name);
 
             if ($callback->action == 'notification') {
-                $status = StuhlService::send($callback->body, $callback->title, '', EVENT_LEVEL_BORING, $callback->destination);
+                StuhlService::send($callback->body, $callback->title, '', EVENT_LEVEL_BORING, $callback->destination);
             }
 
             $callback->has_fired = true;
