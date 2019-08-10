@@ -21,7 +21,8 @@ class EventsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \ReflectionException
      */
     public function index()
     {
@@ -38,7 +39,8 @@ class EventsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Event $record
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(Event $record)
     {
@@ -56,9 +58,8 @@ class EventsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
+     * @param EventRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(EventRequest $request)
     {
@@ -79,6 +80,7 @@ class EventsController extends Controller
 
     /**
      * @param Event $record
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function duplicate(Event $record)
     {
@@ -92,9 +94,7 @@ class EventsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param $id
      */
     public function show($id)
     {
@@ -105,9 +105,8 @@ class EventsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Event $record
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Event $record)
     {
@@ -125,10 +124,9 @@ class EventsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param EventRequest $request
+     * @param Event        $record
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(EventRequest $request, Event $record)
     {
@@ -150,9 +148,8 @@ class EventsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Event $record
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Event $record)
     {

@@ -22,7 +22,8 @@ class CallbacksController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \ReflectionException
      */
     public function index()
     {
@@ -37,7 +38,8 @@ class CallbacksController extends Controller
 
 
     /**
-     * @param Event $record
+     * @param Callback $record
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function duplicate(Callback $record)
     {
@@ -52,7 +54,8 @@ class CallbacksController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Callback $record
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(Callback $record)
     {
@@ -70,9 +73,8 @@ class CallbacksController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
+     * @param CallbackRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(CallbackRequest $request)
     {
@@ -94,9 +96,7 @@ class CallbacksController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param $id
      */
     public function show($id)
     {
@@ -107,9 +107,8 @@ class CallbacksController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Callback $record
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Callback $record)
     {
@@ -127,10 +126,9 @@ class CallbacksController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param CallbackRequest $request
+     * @param Callback        $record
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(CallbackRequest $request, Callback $record)
     {
@@ -152,9 +150,8 @@ class CallbacksController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Callback $record
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Callback $record)
     {

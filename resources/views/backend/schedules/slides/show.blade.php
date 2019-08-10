@@ -56,7 +56,7 @@
     @include('partymeister-slides::layouts.partials.slide_scripts')
     <script>
         $(document).ready(function () {
-            var sm = [];
+            let sm = [];
 
             @foreach ($days as $dayIndex => $day)
                     @foreach ($day as $eventBlockIndex => $eventBlock)
@@ -73,7 +73,7 @@
 
                 $('.loader').addClass('is-active');
 
-                var tasks = [];
+                let tasks = [];
 
                 sm['{{$dayIndex}}-{{$eventBlockIndex}}'].data.export('preview', '{{$dayIndex}}-{{$eventBlockIndex}}').then(result => {
                     Object.keys(sm).forEach(function (key) {

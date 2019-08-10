@@ -14,7 +14,7 @@ class GuestsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
@@ -27,9 +27,8 @@ class GuestsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
+     * @param GuestRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(GuestRequest $request)
     {
@@ -43,9 +42,8 @@ class GuestsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Guest $record
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Guest $record)
     {
@@ -59,10 +57,9 @@ class GuestsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param GuestRequest $request
+     * @param Guest        $record
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(GuestRequest $request, Guest $record)
     {
@@ -76,9 +73,8 @@ class GuestsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Guest $record
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Guest $record)
     {

@@ -14,7 +14,7 @@ class CallbacksController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
@@ -28,9 +28,8 @@ class CallbacksController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
+     * @param CallbackRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(CallbackRequest $request)
     {
@@ -44,9 +43,8 @@ class CallbacksController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Callback $record
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Callback $record)
     {
@@ -60,10 +58,9 @@ class CallbacksController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param CallbackRequest $request
+     * @param Callback        $record
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(CallbackRequest $request, Callback $record)
     {
@@ -77,9 +74,8 @@ class CallbacksController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Callback $record
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Callback $record)
     {

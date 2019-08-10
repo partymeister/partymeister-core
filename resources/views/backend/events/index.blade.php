@@ -31,9 +31,9 @@
                 return false;
             }
         });
-        var apiToken = '{{Auth::user()->api_token}}';
+        let apiToken = '{{Auth::user()->api_token}}';
 
-        var updateEvent = function (that, recordId, data, callback) {
+        let updateEvent = function (that, recordId, data, callback) {
             $.ajax({
                 type: 'PATCH',
                 url: '{{action('\Partymeister\Core\Http\Controllers\Api\EventsController@index')}}/' + recordId + '?api_token=' + apiToken,
@@ -46,7 +46,7 @@
         $('.change-sort-position').blur(function (e) {
             e.preventDefault();
 
-            var data = {};
+            let data = {};
             data[$(this).data('field')] = $(this).val();
 
             updateEvent(this, $(this).data('record'), data, function (that, results) {

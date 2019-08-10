@@ -14,7 +14,7 @@ class EventsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
@@ -27,9 +27,8 @@ class EventsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
+     * @param EventRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(EventRequest $request)
     {
@@ -43,9 +42,8 @@ class EventsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Event $record
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Event $record)
     {
@@ -59,10 +57,9 @@ class EventsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param EventRequest $request
+     * @param Event        $record
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(EventRequest $request, Event $record)
     {
@@ -76,9 +73,8 @@ class EventsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Event $record
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Event $record)
     {

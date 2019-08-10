@@ -31,9 +31,8 @@ class ComponentSchedulesController extends ComponentController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
@@ -51,9 +50,8 @@ class ComponentSchedulesController extends ComponentController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param ComponentSchedule $record
+     * @return \Illuminate\Http\JsonResponse
      */
     public function edit(ComponentSchedule $record)
     {
@@ -68,10 +66,9 @@ class ComponentSchedulesController extends ComponentController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request           $request
+     * @param ComponentSchedule $record
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, ComponentSchedule $record)
     {

@@ -144,7 +144,7 @@
             $('[data-toggle="tooltip"]').tooltip()
         });
 
-        var switchCssClass = function (that, value, cssClass1, cssClass2) {
+        let switchCssClass = function (that, value, cssClass1, cssClass2) {
             if (value == true) {
                 $(that).removeClass(cssClass2);
                 $(that).addClass(cssClass1);

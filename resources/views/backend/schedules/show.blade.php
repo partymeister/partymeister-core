@@ -93,7 +93,7 @@
 </div>
 <script src="{{mix('js/motor-backend.js')}}"></script>
 <script>
-    var Clock = {
+    let Clock = {
         template: "<div>@{{hours}}:@{{minutes}}:@{{seconds}}</div>",
         data: function data() {
             return {
@@ -108,8 +108,8 @@
 
         methods: {
             updateDateTime: function updateDateTime() {
-                var self = this;
-                var now = new Date();
+                let self = this;
+                let now = new Date();
 
                 self.hours = now.getHours();
                 self.minutes = self.getZeroPad(now.getMinutes());
@@ -123,7 +123,7 @@
         }
     };
 
-    var Countdown = {
+    let Countdown = {
         template: '<div :class="cssClass">@{{hours}}:@{{minutes}}:@{{seconds}}</div>',
         props: ['date', 'index'],
         data: function data() {
@@ -140,25 +140,25 @@
 
         methods: {
             updateDateTime: function updateDateTime() {
-                var self = this;
-                var now = new Date();
-                var target = new Date(this.date);
+                let self = this;
+                let now = new Date();
+                let target = new Date(this.date);
 
-                var seconds = Math.ceil(((target.getTime() - now.getTime()) / 1000));
+                let seconds = Math.ceil(((target.getTime() - now.getTime()) / 1000));
 
                 if (seconds < 1800) {
                     app.$emit('event-blink', {index: this.index});
                 }
 
-                var negative = false;
+                let negative = false;
                 if (seconds < 0) {
                     seconds = Math.abs(seconds);
                     negative = true;
                 }
 
-                var hours = Math.floor(seconds / 3600);
+                let hours = Math.floor(seconds / 3600);
                 seconds -= hours * 3600;
-                var minutes = Math.floor(seconds / 60);
+                let minutes = Math.floor(seconds / 60);
                 seconds -= minutes * 60;
 
                 self.hours = self.getZeroPad(hours);
@@ -178,7 +178,7 @@
         }
     };
 
-    var app = new Vue({
+    let app = new Vue({
         el: '#schedule-container',
         data: {
             events: [],
@@ -190,7 +190,7 @@
         },
         methods: {
             formatDate: function (dateString) {
-                var date = new Date(dateString);
+                let date = new Date(dateString);
                 return date.getFullYear() + '-' + this.getZeroPad(date.getUTCMonth() + 1) + '-' + this.getZeroPad(date.getDate()) + ' ' + this.getZeroPad(date.getHours()) + ':' + this.getZeroPad(date.getMinutes());
             },
             getZeroPad: function getZeroPad(n) {
@@ -198,8 +198,8 @@
             },
             filterEvents: function () {
                 this.filteredEvents = this.events.filter(function (event) {
-                    var now = new Date();
-                    var target = new Date(event.starts_at);
+                    let now = new Date();
+                    let target = new Date(event.starts_at);
                     if (event.is_visible && (Math.ceil(((target.getTime() - now.getTime()) / 1000)) > (-3*3600))) {
                         return true;
                     }

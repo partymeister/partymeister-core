@@ -4,6 +4,7 @@ namespace Partymeister\Core\Forms\Component;
 
 use Illuminate\Validation\Rule;
 use Kris\LaravelFormBuilder\Form;
+use Symfony\Component\Intl\Countries;
 
 class VisitorRegistrationForm extends Form
 {
@@ -28,7 +29,7 @@ class VisitorRegistrationForm extends Form
         }
         $countryList = config('partymeister-core-visitor-registration.countries', []);
         if (count($countryList) == 0) {
-            $countryList = \Symfony\Component\Intl\Intl::getRegionBundle()->getCountryNames();
+            $countryList = Countries::getNames();
         }
         $this->add('country_iso_3166_1', 'select',
             ['label' => trans('motor-backend::backend/global.address.country'), 'choices' => $countryList]);

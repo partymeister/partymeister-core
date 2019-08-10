@@ -14,7 +14,7 @@ class VisitorsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
@@ -27,9 +27,8 @@ class VisitorsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
+     * @param VisitorRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(VisitorRequest $request)
     {
@@ -43,9 +42,8 @@ class VisitorsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Visitor $record
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Visitor $record)
     {
@@ -59,10 +57,9 @@ class VisitorsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param VisitorRequest $request
+     * @param Visitor        $record
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(VisitorRequest $request, Visitor $record)
     {
@@ -76,9 +73,8 @@ class VisitorsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Visitor $record
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Visitor $record)
     {

@@ -22,7 +22,8 @@ class SlidesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Schedule $record
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(Schedule $record)
     {
