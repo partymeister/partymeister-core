@@ -18,10 +18,19 @@ use Partymeister\Core\Transformers\ScheduleTransformer;
 class ComponentSchedules
 {
 
+    /**
+     * @var ComponentSchedule
+     */
     protected $component;
 
+    /**
+     * @var PageVersionComponent
+     */
     protected $pageVersionComponent;
 
+    /**
+     * @var array
+     */
     protected $days = [];
 
 

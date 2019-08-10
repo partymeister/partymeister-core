@@ -13,6 +13,9 @@ use Partymeister\Core\Models\Callback;
 class CallbackService extends BaseService
 {
 
+    /**
+     * @var string
+     */
     protected $model = Callback::class;
 
 

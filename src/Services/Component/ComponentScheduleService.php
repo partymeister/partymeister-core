@@ -12,7 +12,13 @@ use Partymeister\Core\Models\Component\ComponentSchedule;
 class ComponentScheduleService extends ComponentBaseService
 {
 
+    /**
+     * @var string
+     */
     protected $model = ComponentSchedule::class;
 
+    /**
+     * @var string
+     */
     protected $name = 'schedule';
 }

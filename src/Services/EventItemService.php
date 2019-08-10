@@ -12,5 +12,8 @@ use Partymeister\Core\Models\EventItem;
 class EventItemService extends BaseService
 {
 
+    /**
+     * @var string
+     */
     protected $model = EventItem::class;
 }

@@ -21,12 +21,24 @@ class ComponentVisitorLogins
 
     use FormBuilderTrait;
 
+    /**
+     * @var PageVersionComponent
+     */
     protected $pageVersionComponent;
 
+    /**
+     * @var ComponentVisitorLogin
+     */
     protected $component;
 
+    /**
+     * @var
+     */
     protected $visitorLoginForm;
 
+    /**
+     * @var
+     */
     protected $request;
 
 

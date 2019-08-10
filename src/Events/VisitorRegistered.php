@@ -14,6 +14,9 @@ class VisitorRegistered
 
     use SerializesModels;
 
+    /**
+     * @var Visitor
+     */
     public $visitor;
 
 

@@ -20,6 +20,9 @@ class EventTransformer extends Fractal\TransformerAbstract
      */
     protected $availableIncludes = [ 'event_type' ];
 
+    /**
+     * @var array
+     */
     protected $defaultIncludes = [ 'event_type' ];
 
 

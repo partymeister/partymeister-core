@@ -15,8 +15,14 @@ use Partymeister\Core\Models\Visitor;
 class ComponentVisitorLists
 {
 
+    /**
+     * @var PageVersionComponent
+     */
     protected $pageVersionComponent;
 
+    /**
+     * @var
+     */
     protected $visitors;
 
 

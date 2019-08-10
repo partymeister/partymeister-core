@@ -14,6 +14,9 @@ use Partymeister\Core\Models\Guest;
 class GuestService extends BaseService
 {
 
+    /**
+     * @var string
+     */
     protected $model = Guest::class;
 
 

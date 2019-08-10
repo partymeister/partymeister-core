@@ -56,6 +56,9 @@ class Visitor extends Authenticatable
     use Searchable;
     use Filterable;
 
+    /**
+     * @var string
+     */
     protected $guard = 'visitor';
 
     /**

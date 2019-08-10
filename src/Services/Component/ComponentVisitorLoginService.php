@@ -12,7 +12,13 @@ use Partymeister\Core\Models\Component\ComponentVisitorLogin;
 class ComponentVisitorLoginService extends ComponentBaseService
 {
 
+    /**
+     * @var string
+     */
     protected $model = ComponentVisitorLogin::class;
 
+    /**
+     * @var string
+     */
     protected $name = 'visitor-login';
 }

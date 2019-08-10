@@ -20,10 +20,19 @@ class ComponentVisitorRegistrations
 
     use FormBuilderTrait;
 
+    /**
+     * @var PageVersionComponent
+     */
     protected $pageVersionComponent;
 
+    /**
+     * @var
+     */
     protected $visitorRegistrationForm;
 
+    /**
+     * @var
+     */
     protected $request;
 
 

@@ -15,6 +15,9 @@ use Partymeister\Slides\Models\Slide;
 class ScheduleService extends BaseService
 {
 
+    /**
+     * @var string
+     */
     protected $model = Schedule::class;
 
 

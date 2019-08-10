@@ -19,6 +19,9 @@ class ScheduleTransformer extends Fractal\TransformerAbstract
      */
     protected $availableIncludes = [ 'events' ];
 
+    /**
+     * @var array
+     */
     protected $defaultIncludes = [ 'events' ];
 
 

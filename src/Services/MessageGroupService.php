@@ -14,6 +14,9 @@ use Partymeister\Core\Models\User;
 class MessageGroupService extends BaseService
 {
 
+    /**
+     * @var string
+     */
     protected $model = MessageGroup::class;
 
 

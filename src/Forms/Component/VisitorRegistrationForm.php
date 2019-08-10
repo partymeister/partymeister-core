@@ -48,9 +48,9 @@ class VisitorRegistrationForm extends Form
             'label' => trans('motor-backend::backend/users.password'),
             'rules' => 'required|min:6|confirmed'
         ])->add('password_confirmation', 'password', [
-                'value' => '',
-                'label' => trans('motor-backend::backend/users.password_confirm'),
-                'rules' => 'required|min:6'
-            ])->add('submit', 'submit', [ 'attr' => [ 'class' => 'success button expanded' ], 'label' => 'Register' ]);
+            'value' => '',
+            'label' => trans('motor-backend::backend/users.password_confirm'),
+            'rules' => 'required|min:6'
+        ])->add('submit', 'submit', [ 'attr' => [ 'class' => 'success button expanded' ], 'label' => 'Register' ]);
     }
 }
