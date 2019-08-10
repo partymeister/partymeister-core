@@ -2,35 +2,41 @@
 
 namespace Partymeister\Core\Models\Component;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 use Motor\CMS\Models\ComponentBaseModel;
 use Motor\CMS\Models\Navigation;
+use Motor\CMS\Models\PageVersionComponent;
 
 /**
  * Partymeister\Core\Models\Component\ComponentVisitorLogin
  *
- * @property int $id
- * @property int|null $visitor_registration_page_id
- * @property int|null $entries_page_id
- * @property int|null $voting_page_id
- * @property int|null $comments_page_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Motor\CMS\Models\Navigation|null $comments_page
- * @property-read \Illuminate\Database\Eloquent\Collection|\Motor\CMS\Models\PageVersionComponent[] $component
- * @property-read \Motor\CMS\Models\Navigation|null $entries_page
- * @property-read \Motor\CMS\Models\Navigation|null $visitor_registration_page
- * @property-read \Motor\CMS\Models\Navigation|null $voting_page
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Component\ComponentVisitorLogin newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Component\ComponentVisitorLogin newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Component\ComponentVisitorLogin query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Component\ComponentVisitorLogin whereCommentsPageId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Component\ComponentVisitorLogin whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Component\ComponentVisitorLogin whereEntriesPageId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Component\ComponentVisitorLogin whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Component\ComponentVisitorLogin whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Component\ComponentVisitorLogin whereVisitorRegistrationPageId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Component\ComponentVisitorLogin whereVotingPageId($value)
- * @mixin \Eloquent
+ * @property int                                    $id
+ * @property int|null                               $visitor_registration_page_id
+ * @property int|null                               $entries_page_id
+ * @property int|null                               $voting_page_id
+ * @property int|null                               $comments_page_id
+ * @property Carbon|null                            $created_at
+ * @property Carbon|null                            $updated_at
+ * @property-read Navigation|null                   $comments_page
+ * @property-read Collection|PageVersionComponent[] $component
+ * @property-read Navigation|null                   $entries_page
+ * @property-read Navigation|null                   $visitor_registration_page
+ * @property-read Navigation|null                   $voting_page
+ * @method static Builder|ComponentVisitorLogin newModelQuery()
+ * @method static Builder|ComponentVisitorLogin newQuery()
+ * @method static Builder|ComponentVisitorLogin query()
+ * @method static Builder|ComponentVisitorLogin whereCommentsPageId( $value )
+ * @method static Builder|ComponentVisitorLogin whereCreatedAt( $value )
+ * @method static Builder|ComponentVisitorLogin whereEntriesPageId( $value )
+ * @method static Builder|ComponentVisitorLogin whereId( $value )
+ * @method static Builder|ComponentVisitorLogin whereUpdatedAt( $value )
+ * @method static Builder|ComponentVisitorLogin whereVisitorRegistrationPageId( $value )
+ * @method static Builder|ComponentVisitorLogin whereVotingPageId( $value )
+ * @mixin Eloquent
  */
 class ComponentVisitorLogin extends ComponentBaseModel
 {
@@ -61,32 +67,36 @@ class ComponentVisitorLogin extends ComponentBaseModel
         ];
     }
 
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function visitor_registration_page()
     {
         return $this->belongsTo(Navigation::class, 'visitor_registration_page_id');
     }
 
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function entries_page()
     {
         return $this->belongsTo(Navigation::class, 'entries_page_id');
     }
 
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function comments_page()
     {
         return $this->belongsTo(Navigation::class, 'comments_page_id');
     }
 
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function voting_page()
     {

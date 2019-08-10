@@ -2,16 +2,24 @@
 
 namespace Partymeister\Core\Http\Controllers\Backend;
 
-use Motor\Backend\Http\Controllers\Controller;
-
-use Partymeister\Core\Models\MessageGroup;
-use Partymeister\Core\Http\Requests\Backend\MessageGroupRequest;
-use Partymeister\Core\Services\MessageGroupService;
-use Partymeister\Core\Grids\MessageGroupGrid;
-use Partymeister\Core\Forms\Backend\MessageGroupForm;
-
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Motor\Backend\Http\Controllers\Controller;
+use Partymeister\Core\Forms\Backend\MessageGroupForm;
+use Partymeister\Core\Grids\MessageGroupGrid;
+use Partymeister\Core\Http\Requests\Backend\MessageGroupRequest;
+use Partymeister\Core\Models\MessageGroup;
+use Partymeister\Core\Services\MessageGroupService;
+use ReflectionException;
 
+/**
+ * Class MessageGroupsController
+ * @package Partymeister\Core\Http\Controllers\Backend
+ */
 class MessageGroupsController extends Controller
 {
 
@@ -21,8 +29,8 @@ class MessageGroupsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \ReflectionException
+     * @return Factory|View
+     * @throws ReflectionException
      */
     public function index()
     {
@@ -39,7 +47,7 @@ class MessageGroupsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -57,7 +65,7 @@ class MessageGroupsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param MessageGroupRequest $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function store(MessageGroupRequest $request)
     {
@@ -91,7 +99,7 @@ class MessageGroupsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param MessageGroup $record
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function edit(MessageGroup $record)
     {
@@ -111,7 +119,7 @@ class MessageGroupsController extends Controller
      *
      * @param MessageGroupRequest $request
      * @param MessageGroup        $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function update(MessageGroupRequest $request, MessageGroup $record)
     {
@@ -134,7 +142,7 @@ class MessageGroupsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param MessageGroup $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function destroy(MessageGroup $record)
     {

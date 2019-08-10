@@ -3,16 +3,23 @@
 namespace Partymeister\Core\Http\Controllers\Backend\Schedules;
 
 use Carbon\Carbon;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
-use Motor\Backend\Http\Controllers\Controller;
-
-use Partymeister\Core\Models\Schedule;
-
+use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Motor\Backend\Http\Controllers\Controller;
+use Partymeister\Core\Models\Schedule;
 use Partymeister\Core\Services\ScheduleService;
+use Partymeister\Core\Transformers\ScheduleTransformer;
 use Partymeister\Slides\Models\SlideTemplate;
 
+/**
+ * Class SlidesController
+ * @package Partymeister\Core\Http\Controllers\Backend\Schedules
+ */
 class SlidesController extends Controller
 {
 
@@ -23,11 +30,11 @@ class SlidesController extends Controller
      * Display a listing of the resource.
      *
      * @param Schedule $record
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index(Schedule $record)
     {
-        $resource = $this->transformItem($record, \Partymeister\Core\Transformers\ScheduleTransformer::class);
+        $resource = $this->transformItem($record, ScheduleTransformer::class);
 
         $timetableTemplate = SlideTemplate::where('template_for', 'timetable')->first();
 
@@ -56,6 +63,12 @@ class SlidesController extends Controller
         return view('partymeister-core::backend.schedules.slides.show', compact('timetableTemplate', 'days', 'record'));
     }
 
+
+    /**
+     * @param Schedule $record
+     * @param Request  $request
+     * @return RedirectResponse|Redirector
+     */
     public function store(Schedule $record, Request $request)
     {
         ScheduleService::generateSlides($record, $request->all());

@@ -5,8 +5,13 @@ namespace Partymeister\Core\Transformers;
 use League\Fractal;
 use Partymeister\Core\Models\EventItem;
 
+/**
+ * Class EventItemTransformer
+ * @package Partymeister\Core\Transformers
+ */
 class EventItemTransformer extends Fractal\TransformerAbstract
 {
+
     /**
      * List of resources possible to include
      *
@@ -25,7 +30,7 @@ class EventItemTransformer extends Fractal\TransformerAbstract
     public function transform(EventItem $record)
     {
         return [
-            'id'        => (int) $record->id
+            'id' => (int) $record->id
         ];
     }
 }

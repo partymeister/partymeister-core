@@ -7,7 +7,7 @@
 @section('contentheader_title')
     {{ trans('partymeister-core::backend/schedules.schedules') }}
     @if (has_permission('schedules.write'))
-	    {!! link_to_route('backend.schedules.create', trans('partymeister-core::backend/schedules.new'), [], ['class' => 'pull-right float-right btn btn-sm btn-success']) !!}
+        {!! link_to_route('backend.schedules.create', trans('partymeister-core::backend/schedules.new'), [], ['class' => 'pull-right float-right btn btn-sm btn-success']) !!}
     @endif
 @endsection
 

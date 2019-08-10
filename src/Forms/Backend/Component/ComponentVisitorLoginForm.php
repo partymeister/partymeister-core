@@ -5,9 +5,16 @@ namespace Partymeister\Core\Forms\Backend\Component;
 use Kris\LaravelFormBuilder\Form;
 use Motor\CMS\Models\Navigation;
 
+/**
+ * Class ComponentVisitorLoginForm
+ * @package Partymeister\Core\Forms\Backend\Component
+ */
 class ComponentVisitorLoginForm extends Form
 {
 
+    /**
+     * @return mixed|void
+     */
     public function buildForm()
     {
         $nodes = Navigation::where('scope', 'main')->where('parent_id', '!=', null)->defaultOrder()->get();

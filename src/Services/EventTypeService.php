@@ -2,9 +2,13 @@
 
 namespace Partymeister\Core\Services;
 
-use Partymeister\Core\Models\EventType;
 use Motor\Backend\Services\BaseService;
+use Partymeister\Core\Models\EventType;
 
+/**
+ * Class EventTypeService
+ * @package Partymeister\Core\Services
+ */
 class EventTypeService extends BaseService
 {
 

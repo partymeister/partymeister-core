@@ -2,43 +2,49 @@
 
 namespace Partymeister\Core\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Motor\Core\Traits\Searchable;
-use Motor\Core\Traits\Filterable;
 use Culpa\Traits\Blameable;
 use Culpa\Traits\CreatedBy;
 use Culpa\Traits\DeletedBy;
 use Culpa\Traits\UpdatedBy;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
+use Motor\Core\Filter\Filter;
+use Motor\Core\Traits\Filterable;
+use Motor\Core\Traits\Searchable;
 
 /**
  * Partymeister\Core\Models\Schedule
  *
- * @property int $id
- * @property string $name
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property int $created_by
- * @property int $updated_by
- * @property int|null $deleted_by
- * @property-read \Motor\Backend\Models\User $creator
+ * @property int                                  $id
+ * @property string                               $name
+ * @property Carbon|null                          $created_at
+ * @property Carbon|null                          $updated_at
+ * @property int                                  $created_by
+ * @property int                                  $updated_by
+ * @property int|null                             $deleted_by
+ * @property-read \Motor\Backend\Models\User      $creator
  * @property-read \Motor\Backend\Models\User|null $eraser
- * @property-read \Illuminate\Database\Eloquent\Collection|\Partymeister\Core\Models\Event[] $events
- * @property-read mixed $event_count
- * @property-read \Motor\Backend\Models\User $updater
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Schedule filteredBy(\Motor\Core\Filter\Filter $filter, $column)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Schedule filteredByMultiple(\Motor\Core\Filter\Filter $filter)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Schedule newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Schedule newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Schedule query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Schedule search($q, $full_text = false)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Schedule whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Schedule whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Schedule whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Schedule whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Schedule whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Schedule whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Schedule whereUpdatedBy($value)
- * @mixin \Eloquent
+ * @property-read Collection|Event[]              $events
+ * @property-read mixed                           $event_count
+ * @property-read \Motor\Backend\Models\User      $updater
+ * @method static Builder|Schedule filteredBy( Filter $filter, $column )
+ * @method static Builder|Schedule filteredByMultiple( Filter $filter )
+ * @method static Builder|Schedule newModelQuery()
+ * @method static Builder|Schedule newQuery()
+ * @method static Builder|Schedule query()
+ * @method static Builder|Schedule search( $q, $full_text = false )
+ * @method static Builder|Schedule whereCreatedAt( $value )
+ * @method static Builder|Schedule whereCreatedBy( $value )
+ * @method static Builder|Schedule whereDeletedBy( $value )
+ * @method static Builder|Schedule whereId( $value )
+ * @method static Builder|Schedule whereName( $value )
+ * @method static Builder|Schedule whereUpdatedAt( $value )
+ * @method static Builder|Schedule whereUpdatedBy( $value )
+ * @mixin Eloquent
  */
 class Schedule extends Model
 {
@@ -72,12 +78,24 @@ class Schedule extends Model
         'name'
     ];
 
-
+    /**
+     * @return int
+     */
+    /**
+     * @return int
+     */
     public function getEventCountAttribute()
     {
         return $this->events()->count();
     }
 
+
+    /**
+     * @return HasMany
+     */
+    /**
+     * @return HasMany
+     */
     public function events()
     {
         return $this->hasMany(Event::class);

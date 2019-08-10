@@ -2,48 +2,53 @@
 
 namespace Partymeister\Core\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Motor\Core\Traits\Searchable;
-use Motor\Core\Traits\Filterable;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Carbon;
+use Motor\Core\Filter\Filter;
+use Motor\Core\Traits\Filterable;
+use Motor\Core\Traits\Searchable;
 use Partymeister\Competitions\Models\Entry;
 use Partymeister\Competitions\Models\Vote;
 
 /**
  * Partymeister\Core\Models\Visitor
  *
- * @property int $id
- * @property string $name
- * @property string $group
- * @property string $country_iso_3166_1
- * @property array $additional_data
- * @property string|null $email
- * @property string $password
- * @property string $api_token
- * @property string|null $remember_token
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\Partymeister\Competitions\Models\Entry[] $entries
- * @property-read mixed $new_comments
- * @property-read \Illuminate\Database\Eloquent\Collection|\Partymeister\Competitions\Models\Vote[] $votes
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor filteredBy(\Motor\Core\Filter\Filter $filter, $column)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor filteredByMultiple(\Motor\Core\Filter\Filter $filter)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor search($q, $full_text = false)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor whereAdditionalData($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor whereApiToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor whereCountryIso31661($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor whereGroup($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Visitor whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @property int                     $id
+ * @property string                  $name
+ * @property string                  $group
+ * @property string                  $country_iso_3166_1
+ * @property array                   $additional_data
+ * @property string|null             $email
+ * @property string                  $password
+ * @property string                  $api_token
+ * @property string|null             $remember_token
+ * @property Carbon|null             $created_at
+ * @property Carbon|null             $updated_at
+ * @property-read Collection|Entry[] $entries
+ * @property-read mixed              $new_comments
+ * @property-read Collection|Vote[]  $votes
+ * @method static Builder|Visitor filteredBy( Filter $filter, $column )
+ * @method static Builder|Visitor filteredByMultiple( Filter $filter )
+ * @method static Builder|Visitor newModelQuery()
+ * @method static Builder|Visitor newQuery()
+ * @method static Builder|Visitor query()
+ * @method static Builder|Visitor search( $q, $full_text = false )
+ * @method static Builder|Visitor whereAdditionalData( $value )
+ * @method static Builder|Visitor whereApiToken( $value )
+ * @method static Builder|Visitor whereCountryIso31661( $value )
+ * @method static Builder|Visitor whereCreatedAt( $value )
+ * @method static Builder|Visitor whereEmail( $value )
+ * @method static Builder|Visitor whereGroup( $value )
+ * @method static Builder|Visitor whereId( $value )
+ * @method static Builder|Visitor whereName( $value )
+ * @method static Builder|Visitor wherePassword( $value )
+ * @method static Builder|Visitor whereRememberToken( $value )
+ * @method static Builder|Visitor whereUpdatedAt( $value )
+ * @mixin Eloquent
  */
 class Visitor extends Authenticatable
 {
@@ -67,7 +72,7 @@ class Visitor extends Authenticatable
      *
      * @var array
      */
-    protected $searchableColumns = ['name', 'group'];
+    protected $searchableColumns = [ 'name', 'group' ];
 
     /**
      * The attributes that are mass assignable.
@@ -107,6 +112,12 @@ class Visitor extends Authenticatable
     }
 
 
+    /**
+     * @return int
+     */
+    /**
+     * @return int
+     */
     public function getNewCommentsAttribute()
     {
         $numberOfComments = 0;
@@ -118,12 +129,24 @@ class Visitor extends Authenticatable
     }
 
 
+    /**
+     * @return HasMany
+     */
+    /**
+     * @return HasMany
+     */
     public function entries()
     {
         return $this->hasMany(Entry::class);
     }
 
 
+    /**
+     * @return HasMany
+     */
+    /**
+     * @return HasMany
+     */
     public function votes()
     {
         return $this->hasMany(Vote::class);

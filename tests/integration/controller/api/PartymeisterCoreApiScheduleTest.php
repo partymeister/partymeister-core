@@ -35,7 +35,7 @@ class PartymeisterCoreApiScheduleTest extends TestCase
     {
         parent::setUp();
 
-        $this->withFactories(__DIR__.'/../../../../database/factories');
+        $this->withFactories(__DIR__ . '/../../../../database/factories');
 
         $this->addDefaults();
     }
@@ -43,7 +43,7 @@ class PartymeisterCoreApiScheduleTest extends TestCase
 
     protected function addDefaults()
     {
-        $this->user = create_test_user();
+        $this->user             = create_test_user();
         $this->readPermission   = create_test_permission_with_name('schedules.read');
         $this->writePermission  = create_test_permission_with_name('schedules.write');
         $this->deletePermission = create_test_permission_with_name('schedules.delete');
@@ -105,21 +105,25 @@ class PartymeisterCoreApiScheduleTest extends TestCase
     {
         $this->user->givePermissionTo($this->readPermission);
         $record = create_test_schedule();
-        $this->json('GET',
-            '/api/schedules/' . $record->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
-            'name' => $record->name
-        ]);
+        $this->json('GET', '/api/schedules/' . $record->id . '?api_token=' . $this->user->api_token)
+             ->seeStatusCode(200)
+             ->seeJson([
+                 'name' => $record->name
+             ]);
     }
+
 
     /** @test */
     public function fails_to_show_a_single_schedule_without_permission()
     {
         $record = create_test_schedule();
-        $this->json('GET',
-            '/api/schedules/' . $record->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
-            'error' => 'Access denied.'
-        ]);
+        $this->json('GET', '/api/schedules/' . $record->id . '?api_token=' . $this->user->api_token)
+             ->seeStatusCode(403)
+             ->seeJson([
+                 'error' => 'Access denied.'
+             ]);
     }
+
 
     /** @test */
     public function can_get_empty_result_when_trying_to_show_multiple_schedule()
@@ -147,10 +151,11 @@ class PartymeisterCoreApiScheduleTest extends TestCase
     {
         $this->user->givePermissionTo($this->readPermission);
         $records = create_test_schedule(10);
-        $this->json('GET',
-            '/api/schedules?api_token=' . $this->user->api_token . '&search=' . $records[2]->name)->seeStatusCode(200)->seeJson([
-            'name' => $records[2]->name
-        ]);
+        $this->json('GET', '/api/schedules?api_token=' . $this->user->api_token . '&search=' . $records[2]->name)
+             ->seeStatusCode(200)
+             ->seeJson([
+                 'name' => $records[2]->name
+             ]);
     }
 
 
@@ -159,10 +164,11 @@ class PartymeisterCoreApiScheduleTest extends TestCase
     {
         $this->user->givePermissionTo($this->readPermission);
         create_test_schedule(50);
-        $this->json('GET',
-            '/api/schedules?api_token=' . $this->user->api_token . '&page=2')->seeStatusCode(200)->seeJson([
-            'current_page' => 2
-        ]);
+        $this->json('GET', '/api/schedules?api_token=' . $this->user->api_token . '&page=2')
+             ->seeStatusCode(200)
+             ->seeJson([
+                 'current_page' => 2
+             ]);
     }
 
 
@@ -181,10 +187,11 @@ class PartymeisterCoreApiScheduleTest extends TestCase
     {
         $this->user->givePermissionTo($this->writePermission);
         $record = create_test_schedule();
-        $this->json('PATCH',
-            '/api/schedules/' . $record->id . '?api_token=' . $this->user->api_token)->seeStatusCode(422)->seeJson([
-            'name' => [ 'The name field is required.' ]
-        ]);
+        $this->json('PATCH', '/api/schedules/' . $record->id . '?api_token=' . $this->user->api_token)
+             ->seeStatusCode(422)
+             ->seeJson([
+                 'name' => [ 'The name field is required.' ]
+             ]);
     }
 
 
@@ -192,11 +199,13 @@ class PartymeisterCoreApiScheduleTest extends TestCase
     public function fails_if_trying_to_modify_a_schedule_without_permission()
     {
         $record = create_test_schedule();
-        $this->json('PATCH',
-            '/api/schedules/' . $record->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
-            'error' => 'Access denied.'
-        ]);
+        $this->json('PATCH', '/api/schedules/' . $record->id . '?api_token=' . $this->user->api_token)
+             ->seeStatusCode(403)
+             ->seeJson([
+                 'error' => 'Access denied.'
+             ]);
     }
+
 
     /** @test */
     public function can_modify_a_schedule()
@@ -225,20 +234,23 @@ class PartymeisterCoreApiScheduleTest extends TestCase
     public function fails_to_delete_a_schedule_without_permission()
     {
         $record = create_test_schedule();
-        $this->json('DELETE',
-            '/api/schedules/' . $record->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
-            'error' => 'Access denied.'
-        ]);
+        $this->json('DELETE', '/api/schedules/' . $record->id . '?api_token=' . $this->user->api_token)
+             ->seeStatusCode(403)
+             ->seeJson([
+                 'error' => 'Access denied.'
+             ]);
     }
+
 
     /** @test */
     public function can_delete_a_schedule()
     {
         $this->user->givePermissionTo($this->deletePermission);
         $record = create_test_schedule();
-        $this->json('DELETE',
-            '/api/schedules/' . $record->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
-            'success' => true
-        ]);
+        $this->json('DELETE', '/api/schedules/' . $record->id . '?api_token=' . $this->user->api_token)
+             ->seeStatusCode(200)
+             ->seeJson([
+                 'success' => true
+             ]);
     }
 }

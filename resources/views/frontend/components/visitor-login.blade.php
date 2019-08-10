@@ -18,7 +18,8 @@
         </div>
         <div class="cell small-6 text-center">
             @if (!is_null($component->visitor_registration_page))
-                <a href="{{route('frontend.pages.index', ['slug' => $component->visitor_registration_page->full_slug])}}">or register!</a>
+                <a href="{{route('frontend.pages.index', ['slug' => $component->visitor_registration_page->full_slug])}}">or
+                    register!</a>
             @endif
         </div>
     </div>

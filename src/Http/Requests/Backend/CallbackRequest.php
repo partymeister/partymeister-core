@@ -4,6 +4,10 @@ namespace Partymeister\Core\Http\Requests\Backend;
 
 use Motor\Backend\Http\Requests\Request;
 
+/**
+ * Class CallbackRequest
+ * @package Partymeister\Core\Http\Requests\Backend
+ */
 class CallbackRequest extends Request
 {
 

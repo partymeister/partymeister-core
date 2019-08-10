@@ -6,6 +6,7 @@ use Culpa\Facades\Schema;
 
 class CreateSchedulesTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -23,6 +24,7 @@ class CreateSchedulesTable extends Migration
             $table->deletedBy(true);
         });
     }
+
 
     /**
      * Reverse the migrations.

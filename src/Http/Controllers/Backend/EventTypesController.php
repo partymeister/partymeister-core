@@ -2,16 +2,24 @@
 
 namespace Partymeister\Core\Http\Controllers\Backend;
 
-use Motor\Backend\Http\Controllers\Controller;
-
-use Partymeister\Core\Models\EventType;
-use Partymeister\Core\Http\Requests\Backend\EventTypeRequest;
-use Partymeister\Core\Services\EventTypeService;
-use Partymeister\Core\Grids\EventTypeGrid;
-use Partymeister\Core\Forms\Backend\EventTypeForm;
-
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Motor\Backend\Http\Controllers\Controller;
+use Partymeister\Core\Forms\Backend\EventTypeForm;
+use Partymeister\Core\Grids\EventTypeGrid;
+use Partymeister\Core\Http\Requests\Backend\EventTypeRequest;
+use Partymeister\Core\Models\EventType;
+use Partymeister\Core\Services\EventTypeService;
+use ReflectionException;
 
+/**
+ * Class EventTypesController
+ * @package Partymeister\Core\Http\Controllers\Backend
+ */
 class EventTypesController extends Controller
 {
 
@@ -21,8 +29,8 @@ class EventTypesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \ReflectionException
+     * @return Factory|View
+     * @throws ReflectionException
      */
     public function index()
     {
@@ -39,7 +47,7 @@ class EventTypesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -57,7 +65,7 @@ class EventTypesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param EventTypeRequest $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function store(EventTypeRequest $request)
     {
@@ -91,7 +99,7 @@ class EventTypesController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param EventType $record
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function edit(EventType $record)
     {
@@ -111,7 +119,7 @@ class EventTypesController extends Controller
      *
      * @param EventTypeRequest $request
      * @param EventType        $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function update(EventTypeRequest $request, EventType $record)
     {
@@ -134,7 +142,7 @@ class EventTypesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param EventType $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function destroy(EventType $record)
     {

@@ -1,4 +1,5 @@
-1<html>
+1
+<html>
 <head>
     <title>Partymeister - Countdown</title>
     <style type="text/css">
@@ -200,7 +201,7 @@
                 this.filteredEvents = this.events.filter(function (event) {
                     let now = new Date();
                     let target = new Date(event.starts_at);
-                    if (event.is_visible && (Math.ceil(((target.getTime() - now.getTime()) / 1000)) > (-3*3600))) {
+                    if (event.is_visible && (Math.ceil(((target.getTime() - now.getTime()) / 1000)) > (-3 * 3600))) {
                         return true;
                     }
                     return false;
@@ -215,9 +216,9 @@
             this.$on('event-blink', function (data) {
                 Vue.set(this.events[data.index], 'blink', true);
             });
-            setInterval(function(){
+            setInterval(function () {
                 app.filterEvents();
-            }, 1000*60*15);
+            }, 1000 * 60 * 15);
         }
 
     });

@@ -3,22 +3,19 @@
 namespace Partymeister\Core\Services;
 
 use Illuminate\Support\Arr;
-use Partymeister\Core\Models\MessageGroup;
 use Motor\Backend\Services\BaseService;
+use Partymeister\Core\Models\MessageGroup;
 use Partymeister\Core\Models\User;
 
+/**
+ * Class MessageGroupService
+ * @package Partymeister\Core\Services
+ */
 class MessageGroupService extends BaseService
 {
 
     protected $model = MessageGroup::class;
 
-
-    protected function addUsers()
-    {
-        foreach (Arr::get($this->data, 'users', []) as $user) {
-            $this->record->users()->attach($user);
-        }
-    }
 
     public function beforeCreate()
     {
@@ -29,6 +26,14 @@ class MessageGroupService extends BaseService
     public function afterCreate()
     {
         $this->addUsers();
+    }
+
+
+    protected function addUsers()
+    {
+        foreach (Arr::get($this->data, 'users', []) as $user) {
+            $this->record->users()->attach($user);
+        }
     }
 
 

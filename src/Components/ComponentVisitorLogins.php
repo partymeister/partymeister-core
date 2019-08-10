@@ -2,13 +2,20 @@
 
 namespace Partymeister\Core\Components;
 
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\CMS\Models\PageVersionComponent;
 use Partymeister\Core\Forms\Component\VisitorLoginForm;
+use Partymeister\Core\Models\Component\ComponentVisitorLogin;
 use Partymeister\Core\Services\Component\VisitorLoginService;
 
+/**
+ * Class ComponentVisitorLogins
+ * @package Partymeister\Core\Components
+ */
 class ComponentVisitorLogins
 {
 
@@ -23,13 +30,24 @@ class ComponentVisitorLogins
     protected $request;
 
 
-    public function __construct(PageVersionComponent $pageVersionComponent, \Partymeister\Core\Models\Component\ComponentVisitorLogin $component)
-    {
+    /**
+     * ComponentVisitorLogins constructor.
+     * @param PageVersionComponent  $pageVersionComponent
+     * @param ComponentVisitorLogin $component
+     */
+    public function __construct(
+        PageVersionComponent $pageVersionComponent,
+        ComponentVisitorLogin $component
+    ) {
         $this->pageVersionComponent = $pageVersionComponent;
         $this->component            = $component;
     }
 
 
+    /**
+     * @param Request $request
+     * @return bool|Factory|RedirectResponse|View
+     */
     public function index(Request $request)
     {
         $this->request = $request;
@@ -53,6 +71,9 @@ class ComponentVisitorLogins
     }
 
 
+    /**
+     * @return bool|RedirectResponse
+     */
     protected function post()
     {
         if ($this->request->get('logout') && VisitorLoginService::logout()) {
@@ -74,7 +95,9 @@ class ComponentVisitorLogins
 
                 return redirect()->back();
             } else {
-                $this->visitorLoginForm->getValidator()->errors()->add('name', 'Something is wrong with your credentials!');
+                $this->visitorLoginForm->getValidator()
+                                       ->errors()
+                                       ->add('name', 'Something is wrong with your credentials!');
 
                 return redirect()->back()->withErrors($this->visitorLoginForm->getErrors())->withInput();
             }
@@ -84,10 +107,13 @@ class ComponentVisitorLogins
     }
 
 
+    /**
+     * @return Factory|View
+     */
     public function render()
     {
         return view(config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
-            ['visitorLoginForm' => $this->visitorLoginForm, 'component' => $this->component]);
+            [ 'visitorLoginForm' => $this->visitorLoginForm, 'component' => $this->component ]);
     }
 
 }

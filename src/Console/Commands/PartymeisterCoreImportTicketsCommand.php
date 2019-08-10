@@ -2,17 +2,16 @@
 
 namespace Partymeister\Core\Console\Commands;
 
-use Faker\Factory;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
 use Motor\Backend\Models\Category;
 use Motor\Backend\Models\User;
-use Partymeister\Competitions\Models\Competition;
-use Partymeister\Competitions\Models\CompetitionType;
-use Partymeister\Competitions\Models\OptionGroup;
-use Partymeister\Competitions\Models\VoteCategory;
 use Partymeister\Core\Models\Guest;
 
+/**
+ * Class PartymeisterCoreImportTicketsCommand
+ * @package Partymeister\Core\Console\Commands
+ */
 class PartymeisterCoreImportTicketsCommand extends Command
 {
 
@@ -42,20 +41,17 @@ class PartymeisterCoreImportTicketsCommand extends Command
         Auth::login(User::find(1));
 
         // Open file
-        if (($handle = fopen($this->argument('file'), 'r')) !== FALSE)
-        {
+        if (( $handle = fopen($this->argument('file'), 'r') ) !== false) {
             // Read every row and save it in the database, skipping already existing codes
-            while (($row = fgetcsv($handle, 2048, ';')) !== FALSE)
-            {
+            while (( $row = fgetcsv($handle, 2048, ';') ) !== false) {
                 // Skip header
-                if ($row[0] == 'id')
-                {
+                if ($row[0] == 'id') {
                     continue;
                 }
 
                 $record = Guest::where('ticket_code', utf8_encode($row[20]))->first();
-                if (!is_null($record)) {
-                    $this->info('Skip ticket '.utf8_encode($row[20]));
+                if ( ! is_null($record)) {
+                    $this->info('Skip ticket ' . utf8_encode($row[20]));
                     continue;
                 }
 
@@ -64,26 +60,26 @@ class PartymeisterCoreImportTicketsCommand extends Command
                     // Get root
                     $root = Category::where('scope', 'guest')->where('_lft', 1)->first();
 
-                    $category = new Category();
-                    $category->name = utf8_encode($row[19]);
+                    $category        = new Category();
+                    $category->name  = utf8_encode($row[19]);
                     $category->scope = 'guest';
                     $category->appendToNode($root)->save();
                 }
 
                 // Save row
-                $record = new Guest();
+                $record                      = new Guest();
                 $record->ticket_order_number = $row[1];
-                $record->company = utf8_encode($row[2]);
-                $record->name = utf8_encode($row[4].' '.$row[5]);
-                $record->country = utf8_encode($row[9]);
-                $record->email = utf8_encode($row[10]);
-                $record->ticket_type = $row[19];
-                $record->ticket_code = $row[20];
-                $record->category_id = $category->id;
+                $record->company             = utf8_encode($row[2]);
+                $record->name                = utf8_encode($row[4] . ' ' . $row[5]);
+                $record->country             = utf8_encode($row[9]);
+                $record->email               = utf8_encode($row[10]);
+                $record->ticket_type         = $row[19];
+                $record->ticket_code         = $row[20];
+                $record->category_id         = $category->id;
 
                 $record->save();
 
-                $this->info('Added ticket '.$row[20]);
+                $this->info('Added ticket ' . $row[20]);
             }
             fclose($handle);
         }

@@ -2,61 +2,66 @@
 
 namespace Partymeister\Core\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Motor\Core\Traits\Searchable;
-use Motor\Core\Traits\Filterable;
 use Culpa\Traits\Blameable;
 use Culpa\Traits\CreatedBy;
 use Culpa\Traits\DeletedBy;
 use Culpa\Traits\UpdatedBy;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
+use Motor\Core\Filter\Filter;
+use Motor\Core\Traits\Filterable;
+use Motor\Core\Traits\Searchable;
 
 /**
  * Partymeister\Core\Models\Event
  *
- * @property int $id
- * @property int $schedule_id
- * @property int|null $event_type_id
- * @property string $name
- * @property string|null $starts_at
- * @property string|null $ends_at
- * @property int $is_visible
- * @property int $is_organizer_only
- * @property int $notify_minutes
- * @property string $link
- * @property int $sort_position
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property int $created_by
- * @property int $updated_by
- * @property int|null $deleted_by
- * @property-read \Motor\Backend\Models\User $creator
+ * @property int                                  $id
+ * @property int                                  $schedule_id
+ * @property int|null                             $event_type_id
+ * @property string                               $name
+ * @property string|null                          $starts_at
+ * @property string|null                          $ends_at
+ * @property int                                  $is_visible
+ * @property int                                  $is_organizer_only
+ * @property int                                  $notify_minutes
+ * @property string                               $link
+ * @property int                                  $sort_position
+ * @property Carbon|null                          $created_at
+ * @property Carbon|null                          $updated_at
+ * @property int                                  $created_by
+ * @property int                                  $updated_by
+ * @property int|null                             $deleted_by
+ * @property-read \Motor\Backend\Models\User      $creator
  * @property-read \Motor\Backend\Models\User|null $eraser
- * @property-read \Partymeister\Core\Models\EventType|null $event_type
- * @property-read \Partymeister\Core\Models\Schedule $schedule
- * @property-read \Motor\Backend\Models\User $updater
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event filteredBy(\Motor\Core\Filter\Filter $filter, $column)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event filteredByMultiple(\Motor\Core\Filter\Filter $filter)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event search($q, $full_text = false)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event whereEndsAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event whereEventTypeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event whereIsOrganizerOnly($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event whereIsVisible($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event whereLink($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event whereNotifyMinutes($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event whereScheduleId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event whereSortPosition($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event whereStartsAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Event whereUpdatedBy($value)
- * @mixin \Eloquent
+ * @property-read EventType|null                  $event_type
+ * @property-read Schedule                        $schedule
+ * @property-read \Motor\Backend\Models\User      $updater
+ * @method static Builder|Event filteredBy( Filter $filter, $column )
+ * @method static Builder|Event filteredByMultiple( Filter $filter )
+ * @method static Builder|Event newModelQuery()
+ * @method static Builder|Event newQuery()
+ * @method static Builder|Event query()
+ * @method static Builder|Event search( $q, $full_text = false )
+ * @method static Builder|Event whereCreatedAt( $value )
+ * @method static Builder|Event whereCreatedBy( $value )
+ * @method static Builder|Event whereDeletedBy( $value )
+ * @method static Builder|Event whereEndsAt( $value )
+ * @method static Builder|Event whereEventTypeId( $value )
+ * @method static Builder|Event whereId( $value )
+ * @method static Builder|Event whereIsOrganizerOnly( $value )
+ * @method static Builder|Event whereIsVisible( $value )
+ * @method static Builder|Event whereLink( $value )
+ * @method static Builder|Event whereName( $value )
+ * @method static Builder|Event whereNotifyMinutes( $value )
+ * @method static Builder|Event whereScheduleId( $value )
+ * @method static Builder|Event whereSortPosition( $value )
+ * @method static Builder|Event whereStartsAt( $value )
+ * @method static Builder|Event whereUpdatedAt( $value )
+ * @method static Builder|Event whereUpdatedBy( $value )
+ * @mixin Eloquent
  */
 class Event extends Model
 {
@@ -100,13 +105,24 @@ class Event extends Model
         'link',
     ];
 
-
+    /**
+     * @return BelongsTo
+     */
+    /**
+     * @return BelongsTo
+     */
     public function schedule()
     {
         return $this->belongsTo(Schedule::class);
     }
 
 
+    /**
+     * @return BelongsTo
+     */
+    /**
+     * @return BelongsTo
+     */
     public function event_type()
     {
         return $this->belongsTo(EventType::class);

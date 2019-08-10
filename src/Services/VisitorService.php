@@ -4,9 +4,13 @@ namespace Partymeister\Core\Services;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Partymeister\Core\Models\Visitor;
 use Motor\Backend\Services\BaseService;
+use Partymeister\Core\Models\Visitor;
 
+/**
+ * Class VisitorService
+ * @package Partymeister\Core\Services
+ */
 class VisitorService extends BaseService
 {
 

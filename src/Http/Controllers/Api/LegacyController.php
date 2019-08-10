@@ -2,16 +2,27 @@
 
 namespace Partymeister\Core\Http\Controllers\Api;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Motor\Backend\Http\Controllers\Controller;
 use Partymeister\Accounting\Models\ItemType;
 use Partymeister\Core\Models\Schedule;
+use Partymeister\Core\Models\Visitor;
+use Partymeister\Core\Transformers\ScheduleTransformer;
+use Partymeister\Core\Transformers\VisitorTransformer;
 use stdClass;
 
+/**
+ * Class LegacyController
+ * @package Partymeister\Core\Http\Controllers\Api
+ */
 class LegacyController extends Controller
 {
 
+    /**
+     * @return JsonResponse
+     */
     public function infodesk()
     {
         $itemTypes = new stdClass();
@@ -49,10 +60,13 @@ class LegacyController extends Controller
         return response()->json($response);
     }
 
+
+    /**
+     * @return JsonResponse
+     */
     public function visitors()
     {
-        $data = fractal(\Partymeister\Core\Models\Visitor::orderBy('created_at', 'DESC')->get(),
-            \Partymeister\Core\Transformers\VisitorTransformer::class)->toArray();
+        $data = fractal(Visitor::orderBy('created_at', 'DESC')->get(), VisitorTransformer::class)->toArray();
 
         $visitors = [];
 
@@ -83,9 +97,13 @@ class LegacyController extends Controller
         return response()->json($response);
     }
 
+
+    /**
+     * @return JsonResponse
+     */
     public function timetable()
     {
-        $data = fractal(Schedule::first(), \Partymeister\Core\Transformers\ScheduleTransformer::class)->toArray();
+        $data = fractal(Schedule::first(), ScheduleTransformer::class)->toArray();
 
         $days = [];
 

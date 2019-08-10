@@ -10,5 +10,5 @@
 
 @section('main-content')
     Useful info goes here!
-{{--    <partymeister-core-chats :visitors-json="{{$visitors}}" :message-groups-json="'{{$messageGroups}}'"></partymeister-core-chats>--}}
+    {{--    <partymeister-core-chats :visitors-json="{{$visitors}}" :message-groups-json="'{{$messageGroups}}'"></partymeister-core-chats>--}}
 @endsection

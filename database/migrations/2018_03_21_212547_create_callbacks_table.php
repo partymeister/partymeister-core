@@ -6,6 +6,7 @@ use Culpa\Facades\Schema;
 
 class CreateCallbacksTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -34,6 +35,7 @@ class CreateCallbacksTable extends Migration
             $table->deletedBy(true);
         });
     }
+
 
     /**
      * Reverse the migrations.

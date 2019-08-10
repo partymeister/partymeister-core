@@ -5,6 +5,10 @@ namespace Partymeister\Core\Transformers;
 use League\Fractal;
 use Partymeister\Core\Models\Guest;
 
+/**
+ * Class GuestTransformer
+ * @package Partymeister\Core\Transformers
+ */
 class GuestTransformer extends Fractal\TransformerAbstract
 {
 

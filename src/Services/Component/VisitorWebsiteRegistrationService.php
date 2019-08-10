@@ -6,9 +6,16 @@ use Illuminate\Support\Str;
 use Partymeister\Core\Events\VisitorRegistered;
 use Partymeister\Core\Models\Visitor;
 
+/**
+ * Class VisitorWebsiteRegistrationService
+ * @package Partymeister\Core\Services\Component
+ */
 class VisitorWebsiteRegistrationService
 {
 
+    /**
+     * @param $data
+     */
     public static function register($data)
     {
         $visitor = Visitor::create([

@@ -6,6 +6,7 @@ use Culpa\Facades\Schema;
 
 class CreateEventTypesTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -25,6 +26,7 @@ class CreateEventTypesTable extends Migration
             $table->deletedBy(true);
         });
     }
+
 
     /**
      * Reverse the migrations.

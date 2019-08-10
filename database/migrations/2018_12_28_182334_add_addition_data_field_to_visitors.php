@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class AddAdditionDataFieldToVisitors extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -17,6 +18,7 @@ class AddAdditionDataFieldToVisitors extends Migration
             $table->json('additional_data')->after('country_iso_3166_1');
         });
     }
+
 
     /**
      * Reverse the migrations.

@@ -7,7 +7,7 @@
 @section('contentheader_title')
     {{ trans('partymeister-core::backend/event_types.event_types') }}
     @if (has_permission('event_types.write'))
-	    {!! link_to_route('backend.event_types.create', trans('partymeister-core::backend/event_types.new'), [], ['class' => 'pull-right float-right btn btn-sm btn-success']) !!}
+        {!! link_to_route('backend.event_types.create', trans('partymeister-core::backend/event_types.new'), [], ['class' => 'pull-right float-right btn btn-sm btn-success']) !!}
     @endif
 @endsection
 

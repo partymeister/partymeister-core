@@ -4,6 +4,10 @@ namespace Partymeister\Core\Http\Requests\Backend;
 
 use Motor\Backend\Http\Requests\Request;
 
+/**
+ * Class MessageGroupRequest
+ * @package Partymeister\Core\Http\Requests\Backend
+ */
 class MessageGroupRequest extends Request
 {
 

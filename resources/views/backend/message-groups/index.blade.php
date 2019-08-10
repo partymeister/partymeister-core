@@ -7,7 +7,7 @@
 @section('contentheader_title')
     {{ trans('partymeister-core::backend/message-groups.message_groups') }}
     @if (has_permission('message_groups.write'))
-	    {!! link_to_route('backend.message-groups.create', trans('partymeister-core::backend/message-groups.new'), [], ['class' => 'pull-right float-right btn btn-sm btn-success']) !!}
+        {!! link_to_route('backend.message-groups.create', trans('partymeister-core::backend/message-groups.new'), [], ['class' => 'pull-right float-right btn btn-sm btn-success']) !!}
     @endif
 @endsection
 

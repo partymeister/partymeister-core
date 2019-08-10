@@ -7,7 +7,7 @@
 @section('contentheader_title')
     {{ trans('partymeister-core::backend/visitors.visitors') }}
     @if (has_permission('visitors.write'))
-	    {!! link_to_route('backend.visitors.create', trans('partymeister-core::backend/visitors.new'), [], ['class' => 'pull-right float-right btn btn-sm btn-success']) !!}
+        {!! link_to_route('backend.visitors.create', trans('partymeister-core::backend/visitors.new'), [], ['class' => 'pull-right float-right btn btn-sm btn-success']) !!}
     @endif
 @endsection
 

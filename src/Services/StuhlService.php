@@ -2,8 +2,10 @@
 
 namespace Partymeister\Core\Services;
 
-use GuzzleHttp\Psr7\Request;
+use Exception;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 
@@ -16,6 +18,10 @@ define('EVENT_CHANNEL_ORGA', 'orga');
 define('EVENT_CHANNEL_PUBLIC', 'public');
 define('EVENT_CHANNEL_ALL', 'all');
 
+/**
+ * Class StuhlService
+ * @package Partymeister\Core\Services
+ */
 class StuhlService
 {
 
@@ -26,6 +32,15 @@ class StuhlService
     public static $password;
 
 
+    /**
+     * @param        $message
+     * @param string $title
+     * @param string $link
+     * @param string $level
+     * @param string $destination
+     * @return int|string
+     * @throws GuzzleException
+     */
     public static function send(
         $message,
         $title = '',
@@ -58,8 +73,9 @@ class StuhlService
 
         try {
             $response = $client->send($request);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::warning($e->getMessage());
+
             return $e->getMessage();
         }
 

@@ -2,16 +2,23 @@
 
 namespace Partymeister\Core\Http\Controllers\Backend;
 
-use Motor\Backend\Http\Controllers\Controller;
-
-use Partymeister\Core\Models\Event;
-use Partymeister\Core\Http\Requests\Backend\EventRequest;
-use Partymeister\Core\Services\EventService;
-use Partymeister\Core\Grids\EventGrid;
-use Partymeister\Core\Forms\Backend\EventForm;
-
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Motor\Backend\Http\Controllers\Controller;
+use Partymeister\Core\Forms\Backend\EventForm;
+use Partymeister\Core\Grids\EventGrid;
+use Partymeister\Core\Http\Requests\Backend\EventRequest;
+use Partymeister\Core\Models\Event;
+use Partymeister\Core\Services\EventService;
+use ReflectionException;
 
+/**
+ * Class EventsController
+ * @package Partymeister\Core\Http\Controllers\Backend
+ */
 class EventsController extends Controller
 {
 
@@ -21,8 +28,8 @@ class EventsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \ReflectionException
+     * @return Factory|View
+     * @throws ReflectionException
      */
     public function index()
     {
@@ -37,29 +44,10 @@ class EventsController extends Controller
 
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @param Event $record
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create(Event $record)
-    {
-        $form = $this->form(EventForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.events.store',
-            'enctype' => 'multipart/form-data',
-            'model'   => $record,
-        ]);
-
-        return view('partymeister-core::backend.events.create', compact('form'));
-    }
-
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param EventRequest $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function store(EventRequest $request)
     {
@@ -80,7 +68,7 @@ class EventsController extends Controller
 
     /**
      * @param Event $record
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function duplicate(Event $record)
     {
@@ -88,6 +76,25 @@ class EventsController extends Controller
         $newRecord->name = 'Duplicate of ' . $newRecord->name;
 
         return $this->create($newRecord);
+    }
+
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @param Event $record
+     * @return Factory|View
+     */
+    public function create(Event $record)
+    {
+        $form = $this->form(EventForm::class, [
+            'method'  => 'POST',
+            'route'   => 'backend.events.store',
+            'enctype' => 'multipart/form-data',
+            'model'   => $record,
+        ]);
+
+        return view('partymeister-core::backend.events.create', compact('form'));
     }
 
 
@@ -106,7 +113,7 @@ class EventsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Event $record
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function edit(Event $record)
     {
@@ -126,7 +133,7 @@ class EventsController extends Controller
      *
      * @param EventRequest $request
      * @param Event        $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function update(EventRequest $request, Event $record)
     {
@@ -149,7 +156,7 @@ class EventsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Event $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function destroy(Event $record)
     {

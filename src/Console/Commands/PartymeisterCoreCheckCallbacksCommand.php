@@ -2,20 +2,18 @@
 
 namespace Partymeister\Core\Console\Commands;
 
-use Faker\Factory;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Motor\Backend\Models\Category;
 use Motor\Backend\Models\User;
-use Partymeister\Competitions\Models\Competition;
-use Partymeister\Competitions\Models\CompetitionType;
-use Partymeister\Competitions\Models\OptionGroup;
-use Partymeister\Competitions\Models\VoteCategory;
 use Partymeister\Core\Models\Callback;
-use Partymeister\Core\Models\Guest;
 use Partymeister\Core\Services\StuhlService;
 
+/**
+ * Class PartymeisterCoreCheckCallbacksCommand
+ * @package Partymeister\Core\Console\Commands
+ */
 class PartymeisterCoreCheckCallbacksCommand extends Command
 {
 
@@ -37,16 +35,19 @@ class PartymeisterCoreCheckCallbacksCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @throws GuzzleException
      */
     public function handle()
     {
         Auth::login(User::first());
 
-        $callbacks = Callback::where('is_timed', true)->where('has_fired', false)->where('embargo_until', '<', date('Y-m-d H:i:s'))->get();
+        $callbacks = Callback::where('is_timed', true)
+                             ->where('has_fired', false)
+                             ->where('embargo_until', '<', date('Y-m-d H:i:s'))
+                             ->get();
 
         foreach ($callbacks as $callback) {
-            Log::info('Firing callback '.$callback->name);
+            Log::info('Firing callback ' . $callback->name);
 
             if ($callback->action == 'notification') {
                 StuhlService::send($callback->body, $callback->title, '', EVENT_LEVEL_BORING, $callback->destination);

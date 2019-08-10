@@ -3,10 +3,9 @@
 namespace Partymeister\Core\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use Auth;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
-use Partymeister\Core\Models\MessageGroup;
-use Partymeister\Core\Models\Visitor;
+use Illuminate\View\View;
 
 /**
  * Class DashboardController
@@ -30,7 +29,7 @@ class DashboardController extends Controller
      * Show the application dashboard.
      *
      * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function show(Request $request)
     {
@@ -49,6 +48,7 @@ class DashboardController extends Controller
         //    $visitors[] = [ 'name' => $visitor->name . ($visitor->group != '' ? ' / '.$visitor->group : ''), 'uuid' => $visitor->api_token ];
         //}
 
-        return view('partymeister-core::backend.dashboard', [ 'messageGroups' => json_encode($messageGroups), 'visitors' => json_encode($visitors) ]);
+        return view('partymeister-core::backend.dashboard',
+            [ 'messageGroups' => json_encode($messageGroups), 'visitors' => json_encode($visitors) ]);
     }
 }

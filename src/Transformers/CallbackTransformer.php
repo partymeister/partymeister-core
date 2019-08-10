@@ -5,6 +5,10 @@ namespace Partymeister\Core\Transformers;
 use League\Fractal;
 use Partymeister\Core\Models\Callback;
 
+/**
+ * Class CallbackTransformer
+ * @package Partymeister\Core\Transformers
+ */
 class CallbackTransformer extends Fractal\TransformerAbstract
 {
 

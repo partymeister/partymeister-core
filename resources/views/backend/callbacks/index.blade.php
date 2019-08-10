@@ -7,7 +7,7 @@
 @section('contentheader_title')
     {{ trans('partymeister-core::backend/callbacks.callbacks') }}
     @if (has_permission('callbacks.write'))
-	    {!! link_to_route('backend.callbacks.create', trans('partymeister-core::backend/callbacks.new'), [], ['class' => 'pull-right float-right btn btn-sm btn-success']) !!}
+        {!! link_to_route('backend.callbacks.create', trans('partymeister-core::backend/callbacks.new'), [], ['class' => 'pull-right float-right btn btn-sm btn-success']) !!}
     @endif
 @endsection
 

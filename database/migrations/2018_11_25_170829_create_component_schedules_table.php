@@ -6,6 +6,7 @@ use Culpa\Facades\Schema;
 
 class CreateComponentSchedulesTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -19,6 +20,7 @@ class CreateComponentSchedulesTable extends Migration
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

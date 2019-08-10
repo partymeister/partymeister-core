@@ -4,17 +4,24 @@ namespace Partymeister\Core\Services;
 
 use Illuminate\Support\Arr;
 use Motor\Backend\Models\Category;
-use Partymeister\Core\Models\Schedule;
 use Motor\Backend\Services\BaseService;
-use Partymeister\Slides\Events\SlideSaved;
+use Partymeister\Core\Models\Schedule;
 use Partymeister\Slides\Models\Slide;
 
+/**
+ * Class ScheduleService
+ * @package Partymeister\Core\Services
+ */
 class ScheduleService extends BaseService
 {
 
     protected $model = Schedule::class;
 
 
+    /**
+     * @param Schedule $schedule
+     * @param          $data
+     */
     public static function generateSlides(Schedule $schedule, $data)
     {
         // 1. create a slide category for the timetable slides in case it does not exist yet
@@ -31,7 +38,7 @@ class ScheduleService extends BaseService
         }
 
         // 3. save slides
-        $slideType            = config('partymeister-core-slides.timetable.slide_type', 'default');
+        $slideType = config('partymeister-core-slides.timetable.slide_type', 'default');
 
         foreach (Arr::get($data, 'slide', []) as $slideName => $definitions) {
             $name = Arr::get($data, 'name.' . $slideName);
@@ -39,33 +46,33 @@ class ScheduleService extends BaseService
             // 2. look for existing slides with the same name
             $slide = Slide::where('name', $name)->where('category_id', $timetableCategory->id)->first();
             if (is_null($slide)) {
-                $slide              = new Slide();
+                $slide = new Slide();
             }
 
-            $slide->category_id = $timetableCategory->id;
-            $slide->name        = $name;
-            $slide->slide_type  = $slideType;
-            $slide->definitions = $definitions;
+            $slide->category_id         = $timetableCategory->id;
+            $slide->name                = $name;
+            $slide->slide_type          = $slideType;
+            $slide->definitions         = $definitions;
             $slide->cached_html_preview = Arr::get($data, 'cached_html_preview.' . $slideName, '');
             $slide->cached_html_final   = Arr::get($data, 'cached_html_final.' . $slideName, '');
 
             $slide->save();
 
             // 7. generate slides
-			// 7. generate slides
-			// Convert PNG to actual file
-			//$pngData = array_get($data, 'final.' . $slideName);
-			//$pngData = substr($pngData, 22);
-			//file_put_contents(storage_path().'/final_'.$slideName.'.png', base64_decode($pngData));
+            // 7. generate slides
+            // Convert PNG to actual file
+            //$pngData = array_get($data, 'final.' . $slideName);
+            //$pngData = substr($pngData, 22);
+            //file_put_contents(storage_path().'/final_'.$slideName.'.png', base64_decode($pngData));
 
-			$pngData = Arr::get($data, 'preview.' . $slideName);
-			$pngData = substr($pngData, 22);
-			file_put_contents(storage_path().'/preview_'.$slideName.'.png', base64_decode($pngData));
+            $pngData = Arr::get($data, 'preview.' . $slideName);
+            $pngData = substr($pngData, 22);
+            file_put_contents(storage_path() . '/preview_' . $slideName . '.png', base64_decode($pngData));
 
-			$slide->clearMediaCollection('preview');
-			$slide->clearMediaCollection('final');
-			$slide->addMedia(storage_path().'/preview_'.$slideName.'.png')->toMediaCollection('preview', 'media');
-			//$slide->addMedia(storage_path().'/final_'.$slideName.'.png')->toMediaCollection('final', 'media');
+            $slide->clearMediaCollection('preview');
+            $slide->clearMediaCollection('final');
+            $slide->addMedia(storage_path() . '/preview_' . $slideName . '.png')->toMediaCollection('preview', 'media');
+            //$slide->addMedia(storage_path().'/final_'.$slideName.'.png')->toMediaCollection('final', 'media');
 
 //            event(new SlideSaved($slide, 'slides'));
         }

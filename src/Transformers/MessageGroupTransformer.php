@@ -5,8 +5,13 @@ namespace Partymeister\Core\Transformers;
 use League\Fractal;
 use Partymeister\Core\Models\MessageGroup;
 
+/**
+ * Class MessageGroupTransformer
+ * @package Partymeister\Core\Transformers
+ */
 class MessageGroupTransformer extends Fractal\TransformerAbstract
 {
+
     /**
      * List of resources possible to include
      *
@@ -25,7 +30,7 @@ class MessageGroupTransformer extends Fractal\TransformerAbstract
     public function transform(MessageGroup $record)
     {
         return [
-            'id'        => (int) $record->id
+            'id' => (int) $record->id
         ];
     }
 }

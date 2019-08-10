@@ -6,6 +6,10 @@ use Carbon\Carbon;
 use League\Fractal;
 use Partymeister\Core\Models\Event;
 
+/**
+ * Class EventTransformer
+ * @package Partymeister\Core\Transformers
+ */
 class EventTransformer extends Fractal\TransformerAbstract
 {
 
@@ -39,6 +43,10 @@ class EventTransformer extends Fractal\TransformerAbstract
     }
 
 
+    /**
+     * @param Event $record
+     * @return Fractal\Resource\Item
+     */
     public function includeEventType(Event $record)
     {
         return $this->item($record->event_type, new EventTypeTransformer());

@@ -2,16 +2,24 @@
 
 namespace Partymeister\Core\Http\Controllers\Backend;
 
-use Motor\Backend\Http\Controllers\Controller;
-
-use Partymeister\Core\Models\Schedule;
-use Partymeister\Core\Http\Requests\Backend\ScheduleRequest;
-use Partymeister\Core\Services\ScheduleService;
-use Partymeister\Core\Grids\ScheduleGrid;
-use Partymeister\Core\Forms\Backend\ScheduleForm;
-
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Motor\Backend\Http\Controllers\Controller;
+use Partymeister\Core\Forms\Backend\ScheduleForm;
+use Partymeister\Core\Grids\ScheduleGrid;
+use Partymeister\Core\Http\Requests\Backend\ScheduleRequest;
+use Partymeister\Core\Models\Schedule;
+use Partymeister\Core\Services\ScheduleService;
+use ReflectionException;
 
+/**
+ * Class SchedulesController
+ * @package Partymeister\Core\Http\Controllers\Backend
+ */
 class SchedulesController extends Controller
 {
 
@@ -21,8 +29,8 @@ class SchedulesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \ReflectionException
+     * @return Factory|View
+     * @throws ReflectionException
      */
     public function index()
     {
@@ -39,7 +47,7 @@ class SchedulesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -57,7 +65,7 @@ class SchedulesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param ScheduleRequest $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function store(ScheduleRequest $request)
     {
@@ -80,7 +88,7 @@ class SchedulesController extends Controller
      * Display the specified resource.
      *
      * @param Schedule $record
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function show(Schedule $record)
     {
@@ -92,7 +100,7 @@ class SchedulesController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Schedule $record
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function edit(Schedule $record)
     {
@@ -112,7 +120,7 @@ class SchedulesController extends Controller
      *
      * @param ScheduleRequest $request
      * @param Schedule        $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function update(ScheduleRequest $request, Schedule $record)
     {
@@ -135,7 +143,7 @@ class SchedulesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Schedule $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function destroy(Schedule $record)
     {

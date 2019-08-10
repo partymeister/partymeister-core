@@ -2,29 +2,36 @@
 
 namespace Partymeister\Core\Models\Component;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 use Motor\CMS\Models\ComponentBaseModel;
+use Motor\CMS\Models\PageVersionComponent;
 use Partymeister\Core\Models\Schedule;
 
 /**
  * Partymeister\Core\Models\Component\ComponentSchedule
  *
- * @property int $id
- * @property int $schedule_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\Motor\CMS\Models\PageVersionComponent[] $component
- * @property-read \Partymeister\Core\Models\Schedule $schedule
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Component\ComponentSchedule newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Component\ComponentSchedule newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Component\ComponentSchedule query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Component\ComponentSchedule whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Component\ComponentSchedule whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Component\ComponentSchedule whereScheduleId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Partymeister\Core\Models\Component\ComponentSchedule whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @property int                                    $id
+ * @property int                                    $schedule_id
+ * @property Carbon|null                            $created_at
+ * @property Carbon|null                            $updated_at
+ * @property-read Collection|PageVersionComponent[] $component
+ * @property-read Schedule                          $schedule
+ * @method static Builder|ComponentSchedule newModelQuery()
+ * @method static Builder|ComponentSchedule newQuery()
+ * @method static Builder|ComponentSchedule query()
+ * @method static Builder|ComponentSchedule whereCreatedAt( $value )
+ * @method static Builder|ComponentSchedule whereId( $value )
+ * @method static Builder|ComponentSchedule whereScheduleId( $value )
+ * @method static Builder|ComponentSchedule whereUpdatedAt( $value )
+ * @mixin Eloquent
  */
 class ComponentSchedule extends ComponentBaseModel
 {
+
     /**
      * The attributes that are mass assignable.
      *
@@ -33,6 +40,7 @@ class ComponentSchedule extends ComponentBaseModel
     protected $fillable = [
         'schedule_id',
     ];
+
 
     /**
      * Preview function for the page editor
@@ -49,7 +57,7 @@ class ComponentSchedule extends ComponentBaseModel
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function schedule()
     {

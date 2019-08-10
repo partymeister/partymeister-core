@@ -16,9 +16,11 @@
                 <div class="modal-body">
                     <div v-if="comment != ''" v-html="'<p>'+nl2br(comment)+'</p>'"></div>
                     <div class="alert alert-info">
-                        <p v-if="has_badge" style="margin-bottom: 0; padding: 1rem 0;font-size: 20px;" v-html="$t('partymeister-core.backend.guests.badge_info_vue', {name: name})">
+                        <p v-if="has_badge" style="margin-bottom: 0; padding: 1rem 0;font-size: 20px;"
+                           v-html="$t('partymeister-core.backend.guests.badge_info_vue', {name: name})">
                         </p>
-                        <p v-if="ticket_code != ''" style="margin-bottom: 0; padding: 1rem 0;font-size: 20px;" v-html="$t('partymeister-core.backend.guests.ticket_code_info_vue', {ticket_code: ticket_code})">
+                        <p v-if="ticket_code != ''" style="margin-bottom: 0; padding: 1rem 0;font-size: 20px;"
+                           v-html="$t('partymeister-core.backend.guests.ticket_code_info_vue', {ticket_code: ticket_code})">
                         </p>
                     </div>
                 </div>
@@ -64,7 +66,7 @@
             this.$eventHub.$on('partymeister-core:update-guest-modal', (payload) => {
 
 
-                axios.get(route('api.guests.show', [payload.record])+'?api_token=' + this.apiToken).then((response) => {
+                axios.get(route('api.guests.show', [payload.record]) + '?api_token=' + this.apiToken).then((response) => {
 
                     if (this.update(payload.element, response.data.data)) {
                         $('#guest-modal').modal('show');

@@ -3,42 +3,62 @@
 namespace Partymeister\Core\Components;
 
 use Carbon\Carbon;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\View\View;
 use Motor\CMS\Models\PageVersionComponent;
+use Partymeister\Core\Models\Component\ComponentSchedule;
+use Partymeister\Core\Transformers\ScheduleTransformer;
 
-class ComponentSchedules {
+/**
+ * Class ComponentSchedules
+ * @package Partymeister\Core\Components
+ */
+class ComponentSchedules
+{
 
     protected $component;
+
     protected $pageVersionComponent;
 
     protected $days = [];
 
-    public function __construct(PageVersionComponent $pageVersionComponent, \Partymeister\Core\Models\Component\ComponentSchedule $component)
-    {
-        $this->component = $component;
+
+    /**
+     * ComponentSchedules constructor.
+     * @param PageVersionComponent $pageVersionComponent
+     * @param ComponentSchedule    $component
+     */
+    public function __construct(
+        PageVersionComponent $pageVersionComponent,
+        ComponentSchedule $component
+    ) {
+        $this->component            = $component;
         $this->pageVersionComponent = $pageVersionComponent;
     }
 
+
+    /**
+     * @param Request $request
+     * @return Factory|View
+     */
     public function index(Request $request)
     {
-        $data = fractal($this->component->schedule, \Partymeister\Core\Transformers\ScheduleTransformer::class)->toArray();
+        $data = fractal($this->component->schedule, ScheduleTransformer::class)->toArray();
 
-        foreach (Arr::get($data, 'data.events.data') as $event)
-        {
+        foreach (Arr::get($data, 'data.events.data') as $event) {
             if (Arr::get($event, 'is_visible') == false) {
                 continue;
             }
-            $date = Carbon::createFromTimestamp(strtotime(Arr::get($event, 'starts_at')));
-            $dayKey = $date->format('l');
+            $date    = Carbon::createFromTimestamp(strtotime(Arr::get($event, 'starts_at')));
+            $dayKey  = $date->format('l');
             $timeKey = $date->format('H:i');
-            if (!isset($this->days[$dayKey]))
-            {
+            if ( ! isset($this->days[$dayKey])) {
                 $this->days[$dayKey] = [];
             }
 
-            if (!isset($this->days[$dayKey][$timeKey]))
-            {
+            if ( ! isset($this->days[$dayKey][$timeKey])) {
                 $this->days[$dayKey][$timeKey] = [];
             }
             $this->days[$dayKey][$timeKey][] = [
@@ -59,9 +79,13 @@ class ComponentSchedules {
     }
 
 
+    /**
+     * @return Factory|View
+     */
     public function render()
     {
-        return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), ['component' => $this->component, 'days' => $this->days]);
+        return view(config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
+            [ 'component' => $this->component, 'days' => $this->days ]);
     }
 
 }

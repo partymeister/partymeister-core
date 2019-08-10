@@ -2,16 +2,24 @@
 
 namespace Partymeister\Core\Http\Controllers\Backend;
 
-use Motor\Backend\Http\Controllers\Controller;
-
-use Partymeister\Core\Models\Guest;
-use Partymeister\Core\Http\Requests\Backend\GuestRequest;
-use Partymeister\Core\Services\GuestService;
-use Partymeister\Core\Grids\GuestGrid;
-use Partymeister\Core\Forms\Backend\GuestForm;
-
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Motor\Backend\Http\Controllers\Controller;
+use Partymeister\Core\Forms\Backend\GuestForm;
+use Partymeister\Core\Grids\GuestGrid;
+use Partymeister\Core\Http\Requests\Backend\GuestRequest;
+use Partymeister\Core\Models\Guest;
+use Partymeister\Core\Services\GuestService;
+use ReflectionException;
 
+/**
+ * Class GuestsController
+ * @package Partymeister\Core\Http\Controllers\Backend
+ */
 class GuestsController extends Controller
 {
 
@@ -21,8 +29,8 @@ class GuestsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \ReflectionException
+     * @return Factory|View
+     * @throws ReflectionException
      */
     public function index()
     {
@@ -39,7 +47,7 @@ class GuestsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -57,7 +65,7 @@ class GuestsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param GuestRequest $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function store(GuestRequest $request)
     {
@@ -91,7 +99,7 @@ class GuestsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Guest $record
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function edit(Guest $record)
     {
@@ -111,7 +119,7 @@ class GuestsController extends Controller
      *
      * @param GuestRequest $request
      * @param Guest        $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function update(GuestRequest $request, Guest $record)
     {
@@ -134,7 +142,7 @@ class GuestsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Guest $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function destroy(Guest $record)
     {

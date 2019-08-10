@@ -2,14 +2,21 @@
 
 namespace Partymeister\Core\Components;
 
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\CMS\Models\PageVersionComponent;
 use Partymeister\Core\Forms\Component\VisitorWebsiteRegistrationForm;
 use Partymeister\Core\Services\Component\VisitorWebsiteRegistrationService;
 
-class ComponentVisitorWebsiteRegistrations {
+/**
+ * Class ComponentVisitorWebsiteRegistrations
+ * @package Partymeister\Core\Components
+ */
+class ComponentVisitorWebsiteRegistrations
+{
 
     use FormBuilderTrait;
 
@@ -19,11 +26,21 @@ class ComponentVisitorWebsiteRegistrations {
 
     protected $request;
 
+
+    /**
+     * ComponentVisitorWebsiteRegistrations constructor.
+     * @param PageVersionComponent $pageVersionComponent
+     */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
         $this->pageVersionComponent = $pageVersionComponent;
     }
 
+
+    /**
+     * @param Request $request
+     * @return bool|Factory|RedirectResponse|View
+     */
     public function index(Request $request)
     {
         $this->request = $request;
@@ -47,13 +64,16 @@ class ComponentVisitorWebsiteRegistrations {
     }
 
 
+    /**
+     * @return bool|RedirectResponse
+     */
     protected function post()
     {
         if (is_null($this->request->get('visitor-website-registration'))) {
             return true;
         }
 
-        if (!$this->visitorWebsiteRegistrationForm->isValid()) {
+        if ( ! $this->visitorWebsiteRegistrationForm->isValid()) {
             return redirect()->back()->withErrors($this->visitorWebsiteRegistrationForm->getErrors())->withInput();
         }
 
@@ -63,10 +83,14 @@ class ComponentVisitorWebsiteRegistrations {
         return redirect()->back();
     }
 
+
+    /**
+     * @return Factory|View
+     */
     public function render()
     {
         return view(config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
-            ['visitorWebsiteRegistrationForm' => $this->visitorWebsiteRegistrationForm]);
+            [ 'visitorWebsiteRegistrationForm' => $this->visitorWebsiteRegistrationForm ]);
     }
 
 }

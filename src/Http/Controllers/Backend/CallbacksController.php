@@ -2,17 +2,23 @@
 
 namespace Partymeister\Core\Http\Controllers\Backend;
 
-use Grpc\Call;
-use Motor\Backend\Http\Controllers\Controller;
-
-use Partymeister\Core\Models\Callback;
-use Partymeister\Core\Http\Requests\Backend\CallbackRequest;
-use Partymeister\Core\Services\CallbackService;
-use Partymeister\Core\Grids\CallbackGrid;
-use Partymeister\Core\Forms\Backend\CallbackForm;
-
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Motor\Backend\Http\Controllers\Controller;
+use Partymeister\Core\Forms\Backend\CallbackForm;
+use Partymeister\Core\Grids\CallbackGrid;
+use Partymeister\Core\Http\Requests\Backend\CallbackRequest;
+use Partymeister\Core\Models\Callback;
+use Partymeister\Core\Services\CallbackService;
+use ReflectionException;
 
+/**
+ * Class CallbacksController
+ * @package Partymeister\Core\Http\Controllers\Backend
+ */
 class CallbacksController extends Controller
 {
 
@@ -22,8 +28,8 @@ class CallbacksController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \ReflectionException
+     * @return Factory|View
+     * @throws ReflectionException
      */
     public function index()
     {
@@ -39,7 +45,7 @@ class CallbacksController extends Controller
 
     /**
      * @param Callback $record
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function duplicate(Callback $record)
     {
@@ -55,7 +61,7 @@ class CallbacksController extends Controller
      * Show the form for creating a new resource.
      *
      * @param Callback $record
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function create(Callback $record)
     {
@@ -74,7 +80,7 @@ class CallbacksController extends Controller
      * Store a newly created resource in storage.
      *
      * @param CallbackRequest $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function store(CallbackRequest $request)
     {
@@ -108,7 +114,7 @@ class CallbacksController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Callback $record
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function edit(Callback $record)
     {
@@ -128,7 +134,7 @@ class CallbacksController extends Controller
      *
      * @param CallbackRequest $request
      * @param Callback        $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function update(CallbackRequest $request, Callback $record)
     {
@@ -151,7 +157,7 @@ class CallbacksController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Callback $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function destroy(Callback $record)
     {

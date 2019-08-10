@@ -34,7 +34,7 @@
         {!! form_row($form->is_timed) !!}
         {!! form_row($form->embargo_until) !!}
         @if (!is_null($form->fired_at->getValue()))
-        {!! form_row($form->fired_at) !!}
+            {!! form_row($form->fired_at) !!}
         @endif
     </div>
     <div class="@boxFooter">

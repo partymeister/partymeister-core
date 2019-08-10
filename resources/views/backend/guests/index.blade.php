@@ -156,7 +156,10 @@
 
         $('.change-has-arrived').click(function (e) {
             e.preventDefault();
-            Vue.prototype.$eventHub.$emit('partymeister-core:update-guest-modal', { element: this, record: $(this).data('record')});
+            Vue.prototype.$eventHub.$emit('partymeister-core:update-guest-modal', {
+                element: this,
+                record: $(this).data('record')
+            });
         });
     </script>
 @append

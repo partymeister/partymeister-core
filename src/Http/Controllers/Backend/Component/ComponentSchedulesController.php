@@ -2,29 +2,35 @@
 
 namespace Partymeister\Core\Http\Controllers\Backend\Component;
 
-use Motor\CMS\Http\Controllers\Component\ComponentController;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-
+use Illuminate\Http\Response;
+use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Motor\CMS\Http\Controllers\Component\ComponentController;
+use Partymeister\Core\Forms\Backend\Component\ComponentScheduleForm;
 use Partymeister\Core\Models\Component\ComponentSchedule;
 use Partymeister\Core\Services\Component\ComponentScheduleService;
-use Partymeister\Core\Forms\Backend\Component\ComponentScheduleForm;
 
-use Kris\LaravelFormBuilder\FormBuilderTrait;
-
+/**
+ * Class ComponentSchedulesController
+ * @package Partymeister\Core\Http\Controllers\Backend\Component
+ */
 class ComponentSchedulesController extends ComponentController
 {
+
     use FormBuilderTrait;
+
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
         $this->form = $this->form(ComponentScheduleForm::class);
 
-        return response()->json($this->getFormData('component.schedules.store', ['mediapool' => false]));
+        return response()->json($this->getFormData('component.schedules.store', [ 'mediapool' => false ]));
     }
 
 
@@ -32,7 +38,7 @@ class ComponentSchedulesController extends ComponentController
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
@@ -44,14 +50,15 @@ class ComponentSchedulesController extends ComponentController
 
         ComponentScheduleService::createWithForm($request, $this->form);
 
-        return response()->json(['message' => trans('partymeister-core::component/schedules.created')]);
+        return response()->json([ 'message' => trans('partymeister-core::component/schedules.created') ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param ComponentSchedule $record
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function edit(ComponentSchedule $record)
     {
@@ -59,7 +66,7 @@ class ComponentSchedulesController extends ComponentController
             'model' => $record
         ]);
 
-        return response()->json($this->getFormData('component.schedules.update', ['mediapool' => false]));
+        return response()->json($this->getFormData('component.schedules.update', [ 'mediapool' => false ]));
     }
 
 
@@ -68,7 +75,7 @@ class ComponentSchedulesController extends ComponentController
      *
      * @param Request           $request
      * @param ComponentSchedule $record
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update(Request $request, ComponentSchedule $record)
     {
@@ -80,6 +87,6 @@ class ComponentSchedulesController extends ComponentController
 
         ComponentScheduleService::updateWithForm($record, $request, $form);
 
-        return response()->json(['message' => trans('partymeister-core::component/schedules.updated')]);
+        return response()->json([ 'message' => trans('partymeister-core::component/schedules.updated') ]);
     }
 }

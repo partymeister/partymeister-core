@@ -5,6 +5,10 @@ namespace Partymeister\Core\Transformers;
 use League\Fractal;
 use Partymeister\Core\Models\EventType;
 
+/**
+ * Class EventTypeTransformer
+ * @package Partymeister\Core\Transformers
+ */
 class EventTypeTransformer extends Fractal\TransformerAbstract
 {
 

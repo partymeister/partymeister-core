@@ -5,9 +5,16 @@ namespace Partymeister\Core\Forms\Backend\Component;
 use Kris\LaravelFormBuilder\Form;
 use Partymeister\Core\Models\Schedule;
 
+/**
+ * Class ComponentScheduleForm
+ * @package Partymeister\Core\Forms\Backend\Component
+ */
 class ComponentScheduleForm extends Form
 {
 
+    /**
+     * @return mixed|void
+     */
     public function buildForm()
     {
         $this->add('schedule_id', 'select', [

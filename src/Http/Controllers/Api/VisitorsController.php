@@ -2,37 +2,43 @@
 
 namespace Partymeister\Core\Http\Controllers\Api;
 
+use Illuminate\Http\JsonResponse;
 use Motor\Backend\Http\Controllers\Controller;
-
-use Partymeister\Core\Models\Visitor;
 use Partymeister\Core\Http\Requests\Backend\VisitorRequest;
+use Partymeister\Core\Models\Visitor;
 use Partymeister\Core\Services\VisitorService;
 use Partymeister\Core\Transformers\VisitorTransformer;
 
+/**
+ * Class VisitorsController
+ * @package Partymeister\Core\Http\Controllers\Api
+ */
 class VisitorsController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function index()
     {
         $paginator = VisitorService::collection()->getPaginator();
-        $resource = $this->transformPaginator($paginator, VisitorTransformer::class);
+        $resource  = $this->transformPaginator($paginator, VisitorTransformer::class);
 
         return $this->respondWithJson('Visitor collection read', $resource);
     }
+
 
     /**
      * Store a newly created resource in storage.
      *
      * @param VisitorRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function store(VisitorRequest $request)
     {
-        $result = VisitorService::create($request)->getResult();
+        $result   = VisitorService::create($request)->getResult();
         $resource = $this->transformItem($result, VisitorTransformer::class);
 
         return $this->respondWithJson('Visitor created', $resource);
@@ -43,11 +49,11 @@ class VisitorsController extends Controller
      * Display the specified resource.
      *
      * @param Visitor $record
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function show(Visitor $record)
     {
-        $result = VisitorService::show($record)->getResult();
+        $result   = VisitorService::show($record)->getResult();
         $resource = $this->transformItem($result, VisitorTransformer::class);
 
         return $this->respondWithJson('Visitor read', $resource);
@@ -59,11 +65,11 @@ class VisitorsController extends Controller
      *
      * @param VisitorRequest $request
      * @param Visitor        $record
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update(VisitorRequest $request, Visitor $record)
     {
-        $result = VisitorService::update($record, $request)->getResult();
+        $result   = VisitorService::update($record, $request)->getResult();
         $resource = $this->transformItem($result, VisitorTransformer::class);
 
         return $this->respondWithJson('Visitor updated', $resource);
@@ -74,15 +80,16 @@ class VisitorsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Visitor $record
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function destroy(Visitor $record)
     {
         $result = VisitorService::delete($record)->getResult();
 
         if ($result) {
-            return $this->respondWithJson('Visitor deleted', ['success' => true]);
+            return $this->respondWithJson('Visitor deleted', [ 'success' => true ]);
         }
-        return $this->respondWithJson('Visitor NOT deleted', ['success' => false]);
+
+        return $this->respondWithJson('Visitor NOT deleted', [ 'success' => false ]);
     }
 }

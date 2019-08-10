@@ -2,16 +2,24 @@
 
 namespace Partymeister\Core\Http\Controllers\Backend;
 
-use Motor\Backend\Http\Controllers\Controller;
-
-use Partymeister\Core\Models\Visitor;
-use Partymeister\Core\Http\Requests\Backend\VisitorRequest;
-use Partymeister\Core\Services\VisitorService;
-use Partymeister\Core\Grids\VisitorGrid;
-use Partymeister\Core\Forms\Backend\VisitorForm;
-
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Motor\Backend\Http\Controllers\Controller;
+use Partymeister\Core\Forms\Backend\VisitorForm;
+use Partymeister\Core\Grids\VisitorGrid;
+use Partymeister\Core\Http\Requests\Backend\VisitorRequest;
+use Partymeister\Core\Models\Visitor;
+use Partymeister\Core\Services\VisitorService;
+use ReflectionException;
 
+/**
+ * Class VisitorsController
+ * @package Partymeister\Core\Http\Controllers\Backend
+ */
 class VisitorsController extends Controller
 {
 
@@ -21,8 +29,8 @@ class VisitorsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \ReflectionException
+     * @return Factory|View
+     * @throws ReflectionException
      */
     public function index()
     {
@@ -39,7 +47,7 @@ class VisitorsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -58,7 +66,7 @@ class VisitorsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param VisitorRequest $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function store(VisitorRequest $request)
     {
@@ -92,7 +100,7 @@ class VisitorsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Visitor $record
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function edit(Visitor $record)
     {
@@ -112,7 +120,7 @@ class VisitorsController extends Controller
      *
      * @param VisitorRequest $request
      * @param Visitor        $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function update(VisitorRequest $request, Visitor $record)
     {
@@ -135,7 +143,7 @@ class VisitorsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Visitor $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function destroy(Visitor $record)
     {
