@@ -50,7 +50,8 @@
             data[$(this).data('field')] = $(this).val();
 
             updateEvent(this, $(this).data('record'), data, function (that, results) {
-                // console.log(results);
+                toastr.options = {progressBar: true};
+                toastr.success('{{trans('partymeister-core::backend/events.sort_position_updated')}}', '{{ trans('motor-backend::backend/global.flash.success') }}');
             });
         });
     </script>

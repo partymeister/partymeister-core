@@ -103,6 +103,9 @@
                     arrived_at: new Date().toISOString(),
                     has_arrived: $(this.element).data('has-arrived')
                 }).then((response) => {
+                    toastr.options = {progressBar: true};
+                    toastr.success(this.$t('partymeister-core.backend.guests.arrival_status_updated'), this.$t('motor-backend.backend.global.flash.success'));
+
                     switchCssClass(this.element, response.data.data.has_arrived, $(this.element).data('class'), $(this.element).data('class-alternate'));
                     $(this.element).data('has-arrived', response.data.data.has_arrived ? 0 : 1);
                 });
