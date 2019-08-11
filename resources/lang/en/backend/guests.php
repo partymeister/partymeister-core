@@ -30,5 +30,5 @@ return [
     'scan_tickets'                => 'Scan tickets',
     'ticket_code_not_found'       => 'Ticket code (:ticket_code) not found!',
     'ticket_code_already_scanned' => 'Ticket code (:ticket_code) already scanned at :date!',
-    'guest_already_arrived'       => 'Guest has already arrived at :date',
+    'guest_already_arrived'       => 'Guest was already marked as \'arrived\' on :date',
 ];

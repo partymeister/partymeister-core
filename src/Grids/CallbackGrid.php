@@ -21,7 +21,7 @@ class CallbackGrid extends Grid
         $this->addColumn('destination', trans('partymeister-core::backend/callbacks.destination'), true)
              ->renderer(TranslateRenderer::class, [ 'file' => 'partymeister-core::backend/callbacks.destinations' ]);
         $this->addColumn('embargo_until', trans('partymeister-core::backend/callbacks.embargo_until'), true)
-             ->renderer(DateRenderer::class);
+             ->renderer(DateRenderer::class, ['format' => 'Y-m-d H:i']);
         $this->addColumn('has_fired', trans('partymeister-core::backend/callbacks.has_fired'), true)
              ->renderer(BooleanRenderer::class);
         $this->addColumn('is_timed', trans('partymeister-core::backend/callbacks.is_timed'), true)

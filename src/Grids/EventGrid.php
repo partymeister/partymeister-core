@@ -22,10 +22,10 @@ class EventGrid extends Grid
              ->renderer(BladeRenderer::class, [ 'template' => 'partymeister-core::grid.event_type' ]);
 
         $this->addColumn('starts_at', trans('partymeister-core::backend/events.starts_at'), true)
-             ->renderer(DateRenderer::class);
+             ->renderer(DateRenderer::class, ['format' => 'Y-m-d H:i']);
 
         $this->addColumn('starts_at', trans('partymeister-core::backend/events.starts_at'), true)
-             ->renderer(DateRenderer::class);
+             ->renderer(DateRenderer::class, ['format' => 'Y-m-d H:i']);
 
         $this->addColumn('sort_position', trans('partymeister-core::backend/events.sort_position'), true)
              ->renderer(BladeRenderer::class,

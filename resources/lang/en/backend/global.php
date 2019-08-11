@@ -1,5 +1,7 @@
 <?php
 
 return [
-    'partymeister' => 'Partymeister'
+    'partymeister' => 'Partymeister',
+    'latest'       => 'Latest',
+    'created_at'   => 'Created at',
 ];

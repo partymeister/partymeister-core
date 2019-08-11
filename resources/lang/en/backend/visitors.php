@@ -11,5 +11,8 @@ return [
     'deleted'  => 'Visitor deleted',
 
     'name'  => 'Handle',
-    'group' => 'Group'
+    'group' => 'Group',
+
+    'latest' => 'Latest registered visitors'
+
 ];

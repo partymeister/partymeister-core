@@ -19,6 +19,13 @@ Route::group([
 ], function () {
 
     Route::group([ 'middleware' => [ 'permission' ] ], function () {
+
+        Route::get('/', [
+            'as'   => 'dashboard.index',
+            'uses' => 'DashboardController@show'
+        ]);
+        Route::get('dashboard', 'DashboardController@show')->name('dashboard.index');
+
         Route::resource('callbacks', 'CallbacksController');
         Route::get('callbacks/{callback}/duplicate', 'CallbacksController@duplicate')->name('callbacks.duplicate');
         Route::resource('schedules', 'SchedulesController');
