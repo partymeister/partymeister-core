@@ -31,7 +31,13 @@
         @if ($visitor->new_comments > 0)
             <div class="callout warning">
                 <a href="{{route('frontend.pages.index', ['slug' => $component->entries_page->full_slug])}}">
-                    You have {{$visitor->new_comments}} new message(s) for your entries!
+                    You have {{$visitor->new_comments}} new
+                    @if ($visitor->new_comments > 1)
+                        messages
+                    @else
+                        message
+                    @endif
+                    for your entries!
                 </a>
             </div>
         @endif
