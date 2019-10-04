@@ -10,7 +10,8 @@ use Symfony\Component\Intl\Countries;
  * Class VisitorRegistrationForm
  * @package Partymeister\Core\Forms\Component
  */
-class VisitorRegistrationForm extends Form
+class
+VisitorRegistrationForm extends Form
 {
 
     /**
@@ -23,7 +24,7 @@ class VisitorRegistrationForm extends Form
             'rules' => [ 'required', 'max:255', Rule::unique('visitors', 'name') ]
         ])->add('group', 'text', [ 'label' => trans('partymeister-core::backend/visitors.group') ]);
 
-        if (config('partymneister-core-visitor-registration.access_key_reqired')) {
+        if (config('partymeister-core-visitor-registration.require_access_key')) {
 
             $this->add('access_key', 'text', [
                 'label' => trans('partymeister-competitions::backend/access_keys.access_key'),

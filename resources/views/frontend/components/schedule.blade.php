@@ -4,7 +4,7 @@
         <tbody>
         @foreach ($times as $hourKey => $events)
             <tr>
-                <td class="align-top" width="10%"><strong>{{$hourKey}}</strong></td>
+                <td class="align-top" style="width: 10%;"><strong>{{$hourKey}}</strong></td>
                 <td>
                     <table class="inner-table">
                         <tbody>

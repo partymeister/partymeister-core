@@ -29,7 +29,7 @@ class VisitorRegistrationService
             'password'           => bcrypt($data['password']),
             'api_token'          => Str::random(60),
         ]);
-        if (config('partymeister-core-visitor-registration.access_key_required')) {
+        if (config('partymeister-core-visitor-registration.require_access_key')) {
             $accessKey                = AccessKey::where('access_key', $data['access_key'])->first();
             $accessKey->visitor_id    = $visitor->id;
             $accessKey->ip_address    = Request::ip();
