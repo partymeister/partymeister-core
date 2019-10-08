@@ -24,6 +24,9 @@ class ScheduleService extends BaseService
     /**
      * @param Schedule $schedule
      * @param          $data
+     * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\DiskDoesNotExist
+     * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileDoesNotExist
+     * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileIsTooBig
      */
     public static function generateSlides(Schedule $schedule, $data)
     {

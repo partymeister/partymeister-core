@@ -11,7 +11,7 @@
             height: 100px;
             text-align: center;
             font-size: 40px;
-            font-family: "Courier New", Courier;
+            font-family: "Courier New", Courier, monospace;
             text-transform: uppercase;
         }
 
