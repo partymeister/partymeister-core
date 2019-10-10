@@ -37,20 +37,19 @@ class PartymeisterCoreImportTicketsCommand extends Command
      */
     public function handle()
     {
-
         Auth::login(User::find(1));
 
         // Open file
-        if (( $handle = fopen($this->argument('file'), 'r') ) !== false) {
+        if (($handle = fopen($this->argument('file'), 'r')) !== false) {
             // Read every row and save it in the database, skipping already existing codes
-            while (( $row = fgetcsv($handle, 2048, ';') ) !== false) {
+            while (($row = fgetcsv($handle, 2048, ';')) !== false) {
                 // Skip header
                 if ($row[0] == 'id') {
                     continue;
                 }
 
                 $record = Guest::where('ticket_code', utf8_encode($row[20]))->first();
-                if ( ! is_null($record)) {
+                if (! is_null($record)) {
                     $this->info('Skip ticket ' . utf8_encode($row[20]));
                     continue;
                 }

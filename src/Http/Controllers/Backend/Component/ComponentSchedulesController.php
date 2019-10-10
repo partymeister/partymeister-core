@@ -17,7 +17,6 @@ use Partymeister\Core\Services\Component\ComponentScheduleService;
  */
 class ComponentSchedulesController extends ComponentController
 {
-
     use FormBuilderTrait;
 
 
@@ -44,7 +43,7 @@ class ComponentSchedulesController extends ComponentController
     {
         $this->form = $this->form(ComponentScheduleForm::class);
 
-        if ( ! $this->isValid()) {
+        if (! $this->isValid()) {
             return $this->respondWithValidationError();
         }
 
@@ -81,7 +80,7 @@ class ComponentSchedulesController extends ComponentController
     {
         $form = $this->form(ComponentScheduleForm::class);
 
-        if ( ! $this->isValid()) {
+        if (! $this->isValid()) {
             return $this->respondWithValidationError();
         }
 

@@ -13,7 +13,7 @@ use Partymeister\Core\Transformers\ScheduleTransformer;
  * Class SchedulesController
  * @package Partymeister\Core\Http\Controllers\Api
  */
-class   SchedulesController extends Controller
+class SchedulesController extends Controller
 {
 
     /**

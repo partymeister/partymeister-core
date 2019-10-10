@@ -17,9 +17,7 @@ Route::group([
         'navigation'
     ]
 ], function () {
-
     Route::group([ 'middleware' => [ 'permission' ] ], function () {
-
         Route::get('/', [
             'as'   => 'dashboard.index',
             'uses' => 'DashboardController@show'

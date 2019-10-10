@@ -41,6 +41,5 @@ class MessageGroupForm extends Form
                  'attr'  => [ 'class' => 'btn btn-primary' ],
                  'label' => trans('partymeister-core::backend/message-groups.save')
              ]);
-
     }
 }

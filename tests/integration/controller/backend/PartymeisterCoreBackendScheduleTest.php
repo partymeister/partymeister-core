@@ -7,7 +7,6 @@ use Partymeister\Core\Models\Schedule;
 
 class PartymeisterCoreBackendScheduleTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     protected $user;
@@ -168,8 +167,8 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
         $this->assertCount(1, Schedule::all());
 
         $this->visit('/backend/schedules')->within('table', function () {
-                $this->press(trans('motor-backend::backend/global.delete'));
-            })->seePageIs('/backend/schedules')->see(trans('partymeister-core::backend/schedules.deleted'));
+            $this->press(trans('motor-backend::backend/global.delete'));
+        })->seePageIs('/backend/schedules')->see(trans('partymeister-core::backend/schedules.deleted'));
 
         $this->assertCount(0, Schedule::all());
     }
@@ -180,8 +179,8 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
     {
         $records = create_test_schedule(100);
         $this->visit('/backend/schedules')->within('.pagination', function () {
-                $this->click('3');
-            })->seePageIs('/backend/schedules?page=3');
+            $this->click('3');
+        })->seePageIs('/backend/schedules?page=3');
     }
 
 

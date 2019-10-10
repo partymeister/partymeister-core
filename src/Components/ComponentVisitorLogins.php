@@ -18,7 +18,6 @@ use Partymeister\Core\Services\Component\VisitorLoginService;
  */
 class ComponentVisitorLogins
 {
-
     use FormBuilderTrait;
 
     /**
@@ -73,7 +72,7 @@ class ComponentVisitorLogins
         switch ($request->method()) {
             case 'POST':
                 $result = $this->post();
-                if ($result instanceOf RedirectResponse) {
+                if ($result instanceof RedirectResponse) {
                     return $result;
                 }
                 break;
@@ -101,7 +100,7 @@ class ComponentVisitorLogins
         $data = $this->request->get('visitor-login');
 
         $this->visitorLoginForm->isValid();
-        if ( ! is_null($data)) {
+        if (! is_null($data)) {
             if (VisitorLoginService::validateLogin($data)) {
                 $this->request->session()->regenerate();
 
@@ -124,8 +123,9 @@ class ComponentVisitorLogins
      */
     public function render()
     {
-        return view(config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
-            [ 'visitorLoginForm' => $this->visitorLoginForm, 'component' => $this->component ]);
+        return view(
+            config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
+            [ 'visitorLoginForm' => $this->visitorLoginForm, 'component' => $this->component ]
+        );
     }
-
 }

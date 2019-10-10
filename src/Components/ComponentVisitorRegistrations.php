@@ -17,7 +17,6 @@ use Partymeister\Core\Services\Component\VisitorRegistrationService;
  */
 class ComponentVisitorRegistrations
 {
-
     use FormBuilderTrait;
 
     /**
@@ -63,7 +62,7 @@ class ComponentVisitorRegistrations
         switch ($request->method()) {
             case 'POST':
                 $result = $this->post();
-                if ($result instanceOf RedirectResponse) {
+                if ($result instanceof RedirectResponse) {
                     return $result;
                 }
                 break;
@@ -82,7 +81,7 @@ class ComponentVisitorRegistrations
             return true;
         }
 
-        if ( ! $this->visitorRegistrationForm->isValid()) {
+        if (! $this->visitorRegistrationForm->isValid()) {
             return redirect()->back()->withErrors($this->visitorRegistrationForm->getErrors())->withInput();
         }
         VisitorRegistrationService::register($this->request->get('visitor-registration'));
@@ -96,8 +95,9 @@ class ComponentVisitorRegistrations
      */
     public function render()
     {
-        return view(config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
-            [ 'visitorRegistrationForm' => $this->visitorRegistrationForm ]);
+        return view(
+            config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
+            [ 'visitorRegistrationForm' => $this->visitorRegistrationForm ]
+        );
     }
-
 }

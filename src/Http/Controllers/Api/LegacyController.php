@@ -76,7 +76,6 @@ class LegacyController extends Controller
                 'groups'       => $visitor['groups'],
                 'country_code' => $visitor['country']
             ];
-
         }
         $content           = new stdClass();
         $content->visitors = $visitors;
@@ -111,11 +110,11 @@ class LegacyController extends Controller
             $date    = Carbon::createFromTimestamp(strtotime(Arr::get($event, 'starts_at')));
             $dayKey  = $date->format('Y-m-d') . ' - ' . $date->format('l');
             $timeKey = $date->format('H:i');
-            if ( ! isset($days[$dayKey])) {
+            if (! isset($days[$dayKey])) {
                 $days[$dayKey] = [];
             }
 
-            if ( ! isset($days[$dayKey][$timeKey])) {
+            if (! isset($days[$dayKey][$timeKey])) {
                 $days[$dayKey][$timeKey] = [];
             }
             $days[$dayKey][$timeKey][] = [

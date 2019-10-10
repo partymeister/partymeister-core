@@ -39,6 +39,5 @@ class VisitorService extends BaseService
         } else {
             $this->data['password'] = bcrypt($this->data['password']);
         }
-
     }
 }

@@ -54,7 +54,7 @@ class ScheduleTransformer extends Fractal\TransformerAbstract
                              ->orderBy('name', 'ASC')
                              ->get();
 
-        if ( ! is_null($collection)) {
+        if (! is_null($collection)) {
             return $this->collection($collection, new EventTransformer());
         }
     }

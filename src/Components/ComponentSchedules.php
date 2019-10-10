@@ -63,11 +63,11 @@ class ComponentSchedules
             $date    = Carbon::createFromTimestamp(strtotime(Arr::get($event, 'starts_at')));
             $dayKey  = $date->format('l');
             $timeKey = $date->format('H:i');
-            if ( ! isset($this->days[$dayKey])) {
+            if (! isset($this->days[$dayKey])) {
                 $this->days[$dayKey] = [];
             }
 
-            if ( ! isset($this->days[$dayKey][$timeKey])) {
+            if (! isset($this->days[$dayKey][$timeKey])) {
                 $this->days[$dayKey][$timeKey] = [];
             }
             $this->days[$dayKey][$timeKey][] = [
@@ -93,8 +93,9 @@ class ComponentSchedules
      */
     public function render()
     {
-        return view(config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
-            [ 'component' => $this->component, 'days' => $this->days ]);
+        return view(
+            config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
+            [ 'component' => $this->component, 'days' => $this->days ]
+        );
     }
-
 }

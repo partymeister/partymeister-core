@@ -11,7 +11,6 @@ use Partymeister\Core\Models\Visitor;
  */
 class VisitorRegistered
 {
-
     use SerializesModels;
 
     /**

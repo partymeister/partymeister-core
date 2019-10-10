@@ -10,8 +10,7 @@ use Symfony\Component\Intl\Countries;
  * Class VisitorRegistrationForm
  * @package Partymeister\Core\Forms\Component
  */
-class
-VisitorRegistrationForm extends Form
+class VisitorRegistrationForm extends Form
 {
 
     /**
@@ -25,7 +24,6 @@ VisitorRegistrationForm extends Form
         ])->add('group', 'text', [ 'label' => trans('partymeister-core::backend/visitors.group') ]);
 
         if (config('partymeister-core-visitor-registration.require_access_key')) {
-
             $this->add('access_key', 'text', [
                 'label' => trans('partymeister-competitions::backend/access_keys.access_key'),
                 'rules' => [
@@ -41,8 +39,11 @@ VisitorRegistrationForm extends Form
         if (count($countryList) == 0) {
             $countryList = Countries::getNames();
         }
-        $this->add('country_iso_3166_1', 'select',
-            [ 'label' => trans('motor-backend::backend/global.address.country'), 'choices' => $countryList ]);
+        $this->add(
+            'country_iso_3166_1',
+            'select',
+            [ 'label' => trans('motor-backend::backend/global.address.country'), 'choices' => $countryList ]
+        );
 
         $this->add('password', 'password', [
             'value' => '',

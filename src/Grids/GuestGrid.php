@@ -12,7 +12,6 @@ use Motor\Backend\Grid\Renderers\BooleanRenderer;
  */
 class GuestGrid extends Grid
 {
-
     protected function setup()
     {
         $this->addColumn('category.name', trans('motor-backend::backend/categories.category'));

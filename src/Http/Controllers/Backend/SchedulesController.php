@@ -22,7 +22,6 @@ use ReflectionException;
  */
 class SchedulesController extends Controller
 {
-
     use FormBuilderTrait;
 
 
@@ -72,7 +71,7 @@ class SchedulesController extends Controller
         $form = $this->form(ScheduleForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
@@ -127,7 +126,7 @@ class SchedulesController extends Controller
         $form = $this->form(ScheduleForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 

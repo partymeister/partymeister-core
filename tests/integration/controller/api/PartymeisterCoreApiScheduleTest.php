@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class PartymeisterCoreApiScheduleTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     protected $user;

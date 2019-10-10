@@ -29,8 +29,11 @@ class EventForm extends Form
              ])
              ->add('starts_at', 'datetimepicker', [ 'label' => trans('partymeister-core::backend/events.starts_at') ])
              ->add('is_visible', 'checkbox', [ 'label' => trans('partymeister-core::backend/events.is_visible') ])
-             ->add('is_organizer_only', 'checkbox',
-                 [ 'label' => trans('partymeister-core::backend/events.is_organizer_only') ])
+             ->add(
+                 'is_organizer_only',
+                 'checkbox',
+                 [ 'label' => trans('partymeister-core::backend/events.is_organizer_only') ]
+             )
              ->add('sort_position', 'text', [ 'label' => trans('partymeister-core::backend/events.sort_position') ])
              ->add('submit', 'submit', [
                  'attr'  => [ 'class' => 'btn btn-primary' ],

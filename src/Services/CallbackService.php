@@ -25,14 +25,15 @@ class CallbackService extends BaseService
                      ->setOptionPrefix(trans('partymeister-core::backend/callbacks.destination'))
                      ->setEmptyOption('-- ' . trans('partymeister-core::backend/callbacks.destination') . ' --')
                      ->setOptions(trans('partymeister-core::backend/callbacks.destinations'));
-
     }
 
 
     public function beforeCreate()
     {
-        $this->record->hash = hash_hmac('sha256',
+        $this->record->hash = hash_hmac(
+            'sha256',
             $this->request->get('payload') . $this->request->get('name') . $this->request->get('title') . $this->request->get('body') . $this->request->get('embargo_until'),
-            20);
+            20
+        );
     }
 }

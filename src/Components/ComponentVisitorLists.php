@@ -53,8 +53,9 @@ class ComponentVisitorLists
      */
     public function render()
     {
-        return view(config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
-            [ 'visitors' => $this->visitors ]);
+        return view(
+            config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
+            [ 'visitors' => $this->visitors ]
+        );
     }
-
 }

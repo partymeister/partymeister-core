@@ -21,7 +21,6 @@ use ReflectionException;
  */
 class EventsController extends Controller
 {
-
     use FormBuilderTrait;
 
 
@@ -54,7 +53,7 @@ class EventsController extends Controller
         $form = $this->form(EventForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
@@ -140,7 +139,7 @@ class EventsController extends Controller
         $form = $this->form(EventForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 

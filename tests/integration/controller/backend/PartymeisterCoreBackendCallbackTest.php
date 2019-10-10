@@ -7,7 +7,6 @@ use Partymeister\Core\Models\Callback;
 
 class PartymeisterCoreBackendCallbackTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     protected $user;
@@ -168,8 +167,8 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
         $this->assertCount(1, Callback::all());
 
         $this->visit('/backend/callbacks')->within('table', function () {
-                $this->press(trans('motor-backend::backend/global.delete'));
-            })->seePageIs('/backend/callbacks')->see(trans('partymeister-core::backend/callbacks.deleted'));
+            $this->press(trans('motor-backend::backend/global.delete'));
+        })->seePageIs('/backend/callbacks')->see(trans('partymeister-core::backend/callbacks.deleted'));
 
         $this->assertCount(0, Callback::all());
     }
@@ -180,8 +179,8 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
     {
         $records = create_test_callback(100);
         $this->visit('/backend/callbacks')->within('.pagination', function () {
-                $this->click('3');
-            })->seePageIs('/backend/callbacks?page=3');
+            $this->click('3');
+        })->seePageIs('/backend/callbacks?page=3');
     }
 
 

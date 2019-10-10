@@ -22,7 +22,6 @@ use ReflectionException;
  */
 class MessageGroupsController extends Controller
 {
-
     use FormBuilderTrait;
 
 
@@ -72,7 +71,7 @@ class MessageGroupsController extends Controller
         $form = $this->form(MessageGroupForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
@@ -126,7 +125,7 @@ class MessageGroupsController extends Controller
         $form = $this->form(MessageGroupForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 

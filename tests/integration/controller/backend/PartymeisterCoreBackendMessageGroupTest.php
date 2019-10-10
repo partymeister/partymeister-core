@@ -7,7 +7,6 @@ use Partymeister\Core\Models\MessageGroup;
 
 class PartymeisterCoreBackendMessageGroupTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     protected $user;
@@ -168,8 +167,8 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
         $this->assertCount(1, MessageGroup::all());
 
         $this->visit('/backend/message_groups')->within('table', function () {
-                $this->press(trans('motor-backend::backend/global.delete'));
-            })->seePageIs('/backend/message_groups')->see(trans('partymeister-core::backend/message_groups.deleted'));
+            $this->press(trans('motor-backend::backend/global.delete'));
+        })->seePageIs('/backend/message_groups')->see(trans('partymeister-core::backend/message_groups.deleted'));
 
         $this->assertCount(0, MessageGroup::all());
     }
@@ -180,8 +179,8 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
     {
         $records = create_test_message_group(100);
         $this->visit('/backend/message_groups')->within('.pagination', function () {
-                $this->click('3');
-            })->seePageIs('/backend/message_groups?page=3');
+            $this->click('3');
+        })->seePageIs('/backend/message_groups?page=3');
     }
 
 

@@ -52,7 +52,6 @@ use Partymeister\Competitions\Models\Vote;
  */
 class Visitor extends Authenticatable
 {
-
     use Searchable;
     use Filterable;
 

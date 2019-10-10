@@ -11,7 +11,6 @@ use Motor\Backend\Grid\Renderers\BladeRenderer;
  */
 class EventTypeGrid extends Grid
 {
-
     protected function setup()
     {
         $this->addColumn('name', trans('motor-backend::backend/global.name'), true);

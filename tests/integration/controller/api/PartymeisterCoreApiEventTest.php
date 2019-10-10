@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class PartymeisterCoreApiEventTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     protected $user;

@@ -7,7 +7,6 @@ use Partymeister\Core\Models\Event;
 
 class PartymeisterCoreBackendEventTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     protected $user;
@@ -166,8 +165,8 @@ class PartymeisterCoreBackendEventTest extends TestCase
         $this->assertCount(1, Event::all());
 
         $this->visit('/backend/events')->within('table', function () {
-                $this->press(trans('motor-backend::backend/global.delete'));
-            })->seePageIs('/backend/events')->see(trans('partymeister-core::backend/events.deleted'));
+            $this->press(trans('motor-backend::backend/global.delete'));
+        })->seePageIs('/backend/events')->see(trans('partymeister-core::backend/events.deleted'));
 
         $this->assertCount(0, Event::all());
     }
@@ -178,8 +177,8 @@ class PartymeisterCoreBackendEventTest extends TestCase
     {
         $records = create_test_event(100);
         $this->visit('/backend/events')->within('.pagination', function () {
-                $this->click('3');
-            })->seePageIs('/backend/events?page=3');
+            $this->click('3');
+        })->seePageIs('/backend/events?page=3');
     }
 
 

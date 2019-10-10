@@ -23,21 +23,27 @@ class ScanTicketsController extends Controller
         $guest = Guest::where('ticket_code', $request->get('ticket_code'))->first();
         if (is_null($guest)) {
             return response()->json([
-                'error' => trans('partymeister-core::backend/guests.ticket_code_not_found',
-                    [ 'ticket_code' => $request->get('ticket_code') ])
+                'error' => trans(
+                    'partymeister-core::backend/guests.ticket_code_not_found',
+                    [ 'ticket_code' => $request->get('ticket_code') ]
+                )
             ], 404);
         }
 
         if ($guest->ticket_code_scanned) {
             return response()->json([
-                'error' => trans('partymeister-core::backend/guests.ticket_code_already_scanned',
-                    [ 'ticket_code' => $request->get('ticket_code'), 'date' => $guest->arrived_at ])
+                'error' => trans(
+                    'partymeister-core::backend/guests.ticket_code_already_scanned',
+                    [ 'ticket_code' => $request->get('ticket_code'), 'date' => $guest->arrived_at ]
+                )
             ], 404);
         }
         if ($guest->has_arrived) {
             return response()->json([
-                'error' => trans('partymeister-core::backend/guests.guest_already_arrived',
-                    [ 'date' => $guest->arrived_at ])
+                'error' => trans(
+                    'partymeister-core::backend/guests.guest_already_arrived',
+                    [ 'date' => $guest->arrived_at ]
+                )
             ], 404);
         }
         $guest->has_arrived         = true;

@@ -79,9 +79,19 @@ class DashboardController extends Controller
             $lastPlaylists = Playlist::orderBy('created_at', 'DESC')->limit(5)->get();
         }
 
-        return view('partymeister-core::backend.dashboard',
-            compact('competitionCount', 'entryCount', 'lastEntries', 'visitorCount', 'lastVisitors', 'slideCount',
-                'lastSlides', 'playlistCount', 'lastPlaylists'));
-
+        return view(
+            'partymeister-core::backend.dashboard',
+            compact(
+                'competitionCount',
+                'entryCount',
+                'lastEntries',
+                'visitorCount',
+                'lastVisitors',
+                'slideCount',
+                'lastSlides',
+                'playlistCount',
+                'lastPlaylists'
+            )
+        );
     }
 }

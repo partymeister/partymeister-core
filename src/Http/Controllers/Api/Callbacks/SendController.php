@@ -63,8 +63,13 @@ class SendController extends Controller
 
                 break;
             case 'notification':
-                $status = StuhlService::send($callback->body, $callback->title, '', EVENT_LEVEL_BORING,
-                    $callback->destination);
+                $status = StuhlService::send(
+                    $callback->body,
+                    $callback->title,
+                    '',
+                    EVENT_LEVEL_BORING,
+                    $callback->destination
+                );
                 break;
             case 'live_with_notification':
                 $payload     = json_decode($callback->payload);
@@ -82,8 +87,13 @@ class SendController extends Controller
                 $l->sort_position  = $entry->sort_position;
                 $l->save();
 
-                $status = StuhlService::send($callback->body, $callback->title, '', EVENT_LEVEL_GOOD,
-                    $callback->destination);
+                $status = StuhlService::send(
+                    $callback->body,
+                    $callback->title,
+                    '',
+                    EVENT_LEVEL_GOOD,
+                    $callback->destination
+                );
 
                 event(new LiveVoteUpdated($l));
 

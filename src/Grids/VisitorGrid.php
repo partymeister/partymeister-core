@@ -10,7 +10,6 @@ use Motor\Backend\Grid\Grid;
  */
 class VisitorGrid extends Grid
 {
-
     protected function setup()
     {
         $this->addColumn('name', trans('partymeister-core::backend/visitors.name'), true);

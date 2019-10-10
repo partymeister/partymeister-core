@@ -56,6 +56,5 @@ class PartymeisterCoreCheckCallbacksCommand extends Command
             $callback->has_fired = true;
             $callback->save();
         }
-
     }
 }

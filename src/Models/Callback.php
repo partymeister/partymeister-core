@@ -66,7 +66,6 @@ use Motor\Core\Traits\Searchable;
  */
 class Callback extends Model
 {
-
     use Searchable;
     use Filterable;
     use Blameable, CreatedBy, UpdatedBy, DeletedBy;

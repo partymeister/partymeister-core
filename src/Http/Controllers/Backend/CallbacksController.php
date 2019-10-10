@@ -21,7 +21,6 @@ use ReflectionException;
  */
 class CallbacksController extends Controller
 {
-
     use FormBuilderTrait;
 
 
@@ -87,7 +86,7 @@ class CallbacksController extends Controller
         $form = $this->form(CallbackForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
@@ -141,7 +140,7 @@ class CallbacksController extends Controller
         $form = $this->form(CallbackForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 

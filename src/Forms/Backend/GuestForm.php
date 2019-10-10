@@ -33,13 +33,19 @@ class GuestForm extends Form
              ->add('country', 'text', [ 'label' => trans('partymeister-core::backend/guests.country') ])
              ->add('ticket_code', 'text', [ 'label' => trans('partymeister-core::backend/guests.ticket_code') ])
              ->add('ticket_type', 'text', [ 'label' => trans('partymeister-core::backend/guests.ticket_type') ])
-             ->add('ticket_order_number', 'text',
-                 [ 'label' => trans('partymeister-core::backend/guests.ticket_order_number') ])
+             ->add(
+                 'ticket_order_number',
+                 'text',
+                 [ 'label' => trans('partymeister-core::backend/guests.ticket_order_number') ]
+             )
              ->add('comment', 'textarea', [ 'label' => trans('partymeister-core::backend/guests.comment') ])
              ->add('has_badge', 'checkbox', [ 'label' => trans('partymeister-core::backend/guests.has_badge') ])
              ->add('has_arrived', 'checkbox', [ 'label' => trans('partymeister-core::backend/guests.has_arrived') ])
-             ->add('ticket_code_scanned', 'checkbox',
-                 [ 'label' => trans('partymeister-core::backend/guests.ticket_code_scanned') ])
+             ->add(
+                 'ticket_code_scanned',
+                 'checkbox',
+                 [ 'label' => trans('partymeister-core::backend/guests.ticket_code_scanned') ]
+             )
              ->add('arrived_at', 'static', [ 'label' => trans('partymeister-core::backend/guests.arrived_at') ])
              ->add('submit', 'submit', [
                  'attr'  => [ 'class' => 'btn btn-primary competition-submit' ],

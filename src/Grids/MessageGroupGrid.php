@@ -11,7 +11,6 @@ use Motor\Backend\Grid\Renderers\CollectionRenderer;
  */
 class MessageGroupGrid extends Grid
 {
-
     protected function setup()
     {
         $this->setDefaultSorting('name', 'ASC');

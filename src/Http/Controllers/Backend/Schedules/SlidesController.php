@@ -22,7 +22,6 @@ use Partymeister\Slides\Models\SlideTemplate;
  */
 class SlidesController extends Controller
 {
-
     use FormBuilderTrait;
 
 
@@ -44,7 +43,7 @@ class SlidesController extends Controller
 
         foreach (Arr::get($data, 'data.events.data') as $key => $event) {
             $date = Carbon::createFromTimestamp(strtotime(Arr::get($event, 'starts_at')));
-            if ( ! isset($days[$date->format('l')])) {
+            if (! isset($days[$date->format('l')])) {
                 $days[$date->format('l')] = [];
             }
 

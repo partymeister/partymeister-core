@@ -17,8 +17,11 @@ class VisitorForm extends Form
      */
     public function buildForm()
     {
-        $this->add('name', 'text',
-            [ 'label' => trans('partymeister-core::backend/visitors.name'), 'rules' => 'required' ])
+        $this->add(
+            'name',
+            'text',
+            [ 'label' => trans('partymeister-core::backend/visitors.name'), 'rules' => 'required' ]
+        )
              ->add('group', 'text', [ 'label' => trans('partymeister-core::backend/visitors.group') ])
              ->add('email', 'text', [ 'label' => trans('motor-backend::backend/users.email') ])
              ->add('country_iso_3166_1', 'select2', [

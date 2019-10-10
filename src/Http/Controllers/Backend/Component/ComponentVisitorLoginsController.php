@@ -17,7 +17,6 @@ use Partymeister\Core\Services\Component\ComponentVisitorLoginService;
  */
 class ComponentVisitorLoginsController extends ComponentController
 {
-
     use FormBuilderTrait;
 
 
@@ -44,7 +43,7 @@ class ComponentVisitorLoginsController extends ComponentController
     {
         $this->form = $this->form(ComponentVisitorLoginForm::class);
 
-        if ( ! $this->isValid()) {
+        if (! $this->isValid()) {
             return $this->respondWithValidationError();
         }
 
@@ -81,7 +80,7 @@ class ComponentVisitorLoginsController extends ComponentController
     {
         $form = $this->form(ComponentVisitorLoginForm::class);
 
-        if ( ! $this->isValid()) {
+        if (! $this->isValid()) {
             return $this->respondWithValidationError();
         }
 

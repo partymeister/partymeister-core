@@ -13,7 +13,6 @@ use Motor\Backend\Grid\Renderers\TranslateRenderer;
  */
 class CallbackGrid extends Grid
 {
-
     protected function setup()
     {
         $this->addColumn('name', trans('motor-backend::backend/global.name'), true);

@@ -7,7 +7,6 @@ use Partymeister\Core\Models\Visitor;
 
 class PartymeisterCoreBackendVisitorTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     protected $user;
@@ -168,8 +167,8 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
         $this->assertCount(1, Visitor::all());
 
         $this->visit('/backend/visitors')->within('table', function () {
-                $this->press(trans('motor-backend::backend/global.delete'));
-            })->seePageIs('/backend/visitors')->see(trans('partymeister-core::backend/visitors.deleted'));
+            $this->press(trans('motor-backend::backend/global.delete'));
+        })->seePageIs('/backend/visitors')->see(trans('partymeister-core::backend/visitors.deleted'));
 
         $this->assertCount(0, Visitor::all());
     }
@@ -180,8 +179,8 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
     {
         $records = create_test_visitor(100);
         $this->visit('/backend/visitors')->within('.pagination', function () {
-                $this->click('3');
-            })->seePageIs('/backend/visitors?page=3');
+            $this->click('3');
+        })->seePageIs('/backend/visitors?page=3');
     }
 
 
