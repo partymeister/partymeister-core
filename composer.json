@@ -15,8 +15,12 @@
     "motor-cms/motor-backend": "0.9.*"
   },
   "autoload": {
+    "classmap": [
+      "database"
+    ],
     "psr-4": {
-      "Partymeister\\Core\\": "src"
+      "Partymeister\\Core\\": "src",
+      "Tests\\Partymeister\\Core\\": "tests"
     }
   },
   "extra": {
