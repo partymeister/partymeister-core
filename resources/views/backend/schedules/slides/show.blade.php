@@ -3,7 +3,7 @@
     @include('partymeister-slides::layouts.partials.slide_fonts')
     <style type="text/css">
         .slidemeister-instance {
-            zoom: 0.75;
+            /*zoom: 0.75;*/
             float: left;
             margin-right: 15px;
             margin-bottom: 15px;
@@ -33,9 +33,7 @@
             <div class="@boxBody">
                 @foreach ($days as $dayIndex => $day)
                     @foreach ($day as $eventBlockIndex => $eventBlock)
-                        <div id="slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}"
-                             class="slidemeister-instance"></div>
-
+                        <partymeister-slides-elements :readonly="true" :name="'slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}'" id="slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}" class="slidemeister-instance"></partymeister-slides-elements>
                         <input type="hidden" name="slide[{{$dayIndex}}-{{$eventBlockIndex}}]">
                         <input type="hidden" name="name[{{$dayIndex}}-{{$eventBlockIndex}}]"
                                value="Timetable {{$dayIndex}} {{$eventBlockIndex}}">
@@ -51,16 +49,16 @@
 @endsection
 
 @section('view_scripts')
-    @include('partymeister-slides::layouts.partials.slide_scripts')
     <script>
         $(document).ready(function () {
-            let sm = [];
-
             @foreach ($days as $dayIndex => $day)
                 @foreach ($day as $eventBlockIndex => $eventBlock)
-                    sm['{{$dayIndex}}-{{$eventBlockIndex}}'] = $('#slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}').slidemeister('#slidemeister-properties', slidemeisterProperties);
-                    sm['{{$dayIndex}}-{{$eventBlockIndex}}'].data.load({!! $timetableTemplate->definitions !!}, {'day': '{{strtoupper($dayIndex)}}'}, false, true);
-                    sm['{{$dayIndex}}-{{$eventBlockIndex}}'].data.populateTimetable({!! json_encode($eventBlock) !!});
+                    Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
+                        name: 'slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}',
+                        elements: JSON.parse('{!! addslashes($timetableTemplate->definitions) !!}'),
+                        type: 'timetable',
+                        replacements: { headline: '{{strtoupper($dayIndex)}}', rows: JSON.parse('{!! json_encode($eventBlock) !!}' ) },
+                    });
                 @endforeach
             @endforeach
 
@@ -70,14 +68,32 @@
 
                 $('.loader').addClass('is-active');
 
-                Object.keys(sm).forEach(function (key) {
-                    console.log('Processing ' + key);
-                    $('input[name="slide[' + key + ']"]').val(JSON.stringify(sm[key].data.save(true)));
-                    $('input[name="cached_html_preview[' + key + ']"]').val($(sm[key].data.getTargetElement()).html());
-                    sm[key].data.removePreviewElements();
-                    $('input[name="cached_html_final[' + key + ']"]').val($(sm[key].data.getTargetElement()).html());
-                    $('form#schedule-slides-save').submit();
+                let saveCounter = 0;
+
+                Vue.prototype.$eventHub.$on('partymeister-slides:timetable-finished', () => {
+                    if (saveCounter === $('.slidemeister-instance').length) {
+                        $('#schedule-slides-save').submit();
+                    }
                 });
+
+                @foreach ($days as $dayIndex => $day)
+                    @foreach ($day as $eventBlockIndex => $eventBlock)
+
+                        Vue.prototype.$eventHub.$on('partymeister-slides:receive-definitions', (data) => {
+                            if (data.name === 'slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}') {
+                                console.log("receive definitions for slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}");
+                                $('input[name="slide[{{$dayIndex}}-{{$eventBlockIndex}}]"]').val(data.definitions);
+                                $('input[name="cached_html_preview[{{$dayIndex}}-{{$eventBlockIndex}}]"]').val($('#slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}').html());
+                                $('input[name="cached_html_final[{{$dayIndex}}-{{$eventBlockIndex}}]"]').val($('#slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}').html());
+                                saveCounter++;
+                                Vue.prototype.$eventHub.$emit('partymeister-slides:timetable-finished');
+                            }
+                        });
+
+                        Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}');
+                    @endforeach
+                @endforeach
+
             });
         });
     </script>
