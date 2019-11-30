@@ -22,6 +22,7 @@ class PartymeisterCoreDatabaseSeeder extends Seeder
                 EventTypesTableSeeder::class,
                 EventsTableSeeder::class,
                 MessageGroupsTableSeeder::class,
+                ConfigVariablesTableSeeder::class,
             ]
         );
     }

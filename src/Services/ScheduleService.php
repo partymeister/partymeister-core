@@ -68,9 +68,9 @@ class ScheduleService extends BaseService
             $slide->save();
 
             // 7. generate slides
-            $browser->screenshot(route('backend.slides.show', [ $slide->id ]).'?preview=true',
+            $browser->screenshot(route('backend.slides.show', [ $slide->id ], false).'?preview=true',
                 storage_path().'/preview_'.$slideName.'.png');
-            $browser->screenshot(route('backend.slides.show', [ $slide->id ]),
+            $browser->screenshot(route('backend.slides.show', [ $slide->id ], false),
                 storage_path().'/final_'.$slideName.'.png');
 
             $slide->clearMediaCollection('preview');
