@@ -23,8 +23,7 @@ class CallbacksController extends Controller
      */
     public function index()
     {
-        $paginator = Callback::whereIn('action', [ 'notification', 'competition_ends' ])
-                             ->orderBy('name', 'ASC')
+        $paginator = Callback::orderBy('name', 'ASC')
                              ->where('is_timed', false)
                              ->paginate(500);
 //        $paginator = CallbackService::collection()->getPaginator();
