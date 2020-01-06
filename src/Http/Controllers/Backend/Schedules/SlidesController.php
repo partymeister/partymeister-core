@@ -48,8 +48,8 @@ class SlidesController extends Controller
             }
 
             $days[$date->format('l')][] = [
-                'name'  => Arr::get($event, 'name'),
-                'type'  => Arr::get($event, 'event_type.data.name'),
+                'name'  => addslashes(Arr::get($event, 'name')),
+                'type'  => addslashes(Arr::get($event, 'event_type.data.name')),
                 'color' => Arr::get($event, 'event_type.data.slide_color'),
                 'time'  => $date->format('H:i')
             ];
