@@ -82,7 +82,7 @@
                         Vue.prototype.$eventHub.$on('partymeister-slides:receive-definitions', (data) => {
                             if (data.name === 'slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}') {
                                 console.log("receive definitions for slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}");
-                                $('input[name="slide[{{$dayIndex}}-{{$eventBlockIndex}}]"]').val(data.definitions);
+                                $('input[name="slide[{{$dayIndex}}-{{$eventBlockIndex}}]"]').val(data.definitions_as_form_data);
                                 $('input[name="cached_html_preview[{{$dayIndex}}-{{$eventBlockIndex}}]"]').val($('#slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}').html());
                                 $('input[name="cached_html_final[{{$dayIndex}}-{{$eventBlockIndex}}]"]').val($('#slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}').html());
                                 saveCounter++;

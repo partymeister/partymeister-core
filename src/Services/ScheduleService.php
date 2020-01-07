@@ -61,7 +61,7 @@ class ScheduleService extends BaseService
             $slide->category_id = $timetableCategory->id;
             $slide->name = $name;
             $slide->slide_type = $slideType;
-            $slide->definitions = $definitions;
+            $slide->definitions = stripslashes($definitions);
             $slide->cached_html_preview = Arr::get($data, 'cached_html_preview.'.$slideName, '');
             $slide->cached_html_final = Arr::get($data, 'cached_html_final.'.$slideName, '');
 
