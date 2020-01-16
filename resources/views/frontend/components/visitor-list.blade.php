@@ -1,9 +1,9 @@
 <div class="callout primary">
     <p>
         @if ($visitors->count() == 1)
-            One person is registered in the party network!
+            One person is registered! Woohoo!
         @else
-            {{$visitors->count()}} people are registered in the party network!
+            {{$visitors->count()}} people are registered!
         @endif
     </p>
 </div>
