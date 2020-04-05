@@ -12,7 +12,7 @@ use Partymeister\Core\Models\Guest;
  * Class PartymeisterCoreImportTicketsCommand
  * @package Partymeister\Core\Console\Commands
  */
-class PartymeisterCoreImportTicketsCommand extends Command
+class PartymeisterCoreImportTicketsCSVCommand extends Command
 {
 
     /**
@@ -20,7 +20,7 @@ class PartymeisterCoreImportTicketsCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'partymeister:core:import:tickets {file}';
+    protected $signature = 'partymeister:core:import:tickets:csv {file}';
 
     /**
      * The console command description.

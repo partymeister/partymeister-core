@@ -5,7 +5,8 @@ namespace Partymeister\Core\Providers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Partymeister\Core\Console\Commands\PartymeisterCoreCheckCallbacksCommand;
-use Partymeister\Core\Console\Commands\PartymeisterCoreImportTicketsCommand;
+use Partymeister\Core\Console\Commands\PartymeisterCoreImportTicketsApiCommand;
+use Partymeister\Core\Console\Commands\PartymeisterCoreImportTicketsCSVCommand;
 use Partymeister\Core\Http\Middleware\Frontend\Visitor;
 use Partymeister\Core\Models\Callback;
 use Partymeister\Core\Models\Component\ComponentSchedule;
@@ -141,7 +142,8 @@ class PartymeisterServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                PartymeisterCoreImportTicketsCommand::class,
+                PartymeisterCoreImportTicketsApiCommand::class,
+                PartymeisterCoreImportTicketsCSVCommand::class,
                 PartymeisterCoreCheckCallbacksCommand::class,
             ]);
         }
