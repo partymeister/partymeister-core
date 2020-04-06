@@ -14,7 +14,8 @@ use Partymeister\Core\Transformers\ScheduleTransformer;
  * @package Partymeister\Core\Http\Controllers\Api
  */
 class SchedulesController extends Controller
-{
+{COMPOSER=composer-dev.json php -dmemory_limit=3G /usr/local/bin/composer update
+
 
     /**
      * Display a listing of the resource.

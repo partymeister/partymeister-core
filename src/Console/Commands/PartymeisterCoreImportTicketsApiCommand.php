@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Motor\Backend\Models\Category;
 use Motor\Backend\Models\User;
+use Partymeister\Competitions\Models\AccessKey;
 use Partymeister\Core\Models\Guest;
 
 /**
@@ -55,32 +56,47 @@ class PartymeisterCoreImportTicketsApiCommand extends Command
 
         try {
             $loginResponse = $loginClient->send($loginRequest);
-            $token = Arr::get(json_decode((string)$loginResponse->getBody(), true), 'token');
+            $token         = Arr::get(json_decode((string) $loginResponse->getBody(), true), 'token');
 
             $client = new Client([
                 'verify' => false
             ]);
 
-            $request = new Request('GET', config('partymeister-core-dt.base_url').'/order/getAll',
-                ['content-type' => 'application/json', 'X-Shop' => 'revision20', 'X-Token' => $token]);
+            $request = new Request('GET', config('partymeister-core-dt.base_url').'/order/getAll', [
+                    'content-type' => 'application/json',
+                    'X-Shop'       => 'revision20',
+                    'X-Token'      => $token
+                ]);
 
             try {
                 $response = $client->send($request);
-                $data = json_decode((string)$response->getBody(), true);
-                $count = 0;
-                $amount = 0;
+                $data     = json_decode((string) $response->getBody(), true);
+                $count    = 0;
+                $amount   = 0;
 
                 foreach ($data as $order) {
-                    if (strtotime(Arr::get($order, 'Bestelldatum')) > strtotime('2020-03-23 00:00:00') && Arr::get($order, 'Storniert') == '0' && Arr::get($order, 'Bezahlt') != '0') {
+                    if (strtotime(Arr::get($order,
+                            'Bestelldatum')) > strtotime('2020-03-23 00:00:00') && Arr::get($order,
+                            'Storniert') == '0' && Arr::get($order, 'Bezahlt') != '0') {
                         //$this->info('Order: '.Arr::get($order, 'Betreff').' is valid');
 
                         // Check shopping cart for a valid ticket (t-shirts don't count)
                         foreach (Arr::get($order, 'Warenkorb') as $item) {
                             if (strpos(Arr::get($item, 'Name'), 'T-Shirt') === false) {
-                                $amount += ((int)Arr::get($item, 'Preis') * (int)Arr::get($item, 'Menge'));
+                                $amount += ((int) Arr::get($item, 'Preis') * (int) Arr::get($item, 'Menge'));
                                 foreach (Arr::get($item, 'Keys', []) as $key) {
                                     $count++;
-                                    $this->info('Code: '. $key. ' ('.Arr::get($item, 'Name').')');
+
+                                    // Check if we already imported this key
+                                    $existingAccessKey = AccessKey::where('access_key', $key)->first();
+                                    if (is_null($existingAccessKey)) {
+                                        $accessKey             = new AccessKey();
+                                        $accessKey->access_key = $key;
+                                        $accessKey->save();
+                                        $this->info('Code: '.$key.' ('.Arr::get($item, 'Name').')');
+                                    } else {
+                                        $this->info('Code '.$key.' skipped');
+                                    }
                                 }
                             }
                         }
