@@ -56,7 +56,7 @@ class SlidesController extends Controller
         }
 
         foreach ($days as $key => $day) {
-            $days[$key] = array_chunk($day, 10);
+            $days[$key] = array_chunk($day, 8);
         }
 
         return view('partymeister-core::backend.schedules.slides.show', compact('timetableTemplate', 'days', 'record'));
