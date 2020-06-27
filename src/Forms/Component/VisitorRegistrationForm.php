@@ -28,7 +28,6 @@ class VisitorRegistrationForm extends Form
                 'label' => trans('partymeister-competitions::backend/access_keys.access_key'),
                 'rules' => [
                     'required',
-                    'min:8',
                     Rule::exists('access_keys', 'access_key')->where(function ($query) {
                         $query->where('visitor_id', null);
                     })
