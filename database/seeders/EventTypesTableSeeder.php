@@ -1,5 +1,7 @@
 <?php
 
+namespace Partymeister\Core\Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Motor\Backend\Models\User;

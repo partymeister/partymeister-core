@@ -15,12 +15,11 @@
     "motor-cms/motor-backend": "^0.9|^0.10"
   },
   "autoload": {
-    "classmap": [
-      "database"
-    ],
     "psr-4": {
       "Partymeister\\Core\\": "src",
-      "Tests\\Partymeister\\Core\\": "tests"
+      "Tests\\Partymeister\\Core\\": "tests",
+      "Partymeister\\Core\\Database\\Factories\\": "database/factories/",
+      "Partymeister\\Core\\Database\\Seeders\\": "database/seeders/"
     }
   },
   "extra": {
