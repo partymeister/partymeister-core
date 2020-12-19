@@ -38,16 +38,6 @@
 </style>
 
 <script>
-    import {Ziggy} from 'ziggy-js';
-    import route from 'ziggy-js/src/js/route';
-
-    window.Ziggy = Ziggy;
-
-    Vue.mixin({
-        methods: {
-            route: route
-        }
-    });
 
     export default {
         name: 'partymeister-core-guest-modal',
