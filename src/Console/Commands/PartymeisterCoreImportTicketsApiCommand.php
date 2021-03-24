@@ -64,7 +64,7 @@ class PartymeisterCoreImportTicketsApiCommand extends Command
 
             $request = new Request('GET', config('partymeister-core-dt.base_url').'/order/getAll', [
                     'content-type' => 'application/json',
-                    'X-Shop'       => 'revision20',
+                    'X-Shop'       => config('partymeister-core-dt.shop'),
                     'X-Token'      => $token
                 ]);
 
