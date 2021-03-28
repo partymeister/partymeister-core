@@ -61,7 +61,7 @@ class ComponentSchedules
                 continue;
             }
             $date    = Carbon::createFromTimestamp(strtotime(Arr::get($event, 'starts_at')));
-            $dayKey  = $date->format('l');
+            $dayKey  = $date->format('l, F jS');
             $timeKey = $date->format('H:i');
             if (! isset($this->days[$dayKey])) {
                 $this->days[$dayKey] = [];
