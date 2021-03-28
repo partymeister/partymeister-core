@@ -47,7 +47,9 @@ class ScheduleService extends BaseService
         // 3. save slides
         $slideType = config('partymeister-core-slides.timetable.slide_type', 'default');
 
-        $browser = new ScreenshotHelper();
+        if (config('partymeister-slides.screenshots')) {
+            $browser = new ScreenshotHelper();
+        }
 
         foreach (Arr::get($data, 'slide', []) as $slideName => $definitions) {
             $name = Arr::get($data, 'name.'.$slideName);
@@ -68,10 +70,12 @@ class ScheduleService extends BaseService
             $slide->save();
 
             // 7. generate slides
-            $browser->screenshot(config('app.url').route('backend.slides.show', [ $slide->id ], false).'?preview=true',
-                storage_path().'/preview_'.$slideName.'.png');
-            $browser->screenshot(config('app.url').route('backend.slides.show', [ $slide->id ], false),
-                storage_path().'/final_'.$slideName.'.png');
+            if (isset($browser)) {
+                $browser->screenshot(config('app.url').route('backend.slides.show', [ $slide->id ], false).'?preview=true',
+                    storage_path().'/preview_'.$slideName.'.png');
+                $browser->screenshot(config('app.url').route('backend.slides.show', [ $slide->id ], false),
+                    storage_path().'/final_'.$slideName.'.png');
+            }
 
             $slide->clearMediaCollection('preview');
             $slide->clearMediaCollection('final');
