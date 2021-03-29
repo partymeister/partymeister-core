@@ -3,6 +3,7 @@
 namespace Partymeister\Core\Forms\Component;
 
 use Kris\LaravelFormBuilder\Form;
+use Partymeister\Core\Rules\VisitorLogin;
 
 /**
  * Class VisitorLoginForm
@@ -24,7 +25,7 @@ class VisitorLoginForm extends Form
              ->add(
                  'password',
                  'password',
-                 [ 'label' => trans('motor-backend::backend/users.password'), 'rules' => ['required', 'password:visitor'] ]
+                 [ 'label' => trans('motor-backend::backend/users.password'), 'rules' => ['required', new VisitorLogin] ]
              );
     }
 }
