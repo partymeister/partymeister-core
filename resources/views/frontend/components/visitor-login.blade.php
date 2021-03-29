@@ -2,15 +2,6 @@
     <h3>Login</h3>
     {!! form_start($visitorLoginForm) !!}
     {!! form_until($visitorLoginForm, 'password') !!}
-    @if ($visitorLoginForm->getRequest()->getMethod() == 'POST')
-        @foreach($visitorLoginForm->getErrors() as $error)
-            <ul>
-                @foreach ($error as $message)
-                    <li>{{$message}}</li>
-                @endforeach
-            </ul>
-        @endforeach
-    @endif
     <div class="grid-x">
         <div class="cell small-6">
             <button type="submit"

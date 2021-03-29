@@ -97,24 +97,12 @@ class ComponentVisitorLogins
             return true;
         }
 
-        $data = $this->request->get('visitor-login');
-
-        $this->visitorLoginForm->isValid();
-        if (! is_null($data)) {
-            if (VisitorLoginService::validateLogin($data)) {
-                $this->request->session()->regenerate();
-
-                return redirect()->back();
-            } else {
-                $this->visitorLoginForm->getValidator()
-                                       ->errors()
-                                       ->add('name', 'Something is wrong with your credentials!');
-
-                return redirect()->back()->withErrors($this->visitorLoginForm->getErrors())->withInput();
-            }
+        if (!$this->visitorLoginForm->isValid()) {
+            return redirect()->back()->withErrors($this->visitorLoginForm->getErrors())->withInput();
         }
+        $this->request->session()->regenerate();
 
-        return true;
+        return redirect()->back();
     }
 
 
