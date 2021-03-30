@@ -29,6 +29,7 @@ class ScheduleTransformer extends Fractal\TransformerAbstract
     {
         // Load schedule
         $collection = Event::where('schedule_id', $record->component->schedule_id)
+                           ->where('is_visible', true)
                            ->orderBy('starts_at', 'ASC')
                            ->orderBy('sort_position', 'ASC')
                            ->orderBy('event_type_id', 'ASC')
