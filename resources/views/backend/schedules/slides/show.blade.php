@@ -57,7 +57,7 @@
                         name: 'slidemeister-timetable-{{$dayIndex}}-{{$eventBlockIndex}}',
                         elements: JSON.parse('{!! addslashes($timetableTemplate->definitions) !!}'),
                         type: 'timetable',
-                        replacements: { headline: '{{strtoupper($dayIndex)}}', rows: JSON.parse('{!! json_encode($eventBlock) !!}' ) },
+                        replacements: { headline: '{{strtoupper($dayIndex)}}', rows: JSON.parse('{!! addslashes(json_encode($eventBlock)) !!}' ) },
                     });
                 @endforeach
             @endforeach
