@@ -75,12 +75,13 @@ class ScheduleService extends BaseService
                     storage_path().'/preview_'.$slideName.'.png');
                 $browser->screenshot(config('app.url').route('backend.slides.show', [ $slide->id ], false),
                     storage_path().'/final_'.$slideName.'.png');
+
+                $slide->clearMediaCollection('preview');
+                $slide->clearMediaCollection('final');
+                $slide->addMedia(storage_path().'/preview_'.$slideName.'.png')->toMediaCollection('preview', 'media');
+                $slide->addMedia(storage_path().'/final_'.$slideName.'.png')->toMediaCollection('final', 'media');
             }
 
-            $slide->clearMediaCollection('preview');
-            $slide->clearMediaCollection('final');
-            $slide->addMedia(storage_path().'/preview_'.$slideName.'.png')->toMediaCollection('preview', 'media');
-            $slide->addMedia(storage_path().'/final_'.$slideName.'.png')->toMediaCollection('final', 'media');
 
 //            event(new SlideSaved($slide, 'slides'));
         }
