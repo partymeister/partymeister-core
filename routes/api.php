@@ -5,13 +5,13 @@ Route::group([
     'prefix'     => 'api',
     'as'         => 'api.',
 ], function () {
-    //Route::resource('callbacks', 'CallbacksController');
-    Route::resource('schedules', 'SchedulesController');
-    Route::resource('events', 'EventsController');
-    //Route::resource('event_types', 'EventTypesController');
-    Route::resource('guests', 'GuestsController');
-    //Route::resource('visitors', 'VisitorsController');
-    Route::resource('message-groups', 'MessageGroupsController');
+    Route::apiResource('callbacks', 'CallbacksController');
+    Route::apiResource('schedules', 'SchedulesController');
+    Route::apiResource('events', 'EventsController');
+    Route::apiResource('event_types', 'EventTypesController');
+    Route::apiResource('guests', 'GuestsController');
+    Route::apiResource('visitors', 'VisitorsController');
+    Route::apiResource('message_groups', 'MessageGroupsController');
 });
 
 Route::group([

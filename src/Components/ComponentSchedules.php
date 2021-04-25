@@ -8,16 +8,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
 use Motor\CMS\Models\PageVersionComponent;
+use Partymeister\Core\Http\Resources\ScheduleResource;
 use Partymeister\Core\Models\Component\ComponentSchedule;
-use Partymeister\Core\Transformers\ScheduleTransformer;
 
 /**
  * Class ComponentSchedules
+ *
  * @package Partymeister\Core\Components
  */
 class ComponentSchedules
 {
-
     /**
      * @var ComponentSchedule
      */
@@ -33,20 +33,19 @@ class ComponentSchedules
      */
     protected $days = [];
 
-
     /**
      * ComponentSchedules constructor.
+     *
      * @param PageVersionComponent $pageVersionComponent
-     * @param ComponentSchedule    $component
+     * @param ComponentSchedule $component
      */
     public function __construct(
         PageVersionComponent $pageVersionComponent,
         ComponentSchedule $component
     ) {
-        $this->component            = $component;
+        $this->component = $component;
         $this->pageVersionComponent = $pageVersionComponent;
     }
-
 
     /**
      * @param Request $request
@@ -54,14 +53,14 @@ class ComponentSchedules
      */
     public function index(Request $request)
     {
-        $data = fractal($this->component->schedule, ScheduleTransformer::class)->toArray();
+        $data = new ScheduleResource($this->component->schedule);
 
         foreach (Arr::get($data, 'data.events.data') as $event) {
             if (Arr::get($event, 'is_visible') == false) {
                 continue;
             }
-            $date    = Carbon::createFromTimestamp(strtotime(Arr::get($event, 'starts_at')));
-            $dayKey  = $date->format('l, F jS');
+            $date = Carbon::createFromTimestamp(strtotime(Arr::get($event, 'starts_at')));
+            $dayKey = $date->format('l, F jS');
             $timeKey = $date->format('H:i');
             if (! isset($this->days[$dayKey])) {
                 $this->days[$dayKey] = [];
@@ -80,22 +79,21 @@ class ComponentSchedules
                 "description" => "",
                 "link"        => "",
                 "starttime"   => $date->format('Y-m-d H:i'),
-                "endtime"     => ""
+                "endtime"     => "",
             ];
         }
 
         return $this->render();
     }
 
-
     /**
      * @return Factory|View
      */
     public function render()
     {
-        return view(
-            config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
-            [ 'component' => $this->component, 'days' => $this->days ]
-        );
+        return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
+            'component' => $this->component,
+            'days'      => $this->days,
+        ]);
     }
 }

@@ -6,10 +6,22 @@ use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class ScheduleRequest
+ *
  * @package Partymeister\Core\Http\Requests\Backend
  */
 class ScheduleRequest extends Request
 {
+    /**
+     * @OA\Schema(
+     *   schema="ScheduleRequest",
+     *   @OA\Property(
+     *     property="name",
+     *     type="string",
+     *     example="Main schedule"
+     *   ),
+     *   required={"name"},
+     * )
+     */
 
     /**
      * Determine if the user is authorized to make this request.
@@ -21,7 +33,6 @@ class ScheduleRequest extends Request
         return true;
     }
 
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -30,7 +41,7 @@ class ScheduleRequest extends Request
     public function rules()
     {
         return [
-
+            'name' => 'required',
         ];
     }
 }

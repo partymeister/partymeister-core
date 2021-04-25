@@ -12,6 +12,68 @@ class CallbackRequest extends Request
 {
 
     /**
+     * @OA\Schema(
+     *   schema="CallbackRequest",
+     *   @OA\Property(
+     *     property="name",
+     *     type="string",
+     *     example="My callback"
+     *   ),
+     *   @OA\Property(
+     *     property="action",
+     *     type="string",
+     *     example="live_voting"
+     *   ),
+     *   @OA\Property(
+     *     property="payload",
+     *     type="json",
+     *     example="{}"
+     *   ),
+     *   @OA\Property(
+     *     property="title",
+     *     type="string",
+     *     example="Test Callback!"
+     *   ),
+     *   @OA\Property(
+     *     property="body",
+     *     type="text",
+     *     example="Elaborate prosaic description of the content"
+     *   ),
+     *   @OA\Property(
+     *     property="link",
+     *     type="string",
+     *     example="https://www.mycallback.com"
+     *   ),
+     *   @OA\Property(
+     *     property="destination",
+     *     type="json",
+     *     example="public"
+     *   ),
+     *   @OA\Property(
+     *     property="is_timed",
+     *     type="boolean",
+     *     example="true"
+     *   ),
+     *   @OA\Property(
+     *     property="has_fired",
+     *     type="boolean",
+     *     example="false"
+     *   ),
+     *   @OA\Property(
+     *     property="fired_at",
+     *     type="datetime",
+     *     example="2021-05-28 12:12:12"
+     *   ),
+     *   @OA\Property(
+     *     property="embargo_until",
+     *     type="datetime",
+     *     example="2021-05-28 12:00:00"
+     *   ),
+     *   required={"name", "action", "title", "destinatin", "is_timed"},
+     * )
+     */
+
+    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
