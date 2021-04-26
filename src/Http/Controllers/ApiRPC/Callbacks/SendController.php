@@ -1,13 +1,13 @@
 <?php
 
-namespace Partymeister\Core\Http\Controllers\Api\Callbacks;
+namespace Partymeister\Core\Http\Controllers\ApiRPC\Callbacks;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Motor\Backend\Http\Controllers\Controller;
+use Motor\Backend\Http\Controllers\ApiController;
 use Partymeister\Competitions\Events\CompetitionSaved;
 use Partymeister\Competitions\Events\LiveVoteUpdated;
 use Partymeister\Competitions\Models\Competition;
@@ -18,11 +18,11 @@ use Partymeister\Core\Services\StuhlService;
 
 /**
  * Class SendController
+ *
  * @package Partymeister\Core\Http\Controllers\Api\Callbacks
  */
-class SendController extends Controller
+class SendController extends ApiController
 {
-
     /**
      * @param $hash
      * @return ResponseFactory|JsonResponse|Response
@@ -33,7 +33,8 @@ class SendController extends Controller
         if ($hash == 'single') {
             return $this->single(request());
         }
-        $callback = Callback::where('hash', $hash)->first();
+        $callback = Callback::where('hash', $hash)
+                            ->first();
         if (is_null($callback)) {
             return response(404);
         }
@@ -45,12 +46,12 @@ class SendController extends Controller
         $status = 'THIS SHOULD NOT HAPPEN';
 
         if ($callback->is_timed && strtotime($callback->embargo_until) > time()) {
-            return response('Embargo time ' . $callback->embargo_until . ' not reached', 403);
+            return response('Embargo time '.$callback->embargo_until.' not reached', 403);
         }
 
         switch ($callback->action) {
             case 'competition_ends':
-                $payload     = json_decode($callback->payload);
+                $payload = json_decode($callback->payload);
                 $competition = Competition::find($payload->competition_id);
                 if (is_null($competition)) {
                     return response('Competition does not exist', 403);
@@ -63,17 +64,11 @@ class SendController extends Controller
 
                 break;
             case 'notification':
-                $status = StuhlService::send(
-                    $callback->body,
-                    $callback->title,
-                    '',
-                    EVENT_LEVEL_BORING,
-                    $callback->destination
-                );
+                $status = StuhlService::send($callback->body, $callback->title, '', EVENT_LEVEL_BORING, $callback->destination);
                 break;
             case 'live_with_notification':
-                $payload     = json_decode($callback->payload);
-                $entry       = Entry::find($payload->entry_id);
+                $payload = json_decode($callback->payload);
+                $entry = Entry::find($payload->entry_id);
                 $competition = Competition::find($payload->competition_id);
                 if (is_null($entry) || is_null($competition)) {
                     return response('Entry or competition does not exist', 403);
@@ -82,18 +77,12 @@ class SendController extends Controller
                 if (is_null($l)) {
                     $l = new LiveVote();
                 }
-                $l->entry_id       = $payload->entry_id;
+                $l->entry_id = $payload->entry_id;
                 $l->competition_id = $payload->competition_id;
-                $l->sort_position  = $entry->sort_position;
+                $l->sort_position = $entry->sort_position;
                 $l->save();
 
-                $status = StuhlService::send(
-                    $callback->body,
-                    $callback->title,
-                    '',
-                    EVENT_LEVEL_GOOD,
-                    $callback->destination
-                );
+                $status = StuhlService::send($callback->body, $callback->title, '', EVENT_LEVEL_GOOD, $callback->destination);
 
                 event(new LiveVoteUpdated($l));
 

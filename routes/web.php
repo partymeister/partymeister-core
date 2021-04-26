@@ -1,12 +1,5 @@
 <?php
 
-use Illuminate\Support\Carbon;
-use Partymeister\Accounting\Models\ItemType;
-use Partymeister\Core\Models\Schedule;
-use Partymeister\Core\Services\ScheduleService;
-use Partymeister\Core\Transformers\ScheduleTransformer;
-use Partymeister\Slides\Models\SlideTemplate;
-
 Route::group([
     'as'         => 'backend.',
     'prefix'     => 'backend',
@@ -55,9 +48,9 @@ Route::group([
     Route::get('callbacks', 'CallbacksController@index')->name('callbacks.index');
 });
 
-Route::get('infodesk.json', 'Partymeister\Core\Http\Controllers\Api\LegacyController@infodesk')->name('infodesk');
-Route::get('visitors.json', 'Partymeister\Core\Http\Controllers\Api\LegacyController@visitors')->name('visitors');
-Route::get('timetable.json', 'Partymeister\Core\Http\Controllers\Api\LegacyController@timetable')->name('timetable');
+//Route::get('infodesk.json', 'Partymeister\Core\Http\Controllers\Api\LegacyController@infodesk')->name('infodesk');
+//Route::get('visitors.json', 'Partymeister\Core\Http\Controllers\Api\LegacyController@visitors')->name('visitors');
+//Route::get('timetable.json', 'Partymeister\Core\Http\Controllers\Api\LegacyController@timetable')->name('timetable');
 
 // Only add the route group if you don't already have one for the given namespace
 Route::group([
