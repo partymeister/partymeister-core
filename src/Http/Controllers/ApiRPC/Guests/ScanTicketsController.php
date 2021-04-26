@@ -31,9 +31,9 @@ class ScanTicketsController extends ApiController
         if ($guest->ticket_code_scanned) {
             return response()->json([
                 'error' => trans('partymeister-core::backend/guests.ticket_code_already_scanned', [
-                        'ticket_code' => $request->get('ticket_code'),
-                        'date'        => $guest->arrived_at,
-                    ]),
+                    'ticket_code' => $request->get('ticket_code'),
+                    'date'        => $guest->arrived_at,
+                ]),
             ], 404);
         }
         if ($guest->has_arrived) {
