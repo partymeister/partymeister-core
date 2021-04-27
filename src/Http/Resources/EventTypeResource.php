@@ -41,7 +41,7 @@ class EventTypeResource extends JsonResource
     {
         return [
             'id'          => (int) $this->id,
-            'nmae'        => $this->name,
+            'name'        => $this->name,
             'web_color'   => $this->web_color,
             'slide_color' => $this->slide_color,
         ];

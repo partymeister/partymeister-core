@@ -29,19 +29,10 @@ class ScheduleResource extends JsonResource
      */
     public function toArray($request)
     {
-        $comesFromEventEndpoint = ($request->route()
-                                           ->uri() === 'api/events') ? true : false;
-
-        $events = $this->events()
-                       ->orderBy('starts_at', 'ASC')
-                       ->orderBy('sort_position', 'ASC')
-                       ->orderBy('event_type_id', 'ASC')
-                       ->orderBy('name', 'ASC');
-
         return [
             'id'     => (int) $this->id,
             'name'   => $this->name,
-            'events' => $this->when(! $comesFromEventEndpoint, EventResource::collection($events->get())),
+            'events' => EventResource::collection($this->whenLoaded('events')),
         ];
     }
 }

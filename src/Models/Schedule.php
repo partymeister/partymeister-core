@@ -19,31 +19,31 @@ use Motor\Core\Traits\Searchable;
 /**
  * Partymeister\Core\Models\Schedule
  *
- * @property int                                  $id
- * @property string                               $name
- * @property Carbon|null                          $created_at
- * @property Carbon|null                          $updated_at
- * @property int                                  $created_by
- * @property int                                  $updated_by
- * @property int|null                             $deleted_by
- * @property-read \Motor\Backend\Models\User      $creator
+ * @property int $id
+ * @property string $name
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property int $created_by
+ * @property int $updated_by
+ * @property int|null $deleted_by
+ * @property-read \Motor\Backend\Models\User $creator
  * @property-read \Motor\Backend\Models\User|null $eraser
- * @property-read Collection|Event[]              $events
- * @property-read mixed                           $event_count
- * @property-read \Motor\Backend\Models\User      $updater
- * @method static Builder|Schedule filteredBy( Filter $filter, $column )
- * @method static Builder|Schedule filteredByMultiple( Filter $filter )
+ * @property-read Collection|Event[] $events
+ * @property-read mixed $event_count
+ * @property-read \Motor\Backend\Models\User $updater
+ * @method static Builder|Schedule filteredBy(Filter $filter, $column)
+ * @method static Builder|Schedule filteredByMultiple(Filter $filter)
  * @method static Builder|Schedule newModelQuery()
  * @method static Builder|Schedule newQuery()
  * @method static Builder|Schedule query()
- * @method static Builder|Schedule search( $q, $full_text = false )
- * @method static Builder|Schedule whereCreatedAt( $value )
- * @method static Builder|Schedule whereCreatedBy( $value )
- * @method static Builder|Schedule whereDeletedBy( $value )
- * @method static Builder|Schedule whereId( $value )
- * @method static Builder|Schedule whereName( $value )
- * @method static Builder|Schedule whereUpdatedAt( $value )
- * @method static Builder|Schedule whereUpdatedBy( $value )
+ * @method static Builder|Schedule search($q, $full_text = false)
+ * @method static Builder|Schedule whereCreatedAt($value)
+ * @method static Builder|Schedule whereCreatedBy($value)
+ * @method static Builder|Schedule whereDeletedBy($value)
+ * @method static Builder|Schedule whereId($value)
+ * @method static Builder|Schedule whereName($value)
+ * @method static Builder|Schedule whereUpdatedAt($value)
+ * @method static Builder|Schedule whereUpdatedBy($value)
  * @mixin Eloquent
  */
 class Schedule extends Model
@@ -57,7 +57,7 @@ class Schedule extends Model
      *
      * @var array
      */
-    protected $blameable = [ 'created', 'updated', 'deleted' ];
+    protected $blameable = ['created', 'updated', 'deleted'];
 
     /**
      * Searchable columns for the searchable trait
@@ -65,7 +65,7 @@ class Schedule extends Model
      * @var array
      */
     protected $searchableColumns = [
-        'name'
+        'name',
     ];
 
     /**
@@ -74,29 +74,27 @@ class Schedule extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name',
     ];
 
     /**
      * @return int
      */
-    /**
-     * @return int
-     */
     public function getEventCountAttribute()
     {
-        return $this->events()->count();
+        return $this->events()
+                    ->count();
     }
 
-
-    /**
-     * @return HasMany
-     */
     /**
      * @return HasMany
      */
     public function events()
     {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Event::class)
+                    ->orderBy('starts_at', 'ASC')
+                    ->orderBy('sort_position', 'ASC')
+                    ->orderBy('event_type_id', 'ASC')
+                    ->orderBy('name', 'ASC');
     }
 }
