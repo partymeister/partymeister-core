@@ -36,7 +36,7 @@ class CallbackRequest extends Request
      *   ),
      *   @OA\Property(
      *     property="body",
-     *     type="text",
+     *     type="string",
      *     example="Elaborate prosaic description of the content"
      *   ),
      *   @OA\Property(

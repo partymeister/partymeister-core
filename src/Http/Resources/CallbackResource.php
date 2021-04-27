@@ -34,7 +34,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *   ),
  *   @OA\Property(
  *     property="body",
- *     type="text",
+ *     type="string",
  *     example="Elaborate prosaic description of the content"
  *   ),
  *   @OA\Property(

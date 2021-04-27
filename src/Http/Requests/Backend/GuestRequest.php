@@ -71,7 +71,7 @@ class GuestRequest extends Request
      *   ),
      *   @OA\Property(
      *     property="comment",
-     *     type="text",
+     *     type="string",
      *     example="Gets a visitor shirt in XL"
      *   ),
      *   @OA\Property(
