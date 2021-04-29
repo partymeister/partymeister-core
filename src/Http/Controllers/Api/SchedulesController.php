@@ -16,7 +16,7 @@ use Partymeister\Core\Http\Resources\ScheduleCollection;
  */
 class SchedulesController extends ApiController
 {
-
+    protected string $model = 'Partymeister\Core\Models\Schedule';
     protected string $modelResource = 'schedule';
 
     /**

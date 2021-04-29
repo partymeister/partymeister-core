@@ -16,7 +16,7 @@ use Partymeister\Core\Http\Resources\EventTypeCollection;
  */
 class EventTypesController extends ApiController
 {
-
+    protected string $model = 'Partymeister\Core\Models\EventType';
     protected string $modelResource = 'event_type';
 
     /**

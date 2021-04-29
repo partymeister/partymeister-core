@@ -18,7 +18,7 @@ use Partymeister\Core\Http\Resources\MessageGroupCollection;
  */
 class MessageGroupsController extends ApiController
 {
-
+    protected string $model = 'Partymeister\Core\Models\MessageGroup';
     protected string $modelResource = 'message_group';
 
     /**

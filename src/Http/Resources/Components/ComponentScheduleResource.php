@@ -2,7 +2,7 @@
 
 namespace Partymeister\Core\Http\Resources\Components;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Motor\Backend\Http\Resources\BaseResource;
 
 /**
  * @OA\Schema(
@@ -19,7 +19,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *   ),
  * )
  */
-class ComponentScheduleResource extends JsonResource
+class ComponentScheduleResource extends BaseResource
 {
     /**
      * Transform the resource into an array.

@@ -28,19 +28,19 @@ class SlidesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Schedule $record
-     * @return Factory|View
+     * @param \Illuminate\Http\Request $request
+     * @param \Partymeister\Core\Models\Schedule $record
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index(Schedule $record)
+    public function index(Request $request, Schedule $record)
     {
         $timetableTemplate = SlideTemplate::where('template_for', 'timetable')
                                           ->first();
 
-        $data = new ScheduleResource($record);
+        $resource = new ScheduleResource($record->load('events'));
+        $data = $resource->toArrayRecursive();
 
-        $days = [];
-
-        foreach (Arr::get($data, 'data.events.data') as $key => $event) {
+        foreach (Arr::get($data, 'events') as $key => $event) {
             $date = Carbon::createFromTimestamp(strtotime(Arr::get($event, 'starts_at')));
             if (! isset($days[$date->format('l')])) {
                 $days[$date->format('l')] = [];
@@ -48,8 +48,8 @@ class SlidesController extends Controller
 
             $days[$date->format('l')][] = [
                 'name'  => addslashes(Arr::get($event, 'name')),
-                'type'  => addslashes(Arr::get($event, 'event_type.data.name')),
-                'color' => Arr::get($event, 'event_type.data.slide_color'),
+                'type'  => addslashes(Arr::get($event, 'event_type.name')),
+                'color' => Arr::get($event, 'event_type.slide_color'),
                 'time'  => $date->format('H:i'),
             ];
         }

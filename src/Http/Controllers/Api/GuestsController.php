@@ -16,7 +16,7 @@ use Partymeister\Core\Http\Resources\GuestCollection;
  */
 class GuestsController extends ApiController
 {
-
+    protected string $model = 'Partymeister\Core\Models\Guest';
     protected string $modelResource = 'guest';
 
     /**

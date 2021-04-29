@@ -16,7 +16,7 @@ use Partymeister\Core\Http\Resources\CallbackCollection;
  */
 class CallbacksController extends ApiController
 {
-
+    protected string $model = 'Partymeister\Core\Models\Callback';
     protected string $modelResource = 'callback';
 
     /**

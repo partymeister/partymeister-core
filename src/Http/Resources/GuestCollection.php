@@ -2,9 +2,9 @@
 
 namespace Partymeister\Core\Http\Resources;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Motor\Backend\Http\Resources\BaseCollection;
 
-class GuestCollection extends ResourceCollection
+class GuestCollection extends BaseCollection
 {
     /**
      * Transform the resource collection into an array.

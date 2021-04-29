@@ -85,17 +85,23 @@ class EventRequest extends Request
      */
     public function rules()
     {
-        return [
-            'name'              => 'required',
-            'schedule_id'       => 'required|integer',
-            'event_type_id'     => 'required|integer',
-            'starts_at'         => 'required|datetime',
-            'ends_at'           => 'nullable|datetime',
-            'is_visible'        => 'nullable|boolean',
-            'is_organizer_only' => 'nullable|boolean',
-            'sort_position'     => 'nullable|integer',
-            'notify_minutes'    => 'nullable|integer',
-            'link'              => 'nullable',
-        ];
+        switch ($this->method()) {
+            case 'POST':
+                return [
+                    'name'              => 'required',
+                    'schedule_id'       => 'required|integer',
+                    'event_type_id'     => 'required|integer',
+                    'starts_at'         => 'required|datetime',
+                    'ends_at'           => 'nullable|datetime',
+                    'is_visible'        => 'nullable|boolean',
+                    'is_organizer_only' => 'nullable|boolean',
+                    'sort_position'     => 'nullable|integer',
+                    'notify_minutes'    => 'nullable|integer',
+                    'link'              => 'nullable',
+                ];
+            case 'PUT':
+            case 'PATCH':
+                return [];
+        }
     }
 }
