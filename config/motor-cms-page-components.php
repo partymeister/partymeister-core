@@ -6,8 +6,8 @@ return [
             'name' => 'Partymeister core',
         ],
         'partymeister-website' => [
-            'name' => 'Partymeister website'
-        ]
+            'name' => 'Partymeister website',
+        ],
     ],
     'components' => [
         'visitor-website-registrations' => [
@@ -21,36 +21,36 @@ return [
             'permissions'     => [
 
             ],
-            'group'           => 'partymeister-website'
+            'group'           => 'partymeister-website',
         ],
         'schedule'                      => [
-            'name'              => 'Schedule',
-            'description'       => 'Show Schedule component',
-            'view'              => 'partymeister-core::frontend.components.schedule',
-            'route'             => 'component.schedules',
-            'component_class'   => 'Partymeister\Core\Components\ComponentSchedules',
-            'transformer_class' => 'Partymeister\Core\Transformers\Components\ScheduleTransformer',
-            'compatibility'     => [
+            'name'            => 'Schedule',
+            'description'     => 'Show Schedule component',
+            'view'            => 'partymeister-core::frontend.components.schedule',
+            'route'           => 'component.schedules',
+            'component_class' => 'Partymeister\Core\Components\ComponentSchedules',
+            'resource_class'  => 'Partymeister\Core\Http\Resources\Components\ScheduleResource',
+            'compatibility'   => [
 
             ],
-            'permissions'       => [
+            'permissions'     => [
 
             ],
-            'group'             => 'partymeister-core'
+            'group'           => 'partymeister-core',
         ],
         'visitor-list'                  => [
-            'name'              => 'VisitorList',
-            'description'       => 'Show VisitorList component',
-            'view'              => 'partymeister-core::frontend.components.visitor-list',
-            'component_class'   => 'Partymeister\Core\Components\ComponentVisitorLists',
-            'transformer_class' => 'Partymeister\Core\Transformers\Components\VisitorListTransformer',
-            'compatibility'     => [
+            'name'            => 'VisitorList',
+            'description'     => 'Show VisitorList component',
+            'view'            => 'partymeister-core::frontend.components.visitor-list',
+            'component_class' => 'Partymeister\Core\Components\ComponentVisitorLists',
+            'resource_class'  => 'Partymeister\Core\Http\Resources\Components\VisitorListResource',
+            'compatibility'   => [
 
             ],
-            'permissions'       => [
+            'permissions'     => [
 
             ],
-            'group'             => 'partymeister-core'
+            'group'           => 'partymeister-core',
         ],
         'visitor-login'                 => [
             'name'            => 'VisitorLogin',
@@ -64,7 +64,7 @@ return [
             'permissions'     => [
 
             ],
-            'group'           => 'partymeister-core'
+            'group'           => 'partymeister-core',
         ],
         'visitor-registration'          => [
             'name'            => 'VisitorRegistration',
@@ -77,7 +77,7 @@ return [
             'permissions'     => [
 
             ],
-            'group'           => 'partymeister-core'
+            'group'           => 'partymeister-core',
         ],
     ],
 ];
