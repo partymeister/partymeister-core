@@ -14,11 +14,11 @@ use Partymeister\Slides\Models\Slide;
 
 /**
  * Class DashboardController
+ *
  * @package App\Http\Controllers
  */
 class DashboardController extends Controller
 {
-
     /**
      * Create a new controller instance.
      *
@@ -28,7 +28,6 @@ class DashboardController extends Controller
     {
         $this->middleware('auth');
     }
-
 
     /**
      * Show the application dashboard.
@@ -56,42 +55,36 @@ class DashboardController extends Controller
         //return view('partymeister-core::backend.dashboard',
         //    [ 'messageGroups' => json_encode($messageGroups), 'visitors' => json_encode($visitors) ]);
 
-
         $competitionCount = $entryCount = $lastEntries = $visitorCount = $lastVisitors = $slideCount = $lastSlides = $playlistCount = $lastPlaylists = null;
 
         $visitorCount = Visitor::count();
-        $lastVisitors = Visitor::orderBy('created_at', 'DESC')->limit(5)->get();
+        $lastVisitors = Visitor::orderBy('created_at', 'DESC')
+                               ->limit(5)
+                               ->get();
 
         // Check if competition module is installed
         if (class_exists('\Partymeister\Competitions\Providers\PartymeisterServiceProvider')) {
             $competitionCount = Competition::count();
 
-            $entryCount  = Entry::count();
-            $lastEntries = Entry::orderBy('created_at', 'DESC')->limit(5)->get();
+            $entryCount = Entry::count();
+            $lastEntries = Entry::orderBy('created_at', 'DESC')
+                                ->limit(5)
+                                ->get();
         }
 
         // Check if slides module is installed
         if (class_exists('\Partymeister\Slides\Providers\PartymeisterServiceProvider')) {
             $slideCount = Slide::count();
-            $lastSlides = Slide::orderBy('created_at', 'DESC')->limit(5)->get();
+            $lastSlides = Slide::orderBy('created_at', 'DESC')
+                               ->limit(5)
+                               ->get();
 
             $playlistCount = Playlist::count();
-            $lastPlaylists = Playlist::orderBy('created_at', 'DESC')->limit(5)->get();
+            $lastPlaylists = Playlist::orderBy('created_at', 'DESC')
+                                     ->limit(5)
+                                     ->get();
         }
 
-        return view(
-            'partymeister-core::backend.dashboard',
-            compact(
-                'competitionCount',
-                'entryCount',
-                'lastEntries',
-                'visitorCount',
-                'lastVisitors',
-                'slideCount',
-                'lastSlides',
-                'playlistCount',
-                'lastPlaylists'
-            )
-        );
+        return view('partymeister-core::backend.dashboard', compact('competitionCount', 'entryCount', 'lastEntries', 'visitorCount', 'lastVisitors', 'slideCount', 'lastSlides', 'playlistCount', 'lastPlaylists'));
     }
 }

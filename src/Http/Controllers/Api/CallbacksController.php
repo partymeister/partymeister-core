@@ -12,11 +12,13 @@ use Partymeister\Core\Http\Resources\CallbackCollection;
 
 /**
  * Class CallbacksController
+ *
  * @package Partymeister\Core\Http\Controllers\Api
  */
 class CallbacksController extends ApiController
 {
     protected string $model = 'Partymeister\Core\Models\Callback';
+
     protected string $modelResource = 'callback';
 
     /**
@@ -69,7 +71,8 @@ class CallbacksController extends ApiController
      */
     public function index()
     {
-        $paginator = CallbackService::collection()->getPaginator();
+        $paginator = CallbackService::collection()
+                                    ->getPaginator();
 
         return (new CallbackCollection($paginator))->additional(['message' => 'Callback collection read']);
     }
@@ -125,10 +128,13 @@ class CallbacksController extends ApiController
      */
     public function store(CallbackRequest $request)
     {
-        $result = CallbackService::create($request)->getResult();
-        return (new CallbackResource($result))->additional(['message' => 'Callback created'])->response()->setStatusCode(201);
-    }
+        $result = CallbackService::create($request)
+                                 ->getResult();
 
+        return (new CallbackResource($result))->additional(['message' => 'Callback created'])
+                                              ->response()
+                                              ->setStatusCode(201);
+    }
 
     /**
      * @OA\Get (
@@ -185,10 +191,11 @@ class CallbacksController extends ApiController
      */
     public function show(Callback $record)
     {
-        $result = CallbackService::show($record)->getResult();
+        $result = CallbackService::show($record)
+                                 ->getResult();
+
         return (new CallbackResource($result))->additional(['message' => 'Callback read']);
     }
-
 
     /**
      * @OA\Put (
@@ -244,15 +251,16 @@ class CallbacksController extends ApiController
      * Update the specified resource in storage.
      *
      * @param CallbackRequest $request
-     * @param Callback        $record
+     * @param Callback $record
      * @return CallbackResource
      */
     public function update(CallbackRequest $request, Callback $record)
     {
-        $result = CallbackService::update($record, $request)->getResult();
+        $result = CallbackService::update($record, $request)
+                                 ->getResult();
+
         return (new CallbackResource($result))->additional(['message' => 'Callback updated']);
     }
-
 
     /**
      * @OA\Delete (
@@ -315,11 +323,13 @@ class CallbacksController extends ApiController
      */
     public function destroy(Callback $record)
     {
-        $result = CallbackService::delete($record)->getResult();
+        $result = CallbackService::delete($record)
+                                 ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'Callback deleted']);
         }
+
         return response()->json(['message' => 'Problem deleting Callback'], 404);
     }
 }

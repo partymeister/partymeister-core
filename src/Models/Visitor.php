@@ -17,37 +17,37 @@ use Partymeister\Competitions\Models\Vote;
 /**
  * Partymeister\Core\Models\Visitor
  *
- * @property int                     $id
- * @property string                  $name
- * @property string                  $group
- * @property string                  $country_iso_3166_1
- * @property array                   $additional_data
- * @property string|null             $email
- * @property string                  $password
- * @property string                  $api_token
- * @property string|null             $remember_token
- * @property Carbon|null             $created_at
- * @property Carbon|null             $updated_at
+ * @property int $id
+ * @property string $name
+ * @property string $group
+ * @property string $country_iso_3166_1
+ * @property array $additional_data
+ * @property string|null $email
+ * @property string $password
+ * @property string $api_token
+ * @property string|null $remember_token
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property-read Collection|Entry[] $entries
- * @property-read mixed              $new_comments
- * @property-read Collection|Vote[]  $votes
- * @method static Builder|Visitor filteredBy( Filter $filter, $column )
- * @method static Builder|Visitor filteredByMultiple( Filter $filter )
+ * @property-read mixed $new_comments
+ * @property-read Collection|Vote[] $votes
+ * @method static Builder|Visitor filteredBy(Filter $filter, $column)
+ * @method static Builder|Visitor filteredByMultiple(Filter $filter)
  * @method static Builder|Visitor newModelQuery()
  * @method static Builder|Visitor newQuery()
  * @method static Builder|Visitor query()
- * @method static Builder|Visitor search( $q, $full_text = false )
- * @method static Builder|Visitor whereAdditionalData( $value )
- * @method static Builder|Visitor whereApiToken( $value )
- * @method static Builder|Visitor whereCountryIso31661( $value )
- * @method static Builder|Visitor whereCreatedAt( $value )
- * @method static Builder|Visitor whereEmail( $value )
- * @method static Builder|Visitor whereGroup( $value )
- * @method static Builder|Visitor whereId( $value )
- * @method static Builder|Visitor whereName( $value )
- * @method static Builder|Visitor wherePassword( $value )
- * @method static Builder|Visitor whereRememberToken( $value )
- * @method static Builder|Visitor whereUpdatedAt( $value )
+ * @method static Builder|Visitor search($q, $full_text = false)
+ * @method static Builder|Visitor whereAdditionalData($value)
+ * @method static Builder|Visitor whereApiToken($value)
+ * @method static Builder|Visitor whereCountryIso31661($value)
+ * @method static Builder|Visitor whereCreatedAt($value)
+ * @method static Builder|Visitor whereEmail($value)
+ * @method static Builder|Visitor whereGroup($value)
+ * @method static Builder|Visitor whereId($value)
+ * @method static Builder|Visitor whereName($value)
+ * @method static Builder|Visitor wherePassword($value)
+ * @method static Builder|Visitor whereRememberToken($value)
+ * @method static Builder|Visitor whereUpdatedAt($value)
  * @mixin Eloquent
  */
 class Visitor extends Authenticatable
@@ -74,7 +74,7 @@ class Visitor extends Authenticatable
      *
      * @var array
      */
-    protected $searchableColumns = [ 'name', 'group' ];
+    protected $searchableColumns = ['name', 'group'];
 
     /**
      * The attributes that are mass assignable.
@@ -102,7 +102,6 @@ class Visitor extends Authenticatable
         'remember_token',
     ];
 
-
     /**
      * Get the login username to be used by the controller.
      *
@@ -123,8 +122,11 @@ class Visitor extends Authenticatable
     public function getNewCommentsAttribute()
     {
         $numberOfComments = 0;
-        foreach ($this->entries()->get() as $entry) {
-            $numberOfComments += $entry->comments()->where('read_by_visitor', false)->count();
+        foreach ($this->entries()
+                      ->get() as $entry) {
+            $numberOfComments += $entry->comments()
+                                       ->where('read_by_visitor', false)
+                                       ->count();
         }
 
         return $numberOfComments;

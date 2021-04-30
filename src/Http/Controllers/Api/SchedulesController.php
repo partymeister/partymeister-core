@@ -12,11 +12,13 @@ use Partymeister\Core\Http\Resources\ScheduleCollection;
 
 /**
  * Class SchedulesController
+ *
  * @package Partymeister\Core\Http\Controllers\Api
  */
 class SchedulesController extends ApiController
 {
     protected string $model = 'Partymeister\Core\Models\Schedule';
+
     protected string $modelResource = 'schedule';
 
     /**
@@ -69,7 +71,9 @@ class SchedulesController extends ApiController
      */
     public function index()
     {
-        $paginator = ScheduleService::collection()->getPaginator();
+        $paginator = ScheduleService::collection()
+                                    ->getPaginator();
+
         return (new ScheduleCollection($paginator))->additional(['message' => 'Schedule collection read']);
     }
 
@@ -124,10 +128,13 @@ class SchedulesController extends ApiController
      */
     public function store(ScheduleRequest $request)
     {
-        $result = ScheduleService::create($request)->getResult();
-        return (new ScheduleResource($result))->additional(['message' => 'Schedule created'])->response()->setStatusCode(201);
-    }
+        $result = ScheduleService::create($request)
+                                 ->getResult();
 
+        return (new ScheduleResource($result))->additional(['message' => 'Schedule created'])
+                                              ->response()
+                                              ->setStatusCode(201);
+    }
 
     /**
      * @OA\Get (
@@ -184,10 +191,11 @@ class SchedulesController extends ApiController
      */
     public function show(Schedule $record)
     {
-        $result = ScheduleService::show($record)->getResult();
+        $result = ScheduleService::show($record)
+                                 ->getResult();
+
         return (new ScheduleResource($result))->additional(['message' => 'Schedule read']);
     }
-
 
     /**
      * @OA\Put (
@@ -243,15 +251,16 @@ class SchedulesController extends ApiController
      * Update the specified resource in storage.
      *
      * @param ScheduleRequest $request
-     * @param Schedule        $record
+     * @param Schedule $record
      * @return ScheduleResource
      */
     public function update(ScheduleRequest $request, Schedule $record)
     {
-        $result = ScheduleService::update($record, $request)->getResult();
+        $result = ScheduleService::update($record, $request)
+                                 ->getResult();
+
         return (new ScheduleResource($result))->additional(['message' => 'Schedule updated']);
     }
-
 
     /**
      * @OA\Delete (
@@ -314,11 +323,13 @@ class SchedulesController extends ApiController
      */
     public function destroy(Schedule $record)
     {
-        $result = ScheduleService::delete($record)->getResult();
+        $result = ScheduleService::delete($record)
+                                 ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'Schedule deleted']);
         }
+
         return response()->json(['message' => 'Problem deleting Schedule'], 404);
     }
 }

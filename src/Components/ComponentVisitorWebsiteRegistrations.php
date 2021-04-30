@@ -13,6 +13,7 @@ use Partymeister\Core\Services\Component\VisitorWebsiteRegistrationService;
 
 /**
  * Class ComponentVisitorWebsiteRegistrations
+ *
  * @package Partymeister\Core\Components
  */
 class ComponentVisitorWebsiteRegistrations
@@ -34,16 +35,15 @@ class ComponentVisitorWebsiteRegistrations
      */
     protected $request;
 
-
     /**
      * ComponentVisitorWebsiteRegistrations constructor.
+     *
      * @param PageVersionComponent $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
         $this->pageVersionComponent = $pageVersionComponent;
     }
-
 
     /**
      * @param Request $request
@@ -56,7 +56,7 @@ class ComponentVisitorWebsiteRegistrations
         $this->visitorWebsiteRegistrationForm = $this->form(VisitorWebsiteRegistrationForm::class, [
             'name'    => 'visitor-website-registration',
             'method'  => 'POST',
-            'enctype' => 'multipart/form-data'
+            'enctype' => 'multipart/form-data',
         ]);
 
         switch ($request->method()) {
@@ -71,7 +71,6 @@ class ComponentVisitorWebsiteRegistrations
         return $this->render();
     }
 
-
     /**
      * @return bool|RedirectResponse
      */
@@ -82,7 +81,10 @@ class ComponentVisitorWebsiteRegistrations
         }
 
         if (! $this->visitorWebsiteRegistrationForm->isValid()) {
-            return redirect()->back()->withErrors($this->visitorWebsiteRegistrationForm->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($this->visitorWebsiteRegistrationForm->getErrors())
+                ->withInput();
         }
 
         VisitorWebsiteRegistrationService::register($this->request->get('visitor-website-registration'));
@@ -91,15 +93,11 @@ class ComponentVisitorWebsiteRegistrations
         return redirect()->back();
     }
 
-
     /**
      * @return Factory|View
      */
     public function render()
     {
-        return view(
-            config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
-            [ 'visitorWebsiteRegistrationForm' => $this->visitorWebsiteRegistrationForm ]
-        );
+        return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), ['visitorWebsiteRegistrationForm' => $this->visitorWebsiteRegistrationForm]);
     }
 }

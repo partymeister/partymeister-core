@@ -14,11 +14,13 @@ use Partymeister\Core\Http\Resources\MessageGroupCollection;
 
 /**
  * Class MessageGroupsController
+ *
  * @package Partymeister\Core\Http\Controllers\Api
  */
 class MessageGroupsController extends ApiController
 {
     protected string $model = 'Partymeister\Core\Models\MessageGroup';
+
     protected string $modelResource = 'message_group';
 
     /**
@@ -71,7 +73,9 @@ class MessageGroupsController extends ApiController
      */
     public function index()
     {
-        $paginator = MessageGroupService::collection()->getPaginator();
+        $paginator = MessageGroupService::collection()
+                                        ->getPaginator();
+
         return (new MessageGroupCollection($paginator))->additional(['message' => 'MessageGroup collection read']);
     }
 
@@ -126,10 +130,13 @@ class MessageGroupsController extends ApiController
      */
     public function store(MessageGroupRequest $request)
     {
-        $result = MessageGroupService::create($request)->getResult();
-        return (new MessageGroupResource($result))->additional(['message' => 'MessageGroup created'])->response()->setStatusCode(201);
-    }
+        $result = MessageGroupService::create($request)
+                                     ->getResult();
 
+        return (new MessageGroupResource($result))->additional(['message' => 'MessageGroup created'])
+                                                  ->response()
+                                                  ->setStatusCode(201);
+    }
 
     /**
      * @OA\Get (
@@ -186,10 +193,11 @@ class MessageGroupsController extends ApiController
      */
     public function show(MessageGroup $record)
     {
-        $result = MessageGroupService::show($record)->getResult();
+        $result = MessageGroupService::show($record)
+                                     ->getResult();
+
         return (new MessageGroupResource($result))->additional(['message' => 'MessageGroup read']);
     }
-
 
     /**
      * @OA\Put (
@@ -245,15 +253,16 @@ class MessageGroupsController extends ApiController
      * Update the specified resource in storage.
      *
      * @param MessageGroupRequest $request
-     * @param MessageGroup        $record
+     * @param MessageGroup $record
      * @return MessageGroupResource
      */
     public function update(MessageGroupRequest $request, MessageGroup $record)
     {
-        $result = MessageGroupService::update($record, $request)->getResult();
+        $result = MessageGroupService::update($record, $request)
+                                     ->getResult();
+
         return (new MessageGroupResource($result))->additional(['message' => 'MessageGroup updated']);
     }
-
 
     /**
      * @OA\Delete (
@@ -316,11 +325,13 @@ class MessageGroupsController extends ApiController
      */
     public function destroy(MessageGroup $record)
     {
-        $result = MessageGroupService::delete($record)->getResult();
+        $result = MessageGroupService::delete($record)
+                                     ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'MessageGroup deleted']);
         }
+
         return response()->json(['message' => 'Problem deleting MessageGroup'], 404);
     }
 }

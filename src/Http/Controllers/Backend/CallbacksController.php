@@ -17,12 +17,12 @@ use ReflectionException;
 
 /**
  * Class CallbacksController
+ *
  * @package Partymeister\Core\Http\Controllers\Backend
  */
 class CallbacksController extends Controller
 {
     use FormBuilderTrait;
-
 
     /**
      * Display a listing of the resource.
@@ -41,20 +41,18 @@ class CallbacksController extends Controller
         return view('partymeister-core::backend.callbacks.index', compact('paginator', 'grid'));
     }
 
-
     /**
      * @param Callback $record
      * @return Factory|View
      */
     public function duplicate(Callback $record)
     {
-        $newRecord       = $record->replicate();
-        $newRecord->name = 'Duplicate of ' . $newRecord->name;
+        $newRecord = $record->replicate();
+        $newRecord->name = 'Duplicate of '.$newRecord->name;
         $newRecord->hash = '';
 
         return $this->create($newRecord);
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -74,7 +72,6 @@ class CallbacksController extends Controller
         return view('partymeister-core::backend.callbacks.create', compact('form'));
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
@@ -87,7 +84,10 @@ class CallbacksController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         CallbackService::createWithForm($request, $form);
@@ -96,7 +96,6 @@ class CallbacksController extends Controller
 
         return redirect('backend/callbacks');
     }
-
 
     /**
      * Display the specified resource.
@@ -108,7 +107,6 @@ class CallbacksController extends Controller
         //
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -119,20 +117,19 @@ class CallbacksController extends Controller
     {
         $form = $this->form(CallbackForm::class, [
             'method'  => 'PATCH',
-            'url'     => route('backend.callbacks.update', [ $record->id ]),
+            'url'     => route('backend.callbacks.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record
+            'model'   => $record,
         ]);
 
         return view('partymeister-core::backend.callbacks.edit', compact('form'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @param CallbackRequest $request
-     * @param Callback        $record
+     * @param Callback $record
      * @return RedirectResponse|Redirector
      */
     public function update(CallbackRequest $request, Callback $record)
@@ -141,7 +138,10 @@ class CallbacksController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         CallbackService::updateWithForm($record, $request, $form);
@@ -150,7 +150,6 @@ class CallbacksController extends Controller
 
         return redirect('backend/callbacks');
     }
-
 
     /**
      * Remove the specified resource from storage.

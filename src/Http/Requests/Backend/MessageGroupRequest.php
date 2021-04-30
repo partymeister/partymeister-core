@@ -5,6 +5,7 @@ namespace Partymeister\Core\Http\Requests\Backend;
 use Motor\Backend\Http\Requests\Request;
 
 // TODO: is this class still needed?
+
 /**
  * Class MessageGroupRequest
  *

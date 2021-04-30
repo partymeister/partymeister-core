@@ -105,21 +105,31 @@ class GuestRequest extends Request
      */
     public function rules()
     {
-        return [
-            'category_id'         => 'required|integer',
-            'name'                => 'required',
-            'handle'              => 'nullable',
-            'email'               => 'nullable',
-            'company'             => 'nullable',
-            'country'             => 'nullable',
-            'ticket_code'         => 'nullable',
-            'ticket_type'         => 'nullable',
-            'ticket_order_number' => 'nullable',
-            'has_badge'           => 'nullable|boolean',
-            'has_arrived'         => 'nullable|boolean',
-            'ticket_code_scanned' => 'nullable|boolean',
-            'comment'             => 'nullable',
-            'arrived_at'          => 'nullable|datettime',
-        ];
+        // FIXME: separate request class for ApiRequest
+        switch ($this->method()) {
+            case 'POST':
+                return [
+                    'category_id'         => 'required|integer|exists:categories,id',
+                    'name'                => 'required',
+                    'handle'              => 'nullable',
+                    'email'               => 'nullable|email',
+                    'company'             => 'nullable',
+                    'country'             => 'nullable',
+                    'ticket_code'         => 'nullable',
+                    'ticket_type'         => 'nullable',
+                    'ticket_order_number' => 'nullable',
+                    'has_badge'           => 'nullable|boolean',
+                    'has_arrived'         => 'nullable|boolean',
+                    'ticket_code_scanned' => 'nullable|boolean',
+                    'comment'             => 'nullable',
+                    'arrived_at'          => 'nullable|date_format:Y-m-d H:i:s',
+                ];
+            case 'PUT':
+            case 'PATCH':
+                return [
+                    'category_id' => 'nullable|integer|exists:categories,id',
+                    'arrived_at'  => 'nullable|date_format:Y-m-d H:i:s',
+                ];
+        }
     }
 }

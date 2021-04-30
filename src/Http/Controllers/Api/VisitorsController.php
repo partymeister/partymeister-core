@@ -12,11 +12,13 @@ use Partymeister\Core\Http\Resources\VisitorCollection;
 
 /**
  * Class VisitorsController
+ *
  * @package Partymeister\Core\Http\Controllers\Api
  */
 class VisitorsController extends ApiController
 {
     protected string $model = 'Partymeister\Core\Models\Visitor';
+
     protected string $modelResource = 'visitor';
 
     /**
@@ -69,7 +71,9 @@ class VisitorsController extends ApiController
      */
     public function index()
     {
-        $paginator = VisitorService::collection()->getPaginator();
+        $paginator = VisitorService::collection()
+                                   ->getPaginator();
+
         return (new VisitorCollection($paginator))->additional(['message' => 'Visitor collection read']);
     }
 
@@ -124,10 +128,13 @@ class VisitorsController extends ApiController
      */
     public function store(VisitorRequest $request)
     {
-        $result = VisitorService::create($request)->getResult();
-        return (new VisitorResource($result))->additional(['message' => 'Visitor created'])->response()->setStatusCode(201);
-    }
+        $result = VisitorService::create($request)
+                                ->getResult();
 
+        return (new VisitorResource($result))->additional(['message' => 'Visitor created'])
+                                             ->response()
+                                             ->setStatusCode(201);
+    }
 
     /**
      * @OA\Get (
@@ -184,10 +191,11 @@ class VisitorsController extends ApiController
      */
     public function show(Visitor $record)
     {
-        $result = VisitorService::show($record)->getResult();
+        $result = VisitorService::show($record)
+                                ->getResult();
+
         return (new VisitorResource($result))->additional(['message' => 'Visitor read']);
     }
-
 
     /**
      * @OA\Put (
@@ -243,15 +251,16 @@ class VisitorsController extends ApiController
      * Update the specified resource in storage.
      *
      * @param VisitorRequest $request
-     * @param Visitor        $record
+     * @param Visitor $record
      * @return VisitorResource
      */
     public function update(VisitorRequest $request, Visitor $record)
     {
-        $result = VisitorService::update($record, $request)->getResult();
+        $result = VisitorService::update($record, $request)
+                                ->getResult();
+
         return (new VisitorResource($result))->additional(['message' => 'Visitor updated']);
     }
-
 
     /**
      * @OA\Delete (
@@ -314,11 +323,13 @@ class VisitorsController extends ApiController
      */
     public function destroy(Visitor $record)
     {
-        $result = VisitorService::delete($record)->getResult();
+        $result = VisitorService::delete($record)
+                                ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'Visitor deleted']);
         }
+
         return response()->json(['message' => 'Problem deleting Visitor'], 404);
     }
 }

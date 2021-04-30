@@ -14,24 +14,23 @@ use Partymeister\Core\Models\Schedule;
 /**
  * Partymeister\Core\Models\Component\ComponentSchedule
  *
- * @property int                                    $id
- * @property int                                    $schedule_id
- * @property Carbon|null                            $created_at
- * @property Carbon|null                            $updated_at
+ * @property int $id
+ * @property int $schedule_id
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property-read Collection|PageVersionComponent[] $component
- * @property-read Schedule                          $schedule
+ * @property-read Schedule $schedule
  * @method static Builder|ComponentSchedule newModelQuery()
  * @method static Builder|ComponentSchedule newQuery()
  * @method static Builder|ComponentSchedule query()
- * @method static Builder|ComponentSchedule whereCreatedAt( $value )
- * @method static Builder|ComponentSchedule whereId( $value )
- * @method static Builder|ComponentSchedule whereScheduleId( $value )
- * @method static Builder|ComponentSchedule whereUpdatedAt( $value )
+ * @method static Builder|ComponentSchedule whereCreatedAt($value)
+ * @method static Builder|ComponentSchedule whereId($value)
+ * @method static Builder|ComponentSchedule whereScheduleId($value)
+ * @method static Builder|ComponentSchedule whereUpdatedAt($value)
  * @mixin Eloquent
  */
 class ComponentSchedule extends ComponentBaseModel
 {
-
     /**
      * The attributes that are mass assignable.
      *
@@ -40,7 +39,6 @@ class ComponentSchedule extends ComponentBaseModel
     protected $fillable = [
         'schedule_id',
     ];
-
 
     /**
      * Preview function for the page editor
@@ -54,7 +52,6 @@ class ComponentSchedule extends ComponentBaseModel
             'preview' => ! is_null($this->schedule) ? $this->schedule->name : 'nothing selected',
         ];
     }
-
 
     /**
      * @return BelongsTo

@@ -12,11 +12,13 @@ use Partymeister\Core\Http\Resources\EventTypeCollection;
 
 /**
  * Class EventTypesController
+ *
  * @package Partymeister\Core\Http\Controllers\Api
  */
 class EventTypesController extends ApiController
 {
     protected string $model = 'Partymeister\Core\Models\EventType';
+
     protected string $modelResource = 'event_type';
 
     /**
@@ -69,7 +71,9 @@ class EventTypesController extends ApiController
      */
     public function index()
     {
-        $paginator = EventTypeService::collection()->getPaginator();
+        $paginator = EventTypeService::collection()
+                                     ->getPaginator();
+
         return (new EventTypeCollection($paginator))->additional(['message' => 'EventType collection read']);
     }
 
@@ -124,10 +128,13 @@ class EventTypesController extends ApiController
      */
     public function store(EventTypeRequest $request)
     {
-        $result = EventTypeService::create($request)->getResult();
-        return (new EventTypeResource($result))->additional(['message' => 'EventType created'])->response()->setStatusCode(201);
-    }
+        $result = EventTypeService::create($request)
+                                  ->getResult();
 
+        return (new EventTypeResource($result))->additional(['message' => 'EventType created'])
+                                               ->response()
+                                               ->setStatusCode(201);
+    }
 
     /**
      * @OA\Get (
@@ -184,10 +191,11 @@ class EventTypesController extends ApiController
      */
     public function show(EventType $record)
     {
-        $result = EventTypeService::show($record)->getResult();
+        $result = EventTypeService::show($record)
+                                  ->getResult();
+
         return (new EventTypeResource($result))->additional(['message' => 'EventType read']);
     }
-
 
     /**
      * @OA\Put (
@@ -243,15 +251,16 @@ class EventTypesController extends ApiController
      * Update the specified resource in storage.
      *
      * @param EventTypeRequest $request
-     * @param EventType        $record
+     * @param EventType $record
      * @return EventTypeResource
      */
     public function update(EventTypeRequest $request, EventType $record)
     {
-        $result = EventTypeService::update($record, $request)->getResult();
+        $result = EventTypeService::update($record, $request)
+                                  ->getResult();
+
         return (new EventTypeResource($result))->additional(['message' => 'EventType updated']);
     }
-
 
     /**
      * @OA\Delete (
@@ -314,11 +323,13 @@ class EventTypesController extends ApiController
      */
     public function destroy(EventType $record)
     {
-        $result = EventTypeService::delete($record)->getResult();
+        $result = EventTypeService::delete($record)
+                                  ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'EventType deleted']);
         }
+
         return response()->json(['message' => 'Problem deleting EventType'], 404);
     }
 }

@@ -19,56 +19,56 @@ use Motor\Core\Traits\Searchable;
 /**
  * Partymeister\Core\Models\Guest
  *
- * @property int                                  $id
- * @property int|null                             $category_id
- * @property string                               $name
- * @property string                               $handle
- * @property string                               $email
- * @property string                               $company
- * @property string                               $country
- * @property string                               $ticket_code
- * @property string                               $ticket_type
- * @property string                               $ticket_order_number
- * @property int                                  $has_badge
- * @property int                                  $has_arrived
- * @property int                                  $ticket_code_scanned
- * @property string                               $comment
- * @property string|null                          $arrived_at
- * @property Carbon|null                          $created_at
- * @property Carbon|null                          $updated_at
- * @property int                                  $created_by
- * @property int                                  $updated_by
- * @property int|null                             $deleted_by
- * @property-read Category|null                   $category
- * @property-read \Motor\Backend\Models\User      $creator
+ * @property int $id
+ * @property int|null $category_id
+ * @property string $name
+ * @property string $handle
+ * @property string $email
+ * @property string $company
+ * @property string $country
+ * @property string $ticket_code
+ * @property string $ticket_type
+ * @property string $ticket_order_number
+ * @property int $has_badge
+ * @property int $has_arrived
+ * @property int $ticket_code_scanned
+ * @property string $comment
+ * @property string|null $arrived_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property int $created_by
+ * @property int $updated_by
+ * @property int|null $deleted_by
+ * @property-read Category|null $category
+ * @property-read \Motor\Backend\Models\User $creator
  * @property-read \Motor\Backend\Models\User|null $eraser
- * @property-read \Motor\Backend\Models\User      $updater
- * @method static Builder|Guest filteredBy( Filter $filter, $column )
- * @method static Builder|Guest filteredByMultiple( Filter $filter )
+ * @property-read \Motor\Backend\Models\User $updater
+ * @method static Builder|Guest filteredBy(Filter $filter, $column)
+ * @method static Builder|Guest filteredByMultiple(Filter $filter)
  * @method static Builder|Guest newModelQuery()
  * @method static Builder|Guest newQuery()
  * @method static Builder|Guest query()
- * @method static Builder|Guest search( $q, $full_text = false )
- * @method static Builder|Guest whereArrivedAt( $value )
- * @method static Builder|Guest whereCategoryId( $value )
- * @method static Builder|Guest whereComment( $value )
- * @method static Builder|Guest whereCompany( $value )
- * @method static Builder|Guest whereCountry( $value )
- * @method static Builder|Guest whereCreatedAt( $value )
- * @method static Builder|Guest whereCreatedBy( $value )
- * @method static Builder|Guest whereDeletedBy( $value )
- * @method static Builder|Guest whereEmail( $value )
- * @method static Builder|Guest whereHandle( $value )
- * @method static Builder|Guest whereHasArrived( $value )
- * @method static Builder|Guest whereHasBadge( $value )
- * @method static Builder|Guest whereId( $value )
- * @method static Builder|Guest whereName( $value )
- * @method static Builder|Guest whereTicketCode( $value )
- * @method static Builder|Guest whereTicketCodeScanned( $value )
- * @method static Builder|Guest whereTicketOrderNumber( $value )
- * @method static Builder|Guest whereTicketType( $value )
- * @method static Builder|Guest whereUpdatedAt( $value )
- * @method static Builder|Guest whereUpdatedBy( $value )
+ * @method static Builder|Guest search($q, $full_text = false)
+ * @method static Builder|Guest whereArrivedAt($value)
+ * @method static Builder|Guest whereCategoryId($value)
+ * @method static Builder|Guest whereComment($value)
+ * @method static Builder|Guest whereCompany($value)
+ * @method static Builder|Guest whereCountry($value)
+ * @method static Builder|Guest whereCreatedAt($value)
+ * @method static Builder|Guest whereCreatedBy($value)
+ * @method static Builder|Guest whereDeletedBy($value)
+ * @method static Builder|Guest whereEmail($value)
+ * @method static Builder|Guest whereHandle($value)
+ * @method static Builder|Guest whereHasArrived($value)
+ * @method static Builder|Guest whereHasBadge($value)
+ * @method static Builder|Guest whereId($value)
+ * @method static Builder|Guest whereName($value)
+ * @method static Builder|Guest whereTicketCode($value)
+ * @method static Builder|Guest whereTicketCodeScanned($value)
+ * @method static Builder|Guest whereTicketOrderNumber($value)
+ * @method static Builder|Guest whereTicketType($value)
+ * @method static Builder|Guest whereUpdatedAt($value)
+ * @method static Builder|Guest whereUpdatedBy($value)
  * @mixin Eloquent
  */
 class Guest extends Model
@@ -82,7 +82,7 @@ class Guest extends Model
      *
      * @var array
      */
-    protected $blameable = [ 'created', 'updated', 'deleted' ];
+    protected $blameable = ['created', 'updated', 'deleted'];
 
     /**
      * Searchable columns for the searchable trait
@@ -119,7 +119,7 @@ class Guest extends Model
         'has_arrived',
         'ticket_code_scanned',
         'comment',
-        'arrived_at'
+        'arrived_at',
     ];
 
     /**

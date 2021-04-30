@@ -90,7 +90,7 @@
             },
             confirm: function () {
                 axios.patch(route('api.guests.update', [this.id]) + '?api_token=' + this.apiToken, {
-                    arrived_at: new Date().toISOString(),
+                    arrived_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
                     has_arrived: $(this.element).data('has-arrived')
                 }).then((response) => {
                     toastr.options = {progressBar: true};

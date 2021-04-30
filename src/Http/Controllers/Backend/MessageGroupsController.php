@@ -18,12 +18,12 @@ use ReflectionException;
 
 /**
  * Class MessageGroupsController
+ *
  * @package Partymeister\Core\Http\Controllers\Backend
  */
 class MessageGroupsController extends Controller
 {
     use FormBuilderTrait;
-
 
     /**
      * Display a listing of the resource.
@@ -42,23 +42,21 @@ class MessageGroupsController extends Controller
         return view('partymeister-core::backend.message-groups.index', compact('paginator', 'grid'));
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
         $form = $this->form(MessageGroupForm::class, [
             'method'  => 'POST',
             'route'   => 'backend.message-groups.store',
-            'enctype' => 'multipart/form-data'
+            'enctype' => 'multipart/form-data',
         ]);
 
         return view('partymeister-core::backend.message-groups.create', compact('form'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -72,7 +70,10 @@ class MessageGroupsController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         MessageGroupService::createWithForm($request, $form);
@@ -81,7 +82,6 @@ class MessageGroupsController extends Controller
 
         return redirect('backend/message-groups');
     }
-
 
     /**
      * Display the specified resource.
@@ -93,7 +93,6 @@ class MessageGroupsController extends Controller
         //
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -104,20 +103,19 @@ class MessageGroupsController extends Controller
     {
         $form = $this->form(MessageGroupForm::class, [
             'method'  => 'PATCH',
-            'url'     => route('backend.message-groups.update', [ $record->id ]),
+            'url'     => route('backend.message-groups.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record
+            'model'   => $record,
         ]);
 
         return view('partymeister-core::backend.message-groups.edit', compact('form'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @param MessageGroupRequest $request
-     * @param MessageGroup        $record
+     * @param MessageGroup $record
      * @return RedirectResponse|Redirector
      */
     public function update(MessageGroupRequest $request, MessageGroup $record)
@@ -126,7 +124,10 @@ class MessageGroupsController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         MessageGroupService::updateWithForm($record, $request, $form);
@@ -135,7 +136,6 @@ class MessageGroupsController extends Controller
 
         return redirect('backend/message-groups');
     }
-
 
     /**
      * Remove the specified resource from storage.

@@ -19,11 +19,11 @@ use Partymeister\Core\Models\Schedule;
 
 /**
  * Class PartymeisterServiceProvider
+ *
  * @package Partymeister\Core\Providers
  */
 class PartymeisterServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap the application services.
      *
@@ -47,20 +47,17 @@ class PartymeisterServiceProvider extends ServiceProvider
         merge_local_config_with_db_configuration_variables('partymeister-core');
     }
 
-
     public function config()
     {
     }
 
-
     public function routes()
     {
         if (! $this->app->routesAreCached()) {
-            require __DIR__ . '/../../routes/web.php';
-            require __DIR__ . '/../../routes/api.php';
+            require __DIR__.'/../../routes/web.php';
+            require __DIR__.'/../../routes/api.php';
         }
     }
-
 
     public function routeModelBindings()
     {
@@ -97,46 +94,35 @@ class PartymeisterServiceProvider extends ServiceProvider
         });
     }
 
-
     public function translations()
     {
-        $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', 'partymeister-core');
+        $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'partymeister-core');
 
         $this->publishes([
-            __DIR__ . '/../../resources/lang' => resource_path('lang/vendor/partymeister-core'),
+            __DIR__.'/../../resources/lang' => resource_path('lang/vendor/partymeister-core'),
         ], 'motor-backend-translations');
     }
 
-
     public function views()
     {
-        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'partymeister-core');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'partymeister-core');
 
         $this->publishes([
-            __DIR__ . '/../../resources/views' => resource_path('views/vendor/partymeister-core'),
+            __DIR__.'/../../resources/views' => resource_path('views/vendor/partymeister-core'),
         ], 'motor-backend-views');
     }
-
 
     public function navigationItems()
     {
         $config = $this->app['config']->get('motor-backend-navigation', []);
-        $this->app['config']->set(
-            'motor-backend-navigation',
-            array_replace_recursive(require __DIR__ . '/../../config/motor-backend-navigation.php', $config)
-        );
+        $this->app['config']->set('motor-backend-navigation', array_replace_recursive(require __DIR__.'/../../config/motor-backend-navigation.php', $config));
     }
-
 
     public function permissions()
     {
         $config = $this->app['config']->get('motor-backend-permissions', []);
-        $this->app['config']->set(
-            'motor-backend-permissions',
-            array_replace_recursive(require __DIR__ . '/../../config/motor-backend-permissions.php', $config)
-        );
+        $this->app['config']->set('motor-backend-permissions', array_replace_recursive(require __DIR__.'/../../config/motor-backend-permissions.php', $config));
     }
-
 
     public function registerCommands()
     {
@@ -149,29 +135,23 @@ class PartymeisterServiceProvider extends ServiceProvider
         }
     }
 
-
     public function migrations()
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
     }
-
 
     public function publishResourceAssets()
     {
         $assets = [
-            __DIR__ . '/../../resources/assets/images' => resource_path('assets/images'),
+            __DIR__.'/../../resources/assets/images' => resource_path('assets/images'),
         ];
 
         $this->publishes($assets, 'partymeister-core-install-resources');
     }
 
-
     public function components()
     {
         $config = $this->app['config']->get('motor-cms-page-components', []);
-        $this->app['config']->set(
-            'motor-cms-page-components',
-            array_replace_recursive(require __DIR__ . '/../../config/motor-cms-page-components.php', $config)
-        );
+        $this->app['config']->set('motor-cms-page-components', array_replace_recursive(require __DIR__.'/../../config/motor-cms-page-components.php', $config));
     }
 }

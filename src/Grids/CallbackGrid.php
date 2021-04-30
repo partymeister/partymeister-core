@@ -9,6 +9,7 @@ use Motor\Backend\Grid\Renderers\TranslateRenderer;
 
 /**
  * Class CallbackGrid
+ *
  * @package Partymeister\Core\Grids
  */
 class CallbackGrid extends Grid
@@ -18,7 +19,7 @@ class CallbackGrid extends Grid
         $this->addColumn('name', trans('motor-backend::backend/global.name'), true);
         $this->setDefaultSorting('name', 'ASC');
         $this->addColumn('destination', trans('partymeister-core::backend/callbacks.destination'), true)
-             ->renderer(TranslateRenderer::class, [ 'file' => 'partymeister-core::backend/callbacks.destinations' ]);
+             ->renderer(TranslateRenderer::class, ['file' => 'partymeister-core::backend/callbacks.destinations']);
         $this->addColumn('embargo_until', trans('partymeister-core::backend/callbacks.embargo_until'), true)
              ->renderer(DateRenderer::class, ['format' => 'Y-m-d H:i']);
         $this->addColumn('has_fired', trans('partymeister-core::backend/callbacks.has_fired'), true)

@@ -69,7 +69,7 @@ class VisitorRequest extends Request
             'name'               => 'required',
             'group'              => 'nullable',
             'country_iso_3166_1' => 'required',
-            'email'              => 'nullable',
+            'email'              => 'nullable|unique:visitors,email',
             'password'           => 'nullable',
             'additional_data'    => 'nullable|json',
         ];

@@ -11,11 +11,11 @@ use Request;
 
 /**
  * Class VisitorRegistrationService
+ *
  * @package Partymeister\Core\Services\Component
  */
 class VisitorRegistrationService
 {
-
     /**
      * @param $data
      */
@@ -30,15 +30,17 @@ class VisitorRegistrationService
             'api_token'          => Str::random(60),
         ]);
         if (config('partymeister-core-visitor-registration.require_access_key')) {
-            $accessKey                = AccessKey::where('access_key', $data['access_key'])->first();
-            $accessKey->visitor_id    = $visitor->id;
-            $accessKey->ip_address    = Request::ip();
+            $accessKey = AccessKey::where('access_key', $data['access_key'])
+                                  ->first();
+            $accessKey->visitor_id = $visitor->id;
+            $accessKey->ip_address = Request::ip();
             $accessKey->registered_at = date('Y-m-d H:i:s');
             $accessKey->save();
         }
 
         event(new Registered($visitor));
 
-        Auth::guard('visitor')->login($visitor);
+        Auth::guard('visitor')
+            ->login($visitor);
     }
 }

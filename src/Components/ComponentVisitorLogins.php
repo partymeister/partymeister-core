@@ -14,6 +14,7 @@ use Partymeister\Core\Services\Component\VisitorLoginService;
 
 /**
  * Class ComponentVisitorLogins
+ *
  * @package Partymeister\Core\Components
  */
 class ComponentVisitorLogins
@@ -40,10 +41,10 @@ class ComponentVisitorLogins
      */
     protected $request;
 
-
     /**
      * ComponentVisitorLogins constructor.
-     * @param PageVersionComponent  $pageVersionComponent
+     *
+     * @param PageVersionComponent $pageVersionComponent
      * @param ComponentVisitorLogin $component
      */
     public function __construct(
@@ -51,9 +52,8 @@ class ComponentVisitorLogins
         ComponentVisitorLogin $component
     ) {
         $this->pageVersionComponent = $pageVersionComponent;
-        $this->component            = $component;
+        $this->component = $component;
     }
-
 
     /**
      * @param Request $request
@@ -66,7 +66,7 @@ class ComponentVisitorLogins
         $this->visitorLoginForm = $this->form(VisitorLoginForm::class, [
             'name'    => 'visitor-login',
             'method'  => 'POST',
-            'enctype' => 'multipart/form-data'
+            'enctype' => 'multipart/form-data',
         ]);
 
         switch ($request->method()) {
@@ -81,14 +81,14 @@ class ComponentVisitorLogins
         return $this->render();
     }
 
-
     /**
      * @return bool|RedirectResponse
      */
     protected function post()
     {
         if ($this->request->get('logout') && VisitorLoginService::logout()) {
-            $this->request->session()->invalidate();
+            $this->request->session()
+                          ->invalidate();
 
             return redirect()->back();
         }
@@ -97,23 +97,26 @@ class ComponentVisitorLogins
             return true;
         }
 
-        if (!$this->visitorLoginForm->isValid()) {
-            return redirect()->back()->withErrors($this->visitorLoginForm->getErrors())->withInput();
+        if (! $this->visitorLoginForm->isValid()) {
+            return redirect()
+                ->back()
+                ->withErrors($this->visitorLoginForm->getErrors())
+                ->withInput();
         }
-        $this->request->session()->regenerate();
+        $this->request->session()
+                      ->regenerate();
 
         return redirect()->back();
     }
-
 
     /**
      * @return Factory|View
      */
     public function render()
     {
-        return view(
-            config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
-            [ 'visitorLoginForm' => $this->visitorLoginForm, 'component' => $this->component ]
-        );
+        return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
+                'visitorLoginForm' => $this->visitorLoginForm,
+                'component'        => $this->component,
+            ]);
     }
 }

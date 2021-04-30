@@ -27,7 +27,7 @@ class GuestPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \Motor\Backend\Models\User  $user
+     * @param \Motor\Backend\Models\User $user
      * @return mixed
      */
     public function viewAny(User $user)
@@ -38,8 +38,8 @@ class GuestPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \Motor\Backend\Models\User  $user
-     * @param  \Partymeister\Core\Models\Guest  $guest
+     * @param \Motor\Backend\Models\User $user
+     * @param \Partymeister\Core\Models\Guest $guest
      * @return mixed
      */
     public function view(User $user, Guest $guest)
@@ -50,7 +50,7 @@ class GuestPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \Motor\Backend\Models\User  $user
+     * @param \Motor\Backend\Models\User $user
      * @return mixed
      */
     public function create(User $user)
@@ -61,8 +61,8 @@ class GuestPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \Motor\Backend\Models\User  $user
-     * @param  \Partymeister\Core\Models\Guest  $guest
+     * @param \Motor\Backend\Models\User $user
+     * @param \Partymeister\Core\Models\Guest $guest
      * @return mixed
      */
     public function update(User $user, Guest $guest)
@@ -73,8 +73,8 @@ class GuestPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \Motor\Backend\Models\User  $user
-     * @param  \Partymeister\Core\Models\Guest  $guest
+     * @param \Motor\Backend\Models\User $user
+     * @param \Partymeister\Core\Models\Guest $guest
      * @return mixed
      */
     public function delete(User $user, Guest $guest)
@@ -85,8 +85,8 @@ class GuestPolicy
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \Motor\Backend\Models\User  $user
-     * @param  \Partymeister\Core\Models\Guest  $guest
+     * @param \Motor\Backend\Models\User $user
+     * @param \Partymeister\Core\Models\Guest $guest
      * @return mixed
      */
     public function restore(User $user, Guest $guest)
@@ -97,8 +97,8 @@ class GuestPolicy
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \Motor\Backend\Models\User  $user
-     * @param  \Partymeister\Core\Models\Guest  $guest
+     * @param \Motor\Backend\Models\User $user
+     * @param \Partymeister\Core\Models\Guest $guest
      * @return mixed
      */
     public function forceDelete(User $user, Guest $guest)

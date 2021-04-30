@@ -20,8 +20,8 @@ class VisitorLogin implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
-     * @param  mixed  $value
+     * @param string $attribute
+     * @param mixed $value
      * @return bool
      */
     public function passes($attribute, $value)
@@ -30,7 +30,9 @@ class VisitorLogin implements Rule
 
         $guard = Auth::guard('visitor');
 
-        return $guard->attempt(['name' => $name, 'password' => $value], true); // second parameter is the "remember flag"
+        return $guard->attempt(['name'     => $name,
+                                'password' => $value,
+        ], true); // second parameter is the "remember flag"
     }
 
     /**

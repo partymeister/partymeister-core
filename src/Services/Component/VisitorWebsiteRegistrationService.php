@@ -8,11 +8,11 @@ use Partymeister\Core\Models\Visitor;
 
 /**
  * Class VisitorWebsiteRegistrationService
+ *
  * @package Partymeister\Core\Services\Component
  */
 class VisitorWebsiteRegistrationService
 {
-
     /**
      * @param $data
      */

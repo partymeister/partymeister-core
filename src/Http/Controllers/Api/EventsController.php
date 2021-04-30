@@ -12,11 +12,13 @@ use Partymeister\Core\Http\Resources\EventCollection;
 
 /**
  * Class EventsController
+ *
  * @package Partymeister\Core\Http\Controllers\Api
  */
 class EventsController extends ApiController
 {
     protected string $model = 'Partymeister\Core\Models\Event';
+
     protected string $modelResource = 'event';
 
     /**
@@ -69,7 +71,9 @@ class EventsController extends ApiController
      */
     public function index()
     {
-        $paginator = EventService::collection()->getPaginator();
+        $paginator = EventService::collection()
+                                 ->getPaginator();
+
         return (new EventCollection($paginator))->additional(['message' => 'Event collection read']);
     }
 
@@ -124,10 +128,13 @@ class EventsController extends ApiController
      */
     public function store(EventRequest $request)
     {
-        $result = EventService::create($request)->getResult();
-        return (new EventResource($result))->additional(['message' => 'Event created'])->response()->setStatusCode(201);
-    }
+        $result = EventService::create($request)
+                              ->getResult();
 
+        return (new EventResource($result))->additional(['message' => 'Event created'])
+                                           ->response()
+                                           ->setStatusCode(201);
+    }
 
     /**
      * @OA\Get (
@@ -184,10 +191,11 @@ class EventsController extends ApiController
      */
     public function show(Event $record)
     {
-        $result = EventService::show($record)->getResult();
+        $result = EventService::show($record)
+                              ->getResult();
+
         return (new EventResource($result))->additional(['message' => 'Event read']);
     }
-
 
     /**
      * @OA\Put (
@@ -243,15 +251,16 @@ class EventsController extends ApiController
      * Update the specified resource in storage.
      *
      * @param EventRequest $request
-     * @param Event        $record
+     * @param Event $record
      * @return EventResource
      */
     public function update(EventRequest $request, Event $record)
     {
-        $result = EventService::update($record, $request)->getResult();
+        $result = EventService::update($record, $request)
+                              ->getResult();
+
         return (new EventResource($result))->additional(['message' => 'Event updated']);
     }
-
 
     /**
      * @OA\Delete (
@@ -314,11 +323,13 @@ class EventsController extends ApiController
      */
     public function destroy(Event $record)
     {
-        $result = EventService::delete($record)->getResult();
+        $result = EventService::delete($record)
+                              ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'Event deleted']);
         }
+
         return response()->json(['message' => 'Problem deleting Event'], 404);
     }
 }

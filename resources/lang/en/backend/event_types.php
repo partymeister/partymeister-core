@@ -11,6 +11,6 @@ return [
     'deleted'     => 'Event type deleted',
 
     'name'        => 'Name',
-    'web_color'   => 'Web color (hex)',
-    'slide_color' => 'Slide color (hex)'
+    'web_color'   => 'Web color (hex / rgb / rgba)',
+    'slide_color' => 'Slide color (hex / rgb / rgba)'
 ];

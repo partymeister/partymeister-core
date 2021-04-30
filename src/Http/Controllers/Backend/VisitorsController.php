@@ -18,12 +18,12 @@ use ReflectionException;
 
 /**
  * Class VisitorsController
+ *
  * @package Partymeister\Core\Http\Controllers\Backend
  */
 class VisitorsController extends Controller
 {
     use FormBuilderTrait;
-
 
     /**
      * Display a listing of the resource.
@@ -42,11 +42,10 @@ class VisitorsController extends Controller
         return view('partymeister-core::backend.visitors.index', compact('paginator', 'grid'));
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -54,12 +53,11 @@ class VisitorsController extends Controller
             'method'  => 'POST',
             'route'   => 'backend.visitors.store',
             'enctype' => 'multipart/form-data',
-            'model'   => [ 'country_iso_3166_1' => 'DE' ]
+            'model'   => ['country_iso_3166_1' => 'DE'],
         ]);
 
         return view('partymeister-core::backend.visitors.create', compact('form'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -73,7 +71,10 @@ class VisitorsController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         VisitorService::createWithForm($request, $form);
@@ -82,7 +83,6 @@ class VisitorsController extends Controller
 
         return redirect('backend/visitors');
     }
-
 
     /**
      * Display the specified resource.
@@ -94,7 +94,6 @@ class VisitorsController extends Controller
         //
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -105,20 +104,19 @@ class VisitorsController extends Controller
     {
         $form = $this->form(VisitorForm::class, [
             'method'  => 'PATCH',
-            'url'     => route('backend.visitors.update', [ $record->id ]),
+            'url'     => route('backend.visitors.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record
+            'model'   => $record,
         ]);
 
         return view('partymeister-core::backend.visitors.edit', compact('form'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @param VisitorRequest $request
-     * @param Visitor        $record
+     * @param Visitor $record
      * @return RedirectResponse|Redirector
      */
     public function update(VisitorRequest $request, Visitor $record)
@@ -127,7 +125,10 @@ class VisitorsController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         VisitorService::updateWithForm($record, $request, $form);
@@ -136,7 +137,6 @@ class VisitorsController extends Controller
 
         return redirect('backend/visitors');
     }
-
 
     /**
      * Remove the specified resource from storage.

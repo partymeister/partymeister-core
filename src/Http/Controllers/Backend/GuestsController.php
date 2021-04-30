@@ -18,12 +18,12 @@ use ReflectionException;
 
 /**
  * Class GuestsController
+ *
  * @package Partymeister\Core\Http\Controllers\Backend
  */
 class GuestsController extends Controller
 {
     use FormBuilderTrait;
-
 
     /**
      * Display a listing of the resource.
@@ -42,23 +42,21 @@ class GuestsController extends Controller
         return view('partymeister-core::backend.guests.index', compact('paginator', 'grid'));
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
         $form = $this->form(GuestForm::class, [
             'method'  => 'POST',
             'route'   => 'backend.guests.store',
-            'enctype' => 'multipart/form-data'
+            'enctype' => 'multipart/form-data',
         ]);
 
         return view('partymeister-core::backend.guests.create', compact('form'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -72,7 +70,10 @@ class GuestsController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         GuestService::createWithForm($request, $form);
@@ -81,7 +82,6 @@ class GuestsController extends Controller
 
         return redirect('backend/guests');
     }
-
 
     /**
      * Display the specified resource.
@@ -93,7 +93,6 @@ class GuestsController extends Controller
         //
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -104,20 +103,19 @@ class GuestsController extends Controller
     {
         $form = $this->form(GuestForm::class, [
             'method'  => 'PATCH',
-            'url'     => route('backend.guests.update', [ $record->id ]),
+            'url'     => route('backend.guests.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record
+            'model'   => $record,
         ]);
 
         return view('partymeister-core::backend.guests.edit', compact('form'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @param GuestRequest $request
-     * @param Guest        $record
+     * @param Guest $record
      * @return RedirectResponse|Redirector
      */
     public function update(GuestRequest $request, Guest $record)
@@ -126,7 +124,10 @@ class GuestsController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         GuestService::updateWithForm($record, $request, $form);
@@ -135,7 +136,6 @@ class GuestsController extends Controller
 
         return redirect('backend/guests');
     }
-
 
     /**
      * Remove the specified resource from storage.

@@ -12,11 +12,13 @@ use Partymeister\Core\Http\Resources\GuestCollection;
 
 /**
  * Class GuestsController
+ *
  * @package Partymeister\Core\Http\Controllers\Api
  */
 class GuestsController extends ApiController
 {
     protected string $model = 'Partymeister\Core\Models\Guest';
+
     protected string $modelResource = 'guest';
 
     /**
@@ -69,7 +71,9 @@ class GuestsController extends ApiController
      */
     public function index()
     {
-        $paginator = GuestService::collection()->getPaginator();
+        $paginator = GuestService::collection()
+                                 ->getPaginator();
+
         return (new GuestCollection($paginator))->additional(['message' => 'Guest collection read']);
     }
 
@@ -124,10 +128,13 @@ class GuestsController extends ApiController
      */
     public function store(GuestRequest $request)
     {
-        $result = GuestService::create($request)->getResult();
-        return (new GuestResource($result))->additional(['message' => 'Guest created'])->response()->setStatusCode(201);
-    }
+        $result = GuestService::create($request)
+                              ->getResult();
 
+        return (new GuestResource($result))->additional(['message' => 'Guest created'])
+                                           ->response()
+                                           ->setStatusCode(201);
+    }
 
     /**
      * @OA\Get (
@@ -184,10 +191,11 @@ class GuestsController extends ApiController
      */
     public function show(Guest $record)
     {
-        $result = GuestService::show($record)->getResult();
+        $result = GuestService::show($record)
+                              ->getResult();
+
         return (new GuestResource($result))->additional(['message' => 'Guest read']);
     }
-
 
     /**
      * @OA\Put (
@@ -243,15 +251,16 @@ class GuestsController extends ApiController
      * Update the specified resource in storage.
      *
      * @param GuestRequest $request
-     * @param Guest        $record
+     * @param Guest $record
      * @return GuestResource
      */
     public function update(GuestRequest $request, Guest $record)
     {
-        $result = GuestService::update($record, $request)->getResult();
+        $result = GuestService::update($record, $request)
+                              ->getResult();
+
         return (new GuestResource($result))->additional(['message' => 'Guest updated']);
     }
-
 
     /**
      * @OA\Delete (
@@ -314,11 +323,13 @@ class GuestsController extends ApiController
      */
     public function destroy(Guest $record)
     {
-        $result = GuestService::delete($record)->getResult();
+        $result = GuestService::delete($record)
+                              ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'Guest deleted']);
         }
+
         return response()->json(['message' => 'Problem deleting Guest'], 404);
     }
 }

@@ -9,11 +9,11 @@ use View;
 
 /**
  * Class Visitor
+ *
  * @package Partymeister\Core\Http\Middleware\Frontend
  */
 class Visitor
 {
-
     /**
      * Handle an incoming request.
      *
@@ -24,7 +24,8 @@ class Visitor
      */
     public function handle($request, Closure $next)
     {
-        View::share('visitor', Auth::guard('visitor')->user());
+        View::share('visitor', Auth::guard('visitor')
+                                   ->user());
 
         return $next($request);
     }

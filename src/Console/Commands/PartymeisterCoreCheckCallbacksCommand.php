@@ -12,11 +12,11 @@ use Partymeister\Core\Services\StuhlService;
 
 /**
  * Class PartymeisterCoreCheckCallbacksCommand
+ *
  * @package Partymeister\Core\Console\Commands
  */
 class PartymeisterCoreCheckCallbacksCommand extends Command
 {
-
     /**
      * The console command name.
      *
@@ -30,7 +30,6 @@ class PartymeisterCoreCheckCallbacksCommand extends Command
      * @var string
      */
     protected $description = 'Check and fire callbacks';
-
 
     /**
      * Execute the console command.
@@ -47,7 +46,7 @@ class PartymeisterCoreCheckCallbacksCommand extends Command
                              ->get();
 
         foreach ($callbacks as $callback) {
-            Log::info('Firing callback ' . $callback->name);
+            Log::info('Firing callback '.$callback->name);
 
             if ($callback->action == 'notification') {
                 StuhlService::send($callback->body, $callback->title, '', EVENT_LEVEL_BORING, $callback->destination);

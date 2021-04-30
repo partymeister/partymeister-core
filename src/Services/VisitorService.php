@@ -9,23 +9,24 @@ use Partymeister\Core\Models\Visitor;
 
 /**
  * Class VisitorService
+ *
  * @package Partymeister\Core\Services
  */
 class VisitorService extends BaseService
 {
-
     /**
      * @var string
      */
     protected $model = Visitor::class;
 
-
     public function beforeCreate()
     {
-        $this->data['password']  = bcrypt($this->data['password']);
+        $this->data['password'] = bcrypt($this->data['password']);
         $this->data['api_token'] = Str::random(60);
+        if ($this->data['email'] == '') {
+            $this->data['email'] = null;
+        }
     }
-
 
     public function beforeUpdate()
     {
@@ -38,6 +39,10 @@ class VisitorService extends BaseService
             unset($this->data['password']);
         } else {
             $this->data['password'] = bcrypt($this->data['password']);
+        }
+
+        if ($this->data['email'] == '') {
+            $this->data['email'] = null;
         }
     }
 }

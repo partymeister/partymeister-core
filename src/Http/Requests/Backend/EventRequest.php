@@ -85,14 +85,15 @@ class EventRequest extends Request
      */
     public function rules()
     {
+        // FIXME: separate request class for ApiRequest
         switch ($this->method()) {
             case 'POST':
                 return [
                     'name'              => 'required',
-                    'schedule_id'       => 'required|integer',
-                    'event_type_id'     => 'required|integer',
-                    'starts_at'         => 'required|datetime',
-                    'ends_at'           => 'nullable|datetime',
+                    'schedule_id'       => 'required|integer|exists:schedules,id',
+                    'event_type_id'     => 'required|integer|exists:event_types,id',
+                    'starts_at'         => 'required|date_format:Y-m-d H:i:s',
+                    'ends_at'           => 'nullable|date_format:Y-m-d H:i:s',
                     'is_visible'        => 'nullable|boolean',
                     'is_organizer_only' => 'nullable|boolean',
                     'sort_position'     => 'nullable|integer',
@@ -101,7 +102,10 @@ class EventRequest extends Request
                 ];
             case 'PUT':
             case 'PATCH':
-                return [];
+                return [
+                    'schedule_id'   => 'nullable|integer|exists:schedules,id',
+                    'event_type_id' => 'nullable|integer|exists:event_types,id',
+                ];
         }
     }
 }

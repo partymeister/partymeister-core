@@ -7,17 +7,20 @@ use Motor\CMS\Models\Navigation;
 
 /**
  * Class ComponentVisitorLoginForm
+ *
  * @package Partymeister\Core\Forms\Backend\Component
  */
 class ComponentVisitorLoginForm extends Form
 {
-
     /**
      * @return mixed|void
      */
     public function buildForm()
     {
-        $nodes = Navigation::where('scope', 'main')->where('parent_id', '!=', null)->defaultOrder()->get();
+        $nodes = Navigation::where('scope', 'main')
+                           ->where('parent_id', '!=', null)
+                           ->defaultOrder()
+                           ->get();
 
         $navigationItemOptions = [];
 
@@ -26,7 +29,7 @@ class ComponentVisitorLoginForm extends Form
             foreach ($node->ancestors as $ancestor) {
                 $prefixes[] = $ancestor->name;
             }
-            $navigationItemOptions[$node->id] = implode(' > ', $prefixes) . ' > ' . $node->name;
+            $navigationItemOptions[$node->id] = implode(' > ', $prefixes).' > '.$node->name;
         }
 
         $this->add('visitor_registration_page_id', 'select', [

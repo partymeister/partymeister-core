@@ -7,11 +7,11 @@ use Partymeister\Core\Models\EventType;
 
 /**
  * Class EventTypeService
+ *
  * @package Partymeister\Core\Services
  */
 class EventTypeService extends BaseService
 {
-
     /**
      * @var string
      */

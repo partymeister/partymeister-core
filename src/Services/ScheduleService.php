@@ -11,16 +11,15 @@ use Partymeister\Slides\Models\Slide;
 
 /**
  * Class ScheduleService
+ *
  * @package Partymeister\Core\Services
  */
 class ScheduleService extends BaseService
 {
-
     /**
      * @var string
      */
     protected $model = Schedule::class;
-
 
     /**
      * @param Schedule $schedule
@@ -32,9 +31,13 @@ class ScheduleService extends BaseService
     public static function generateSlides(Schedule $schedule, $data)
     {
         // 1. create a slide category for the timetable slides in case it does not exist yet
-        $timetableCategory = Category::where('scope', 'slides')->where('name', 'Timetable')->first();
+        $timetableCategory = Category::where('scope', 'slides')
+                                     ->where('name', 'Timetable')
+                                     ->first();
         if (is_null($timetableCategory)) {
-            $rootNode = Category::where('scope', 'slides')->where('_lft', 1)->first();
+            $rootNode = Category::where('scope', 'slides')
+                                ->where('_lft', 1)
+                                ->first();
             if (is_null($rootNode)) {
                 die("Root node for slide category tree does not exist");
             }
@@ -55,7 +58,9 @@ class ScheduleService extends BaseService
             $name = Arr::get($data, 'name.'.$slideName);
 
             // 2. look for existing slides with the same name
-            $slide = Slide::where('name', $name)->where('category_id', $timetableCategory->id)->first();
+            $slide = Slide::where('name', $name)
+                          ->where('category_id', $timetableCategory->id)
+                          ->first();
             if (is_null($slide)) {
                 $slide = new Slide();
             }
@@ -71,18 +76,16 @@ class ScheduleService extends BaseService
 
             // 7. generate slides
             if (isset($browser)) {
-                $browser->screenshot(config('app.url').route('backend.slides.show', [ $slide->id ], false).'?preview=true',
-                    storage_path().'/preview_'.$slideName.'.png');
-                $browser->screenshot(config('app.url').route('backend.slides.show', [ $slide->id ], false),
-                    storage_path().'/final_'.$slideName.'.png');
+                $browser->screenshot(config('app.url').route('backend.slides.show', [$slide->id], false).'?preview=true', storage_path().'/preview_'.$slideName.'.png');
+                $browser->screenshot(config('app.url').route('backend.slides.show', [$slide->id], false), storage_path().'/final_'.$slideName.'.png');
 
                 $slide->clearMediaCollection('preview');
                 $slide->clearMediaCollection('final');
-                $slide->addMedia(storage_path().'/preview_'.$slideName.'.png')->toMediaCollection('preview', 'media');
-                $slide->addMedia(storage_path().'/final_'.$slideName.'.png')->toMediaCollection('final', 'media');
+                $slide->addMedia(storage_path().'/preview_'.$slideName.'.png')
+                      ->toMediaCollection('preview', 'media');
+                $slide->addMedia(storage_path().'/final_'.$slideName.'.png')
+                      ->toMediaCollection('final', 'media');
             }
-
-
 //            event(new SlideSaved($slide, 'slides'));
         }
     }

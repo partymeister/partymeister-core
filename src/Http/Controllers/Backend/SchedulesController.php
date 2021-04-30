@@ -18,12 +18,12 @@ use ReflectionException;
 
 /**
  * Class SchedulesController
+ *
  * @package Partymeister\Core\Http\Controllers\Backend
  */
 class SchedulesController extends Controller
 {
     use FormBuilderTrait;
-
 
     /**
      * Display a listing of the resource.
@@ -42,23 +42,21 @@ class SchedulesController extends Controller
         return view('partymeister-core::backend.schedules.index', compact('paginator', 'grid'));
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
         $form = $this->form(ScheduleForm::class, [
             'method'  => 'POST',
             'route'   => 'backend.schedules.store',
-            'enctype' => 'multipart/form-data'
+            'enctype' => 'multipart/form-data',
         ]);
 
         return view('partymeister-core::backend.schedules.create', compact('form'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -72,7 +70,10 @@ class SchedulesController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         ScheduleService::createWithForm($request, $form);
@@ -81,7 +82,6 @@ class SchedulesController extends Controller
 
         return redirect('backend/schedules');
     }
-
 
     /**
      * Display the specified resource.
@@ -94,7 +94,6 @@ class SchedulesController extends Controller
         return view('partymeister-core::backend.schedules.show', compact('record'));
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -105,20 +104,19 @@ class SchedulesController extends Controller
     {
         $form = $this->form(ScheduleForm::class, [
             'method'  => 'PATCH',
-            'url'     => route('backend.schedules.update', [ $record->id ]),
+            'url'     => route('backend.schedules.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record
+            'model'   => $record,
         ]);
 
         return view('partymeister-core::backend.schedules.edit', compact('form'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @param ScheduleRequest $request
-     * @param Schedule        $record
+     * @param Schedule $record
      * @return RedirectResponse|Redirector
      */
     public function update(ScheduleRequest $request, Schedule $record)
@@ -127,7 +125,10 @@ class SchedulesController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         ScheduleService::updateWithForm($record, $request, $form);
@@ -136,7 +137,6 @@ class SchedulesController extends Controller
 
         return redirect('backend/schedules');
     }
-
 
     /**
      * Remove the specified resource from storage.

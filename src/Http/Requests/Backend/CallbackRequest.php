@@ -6,11 +6,11 @@ use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class CallbackRequest
+ *
  * @package Partymeister\Core\Http\Requests\Backend
  */
 class CallbackRequest extends Request
 {
-
     /**
      * @OA\Schema(
      *   schema="CallbackRequest",
@@ -46,7 +46,7 @@ class CallbackRequest extends Request
      *   ),
      *   @OA\Property(
      *     property="destination",
-     *     type="json",
+     *     type="string",
      *     example="public"
      *   ),
      *   @OA\Property(
@@ -69,7 +69,7 @@ class CallbackRequest extends Request
      *     type="datetime",
      *     example="2021-05-28 12:00:00"
      *   ),
-     *   required={"name", "action", "title", "destinatin", "is_timed"},
+     *   required={"name", "action", "title", "destination", "is_timed"},
      * )
      */
 
@@ -83,7 +83,6 @@ class CallbackRequest extends Request
         return true;
     }
 
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -92,7 +91,17 @@ class CallbackRequest extends Request
     public function rules()
     {
         return [
-
+            'name'          => 'required',
+            'action'        => 'required|in:'.implode(',', array_flip(trans('partymeister-core::backend/callbacks.actions'))),
+            'payload'       => 'nullable',
+            'title'         => 'required',
+            'body'          => 'nullable',
+            'link'          => 'nullable|url',
+            'destination'   => 'required|in:'.implode(',', array_flip(trans('partymeister-core::backend/callbacks.destinations'))),
+            'is_timed'      => 'nullable|boolean',
+            'has_fired'     => 'nullable|boolean',
+            'fired_at'      => 'nullable|date_format:Y-m-d H:i:s',
+            'embargo_until' => 'nullable|date_format:Y-m-d H:i:s',
         ];
     }
 }

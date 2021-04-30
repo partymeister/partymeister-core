@@ -17,12 +17,12 @@ use ReflectionException;
 
 /**
  * Class EventsController
+ *
  * @package Partymeister\Core\Http\Controllers\Backend
  */
 class EventsController extends Controller
 {
     use FormBuilderTrait;
-
 
     /**
      * Display a listing of the resource.
@@ -41,7 +41,6 @@ class EventsController extends Controller
         return view('partymeister-core::backend.events.index', compact('paginator', 'grid'));
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
@@ -54,7 +53,10 @@ class EventsController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         EventService::createWithForm($request, $form);
@@ -64,19 +66,17 @@ class EventsController extends Controller
         return redirect('backend/events');
     }
 
-
     /**
      * @param Event $record
      * @return Factory|View
      */
     public function duplicate(Event $record)
     {
-        $newRecord       = $record->replicate();
-        $newRecord->name = 'Duplicate of ' . $newRecord->name;
+        $newRecord = $record->replicate();
+        $newRecord->name = 'Duplicate of '.$newRecord->name;
 
         return $this->create($newRecord);
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -96,7 +96,6 @@ class EventsController extends Controller
         return view('partymeister-core::backend.events.create', compact('form'));
     }
 
-
     /**
      * Display the specified resource.
      *
@@ -106,7 +105,6 @@ class EventsController extends Controller
     {
         //
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -118,20 +116,19 @@ class EventsController extends Controller
     {
         $form = $this->form(EventForm::class, [
             'method'  => 'PATCH',
-            'url'     => route('backend.events.update', [ $record->id ]),
+            'url'     => route('backend.events.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record
+            'model'   => $record,
         ]);
 
         return view('partymeister-core::backend.events.edit', compact('form'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @param EventRequest $request
-     * @param Event        $record
+     * @param Event $record
      * @return RedirectResponse|Redirector
      */
     public function update(EventRequest $request, Event $record)
@@ -140,7 +137,10 @@ class EventsController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         EventService::updateWithForm($record, $request, $form);
@@ -149,7 +149,6 @@ class EventsController extends Controller
 
         return redirect('backend/events');
     }
-
 
     /**
      * Remove the specified resource from storage.

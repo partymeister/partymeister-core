@@ -41,11 +41,11 @@ define('EVENT_CHANNEL_ALL', 'all');
 
 /**
  * Class StuhlService
+ *
  * @package Partymeister\Core\Services
  */
 class StuhlService
 {
-
     /**
      * @var bool
      */
@@ -60,7 +60,6 @@ class StuhlService
      * @var
      */
     public static $password;
-
 
     /**
      * @param        $message
@@ -80,8 +79,8 @@ class StuhlService
     ) {
         $config = config('partymeister-core-stuhl');
 
-        self::$debug    = Arr::get($config, 'debug', false);
-        self::$host     = Arr::get($config, 'server', '');
+        self::$debug = Arr::get($config, 'debug', false);
+        self::$host = Arr::get($config, 'server', '');
         self::$password = Arr::get($config, 'password', '');
 
         if (self::$debug) {
@@ -94,12 +93,12 @@ class StuhlService
             'title'       => $title,
             'link'        => $link,
             'message'     => $message,
-            'destination' => $destination
+            'destination' => $destination,
         ]);
 
         $client = new Client();
 
-        $request = new Request('POST', self::$host, [ 'content-type' => 'application/json' ], $data_string);
+        $request = new Request('POST', self::$host, ['content-type' => 'application/json'], $data_string);
 
         try {
             $response = $client->send($request);

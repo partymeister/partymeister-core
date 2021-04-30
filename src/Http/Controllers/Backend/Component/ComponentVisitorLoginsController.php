@@ -4,7 +4,6 @@ namespace Partymeister\Core\Http\Controllers\Backend\Component;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\CMS\Http\Controllers\Component\ComponentController;
 use Partymeister\Core\Forms\Backend\Component\ComponentVisitorLoginForm;
@@ -13,25 +12,24 @@ use Partymeister\Core\Services\Component\ComponentVisitorLoginService;
 
 /**
  * Class ComponentVisitorLoginsController
+ *
  * @package Partymeister\Core\Http\Controllers\Backend\Component
  */
 class ComponentVisitorLoginsController extends ComponentController
 {
     use FormBuilderTrait;
 
-
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function create()
     {
         $this->form = $this->form(ComponentVisitorLoginForm::class);
 
-        return response()->json($this->getFormData('component.visitor-logins.store', [ 'mediapool' => false ]));
+        return response()->json($this->getFormData('component.visitor-logins.store', ['mediapool' => false]));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -49,9 +47,8 @@ class ComponentVisitorLoginsController extends ComponentController
 
         ComponentVisitorLoginService::createWithForm($request, $this->form);
 
-        return response()->json([ 'message' => trans('partymeister-core::component/visitor-logins.created') ]);
+        return response()->json(['message' => trans('partymeister-core::component/visitor-logins.created')]);
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -62,17 +59,16 @@ class ComponentVisitorLoginsController extends ComponentController
     public function edit(ComponentVisitorLogin $record)
     {
         $this->form = $this->form(ComponentVisitorLoginForm::class, [
-            'model' => $record
+            'model' => $record,
         ]);
 
-        return response()->json($this->getFormData('component.visitor-logins.update', [ 'mediapool' => false ]));
+        return response()->json($this->getFormData('component.visitor-logins.update', ['mediapool' => false]));
     }
-
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Request               $request
+     * @param Request $request
      * @param ComponentVisitorLogin $record
      * @return JsonResponse
      */
@@ -86,6 +82,6 @@ class ComponentVisitorLoginsController extends ComponentController
 
         ComponentVisitorLoginService::updateWithForm($record, $request, $form);
 
-        return response()->json([ 'message' => trans('partymeister-core::component/visitor-logins.updated') ]);
+        return response()->json(['message' => trans('partymeister-core::component/visitor-logins.updated')]);
     }
 }
