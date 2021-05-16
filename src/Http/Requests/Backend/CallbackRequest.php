@@ -100,8 +100,8 @@ class CallbackRequest extends Request
             'destination'   => 'required|in:'.implode(',', array_flip(trans('partymeister-core::backend/callbacks.destinations'))),
             'is_timed'      => 'nullable|boolean',
             'has_fired'     => 'nullable|boolean',
-            'fired_at'      => 'nullable|date_format:Y-m-d H:i:s',
-            'embargo_until' => 'nullable|date_format:Y-m-d H:i:s',
+            'fired_at'      => 'nullable|date_format:Y-m-d\TH:i:s',
+            'embargo_until' => 'nullable|date_format:Y-m-d\TH:i:s',
         ];
     }
 }

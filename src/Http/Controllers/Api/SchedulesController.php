@@ -74,7 +74,7 @@ class SchedulesController extends ApiController
         $paginator = ScheduleService::collection()
                                     ->getPaginator();
 
-        return (new ScheduleCollection($paginator))->additional(['message' => 'Schedule collection read']);
+        return (new ScheduleCollection($paginator->load('events')))->additional(['message' => 'Schedule collection read']);
     }
 
     /**

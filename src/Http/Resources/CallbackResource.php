@@ -2,6 +2,7 @@
 
 namespace Partymeister\Core\Http\Resources;
 
+use Illuminate\Support\Str;
 use Motor\Backend\Http\Resources\BaseResource;
 
 /**
@@ -94,8 +95,8 @@ class CallbackResource extends BaseResource
             'link'          => $this->link,
             'destination'   => $this->destination,
             'hash'          => $this->hash,
-            'embargo_until' => $this->embargo_until,
-            'fired_at'      => (boolean) $this->fired_at,
+            'embargo_until' => Str::replaceFirst(' ', 'T', $this->embargo_until),
+            'fired_at'      => Str::replaceFirst(' ', 'T', $this->fired_at),
             'has_fired'     => (boolean) $this->has_fired,
             'is_timed'      => (boolean) $this->is_timed,
         ];

@@ -2,6 +2,7 @@
 
 namespace Partymeister\Core\Http\Resources;
 
+use Illuminate\Support\Str;
 use Motor\Backend\Http\Resources\BaseResource;
 
 /**
@@ -56,6 +57,7 @@ class VisitorResource extends BaseResource
             'country_iso_3166_1' => $this->country_iso_3166_1,
             'email'              => $this->email,
             'additional_data'    => $this->additional_data,
+            'created_at'         => Str::replaceFirst(' ', 'T', $this->created_at),
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Partymeister\Core\Http\Resources;
 
+use Illuminate\Support\Str;
 use Motor\Backend\Http\Resources\BaseResource;
 
 /**
@@ -78,9 +79,11 @@ class EventResource extends BaseResource
             'id'                => (int) $this->id,
             'name'              => $this->name,
             'schedule'          => new ScheduleResource($this->schedule),
+            'schedule_id'       => $this->schedule_id,
             'event_type'        => new EventTypeResource($this->event_type),
-            'starts_at'         => $this->starts_at,
-            'ends_at'           => $this->ends_at,
+            'event_type_id'     => $this->event_type_id,
+            'starts_at'         => Str::replaceFirst(' ', 'T', $this->starts_at),
+            'ends_at'           => Str::replaceFirst(' ', 'T', $this->ends_at),
             'is_visible'        => (boolean) $this->is_visible,
             'is_organizer_only' => (boolean) $this->is_organizer_only,
             'sort_position'     => (int) $this->sort_position,

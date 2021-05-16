@@ -1,6 +1,21 @@
 <?php
+//Route::group([
+//    'middleware' => ['auth:api', 'bindings', 'permission'],
+//    'namespace'  => 'Partymeister\Core\Http\Controllers\Api',
+//    'prefix'     => 'api',
+//    'as'         => 'api.',
+//], function () {
+//    Route::apiResource('callbacks', 'CallbacksController');
+//    Route::apiResource('schedules', 'SchedulesController');
+//    Route::apiResource('events', 'EventsController');
+//    Route::apiResource('event_types', 'EventTypesController');
+//    Route::apiResource('guests', 'GuestsController');
+//    Route::apiResource('visitors', 'VisitorsController');
+//    Route::apiResource('message_groups', 'MessageGroupsController');
+//});
+
 Route::group([
-    'middleware' => ['auth:api', 'bindings', 'permission'],
+    'middleware' => ['auth:sanctum', 'bindings', 'permission'],
     'namespace'  => 'Partymeister\Core\Http\Controllers\Api',
     'prefix'     => 'api',
     'as'         => 'api.',
