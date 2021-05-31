@@ -3,6 +3,7 @@
 namespace Partymeister\Core\Http\Resources;
 
 use Motor\Backend\Http\Resources\BaseResource;
+use Motor\Backend\Http\Resources\CategoryResource;
 
 /**
  * @OA\Schema(
@@ -97,6 +98,7 @@ class GuestResource extends BaseResource
         return [
             'id'                  => (int) $this->id,
             'category_id'         => (int) $this->category_id,
+            'category'            => new CategoryResource($this->category),
             'name'                => $this->name,
             'handle'              => $this->handle,
             'email'               => $this->email,

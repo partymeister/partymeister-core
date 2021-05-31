@@ -30,6 +30,16 @@ Route::group([
 });
 
 Route::group([
+    'middleware' => ['auth:sanctum', 'bindings', 'permission'],
+    'namespace'  => 'Partymeister\Core\Http\Controllers\ApiRPC',
+    'prefix'     => 'api-rpc',
+    'as'         => 'api-rpc.',
+], function () {
+    Route::post('guests/scan_ticket', 'Guests\ScanTicketsController@index')
+         ->name('guests.scan_ticket.index');
+});
+
+Route::group([
     'middleware' => ['bindings'],
     'namespace'  => 'Partymeister\Core\Http\Controllers\ApiRPC',
     'prefix'     => 'api-rpc',
@@ -51,12 +61,12 @@ Route::group([
          ->name('schedules.show');
 });
 
-Route::group([
-    'middleware' => ['web', 'web_auth', 'bindings'],
-    'namespace'  => 'Partymeister\Core\Http\Controllers\ApiRPC',
-    'prefix'     => 'ajax',
-    'as'         => 'ajax.',
-], function () {
-    Route::post('guests/scan_tickets', 'Guests\ScanTicketsController@index')
-         ->name('guests.scan_tickets.index');
-});
+//Route::group([
+//    'middleware' => ['web', 'web_auth', 'bindings'],
+//    'namespace'  => 'Partymeister\Core\Http\Controllers\ApiRPC',
+//    'prefix'     => 'ajax',
+//    'as'         => 'ajax.',
+//], function () {
+//    Route::post('guests/scan_tickets', 'Guests\ScanTicketsController@index')
+//         ->name('guests.scan_tickets.index');
+//});

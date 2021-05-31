@@ -46,7 +46,7 @@ return [
                          'slug'        => 'guests',
                          'name'        => 'partymeister-core.guests.guests',
                          'icon'        => 'fa fa-plus',
-                         'route'       => 'backend.guests.index',
+                         'route'       => 'admin.partymeister-core.guests',
                          'roles'       => ['SuperAdmin'],
                          'permissions' => ['guests.read'],
                 ],

@@ -2,6 +2,8 @@
 
 namespace Partymeister\Core\Services;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 use Motor\Backend\Models\Category;
 use Motor\Backend\Services\BaseService;
 use Motor\Core\Filter\Renderers\SelectRenderer;
@@ -18,6 +20,16 @@ class GuestService extends BaseService
      * @var string
      */
     protected $model = Guest::class;
+
+    public function beforeCreate()
+    {
+        $this->setArrivalDate();
+    }
+
+    public function beforeUpdate()
+    {
+        $this->setArrivalDate();
+    }
 
     public function filters()
     {
@@ -36,5 +48,16 @@ class GuestService extends BaseService
                          1 => trans('motor-backend::backend/global.yes'),
                          0 => trans('motor-backend::backend/global.no'),
                      ]);
+    }
+
+    protected function setArrivalDate()
+    {
+        unset($this->data['arrived_at']);
+
+        if (Arr::get($this->data, 'has_arrived') === true && is_null($this->record->arrived_at)) {
+            $this->data['arrived_at'] = date('Y-m-d H:i:s');
+        } else if (Arr::get($this->data, 'has_arrived') === false) {
+            $this->data['arrived_at'] = null;
+        }
     }
 }
