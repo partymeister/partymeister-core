@@ -54,7 +54,7 @@ class ComponentSchedules
     public function index(Request $request)
     {
         $data = (new ScheduleResource($this->component->schedule->load('events')))->toArrayRecursive();
-        
+
         foreach (Arr::get($data, 'events', []) as $event) {
             if (Arr::get($event, 'is_visible') == false) {
                 continue;
@@ -70,11 +70,11 @@ class ComponentSchedules
                 $this->days[$dayKey][$timeKey] = [];
             }
             $this->days[$dayKey][$timeKey][] = [
-                "web_color"   => Arr::get($event, 'event_type.data.web_color'),
-                "slide_color" => Arr::get($event, 'event_type.data.slide_color'),
+                "web_color"   => Arr::get($event, 'event_type.web_color'),
+                "slide_color" => Arr::get($event, 'event_type.slide_color'),
                 "id"          => Arr::get($event, 'id'),
-                "typeid"      => Arr::get($event, 'event_type_id'),
-                "type"        => Arr::get($event, 'event_type.data.name'),
+                "typeid"      => Arr::get($event, 'event_type.id'),
+                "type"        => Arr::get($event, 'event_type.name'),
                 "name"        => Arr::get($event, 'name'),
                 "description" => "",
                 "link"        => "",
