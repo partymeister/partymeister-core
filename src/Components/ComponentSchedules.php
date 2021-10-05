@@ -53,8 +53,8 @@ class ComponentSchedules
      */
     public function index(Request $request)
     {
-        $data = new ScheduleResource($this->component->schedule);
-
+        $data = (new ScheduleResource($this->component->schedule->load('events')))->toArrayRecursive();
+        
         foreach (Arr::get($data, 'events', []) as $event) {
             if (Arr::get($event, 'is_visible') == false) {
                 continue;
