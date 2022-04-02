@@ -16,6 +16,16 @@ Route::group([
 
 Route::group([
     'middleware' => ['bindings'],
+    'namespace'  => 'Partymeister\Core\Http\Controllers\Api\Public',
+    'prefix'     => 'api/public',
+    'as'         => 'api.public.',
+], function () {
+    Route::apiResource('visitors', 'VisitorsController')->only(['index']);
+});
+
+
+Route::group([
+    'middleware' => ['bindings'],
     'namespace'  => 'Partymeister\Core\Http\Controllers\ApiRPC',
     'prefix'     => 'api-rpc',
     'as'         => 'api-rpc.',
