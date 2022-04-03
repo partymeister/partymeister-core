@@ -83,6 +83,10 @@ class StuhlService
         self::$host = Arr::get($config, 'server', '');
         self::$password = Arr::get($config, 'password', '');
 
+        if (self::$host === '' || self::$host === null) {
+            return false;
+        }
+
         if (self::$debug) {
             $destination = 'testing';
         }
