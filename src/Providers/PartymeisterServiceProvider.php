@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use Partymeister\Core\Console\Commands\PartymeisterCoreCheckCallbacksCommand;
 use Partymeister\Core\Console\Commands\PartymeisterCoreImportTicketsApiCommand;
 use Partymeister\Core\Console\Commands\PartymeisterCoreImportTicketsCSVCommand;
+use Partymeister\Core\Console\Commands\PartymeisterCoreImportTimetableFromWebsiteCommand;
 use Partymeister\Core\Http\Middleware\Frontend\Visitor;
 use Partymeister\Core\Models\Callback;
 use Partymeister\Core\Models\Component\ComponentSchedule;
@@ -131,6 +132,7 @@ class PartymeisterServiceProvider extends ServiceProvider
                 PartymeisterCoreImportTicketsApiCommand::class,
                 PartymeisterCoreImportTicketsCSVCommand::class,
                 PartymeisterCoreCheckCallbacksCommand::class,
+                PartymeisterCoreImportTimetableFromWebsiteCommand::class,
             ]);
         }
     }
