@@ -81,9 +81,9 @@
                         @{{ formatDate(event.starts_at) }}
                     </div>
                 </td>
-                <td :style="{'background-color': event.event_type.data.web_color}">
+                <td :style="{'background-color': event.event_type.web_color}">
                     <div style="float:left;">@{{ event.name }}</div>
-                    <div style="float: right;">@{{ event.event_type.data.name }}</div>
+                    <div style="float: right;">@{{ event.event_type.name }}</div>
                 </td>
                 <td>
                     <countdown :class="event.blink ? 'blink' : ''" :date="event.starts_at" :index="index"></countdown>
@@ -210,7 +210,7 @@
         },
         mounted: function () {
             axios.get('{{ route('ajax.schedules.show', ['schedule' => $record ]) }}').then(function (response) {
-                app.events = response.data.data.events.data;
+                app.events = response.data.data.events;
                 app.filterEvents();
             });
             this.$on('event-blink', function (data) {

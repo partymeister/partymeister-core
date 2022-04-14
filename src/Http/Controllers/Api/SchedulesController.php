@@ -194,7 +194,7 @@ class SchedulesController extends ApiController
         $result = ScheduleService::show($record)
                                  ->getResult();
 
-        return (new ScheduleResource($result))->additional(['message' => 'Schedule read']);
+        return (new ScheduleResource($result->load('events')))->additional(['message' => 'Schedule read']);
     }
 
     /**
