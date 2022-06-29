@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Partymeister\Core\Models\Guest;
 
@@ -27,31 +25,28 @@ class PartymeisterCoreBackendGuestTest extends TestCase
         'model_has_permissions',
         'model_has_roles',
         'role_has_permissions',
-        'media'
+        'media',
     ];
-
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->withFactories(__DIR__ . '/../../../../database/factories');
+        $this->withFactories(__DIR__.'/../../../../database/factories');
 
         $this->addDefaults();
     }
-
 
     protected function addDefaults()
     {
         $this->user = create_test_superadmin();
 
-        $this->readPermission   = create_test_permission_with_name('guests.read');
-        $this->writePermission  = create_test_permission_with_name('guests.write');
+        $this->readPermission = create_test_permission_with_name('guests.read');
+        $this->writePermission = create_test_permission_with_name('guests.write');
         $this->deletePermission = create_test_permission_with_name('guests.delete');
 
         $this->actingAs($this->user);
     }
-
 
     /** @test */
     public function can_see_grid_without_guest()
@@ -61,14 +56,12 @@ class PartymeisterCoreBackendGuestTest extends TestCase
              ->see(trans('motor-backend::backend/global.no_records'));
     }
 
-
     /** @test */
     public function can_see_grid_with_one_guest()
     {
         $record = create_test_guest();
         $this->visit('/backend/guests')->see(trans('partymeister-core::backend/guests.guests'))->see($record->name);
     }
-
 
     /** @test */
     public function can_visit_the_edit_form_of_a_guest_and_use_the_back_button()
@@ -78,18 +71,17 @@ class PartymeisterCoreBackendGuestTest extends TestCase
              ->within('table', function () {
                  $this->click(trans('motor-backend::backend/global.edit'));
              })
-             ->seePageIs('/backend/guests/' . $record->id . '/edit')
+             ->seePageIs('/backend/guests/'.$record->id.'/edit')
              ->click(trans('motor-backend::backend/global.back'))
              ->seePageIs('/backend/guests');
     }
-
 
     /** @test */
     public function can_visit_the_edit_form_of_a_guest_and_change_values()
     {
         $record = create_test_guest();
 
-        $this->visit('/backend/guests/' . $record->id . '/edit')
+        $this->visit('/backend/guests/'.$record->id.'/edit')
              ->see($record->name)
              ->type('Updated Guest', 'name')
              ->within('.box-footer', function () {
@@ -103,7 +95,6 @@ class PartymeisterCoreBackendGuestTest extends TestCase
         $this->assertEquals('Updated Guest', $record->name);
     }
 
-
     /** @test */
     public function can_click_the_guest_create_button()
     {
@@ -111,7 +102,6 @@ class PartymeisterCoreBackendGuestTest extends TestCase
              ->click(trans('partymeister-core::backend/guests.new'))
              ->seePageIs('/backend/guests/create');
     }
-
 
     /** @test */
     public function can_create_a_new_guest()
@@ -127,7 +117,6 @@ class PartymeisterCoreBackendGuestTest extends TestCase
              ->seePageIs('/backend/guests');
     }
 
-
     /** @test */
     public function cannot_create_a_new_guest_with_empty_fields()
     {
@@ -140,12 +129,11 @@ class PartymeisterCoreBackendGuestTest extends TestCase
              ->seePageIs('/backend/guests/create');
     }
 
-
     /** @test */
     public function can_modify_a_guest()
     {
         $record = create_test_guest();
-        $this->visit('/backend/guests/' . $record->id . '/edit')
+        $this->visit('/backend/guests/'.$record->id.'/edit')
              ->see(trans('partymeister-core::backend/guests.edit'))
              ->type('Modified Guest Name', 'name')
              ->within('.box-footer', function () {
@@ -155,7 +143,6 @@ class PartymeisterCoreBackendGuestTest extends TestCase
              ->see('Modified Guest Name')
              ->seePageIs('/backend/guests');
     }
-
 
     /** @test */
     public function can_delete_a_guest()
@@ -171,7 +158,6 @@ class PartymeisterCoreBackendGuestTest extends TestCase
         $this->assertCount(0, Guest::all());
     }
 
-
     /** @test */
     public function can_paginate_guest_results()
     {
@@ -180,7 +166,6 @@ class PartymeisterCoreBackendGuestTest extends TestCase
             $this->click('3');
         })->seePageIs('/backend/guests?page=3');
     }
-
 
     /** @test */
     public function can_search_guest_results()

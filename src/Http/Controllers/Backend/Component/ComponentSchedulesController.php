@@ -12,8 +12,6 @@ use Partymeister\Core\Services\Component\ComponentScheduleService;
 
 /**
  * Class ComponentSchedulesController
- *
- * @package Partymeister\Core\Http\Controllers\Backend\Component
  */
 class ComponentSchedulesController extends ComponentController
 {
@@ -34,7 +32,7 @@ class ComponentSchedulesController extends ComponentController
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse
      */
     public function store(Request $request)
@@ -53,7 +51,7 @@ class ComponentSchedulesController extends ComponentController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param ComponentSchedule $record
+     * @param  ComponentSchedule  $record
      * @return JsonResponse
      */
     public function edit(ComponentSchedule $record)
@@ -68,8 +66,8 @@ class ComponentSchedulesController extends ComponentController
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param ComponentSchedule $record
+     * @param  Request  $request
+     * @param  ComponentSchedule  $record
      * @return JsonResponse
      */
     public function update(Request $request, ComponentSchedule $record)

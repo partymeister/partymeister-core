@@ -11,8 +11,6 @@ use Request;
 
 /**
  * Class VisitorRegistrationService
- *
- * @package Partymeister\Core\Services\Component
  */
 class VisitorRegistrationService
 {

@@ -6,8 +6,6 @@ use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class GuestRequest
- *
- * @package Partymeister\Core\Http\Requests\Backend
  */
 class GuestRequest extends Request
 {

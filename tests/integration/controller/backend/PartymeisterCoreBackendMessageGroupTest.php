@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Partymeister\Core\Models\MessageGroup;
 
@@ -27,31 +25,28 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
         'model_has_permissions',
         'model_has_roles',
         'role_has_permissions',
-        'media'
+        'media',
     ];
-
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->withFactories(__DIR__ . '/../../../../database/factories');
+        $this->withFactories(__DIR__.'/../../../../database/factories');
 
         $this->addDefaults();
     }
-
 
     protected function addDefaults()
     {
         $this->user = create_test_superadmin();
 
-        $this->readPermission   = create_test_permission_with_name('message_groups.read');
-        $this->writePermission  = create_test_permission_with_name('message_groups.write');
+        $this->readPermission = create_test_permission_with_name('message_groups.read');
+        $this->writePermission = create_test_permission_with_name('message_groups.write');
         $this->deletePermission = create_test_permission_with_name('message_groups.delete');
 
         $this->actingAs($this->user);
     }
-
 
     /** @test */
     public function can_see_grid_without_message_group()
@@ -60,7 +55,6 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
              ->see(trans('partymeister-core::backend/message_groups.message_groups'))
              ->see(trans('motor-backend::backend/global.no_records'));
     }
-
 
     /** @test */
     public function can_see_grid_with_one_message_group()
@@ -71,7 +65,6 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
              ->see($record->name);
     }
 
-
     /** @test */
     public function can_visit_the_edit_form_of_a_message_group_and_use_the_back_button()
     {
@@ -80,18 +73,17 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
              ->within('table', function () {
                  $this->click(trans('motor-backend::backend/global.edit'));
              })
-             ->seePageIs('/backend/message_groups/' . $record->id . '/edit')
+             ->seePageIs('/backend/message_groups/'.$record->id.'/edit')
              ->click(trans('motor-backend::backend/global.back'))
              ->seePageIs('/backend/message_groups');
     }
-
 
     /** @test */
     public function can_visit_the_edit_form_of_a_message_group_and_change_values()
     {
         $record = create_test_message_group();
 
-        $this->visit('/backend/message_groups/' . $record->id . '/edit')
+        $this->visit('/backend/message_groups/'.$record->id.'/edit')
              ->see($record->name)
              ->type('Updated Message group', 'name')
              ->within('.box-footer', function () {
@@ -105,7 +97,6 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
         $this->assertEquals('Updated Message group', $record->name);
     }
 
-
     /** @test */
     public function can_click_the_message_group_create_button()
     {
@@ -113,7 +104,6 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
              ->click(trans('partymeister-core::backend/message_groups.new'))
              ->seePageIs('/backend/message_groups/create');
     }
-
 
     /** @test */
     public function can_create_a_new_message_group()
@@ -129,7 +119,6 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
              ->seePageIs('/backend/message_groups');
     }
 
-
     /** @test */
     public function cannot_create_a_new_message_group_with_empty_fields()
     {
@@ -142,12 +131,11 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
              ->seePageIs('/backend/message_groups/create');
     }
 
-
     /** @test */
     public function can_modify_a_message_group()
     {
         $record = create_test_message_group();
-        $this->visit('/backend/message_groups/' . $record->id . '/edit')
+        $this->visit('/backend/message_groups/'.$record->id.'/edit')
              ->see(trans('partymeister-core::backend/message_groups.edit'))
              ->type('Modified Message group Name', 'name')
              ->within('.box-footer', function () {
@@ -157,7 +145,6 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
              ->see('Modified Message group Name')
              ->seePageIs('/backend/message_groups');
     }
-
 
     /** @test */
     public function can_delete_a_message_group()
@@ -173,7 +160,6 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
         $this->assertCount(0, MessageGroup::all());
     }
 
-
     /** @test */
     public function can_paginate_message_group_results()
     {
@@ -182,7 +168,6 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
             $this->click('3');
         })->seePageIs('/backend/message_groups?page=3');
     }
-
 
     /** @test */
     public function can_search_message_group_results()

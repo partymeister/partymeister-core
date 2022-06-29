@@ -17,8 +17,6 @@ use ReflectionException;
 
 /**
  * Class CallbacksController
- *
- * @package Partymeister\Core\Http\Controllers\Backend
  */
 class CallbacksController extends Controller
 {
@@ -28,6 +26,7 @@ class CallbacksController extends Controller
      * Display a listing of the resource.
      *
      * @return Factory|View
+     *
      * @throws ReflectionException
      */
     public function index()
@@ -42,7 +41,7 @@ class CallbacksController extends Controller
     }
 
     /**
-     * @param Callback $record
+     * @param  callable  $record
      * @return Factory|View
      */
     public function duplicate(Callback $record)
@@ -57,7 +56,7 @@ class CallbacksController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param Callback $record
+     * @param  callable  $record
      * @return Factory|View
      */
     public function create(Callback $record)
@@ -75,7 +74,7 @@ class CallbacksController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param CallbackRequest $request
+     * @param  CallbackRequest  $request
      * @return RedirectResponse|Redirector
      */
     public function store(CallbackRequest $request)
@@ -110,7 +109,7 @@ class CallbacksController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Callback $record
+     * @param  callable  $record
      * @return Factory|View
      */
     public function edit(Callback $record)
@@ -128,8 +127,8 @@ class CallbacksController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param CallbackRequest $request
-     * @param Callback $record
+     * @param  CallbackRequest  $request
+     * @param  callable  $record
      * @return RedirectResponse|Redirector
      */
     public function update(CallbackRequest $request, Callback $record)
@@ -154,7 +153,7 @@ class CallbacksController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Callback $record
+     * @param  callable  $record
      * @return RedirectResponse|Redirector
      */
     public function destroy(Callback $record)

@@ -17,8 +17,6 @@ use ReflectionException;
 
 /**
  * Class EventsController
- *
- * @package Partymeister\Core\Http\Controllers\Backend
  */
 class EventsController extends Controller
 {
@@ -28,6 +26,7 @@ class EventsController extends Controller
      * Display a listing of the resource.
      *
      * @return Factory|View
+     *
      * @throws ReflectionException
      */
     public function index()
@@ -44,7 +43,7 @@ class EventsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param EventRequest $request
+     * @param  EventRequest  $request
      * @return RedirectResponse|Redirector
      */
     public function store(EventRequest $request)
@@ -67,7 +66,7 @@ class EventsController extends Controller
     }
 
     /**
-     * @param Event $record
+     * @param  Event  $record
      * @return Factory|View
      */
     public function duplicate(Event $record)
@@ -81,7 +80,7 @@ class EventsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param Event $record
+     * @param  Event  $record
      * @return Factory|View
      */
     public function create(Event $record)
@@ -109,7 +108,7 @@ class EventsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Event $record
+     * @param  Event  $record
      * @return Factory|View
      */
     public function edit(Event $record)
@@ -127,8 +126,8 @@ class EventsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param EventRequest $request
-     * @param Event $record
+     * @param  EventRequest  $request
+     * @param  Event  $record
      * @return RedirectResponse|Redirector
      */
     public function update(EventRequest $request, Event $record)
@@ -153,7 +152,7 @@ class EventsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Event $record
+     * @param  Event  $record
      * @return RedirectResponse|Redirector
      */
     public function destroy(Event $record)

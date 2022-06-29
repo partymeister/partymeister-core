@@ -12,8 +12,6 @@ use Partymeister\Core\Services\Component\ComponentVisitorLoginService;
 
 /**
  * Class ComponentVisitorLoginsController
- *
- * @package Partymeister\Core\Http\Controllers\Backend\Component
  */
 class ComponentVisitorLoginsController extends ComponentController
 {
@@ -34,7 +32,7 @@ class ComponentVisitorLoginsController extends ComponentController
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse
      */
     public function store(Request $request)
@@ -53,7 +51,7 @@ class ComponentVisitorLoginsController extends ComponentController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param ComponentVisitorLogin $record
+     * @param  ComponentVisitorLogin  $record
      * @return JsonResponse
      */
     public function edit(ComponentVisitorLogin $record)
@@ -68,8 +66,8 @@ class ComponentVisitorLoginsController extends ComponentController
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param ComponentVisitorLogin $record
+     * @param  Request  $request
+     * @param  ComponentVisitorLogin  $record
      * @return JsonResponse
      */
     public function update(Request $request, ComponentVisitorLogin $record)

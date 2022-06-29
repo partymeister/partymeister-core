@@ -1,12 +1,11 @@
 <?php
 
 use Culpa\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 use Culpa\Facades\Schema;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateComponentSchedulesTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -20,7 +19,6 @@ class CreateComponentSchedulesTable extends Migration
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.

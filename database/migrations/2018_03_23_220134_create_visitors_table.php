@@ -1,12 +1,11 @@
 <?php
 
 use Culpa\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 use Culpa\Facades\Schema;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateVisitorsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -26,7 +25,6 @@ class CreateVisitorsTable extends Migration
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.

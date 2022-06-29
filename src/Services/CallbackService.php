@@ -8,8 +8,6 @@ use Partymeister\Core\Models\Callback;
 
 /**
  * Class CallbackService
- *
- * @package Partymeister\Core\Services
  */
 class CallbackService extends BaseService
 {

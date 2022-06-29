@@ -7,8 +7,6 @@ use Motor\Backend\Grid\Renderers\BladeRenderer;
 
 /**
  * Class EventTypeGrid
- *
- * @package Partymeister\Core\Grids
  */
 class EventTypeGrid extends Grid
 {

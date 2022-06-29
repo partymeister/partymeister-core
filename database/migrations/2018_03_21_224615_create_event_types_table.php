@@ -1,12 +1,11 @@
 <?php
 
 use Culpa\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 use Culpa\Facades\Schema;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateEventTypesTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -26,7 +25,6 @@ class CreateEventTypesTable extends Migration
             $table->deletedBy(true);
         });
     }
-
 
     /**
      * Reverse the migrations.

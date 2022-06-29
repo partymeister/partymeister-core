@@ -69,7 +69,7 @@ class EventResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function toArray($request)
@@ -81,8 +81,8 @@ class EventResource extends BaseResource
             'event_type'        => new EventTypeResource($this->event_type),
             'starts_at'         => $this->starts_at,
             'ends_at'           => $this->ends_at,
-            'is_visible'        => (boolean) $this->is_visible,
-            'is_organizer_only' => (boolean) $this->is_organizer_only,
+            'is_visible'        => (bool) $this->is_visible,
+            'is_organizer_only' => (bool) $this->is_organizer_only,
             'sort_position'     => (int) $this->sort_position,
             'notify_minutes'    => (int) $this->notify_minutes,
             'link'              => $this->link,

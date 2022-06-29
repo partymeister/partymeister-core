@@ -3,13 +3,11 @@
 namespace Partymeister\Core\Http\Controllers\Api\Public;
 
 use Motor\Backend\Http\Controllers\PublicApiController;
-use Partymeister\Core\Services\VisitorService;
 use Partymeister\Core\Http\Resources\Public\VisitorCollection;
+use Partymeister\Core\Services\VisitorService;
 
 /**
  * Class VisitorsController
- *
- * @package Partymeister\Core\Http\Controllers\Api\Public
  */
 class VisitorsController extends PublicApiController
 {

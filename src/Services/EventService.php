@@ -9,8 +9,6 @@ use Partymeister\Core\Models\EventType;
 
 /**
  * Class EventService
- *
- * @package Partymeister\Core\Services
  */
 class EventService extends BaseService
 {

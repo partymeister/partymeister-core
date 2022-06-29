@@ -3,17 +3,14 @@
 namespace Partymeister\Core\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
-
-use Partymeister\Core\Models\Callback;
 use Partymeister\Core\Http\Requests\Backend\CallbackRequest;
-use Partymeister\Core\Services\CallbackService;
-use Partymeister\Core\Http\Resources\CallbackResource;
 use Partymeister\Core\Http\Resources\CallbackCollection;
+use Partymeister\Core\Http\Resources\CallbackResource;
+use Partymeister\Core\Models\Callback;
+use Partymeister\Core\Services\CallbackService;
 
 /**
  * Class CallbacksController
- *
- * @package Partymeister\Core\Http\Controllers\Api
  */
 class CallbacksController extends ApiController
 {
@@ -123,7 +120,7 @@ class CallbacksController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param CallbackRequest $request
+     * @param  CallbackRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(CallbackRequest $request)
@@ -186,7 +183,7 @@ class CallbacksController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param Callback $record
+     * @param  callable  $record
      * @return CallbackResource
      */
     public function show(Callback $record)
@@ -250,8 +247,8 @@ class CallbacksController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param CallbackRequest $request
-     * @param Callback $record
+     * @param  CallbackRequest  $request
+     * @param  callable  $record
      * @return CallbackResource
      */
     public function update(CallbackRequest $request, Callback $record)
@@ -318,7 +315,7 @@ class CallbacksController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param Callback $record
+     * @param  callable  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Callback $record)

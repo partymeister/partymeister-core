@@ -8,8 +8,6 @@ use Partymeister\Core\Models\User;
 
 /**
  * Class MessageGroupForm
- *
- * @package Partymeister\Core\Forms\Backend
  */
 class MessageGroupForm extends Form
 {

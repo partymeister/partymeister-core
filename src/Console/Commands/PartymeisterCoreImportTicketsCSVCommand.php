@@ -10,8 +10,6 @@ use Partymeister\Core\Models\Guest;
 
 /**
  * Class PartymeisterCoreImportTicketsCommand
- *
- * @package Partymeister\Core\Console\Commands
  */
 class PartymeisterCoreImportTicketsCSVCommand extends Command
 {

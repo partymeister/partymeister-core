@@ -7,8 +7,6 @@ use Partymeister\Core\Models\Schedule;
 
 /**
  * Class ComponentScheduleForm
- *
- * @package Partymeister\Core\Forms\Backend\Component
  */
 class ComponentScheduleForm extends Form
 {

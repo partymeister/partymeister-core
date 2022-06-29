@@ -6,8 +6,6 @@ use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class EventTypeRequest
- *
- * @package Partymeister\Core\Http\Requests\Backend
  */
 class EventTypeRequest extends Request
 {

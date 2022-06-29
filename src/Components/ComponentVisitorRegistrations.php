@@ -13,8 +13,6 @@ use Partymeister\Core\Services\Component\VisitorRegistrationService;
 
 /**
  * Class ComponentVisitorRegistrations
- *
- * @package Partymeister\Core\Components
  */
 class ComponentVisitorRegistrations
 {
@@ -38,7 +36,7 @@ class ComponentVisitorRegistrations
     /**
      * ComponentVisitorRegistrations constructor.
      *
-     * @param PageVersionComponent $pageVersionComponent
+     * @param  PageVersionComponent  $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
@@ -46,7 +44,7 @@ class ComponentVisitorRegistrations
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return bool|Factory|RedirectResponse|View
      */
     public function index(Request $request)

@@ -89,7 +89,7 @@ class GuestResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function toArray($request)
@@ -105,9 +105,9 @@ class GuestResource extends BaseResource
             'ticket_code'         => $this->ticket_code,
             'ticket_type'         => $this->ticket_type,
             'ticket_order_number' => $this->ticket_order_number,
-            'has_badge'           => (boolean) $this->has_badge,
-            'has_arrived'         => (boolean) $this->has_arrived,
-            'ticket_code_scanned' => (boolean) $this->ticket_code_scanned,
+            'has_badge'           => (bool) $this->has_badge,
+            'has_arrived'         => (bool) $this->has_arrived,
+            'ticket_code_scanned' => (bool) $this->ticket_code_scanned,
             'comment'             => $this->comment,
             'arrived_at'          => $this->arrived_at,
         ];

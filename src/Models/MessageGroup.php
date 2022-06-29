@@ -32,6 +32,7 @@ use Motor\Core\Traits\Searchable;
  * @property-read int $user_count
  * @property-read \Motor\Backend\Models\User $updater
  * @property-read Collection|\Motor\Backend\Models\User[] $users
+ *
  * @method static Builder|MessageGroup filteredBy(Filter $filter, $column)
  * @method static Builder|MessageGroup filteredByMultiple(Filter $filter)
  * @method static Builder|MessageGroup newModelQuery()

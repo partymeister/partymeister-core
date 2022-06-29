@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Partymeister\Core\Models\Callback;
 
@@ -27,31 +25,28 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
         'model_has_permissions',
         'model_has_roles',
         'role_has_permissions',
-        'media'
+        'media',
     ];
-
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->withFactories(__DIR__ . '/../../../../database/factories');
+        $this->withFactories(__DIR__.'/../../../../database/factories');
 
         $this->addDefaults();
     }
-
 
     protected function addDefaults()
     {
         $this->user = create_test_superadmin();
 
-        $this->readPermission   = create_test_permission_with_name('callbacks.read');
-        $this->writePermission  = create_test_permission_with_name('callbacks.write');
+        $this->readPermission = create_test_permission_with_name('callbacks.read');
+        $this->writePermission = create_test_permission_with_name('callbacks.write');
         $this->deletePermission = create_test_permission_with_name('callbacks.delete');
 
         $this->actingAs($this->user);
     }
-
 
     /** @test */
     public function can_see_grid_without_callback()
@@ -60,7 +55,6 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
              ->see(trans('partymeister-core::backend/callbacks.callbacks'))
              ->see(trans('motor-backend::backend/global.no_records'));
     }
-
 
     /** @test */
     public function can_see_grid_with_one_callback()
@@ -71,7 +65,6 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
              ->see($record->name);
     }
 
-
     /** @test */
     public function can_visit_the_edit_form_of_a_callback_and_use_the_back_button()
     {
@@ -80,18 +73,17 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
              ->within('table', function () {
                  $this->click(trans('motor-backend::backend/global.edit'));
              })
-             ->seePageIs('/backend/callbacks/' . $record->id . '/edit')
+             ->seePageIs('/backend/callbacks/'.$record->id.'/edit')
              ->click(trans('motor-backend::backend/global.back'))
              ->seePageIs('/backend/callbacks');
     }
-
 
     /** @test */
     public function can_visit_the_edit_form_of_a_callback_and_change_values()
     {
         $record = create_test_callback();
 
-        $this->visit('/backend/callbacks/' . $record->id . '/edit')
+        $this->visit('/backend/callbacks/'.$record->id.'/edit')
              ->see($record->name)
              ->type('Updated Callback', 'name')
              ->within('.box-footer', function () {
@@ -105,7 +97,6 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
         $this->assertEquals('Updated Callback', $record->name);
     }
 
-
     /** @test */
     public function can_click_the_callback_create_button()
     {
@@ -113,7 +104,6 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
              ->click(trans('partymeister-core::backend/callbacks.new'))
              ->seePageIs('/backend/callbacks/create');
     }
-
 
     /** @test */
     public function can_create_a_new_callback()
@@ -129,7 +119,6 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
              ->seePageIs('/backend/callbacks');
     }
 
-
     /** @test */
     public function cannot_create_a_new_callback_with_empty_fields()
     {
@@ -142,12 +131,11 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
              ->seePageIs('/backend/callbacks/create');
     }
 
-
     /** @test */
     public function can_modify_a_callback()
     {
         $record = create_test_callback();
-        $this->visit('/backend/callbacks/' . $record->id . '/edit')
+        $this->visit('/backend/callbacks/'.$record->id.'/edit')
              ->see(trans('partymeister-core::backend/callbacks.edit'))
              ->type('Modified Callback Name', 'name')
              ->within('.box-footer', function () {
@@ -157,7 +145,6 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
              ->see('Modified Callback Name')
              ->seePageIs('/backend/callbacks');
     }
-
 
     /** @test */
     public function can_delete_a_callback()
@@ -173,7 +160,6 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
         $this->assertCount(0, Callback::all());
     }
 
-
     /** @test */
     public function can_paginate_callback_results()
     {
@@ -182,7 +168,6 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
             $this->click('3');
         })->seePageIs('/backend/callbacks?page=3');
     }
-
 
     /** @test */
     public function can_search_callback_results()

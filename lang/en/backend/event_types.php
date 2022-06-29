@@ -12,5 +12,5 @@ return [
 
     'name'        => 'Name',
     'web_color'   => 'Web color (hex / rgb / rgba)',
-    'slide_color' => 'Slide color (hex / rgb / rgba)'
+    'slide_color' => 'Slide color (hex / rgb / rgba)',
 ];

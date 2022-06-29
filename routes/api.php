@@ -1,4 +1,5 @@
 <?php
+
 Route::group([
     'middleware' => ['auth:api', 'bindings', 'permission'],
     'namespace'  => 'Partymeister\Core\Http\Controllers\Api',
@@ -22,7 +23,6 @@ Route::group([
 ], function () {
     Route::apiResource('visitors', 'VisitorsController')->only(['index']);
 });
-
 
 Route::group([
     'middleware' => ['bindings'],

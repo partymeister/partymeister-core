@@ -6,8 +6,6 @@ use Motor\Backend\Grid\Grid;
 
 /**
  * Class VisitorGrid
- *
- * @package Partymeister\Core\Grids
  */
 class VisitorGrid extends Grid
 {

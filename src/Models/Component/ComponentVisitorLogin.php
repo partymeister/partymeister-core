@@ -26,6 +26,7 @@ use Motor\CMS\Models\PageVersionComponent;
  * @property-read Navigation|null $entries_page
  * @property-read Navigation|null $visitor_registration_page
  * @property-read Navigation|null $voting_page
+ *
  * @method static Builder|ComponentVisitorLogin newModelQuery()
  * @method static Builder|ComponentVisitorLogin newQuery()
  * @method static Builder|ComponentVisitorLogin query()

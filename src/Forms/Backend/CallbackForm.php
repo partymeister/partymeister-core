@@ -6,8 +6,6 @@ use Kris\LaravelFormBuilder\Form;
 
 /**
  * Class CallbackForm
- *
- * @package Partymeister\Core\Forms\Backend
  */
 class CallbackForm extends Form
 {
@@ -23,9 +21,9 @@ class CallbackForm extends Form
              ])
              ->add('payload', 'static', ['label' => trans('partymeister-core::backend/callbacks.payload')])
              ->add('title', 'text', [
-                     'label' => trans('partymeister-core::backend/callbacks.title'),
-                     'rules' => 'required',
-                 ])
+                 'label' => trans('partymeister-core::backend/callbacks.title'),
+                 'rules' => 'required',
+             ])
              ->add('body', 'text', ['label' => trans('partymeister-core::backend/callbacks.body')])
              ->add('link', 'text', ['label' => trans('partymeister-core::backend/callbacks.link')])
              ->add('hash', 'static', ['label' => trans('partymeister-core::backend/callbacks.hash')])

@@ -4,7 +4,6 @@ namespace Partymeister\Core\Http\Controllers\Backend;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
@@ -18,8 +17,6 @@ use ReflectionException;
 
 /**
  * Class EventTypesController
- *
- * @package Partymeister\Core\Http\Controllers\Backend
  */
 class EventTypesController extends Controller
 {
@@ -29,6 +26,7 @@ class EventTypesController extends Controller
      * Display a listing of the resource.
      *
      * @return Factory|View
+     *
      * @throws ReflectionException
      */
     public function index()
@@ -61,7 +59,7 @@ class EventTypesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param EventTypeRequest $request
+     * @param  EventTypeRequest  $request
      * @return RedirectResponse|Redirector
      */
     public function store(EventTypeRequest $request)
@@ -96,7 +94,7 @@ class EventTypesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param EventType $record
+     * @param  EventType  $record
      * @return Factory|View
      */
     public function edit(EventType $record)
@@ -114,8 +112,8 @@ class EventTypesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param EventTypeRequest $request
-     * @param EventType $record
+     * @param  EventTypeRequest  $request
+     * @param  EventType  $record
      * @return RedirectResponse|Redirector
      */
     public function update(EventTypeRequest $request, EventType $record)
@@ -140,7 +138,7 @@ class EventTypesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param EventType $record
+     * @param  EventType  $record
      * @return RedirectResponse|Redirector
      */
     public function destroy(EventType $record)

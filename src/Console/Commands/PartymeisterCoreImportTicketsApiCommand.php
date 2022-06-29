@@ -15,8 +15,6 @@ use Partymeister\Core\Models\Guest;
 
 /**
  * Class PartymeisterCoreImportTicketsCommand
- *
- * @package Partymeister\Core\Console\Commands
  */
 class PartymeisterCoreImportTicketsApiCommand extends Command
 {
@@ -108,7 +106,7 @@ class PartymeisterCoreImportTicketsApiCommand extends Command
         } catch (\Exception $e) {
             Log::warning($e->getMessage());
         }
-        dd("ENDE");
+        dd('ENDE');
 
         // Open file
         if (($handle = fopen($this->argument('file'), 'r')) !== false) {

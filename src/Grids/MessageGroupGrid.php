@@ -7,8 +7,6 @@ use Motor\Backend\Grid\Renderers\CollectionRenderer;
 
 /**
  * Class MessageGroupGrid
- *
- * @package Partymeister\Core\Grids
  */
 class MessageGroupGrid extends Grid
 {

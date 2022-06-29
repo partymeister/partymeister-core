@@ -9,8 +9,6 @@ use Partymeister\Core\Models\Visitor;
 
 /**
  * Class VisitorService
- *
- * @package Partymeister\Core\Services
  */
 class VisitorService extends BaseService
 {

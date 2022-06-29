@@ -1,12 +1,11 @@
 <?php
 
 use Culpa\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 use Culpa\Facades\Schema;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateGuestsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -39,7 +38,6 @@ class CreateGuestsTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
         });
     }
-
 
     /**
      * Reverse the migrations.

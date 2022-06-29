@@ -1,12 +1,11 @@
 <?php
 
 use Culpa\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 use Culpa\Facades\Schema;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateCallbacksTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -35,7 +34,6 @@ class CreateCallbacksTable extends Migration
             $table->deletedBy(true);
         });
     }
-
 
     /**
      * Reverse the migrations.

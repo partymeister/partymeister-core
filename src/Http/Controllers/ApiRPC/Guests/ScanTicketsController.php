@@ -9,13 +9,11 @@ use Partymeister\Core\Models\Guest;
 
 /**
  * Class ScanTicketsController
- *
- * @package Partymeister\Core\Http\Controllers\Api\Guests
  */
 class ScanTicketsController extends ApiController
 {
     /**
-     * @param GuestRequest $request
+     * @param  GuestRequest  $request
      * @return JsonResponse
      */
     public function index(GuestRequest $request)

@@ -5,15 +5,12 @@ namespace Partymeister\Core\Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Motor\Backend\Models\User;
-use Partymeister\Accounting\Models\AccountType;
 
 /**
  * Class AccountsTableSeeder
- * @package Partymeister\Accounting\Database\Seeds
  */
 class EventTypesTableSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *

@@ -2,20 +2,14 @@
 
 namespace Partymeister\Core\Console\Commands;
 
-use DateTime;
-use DateTimeZone;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Motor\Backend\Models\Category;
 use Motor\Backend\Models\User;
 use Partymeister\Core\Models\Event;
-use Partymeister\Core\Models\Guest;
 
 /**
  * Class PartymeisterCoreImportTimetableFromWebsiteCommand
- *
- * @package Partymeister\Core\Console\Commands
  */
 class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
 {
@@ -46,7 +40,7 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
 
         $data = file_get_contents('https://2022.revision-party.net/timetable.json');
 
-        if (!$data) {
+        if (! $data) {
             return false;
         }
 
@@ -60,17 +54,13 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
         $sortPosition = 0;
 
         foreach ($dataJson->timetable as $day) {
-
             foreach ($day->events as $event) {
-
                 $sortPosition += 10;
 
                 if (strtolower($event->category) === 'deadline') {
-
                     $deadlines = explode("\n", $event->title);
 
                     foreach ($deadlines as $deadline) {
-
                         $sortPosition += 10;
 
                         $e = new Event();
@@ -82,7 +72,6 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
                         $e->sort_position = $sortPosition;
                         $e->save();
                     }
-
                 } else {
                     $e = new Event();
                     $e->schedule_id = 1;
@@ -97,7 +86,8 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
         }
     }
 
-    private function categoryToEventIdMapping($category) {
+    private function categoryToEventIdMapping($category)
+    {
         switch (strtolower($category)) {
             case 'competition':
             case 'compo':
@@ -114,6 +104,5 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
             default:
                 return 3;
         }
-
     }
 }

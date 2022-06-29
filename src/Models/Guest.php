@@ -43,6 +43,7 @@ use Motor\Core\Traits\Searchable;
  * @property-read \Motor\Backend\Models\User $creator
  * @property-read \Motor\Backend\Models\User|null $eraser
  * @property-read \Motor\Backend\Models\User $updater
+ *
  * @method static Builder|Guest filteredBy(Filter $filter, $column)
  * @method static Builder|Guest filteredByMultiple(Filter $filter)
  * @method static Builder|Guest newModelQuery()

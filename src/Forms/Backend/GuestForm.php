@@ -7,8 +7,6 @@ use Motor\Backend\Models\Category;
 
 /**
  * Class GuestForm
- *
- * @package Partymeister\Core\Forms\Backend
  */
 class GuestForm extends Form
 {

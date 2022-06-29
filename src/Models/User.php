@@ -34,6 +34,7 @@ use Spatie\Permission\Models\Role;
  * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
  * @property-read Collection|Permission[] $permissions
  * @property-read Collection|Role[] $roles
+ *
  * @method static Builder|\Motor\Backend\Models\User filteredBy(Filter $filter, $column)
  * @method static Builder|\Motor\Backend\Models\User filteredByMultiple(Filter $filter)
  * @method static Builder|User newModelQuery()
