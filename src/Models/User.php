@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Support\Carbon;
-use Motor\Backend\Models\Client;
+use Motor\Admin\Models\Client;
 use Motor\Core\Filter\Filter;
 use Spatie\MediaLibrary\Models\Media;
 use Spatie\Permission\Models\Permission;
@@ -34,14 +34,14 @@ use Spatie\Permission\Models\Role;
  * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
  * @property-read Collection|Permission[] $permissions
  * @property-read Collection|Role[] $roles
- * @method static Builder|\Motor\Backend\Models\User filteredBy(Filter $filter, $column)
- * @method static Builder|\Motor\Backend\Models\User filteredByMultiple(Filter $filter)
+ * @method static Builder|\Motor\Admin\Models\User filteredBy(Filter $filter, $column)
+ * @method static Builder|\Motor\Admin\Models\User filteredByMultiple(Filter $filter)
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
- * @method static Builder|\Motor\Backend\Models\User permission($permissions)
+ * @method static Builder|\Motor\Admin\Models\User permission($permissions)
  * @method static Builder|User query()
- * @method static Builder|\Motor\Backend\Models\User role($roles, $guard = null)
- * @method static Builder|\Motor\Backend\Models\User search($q, $full_text = false)
+ * @method static Builder|\Motor\Admin\Models\User role($roles, $guard = null)
+ * @method static Builder|\Motor\Admin\Models\User search($q, $full_text = false)
  * @method static Builder|User whereApiToken($value)
  * @method static Builder|User whereClientId($value)
  * @method static Builder|User whereCreatedAt($value)
@@ -54,7 +54,7 @@ use Spatie\Permission\Models\Role;
  * @method static Builder|User whereUpdatedAt($value)
  * @mixin Eloquent
  */
-class User extends \Motor\Backend\Models\User
+class User extends \Motor\Admin\Models\User
 {
     /**
      * @return BelongsToMany

@@ -3,7 +3,7 @@
 namespace Partymeister\Core\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Motor\Backend\Models\User;
+use Motor\Admin\Models\User;
 use Partymeister\Core\Models\Visitor;
 
 class VisitorPolicy
