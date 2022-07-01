@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Partymeister\Core\Models\Visitor;
 
@@ -27,31 +25,28 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
         'model_has_permissions',
         'model_has_roles',
         'role_has_permissions',
-        'media'
+        'media',
     ];
-
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->withFactories(__DIR__ . '/../../../../database/factories');
+        $this->withFactories(__DIR__.'/../../../../database/factories');
 
         $this->addDefaults();
     }
-
 
     protected function addDefaults()
     {
         $this->user = create_test_superadmin();
 
-        $this->readPermission   = create_test_permission_with_name('visitors.read');
-        $this->writePermission  = create_test_permission_with_name('visitors.write');
+        $this->readPermission = create_test_permission_with_name('visitors.read');
+        $this->writePermission = create_test_permission_with_name('visitors.write');
         $this->deletePermission = create_test_permission_with_name('visitors.delete');
 
         $this->actingAs($this->user);
     }
-
 
     /** @test */
     public function can_see_grid_without_visitor()
@@ -60,7 +55,6 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
              ->see(trans('partymeister-core::backend/visitors.visitors'))
              ->see(trans('motor-backend::backend/global.no_records'));
     }
-
 
     /** @test */
     public function can_see_grid_with_one_visitor()
@@ -71,7 +65,6 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
              ->see($record->name);
     }
 
-
     /** @test */
     public function can_visit_the_edit_form_of_a_visitor_and_use_the_back_button()
     {
@@ -80,18 +73,17 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
              ->within('table', function () {
                  $this->click(trans('motor-backend::backend/global.edit'));
              })
-             ->seePageIs('/backend/visitors/' . $record->id . '/edit')
+             ->seePageIs('/backend/visitors/'.$record->id.'/edit')
              ->click(trans('motor-backend::backend/global.back'))
              ->seePageIs('/backend/visitors');
     }
-
 
     /** @test */
     public function can_visit_the_edit_form_of_a_visitor_and_change_values()
     {
         $record = create_test_visitor();
 
-        $this->visit('/backend/visitors/' . $record->id . '/edit')
+        $this->visit('/backend/visitors/'.$record->id.'/edit')
              ->see($record->name)
              ->type('Updated Visitor', 'name')
              ->within('.box-footer', function () {
@@ -105,7 +97,6 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
         $this->assertEquals('Updated Visitor', $record->name);
     }
 
-
     /** @test */
     public function can_click_the_visitor_create_button()
     {
@@ -113,7 +104,6 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
              ->click(trans('partymeister-core::backend/visitors.new'))
              ->seePageIs('/backend/visitors/create');
     }
-
 
     /** @test */
     public function can_create_a_new_visitor()
@@ -129,7 +119,6 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
              ->seePageIs('/backend/visitors');
     }
 
-
     /** @test */
     public function cannot_create_a_new_visitor_with_empty_fields()
     {
@@ -142,12 +131,11 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
              ->seePageIs('/backend/visitors/create');
     }
 
-
     /** @test */
     public function can_modify_a_visitor()
     {
         $record = create_test_visitor();
-        $this->visit('/backend/visitors/' . $record->id . '/edit')
+        $this->visit('/backend/visitors/'.$record->id.'/edit')
              ->see(trans('partymeister-core::backend/visitors.edit'))
              ->type('Modified Visitor Name', 'name')
              ->within('.box-footer', function () {
@@ -157,7 +145,6 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
              ->see('Modified Visitor Name')
              ->seePageIs('/backend/visitors');
     }
-
 
     /** @test */
     public function can_delete_a_visitor()
@@ -173,7 +160,6 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
         $this->assertCount(0, Visitor::all());
     }
 
-
     /** @test */
     public function can_paginate_visitor_results()
     {
@@ -182,7 +168,6 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
             $this->click('3');
         })->seePageIs('/backend/visitors?page=3');
     }
-
 
     /** @test */
     public function can_search_visitor_results()

@@ -6,8 +6,6 @@ use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class ScheduleRequest
- *
- * @package Partymeister\Core\Http\Requests\Backend
  */
 class ScheduleRequest extends Request
 {

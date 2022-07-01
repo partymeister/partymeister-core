@@ -20,6 +20,7 @@ use Partymeister\Core\Models\Schedule;
  * @property Carbon|null $updated_at
  * @property-read Collection|PageVersionComponent[] $component
  * @property-read Schedule $schedule
+ *
  * @method static Builder|ComponentSchedule newModelQuery()
  * @method static Builder|ComponentSchedule newQuery()
  * @method static Builder|ComponentSchedule query()

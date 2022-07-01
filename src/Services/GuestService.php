@@ -3,7 +3,6 @@
 namespace Partymeister\Core\Services;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Log;
 use Motor\Backend\Models\Category;
 use Motor\Backend\Services\BaseService;
 use Motor\Core\Filter\Renderers\SelectRenderer;
@@ -11,8 +10,6 @@ use Partymeister\Core\Models\Guest;
 
 /**
  * Class GuestService
- *
- * @package Partymeister\Core\Services
  */
 class GuestService extends BaseService
 {
@@ -56,7 +53,7 @@ class GuestService extends BaseService
 
         if (Arr::get($this->data, 'has_arrived') === true && is_null($this->record->arrived_at)) {
             $this->data['arrived_at'] = date('Y-m-d H:i:s');
-        } else if (Arr::get($this->data, 'has_arrived') === false) {
+        } elseif (Arr::get($this->data, 'has_arrived') === false) {
             $this->data['arrived_at'] = null;
         }
     }

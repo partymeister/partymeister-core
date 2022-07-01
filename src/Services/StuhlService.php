@@ -9,40 +9,22 @@ use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 
-/**
- *
- */
 define('EVENT_LEVEL_GOOD', 'GOOD');
-/**
- *
- */
+
 define('EVENT_LEVEL_BAD', 'BAD');
-/**
- *
- */
+
 define('EVENT_LEVEL_BORING', 'BORING');
-/**
- *
- */
+
 define('EVENT_LEVEL_GAY', 'GAY');
 
-/**
- *
- */
 define('EVENT_CHANNEL_ORGA', 'orga');
-/**
- *
- */
+
 define('EVENT_CHANNEL_PUBLIC', 'public');
-/**
- *
- */
+
 define('EVENT_CHANNEL_ALL', 'all');
 
 /**
  * Class StuhlService
- *
- * @package Partymeister\Core\Services
  */
 class StuhlService
 {
@@ -62,12 +44,13 @@ class StuhlService
     public static $password;
 
     /**
-     * @param        $message
-     * @param string $title
-     * @param string $link
-     * @param string $level
-     * @param string $destination
+     * @param    $message
+     * @param  string  $title
+     * @param  string  $link
+     * @param  string  $level
+     * @param  string  $destination
      * @return int|string
+     *
      * @throws GuzzleException
      */
     public static function send(

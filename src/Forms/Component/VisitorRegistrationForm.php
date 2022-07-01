@@ -8,8 +8,6 @@ use Symfony\Component\Intl\Countries;
 
 /**
  * Class VisitorRegistrationForm
- *
- * @package Partymeister\Core\Forms\Component
  */
 class VisitorRegistrationForm extends Form
 {
@@ -41,8 +39,8 @@ class VisitorRegistrationForm extends Form
             $countryList = Countries::getNames();
         }
         $this->add('country_iso_3166_1', 'select', ['label'   => trans('motor-backend::backend/global.address.country'),
-                                                    'choices' => $countryList,
-            ]);
+            'choices' => $countryList,
+        ]);
 
         $this->add('password', 'password', [
             'value' => '',

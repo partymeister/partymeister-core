@@ -6,8 +6,6 @@ use Kris\LaravelFormBuilder\Form;
 
 /**
  * Class EventTypeForm
- *
- * @package Partymeister\Core\Forms\Backend
  */
 class EventTypeForm extends Form
 {

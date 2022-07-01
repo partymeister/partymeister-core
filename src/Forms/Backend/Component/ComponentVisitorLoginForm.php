@@ -7,8 +7,6 @@ use Motor\CMS\Models\Navigation;
 
 /**
  * Class ComponentVisitorLoginForm
- *
- * @package Partymeister\Core\Forms\Backend\Component
  */
 class ComponentVisitorLoginForm extends Form
 {

@@ -31,6 +31,7 @@ use Motor\Core\Traits\Searchable;
  * @property-read Collection|Event[] $events
  * @property-read mixed $event_count
  * @property-read \Motor\Backend\Models\User $updater
+ *
  * @method static Builder|Schedule filteredBy(Filter $filter, $column)
  * @method static Builder|Schedule filteredByMultiple(Filter $filter)
  * @method static Builder|Schedule newModelQuery()

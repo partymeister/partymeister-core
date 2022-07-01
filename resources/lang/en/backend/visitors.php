@@ -13,6 +13,6 @@ return [
     'name'  => 'Handle',
     'group' => 'Group',
 
-    'latest' => 'Latest registered visitors'
+    'latest' => 'Latest registered visitors',
 
 ];

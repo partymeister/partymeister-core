@@ -3,19 +3,16 @@
 namespace Partymeister\Core\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
-
-use Partymeister\Core\Models\MessageGroup;
 use Partymeister\Core\Http\Requests\Backend\MessageGroupRequest;
-use Partymeister\Core\Services\MessageGroupService;
-use Partymeister\Core\Http\Resources\MessageGroupResource;
 use Partymeister\Core\Http\Resources\MessageGroupCollection;
+use Partymeister\Core\Http\Resources\MessageGroupResource;
+use Partymeister\Core\Models\MessageGroup;
+use Partymeister\Core\Services\MessageGroupService;
 
 // TODO: is this class still needed?
 
 /**
  * Class MessageGroupsController
- *
- * @package Partymeister\Core\Http\Controllers\Api
  */
 class MessageGroupsController extends ApiController
 {
@@ -125,7 +122,7 @@ class MessageGroupsController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param MessageGroupRequest $request
+     * @param  MessageGroupRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(MessageGroupRequest $request)
@@ -188,7 +185,7 @@ class MessageGroupsController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param MessageGroup $record
+     * @param  MessageGroup  $record
      * @return MessageGroupResource
      */
     public function show(MessageGroup $record)
@@ -252,8 +249,8 @@ class MessageGroupsController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param MessageGroupRequest $request
-     * @param MessageGroup $record
+     * @param  MessageGroupRequest  $request
+     * @param  MessageGroup  $record
      * @return MessageGroupResource
      */
     public function update(MessageGroupRequest $request, MessageGroup $record)
@@ -320,7 +317,7 @@ class MessageGroupsController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param MessageGroup $record
+     * @param  MessageGroup  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(MessageGroup $record)

@@ -1,4 +1,5 @@
 <?php
+
 //Route::group([
 //    'middleware' => ['auth:api', 'bindings', 'permission'],
 //    'namespace'  => 'Partymeister\Core\Http\Controllers\Api',

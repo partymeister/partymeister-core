@@ -13,8 +13,6 @@ use Partymeister\Core\Models\Component\ComponentSchedule;
 
 /**
  * Class ComponentSchedules
- *
- * @package Partymeister\Core\Components
  */
 class ComponentSchedules
 {
@@ -36,8 +34,8 @@ class ComponentSchedules
     /**
      * ComponentSchedules constructor.
      *
-     * @param PageVersionComponent $pageVersionComponent
-     * @param ComponentSchedule $component
+     * @param  PageVersionComponent  $pageVersionComponent
+     * @param  ComponentSchedule  $component
      */
     public function __construct(
         PageVersionComponent $pageVersionComponent,
@@ -48,7 +46,7 @@ class ComponentSchedules
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return Factory|View
      */
     public function index(Request $request)
@@ -70,16 +68,16 @@ class ComponentSchedules
                 $this->days[$dayKey][$timeKey] = [];
             }
             $this->days[$dayKey][$timeKey][] = [
-                "web_color"   => Arr::get($event, 'event_type.data.web_color'),
-                "slide_color" => Arr::get($event, 'event_type.data.slide_color'),
-                "id"          => Arr::get($event, 'id'),
-                "typeid"      => Arr::get($event, 'event_type_id'),
-                "type"        => Arr::get($event, 'event_type.data.name'),
-                "name"        => Arr::get($event, 'name'),
-                "description" => "",
-                "link"        => "",
-                "starttime"   => $date->format('Y-m-d H:i'),
-                "endtime"     => "",
+                'web_color'   => Arr::get($event, 'event_type.data.web_color'),
+                'slide_color' => Arr::get($event, 'event_type.data.slide_color'),
+                'id'          => Arr::get($event, 'id'),
+                'typeid'      => Arr::get($event, 'event_type_id'),
+                'type'        => Arr::get($event, 'event_type.data.name'),
+                'name'        => Arr::get($event, 'name'),
+                'description' => '',
+                'link'        => '',
+                'starttime'   => $date->format('Y-m-d H:i'),
+                'endtime'     => '',
             ];
         }
 

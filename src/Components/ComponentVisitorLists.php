@@ -10,8 +10,6 @@ use Partymeister\Core\Models\Visitor;
 
 /**
  * Class ComponentVisitorLists
- *
- * @package Partymeister\Core\Components
  */
 class ComponentVisitorLists
 {
@@ -28,7 +26,7 @@ class ComponentVisitorLists
     /**
      * ComponentVisitorLists constructor.
      *
-     * @param PageVersionComponent $pageVersionComponent
+     * @param  PageVersionComponent  $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
@@ -36,7 +34,7 @@ class ComponentVisitorLists
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return Factory|View
      */
     public function index(Request $request)

@@ -7,8 +7,6 @@ use Partymeister\Core\Models\Component\ComponentSchedule;
 
 /**
  * Class ComponentScheduleService
- *
- * @package Partymeister\Core\Services\Component
  */
 class ComponentScheduleService extends ComponentBaseService
 {

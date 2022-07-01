@@ -12,8 +12,6 @@ use Partymeister\Core\Services\StuhlService;
 
 /**
  * Class PartymeisterCoreCheckCallbacksCommand
- *
- * @package Partymeister\Core\Console\Commands
  */
 class PartymeisterCoreCheckCallbacksCommand extends Command
 {

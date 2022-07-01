@@ -6,8 +6,6 @@ use Motor\Backend\Grid\Grid;
 
 /**
  * Class ScheduleGrid
- *
- * @package Partymeister\Core\Grids
  */
 class ScheduleGrid extends Grid
 {

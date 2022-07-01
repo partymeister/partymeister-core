@@ -11,8 +11,6 @@ use Partymeister\Slides\Models\Slide;
 
 /**
  * Class ScheduleService
- *
- * @package Partymeister\Core\Services
  */
 class ScheduleService extends BaseService
 {
@@ -22,8 +20,9 @@ class ScheduleService extends BaseService
     protected $model = Schedule::class;
 
     /**
-     * @param Schedule $schedule
-     * @param          $data
+     * @param  Schedule  $schedule
+     * @param    $data
+     *
      * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\DiskDoesNotExist
      * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileDoesNotExist
      * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileIsTooBig
@@ -39,7 +38,7 @@ class ScheduleService extends BaseService
                                 ->where('_lft', 1)
                                 ->first();
             if (is_null($rootNode)) {
-                die("Root node for slide category tree does not exist");
+                exit('Root node for slide category tree does not exist');
             }
             $timetableCategory = new Category();
             $timetableCategory->scope = 'slides';

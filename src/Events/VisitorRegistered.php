@@ -7,8 +7,6 @@ use Partymeister\Core\Models\Visitor;
 
 /**
  * Class VisitorRegistered
- *
- * @package Partymeister\Core\Events
  */
 class VisitorRegistered
 {
@@ -22,7 +20,7 @@ class VisitorRegistered
     /**
      * VisitorRegistered constructor.
      *
-     * @param Visitor $visitor
+     * @param  Visitor  $visitor
      */
     public function __construct(Visitor $visitor)
     {

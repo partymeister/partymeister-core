@@ -3,17 +3,14 @@
 namespace Partymeister\Core\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
-
-use Partymeister\Core\Models\Guest;
 use Partymeister\Core\Http\Requests\Backend\GuestRequest;
-use Partymeister\Core\Services\GuestService;
-use Partymeister\Core\Http\Resources\GuestResource;
 use Partymeister\Core\Http\Resources\GuestCollection;
+use Partymeister\Core\Http\Resources\GuestResource;
+use Partymeister\Core\Models\Guest;
+use Partymeister\Core\Services\GuestService;
 
 /**
  * Class GuestsController
- *
- * @package Partymeister\Core\Http\Controllers\Api
  */
 class GuestsController extends ApiController
 {
@@ -123,7 +120,7 @@ class GuestsController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param GuestRequest $request
+     * @param  GuestRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(GuestRequest $request)
@@ -186,7 +183,7 @@ class GuestsController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param Guest $record
+     * @param  Guest  $record
      * @return GuestResource
      */
     public function show(Guest $record)
@@ -250,8 +247,8 @@ class GuestsController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param GuestRequest $request
-     * @param Guest $record
+     * @param  GuestRequest  $request
+     * @param  Guest  $record
      * @return GuestResource
      */
     public function update(GuestRequest $request, Guest $record)
@@ -318,7 +315,7 @@ class GuestsController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param Guest $record
+     * @param  Guest  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Guest $record)

@@ -19,8 +19,6 @@ use Partymeister\Core\Models\Schedule;
 
 /**
  * Class PartymeisterServiceProvider
- *
- * @package Partymeister\Core\Providers
  */
 class PartymeisterServiceProvider extends ServiceProvider
 {

@@ -4,7 +4,6 @@ namespace Partymeister\Core\Http\Controllers\Backend;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
@@ -18,8 +17,6 @@ use ReflectionException;
 
 /**
  * Class GuestsController
- *
- * @package Partymeister\Core\Http\Controllers\Backend
  */
 class GuestsController extends Controller
 {
@@ -29,6 +26,7 @@ class GuestsController extends Controller
      * Display a listing of the resource.
      *
      * @return Factory|View
+     *
      * @throws ReflectionException
      */
     public function index()
@@ -61,7 +59,7 @@ class GuestsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param GuestRequest $request
+     * @param  GuestRequest  $request
      * @return RedirectResponse|Redirector
      */
     public function store(GuestRequest $request)
@@ -96,7 +94,7 @@ class GuestsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Guest $record
+     * @param  Guest  $record
      * @return Factory|View
      */
     public function edit(Guest $record)
@@ -114,8 +112,8 @@ class GuestsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param GuestRequest $request
-     * @param Guest $record
+     * @param  GuestRequest  $request
+     * @param  Guest  $record
      * @return RedirectResponse|Redirector
      */
     public function update(GuestRequest $request, Guest $record)
@@ -140,7 +138,7 @@ class GuestsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Guest $record
+     * @param  Guest  $record
      * @return RedirectResponse|Redirector
      */
     public function destroy(Guest $record)

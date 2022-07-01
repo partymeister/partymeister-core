@@ -4,7 +4,6 @@ namespace Partymeister\Core\Http\Controllers\Backend;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
@@ -18,8 +17,6 @@ use ReflectionException;
 
 /**
  * Class MessageGroupsController
- *
- * @package Partymeister\Core\Http\Controllers\Backend
  */
 class MessageGroupsController extends Controller
 {
@@ -29,6 +26,7 @@ class MessageGroupsController extends Controller
      * Display a listing of the resource.
      *
      * @return Factory|View
+     *
      * @throws ReflectionException
      */
     public function index()
@@ -61,7 +59,7 @@ class MessageGroupsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param MessageGroupRequest $request
+     * @param  MessageGroupRequest  $request
      * @return RedirectResponse|Redirector
      */
     public function store(MessageGroupRequest $request)
@@ -96,7 +94,7 @@ class MessageGroupsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param MessageGroup $record
+     * @param  MessageGroup  $record
      * @return Factory|View
      */
     public function edit(MessageGroup $record)
@@ -114,8 +112,8 @@ class MessageGroupsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param MessageGroupRequest $request
-     * @param MessageGroup $record
+     * @param  MessageGroupRequest  $request
+     * @param  MessageGroup  $record
      * @return RedirectResponse|Redirector
      */
     public function update(MessageGroupRequest $request, MessageGroup $record)
@@ -140,7 +138,7 @@ class MessageGroupsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param MessageGroup $record
+     * @param  MessageGroup  $record
      * @return RedirectResponse|Redirector
      */
     public function destroy(MessageGroup $record)

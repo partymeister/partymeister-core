@@ -39,6 +39,7 @@ use Motor\Core\Traits\Searchable;
  * @property-read EventType|null $event_type
  * @property-read Schedule $schedule
  * @property-read \Motor\Backend\Models\User $updater
+ *
  * @method static Builder|Event filteredBy(Filter $filter, $column)
  * @method static Builder|Event filteredByMultiple(Filter $filter)
  * @method static Builder|Event newModelQuery()
@@ -114,7 +115,6 @@ class Event extends Model
     {
         return $this->belongsTo(Schedule::class);
     }
-
 
     /**
      * @return BelongsTo

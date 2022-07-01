@@ -3,17 +3,14 @@
 namespace Partymeister\Core\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
-
-use Partymeister\Core\Models\Visitor;
 use Partymeister\Core\Http\Requests\Backend\VisitorRequest;
-use Partymeister\Core\Services\VisitorService;
-use Partymeister\Core\Http\Resources\VisitorResource;
 use Partymeister\Core\Http\Resources\VisitorCollection;
+use Partymeister\Core\Http\Resources\VisitorResource;
+use Partymeister\Core\Models\Visitor;
+use Partymeister\Core\Services\VisitorService;
 
 /**
  * Class VisitorsController
- *
- * @package Partymeister\Core\Http\Controllers\Api
  */
 class VisitorsController extends ApiController
 {
@@ -123,7 +120,7 @@ class VisitorsController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param VisitorRequest $request
+     * @param  VisitorRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(VisitorRequest $request)
@@ -186,7 +183,7 @@ class VisitorsController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param Visitor $record
+     * @param  Visitor  $record
      * @return VisitorResource
      */
     public function show(Visitor $record)
@@ -250,8 +247,8 @@ class VisitorsController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param VisitorRequest $request
-     * @param Visitor $record
+     * @param  VisitorRequest  $request
+     * @param  Visitor  $record
      * @return VisitorResource
      */
     public function update(VisitorRequest $request, Visitor $record)
@@ -318,7 +315,7 @@ class VisitorsController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param Visitor $record
+     * @param  Visitor  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Visitor $record)

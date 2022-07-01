@@ -7,8 +7,6 @@ use Partymeister\Core\Rules\VisitorLogin;
 
 /**
  * Class VisitorLoginForm
- *
- * @package Partymeister\Core\Forms\Component
  */
 class VisitorLoginForm extends Form
 {
@@ -18,12 +16,12 @@ class VisitorLoginForm extends Form
     public function buildForm()
     {
         $this->add('name', 'text', [
-                'label' => trans('partymeister-core::backend/visitors.name'),
-                'rules' => 'required',
-            ])
+            'label' => trans('partymeister-core::backend/visitors.name'),
+            'rules' => 'required',
+        ])
              ->add('password', 'password', [
-                     'label' => trans('motor-backend::backend/users.password'),
-                     'rules' => ['required', new VisitorLogin],
-                 ]);
+                 'label' => trans('motor-backend::backend/users.password'),
+                 'rules' => ['required', new VisitorLogin],
+             ]);
     }
 }

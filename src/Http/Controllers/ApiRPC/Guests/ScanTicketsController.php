@@ -11,13 +11,11 @@ use Partymeister\Core\Models\Guest;
 
 /**
  * Class ScanTicketsController
- *
- * @package Partymeister\Core\Http\Controllers\Api\Guests
  */
 class ScanTicketsController extends ApiController
 {
     /**
-     * @param GuestRequest $request
+     * @param  GuestRequest  $request
      * @return JsonResponse
      */
     public function index(Request $request)
@@ -42,7 +40,7 @@ class ScanTicketsController extends ApiController
         }
         if ($guest->has_arrived) {
             return response()->json([
-                'error' => 'partymeister-core.guests.guest_already_arrived', 'replace' => ['date' => $guest->arrived_at]
+                'error' => 'partymeister-core.guests.guest_already_arrived', 'replace' => ['date' => $guest->arrived_at],
             ], 404);
         }
         $guest->has_arrived = true;
@@ -52,6 +50,7 @@ class ScanTicketsController extends ApiController
 
         $response = [];
         $response['record'] = new GuestResource($guest);
+
         return response()->json($response, 200);
     }
 }

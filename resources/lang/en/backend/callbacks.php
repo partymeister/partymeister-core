@@ -27,7 +27,7 @@ return [
     'actions'      => [
         'notification'           => 'Send notification',
         'live'                   => 'Advance live voting',
-        'live_with_notification' => 'Adanvce live voting and send notification'
+        'live_with_notification' => 'Adanvce live voting and send notification',
     ],
     'destination'  => 'Destination',
     'destinations' => [
@@ -42,6 +42,6 @@ return [
         'location'     => 'Location (public)',
         'ios'          => 'iOS (public)',
         'android'      => 'Android (public)',
-        'testing'      => 'TESTING'
-    ]
+        'testing'      => 'TESTING',
+    ],
 ];

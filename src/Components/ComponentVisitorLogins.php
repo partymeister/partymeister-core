@@ -14,8 +14,6 @@ use Partymeister\Core\Services\Component\VisitorLoginService;
 
 /**
  * Class ComponentVisitorLogins
- *
- * @package Partymeister\Core\Components
  */
 class ComponentVisitorLogins
 {
@@ -44,8 +42,8 @@ class ComponentVisitorLogins
     /**
      * ComponentVisitorLogins constructor.
      *
-     * @param PageVersionComponent $pageVersionComponent
-     * @param ComponentVisitorLogin $component
+     * @param  PageVersionComponent  $pageVersionComponent
+     * @param  ComponentVisitorLogin  $component
      */
     public function __construct(
         PageVersionComponent $pageVersionComponent,
@@ -56,7 +54,7 @@ class ComponentVisitorLogins
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return bool|Factory|RedirectResponse|View
      */
     public function index(Request $request)
@@ -115,8 +113,8 @@ class ComponentVisitorLogins
     public function render()
     {
         return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
-                'visitorLoginForm' => $this->visitorLoginForm,
-                'component'        => $this->component,
-            ]);
+            'visitorLoginForm' => $this->visitorLoginForm,
+            'component'        => $this->component,
+        ]);
     }
 }

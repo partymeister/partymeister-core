@@ -18,14 +18,13 @@ use Partymeister\Core\Services\StuhlService;
 
 /**
  * Class SendController
- *
- * @package Partymeister\Core\Http\Controllers\Api\Callbacks
  */
 class SendController extends ApiController
 {
     /**
      * @param $hash
      * @return ResponseFactory|JsonResponse|Response
+     *
      * @throws GuzzleException
      */
     public function callback($hash)
@@ -95,14 +94,14 @@ class SendController extends ApiController
         return response()->json($status);
     }
 
-
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return ResponseFactory|Response
      */
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return ResponseFactory|Response
+     *
      * @throws GuzzleException
      */
     public function single(Request $request)

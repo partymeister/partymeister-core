@@ -9,8 +9,6 @@ use Motor\Backend\Grid\Renderers\TranslateRenderer;
 
 /**
  * Class CallbackGrid
- *
- * @package Partymeister\Core\Grids
  */
 class CallbackGrid extends Grid
 {

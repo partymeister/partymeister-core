@@ -3,12 +3,10 @@
 namespace Partymeister\Core\Http\Controllers\Backend\Schedules;
 
 use Carbon\Carbon;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
-use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Http\Controllers\Controller;
 use Partymeister\Core\Http\Resources\ScheduleResource;
@@ -18,8 +16,6 @@ use Partymeister\Slides\Models\SlideTemplate;
 
 /**
  * Class SlidesController
- *
- * @package Partymeister\Core\Http\Controllers\Backend\Schedules
  */
 class SlidesController extends Controller
 {
@@ -28,8 +24,8 @@ class SlidesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Partymeister\Core\Models\Schedule $record
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Partymeister\Core\Models\Schedule  $record
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index(Request $request, Schedule $record)
@@ -62,8 +58,8 @@ class SlidesController extends Controller
     }
 
     /**
-     * @param Schedule $record
-     * @param Request $request
+     * @param  Schedule  $record
+     * @param  Request  $request
      * @return RedirectResponse|Redirector
      */
     public function store(Schedule $record, Request $request)

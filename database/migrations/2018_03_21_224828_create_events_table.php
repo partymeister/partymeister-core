@@ -1,12 +1,11 @@
 <?php
 
 use Culpa\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 use Culpa\Facades\Schema;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateEventsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -36,7 +35,6 @@ class CreateEventsTable extends Migration
             $table->foreign('event_type_id')->references('id')->on('event_types')->onDelete('set null');
         });
     }
-
 
     /**
      * Reverse the migrations.

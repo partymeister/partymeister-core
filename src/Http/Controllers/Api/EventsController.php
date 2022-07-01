@@ -3,17 +3,14 @@
 namespace Partymeister\Core\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
-
-use Partymeister\Core\Models\Event;
 use Partymeister\Core\Http\Requests\Backend\EventRequest;
-use Partymeister\Core\Services\EventService;
-use Partymeister\Core\Http\Resources\EventResource;
 use Partymeister\Core\Http\Resources\EventCollection;
+use Partymeister\Core\Http\Resources\EventResource;
+use Partymeister\Core\Models\Event;
+use Partymeister\Core\Services\EventService;
 
 /**
  * Class EventsController
- *
- * @package Partymeister\Core\Http\Controllers\Api
  */
 class EventsController extends ApiController
 {
@@ -123,7 +120,7 @@ class EventsController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param EventRequest $request
+     * @param  EventRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(EventRequest $request)
@@ -186,7 +183,7 @@ class EventsController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param Event $record
+     * @param  Event  $record
      * @return EventResource
      */
     public function show(Event $record)
@@ -250,8 +247,8 @@ class EventsController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param EventRequest $request
-     * @param Event $record
+     * @param  EventRequest  $request
+     * @param  Event  $record
      * @return EventResource
      */
     public function update(EventRequest $request, Event $record)
@@ -318,7 +315,7 @@ class EventsController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param Event $record
+     * @param  Event  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Event $record)

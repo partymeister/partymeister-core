@@ -6,8 +6,6 @@ use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class VisitorRequest
- *
- * @package Partymeister\Core\Http\Requests\Backend
  */
 class VisitorRequest extends Request
 {

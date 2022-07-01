@@ -8,8 +8,6 @@ use Partymeister\Core\Models\Schedule;
 
 /**
  * Class EventForm
- *
- * @package Partymeister\Core\Forms\Backend
  */
 class EventForm extends Form
 {

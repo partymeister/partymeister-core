@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Partymeister\Core\Models\EventType;
 
@@ -27,31 +25,28 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
         'model_has_permissions',
         'model_has_roles',
         'role_has_permissions',
-        'media'
+        'media',
     ];
-
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->withFactories(__DIR__ . '/../../../../database/factories');
+        $this->withFactories(__DIR__.'/../../../../database/factories');
 
         $this->addDefaults();
     }
-
 
     protected function addDefaults()
     {
         $this->user = create_test_superadmin();
 
-        $this->readPermission   = create_test_permission_with_name('event_types.read');
-        $this->writePermission  = create_test_permission_with_name('event_types.write');
+        $this->readPermission = create_test_permission_with_name('event_types.read');
+        $this->writePermission = create_test_permission_with_name('event_types.write');
         $this->deletePermission = create_test_permission_with_name('event_types.delete');
 
         $this->actingAs($this->user);
     }
-
 
     /** @test */
     public function can_see_grid_without_event_type()
@@ -60,7 +55,6 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
              ->see(trans('partymeister-core::backend/event_types.event_types'))
              ->see(trans('motor-backend::backend/global.no_records'));
     }
-
 
     /** @test */
     public function can_see_grid_with_one_event_type()
@@ -71,7 +65,6 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
              ->see($record->name);
     }
 
-
     /** @test */
     public function can_visit_the_edit_form_of_a_event_type_and_use_the_back_button()
     {
@@ -80,18 +73,17 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
              ->within('table', function () {
                  $this->click(trans('motor-backend::backend/global.edit'));
              })
-             ->seePageIs('/backend/event_types/' . $record->id . '/edit')
+             ->seePageIs('/backend/event_types/'.$record->id.'/edit')
              ->click(trans('motor-backend::backend/global.back'))
              ->seePageIs('/backend/event_types');
     }
-
 
     /** @test */
     public function can_visit_the_edit_form_of_a_event_type_and_change_values()
     {
         $record = create_test_event_type();
 
-        $this->visit('/backend/event_types/' . $record->id . '/edit')
+        $this->visit('/backend/event_types/'.$record->id.'/edit')
              ->see($record->name)
              ->type('Updated Event type', 'name')
              ->within('.box-footer', function () {
@@ -105,7 +97,6 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
         $this->assertEquals('Updated Event type', $record->name);
     }
 
-
     /** @test */
     public function can_click_the_event_type_create_button()
     {
@@ -113,7 +104,6 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
              ->click(trans('partymeister-core::backend/event_types.new'))
              ->seePageIs('/backend/event_types/create');
     }
-
 
     /** @test */
     public function can_create_a_new_event_type()
@@ -129,7 +119,6 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
              ->seePageIs('/backend/event_types');
     }
 
-
     /** @test */
     public function cannot_create_a_new_event_type_with_empty_fields()
     {
@@ -142,12 +131,11 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
              ->seePageIs('/backend/event_types/create');
     }
 
-
     /** @test */
     public function can_modify_a_event_type()
     {
         $record = create_test_event_type();
-        $this->visit('/backend/event_types/' . $record->id . '/edit')
+        $this->visit('/backend/event_types/'.$record->id.'/edit')
              ->see(trans('partymeister-core::backend/event_types.edit'))
              ->type('Modified Event type Name', 'name')
              ->within('.box-footer', function () {
@@ -157,7 +145,6 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
              ->see('Modified Event type Name')
              ->seePageIs('/backend/event_types');
     }
-
 
     /** @test */
     public function can_delete_a_event_type()
@@ -173,7 +160,6 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
         $this->assertCount(0, EventType::all());
     }
 
-
     /** @test */
     public function can_paginate_event_type_results()
     {
@@ -182,7 +168,6 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
             $this->click('3');
         })->seePageIs('/backend/event_types?page=3');
     }
-
 
     /** @test */
     public function can_search_event_type_results()

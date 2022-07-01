@@ -80,7 +80,7 @@ class CallbackResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function toArray($request)
@@ -97,8 +97,8 @@ class CallbackResource extends BaseResource
             'hash'          => $this->hash,
             'embargo_until' => Str::replaceFirst(' ', 'T', $this->embargo_until),
             'fired_at'      => Str::replaceFirst(' ', 'T', $this->fired_at),
-            'has_fired'     => (boolean) $this->has_fired,
-            'is_timed'      => (boolean) $this->is_timed,
+            'has_fired'     => (bool) $this->has_fired,
+            'is_timed'      => (bool) $this->is_timed,
         ];
     }
 }

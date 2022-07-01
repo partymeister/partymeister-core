@@ -6,8 +6,6 @@ use Kris\LaravelFormBuilder\Form;
 
 /**
  * Class ScheduleForm
- *
- * @package Partymeister\Core\Forms\Backend
  */
 class ScheduleForm extends Form
 {

@@ -8,11 +8,9 @@ use Motor\Admin\Models\User;
 
 /**
  * Class AccountsTableSeeder
- * @package Partymeister\Accounting\Database\Seeds
  */
 class MessageGroupsTableSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *

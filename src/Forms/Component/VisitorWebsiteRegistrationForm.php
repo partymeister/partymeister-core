@@ -8,8 +8,6 @@ use Symfony\Component\Intl\Countries;
 
 /**
  * Class VisitorWebsiteRegistrationForm
- *
- * @package Partymeister\Core\Forms\Component
  */
 class VisitorWebsiteRegistrationForm extends Form
 {

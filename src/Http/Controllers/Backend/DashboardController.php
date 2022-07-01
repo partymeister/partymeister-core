@@ -14,8 +14,6 @@ use Partymeister\Slides\Models\Slide;
 
 /**
  * Class DashboardController
- *
- * @package App\Http\Controllers
  */
 class DashboardController extends Controller
 {
@@ -32,7 +30,7 @@ class DashboardController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return Factory|View
      */
     public function show(Request $request)

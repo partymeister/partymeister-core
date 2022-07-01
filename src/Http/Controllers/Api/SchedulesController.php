@@ -3,17 +3,14 @@
 namespace Partymeister\Core\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
-
-use Partymeister\Core\Models\Schedule;
 use Partymeister\Core\Http\Requests\Backend\ScheduleRequest;
-use Partymeister\Core\Services\ScheduleService;
-use Partymeister\Core\Http\Resources\ScheduleResource;
 use Partymeister\Core\Http\Resources\ScheduleCollection;
+use Partymeister\Core\Http\Resources\ScheduleResource;
+use Partymeister\Core\Models\Schedule;
+use Partymeister\Core\Services\ScheduleService;
 
 /**
  * Class SchedulesController
- *
- * @package Partymeister\Core\Http\Controllers\Api
  */
 class SchedulesController extends ApiController
 {
@@ -123,7 +120,7 @@ class SchedulesController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param ScheduleRequest $request
+     * @param  ScheduleRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(ScheduleRequest $request)
@@ -186,7 +183,7 @@ class SchedulesController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param Schedule $record
+     * @param  Schedule  $record
      * @return ScheduleResource
      */
     public function show(Schedule $record)
@@ -250,8 +247,8 @@ class SchedulesController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param ScheduleRequest $request
-     * @param Schedule $record
+     * @param  ScheduleRequest  $request
+     * @param  Schedule  $record
      * @return ScheduleResource
      */
     public function update(ScheduleRequest $request, Schedule $record)
@@ -318,7 +315,7 @@ class SchedulesController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param Schedule $record
+     * @param  Schedule  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Schedule $record)

@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\Auth;
 
 /**
  * Class VisitorLoginService
- *
- * @package Partymeister\Core\Services\Component
  */
 class VisitorLoginService
 {

@@ -9,8 +9,6 @@ use Motor\Backend\Grid\Renderers\DateRenderer;
 
 /**
  * Class EventGrid
- *
- * @package Partymeister\Core\Grids
  */
 class EventGrid extends Grid
 {
@@ -29,9 +27,9 @@ class EventGrid extends Grid
 
         $this->addColumn('sort_position', trans('partymeister-core::backend/events.sort_position'), true)
              ->renderer(BladeRenderer::class, [
-                     'template' => 'partymeister-core::grid.input_callback',
-                     'field'    => 'sort_position',
-                 ]);
+                 'template' => 'partymeister-core::grid.input_callback',
+                 'field'    => 'sort_position',
+             ]);
 
         $this->addColumn('is_visible', trans('partymeister-core::backend/events.is_visible'), true)
              ->renderer(BooleanRenderer::class);

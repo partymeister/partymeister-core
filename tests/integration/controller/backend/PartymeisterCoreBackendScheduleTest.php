@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Partymeister\Core\Models\Schedule;
 
@@ -27,31 +25,28 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
         'model_has_permissions',
         'model_has_roles',
         'role_has_permissions',
-        'media'
+        'media',
     ];
-
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->withFactories(__DIR__ . '/../../../../database/factories');
+        $this->withFactories(__DIR__.'/../../../../database/factories');
 
         $this->addDefaults();
     }
-
 
     protected function addDefaults()
     {
         $this->user = create_test_superadmin();
 
-        $this->readPermission   = create_test_permission_with_name('schedules.read');
-        $this->writePermission  = create_test_permission_with_name('schedules.write');
+        $this->readPermission = create_test_permission_with_name('schedules.read');
+        $this->writePermission = create_test_permission_with_name('schedules.write');
         $this->deletePermission = create_test_permission_with_name('schedules.delete');
 
         $this->actingAs($this->user);
     }
-
 
     /** @test */
     public function can_see_grid_without_schedule()
@@ -60,7 +55,6 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
              ->see(trans('partymeister-core::backend/schedules.schedules'))
              ->see(trans('motor-backend::backend/global.no_records'));
     }
-
 
     /** @test */
     public function can_see_grid_with_one_schedule()
@@ -71,7 +65,6 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
              ->see($record->name);
     }
 
-
     /** @test */
     public function can_visit_the_edit_form_of_a_schedule_and_use_the_back_button()
     {
@@ -80,18 +73,17 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
              ->within('table', function () {
                  $this->click(trans('motor-backend::backend/global.edit'));
              })
-             ->seePageIs('/backend/schedules/' . $record->id . '/edit')
+             ->seePageIs('/backend/schedules/'.$record->id.'/edit')
              ->click(trans('motor-backend::backend/global.back'))
              ->seePageIs('/backend/schedules');
     }
-
 
     /** @test */
     public function can_visit_the_edit_form_of_a_schedule_and_change_values()
     {
         $record = create_test_schedule();
 
-        $this->visit('/backend/schedules/' . $record->id . '/edit')
+        $this->visit('/backend/schedules/'.$record->id.'/edit')
              ->see($record->name)
              ->type('Updated Schedule', 'name')
              ->within('.box-footer', function () {
@@ -105,7 +97,6 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
         $this->assertEquals('Updated Schedule', $record->name);
     }
 
-
     /** @test */
     public function can_click_the_schedule_create_button()
     {
@@ -113,7 +104,6 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
              ->click(trans('partymeister-core::backend/schedules.new'))
              ->seePageIs('/backend/schedules/create');
     }
-
 
     /** @test */
     public function can_create_a_new_schedule()
@@ -129,7 +119,6 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
              ->seePageIs('/backend/schedules');
     }
 
-
     /** @test */
     public function cannot_create_a_new_schedule_with_empty_fields()
     {
@@ -142,12 +131,11 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
              ->seePageIs('/backend/schedules/create');
     }
 
-
     /** @test */
     public function can_modify_a_schedule()
     {
         $record = create_test_schedule();
-        $this->visit('/backend/schedules/' . $record->id . '/edit')
+        $this->visit('/backend/schedules/'.$record->id.'/edit')
              ->see(trans('partymeister-core::backend/schedules.edit'))
              ->type('Modified Schedule Name', 'name')
              ->within('.box-footer', function () {
@@ -157,7 +145,6 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
              ->see('Modified Schedule Name')
              ->seePageIs('/backend/schedules');
     }
-
 
     /** @test */
     public function can_delete_a_schedule()
@@ -173,7 +160,6 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
         $this->assertCount(0, Schedule::all());
     }
 
-
     /** @test */
     public function can_paginate_schedule_results()
     {
@@ -182,7 +168,6 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
             $this->click('3');
         })->seePageIs('/backend/schedules?page=3');
     }
-
 
     /** @test */
     public function can_search_schedule_results()

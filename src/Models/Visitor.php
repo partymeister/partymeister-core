@@ -31,6 +31,7 @@ use Partymeister\Competitions\Models\Vote;
  * @property-read Collection|Entry[] $entries
  * @property-read mixed $new_comments
  * @property-read Collection|Vote[] $votes
+ *
  * @method static Builder|Visitor filteredBy(Filter $filter, $column)
  * @method static Builder|Visitor filteredByMultiple(Filter $filter)
  * @method static Builder|Visitor newModelQuery()
@@ -112,7 +113,6 @@ class Visitor extends Authenticatable
         return 'name';
     }
 
-
     /**
      * @return int
      */
@@ -132,7 +132,6 @@ class Visitor extends Authenticatable
         return $numberOfComments;
     }
 
-
     /**
      * @return HasMany
      */
@@ -143,7 +142,6 @@ class Visitor extends Authenticatable
     {
         return $this->hasMany(Entry::class);
     }
-
 
     /**
      * @return HasMany

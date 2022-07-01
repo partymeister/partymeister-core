@@ -9,8 +9,6 @@ use Partymeister\Core\Models\User;
 
 /**
  * Class MessageGroupService
- *
- * @package Partymeister\Core\Services
  */
 class MessageGroupService extends BaseService
 {

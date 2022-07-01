@@ -1,12 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddAdditionDataFieldToVisitors extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -18,7 +17,6 @@ class AddAdditionDataFieldToVisitors extends Migration
             $table->json('additional_data')->after('country_iso_3166_1');
         });
     }
-
 
     /**
      * Reverse the migrations.

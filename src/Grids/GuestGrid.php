@@ -8,8 +8,6 @@ use Motor\Backend\Grid\Renderers\BooleanRenderer;
 
 /**
  * Class GuestGrid
- *
- * @package Partymeister\Core\Grids
  */
 class GuestGrid extends Grid
 {
