@@ -27,11 +27,11 @@ use Motor\Core\Traits\Searchable;
  * @property int $created_by
  * @property int $updated_by
  * @property int|null $deleted_by
- * @property-read \Motor\Backend\Models\User $creator
- * @property-read \Motor\Backend\Models\User|null $eraser
+ * @property-read \Motor\Admin\Models\User $creator
+ * @property-read \Motor\Admin\Models\User|null $eraser
  * @property-read int $user_count
- * @property-read \Motor\Backend\Models\User $updater
- * @property-read Collection|\Motor\Backend\Models\User[] $users
+ * @property-read \Motor\Admin\Models\User $updater
+ * @property-read Collection|\Motor\Admin\Models\User[] $users
  *
  * @method static Builder|MessageGroup filteredBy(Filter $filter, $column)
  * @method static Builder|MessageGroup filteredByMultiple(Filter $filter)

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Motor\Backend\Http\Controllers\ApiController;
+use Motor\Admin\Http\Controllers\ApiController;
 use Partymeister\Competitions\Events\CompetitionSaved;
 use Partymeister\Competitions\Events\LiveVoteUpdated;
 use Partymeister\Competitions\Models\Competition;

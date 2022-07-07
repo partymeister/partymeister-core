@@ -3,8 +3,8 @@
 namespace Partymeister\Core\Services;
 
 use Illuminate\Support\Arr;
-use Motor\Backend\Models\Category;
-use Motor\Backend\Services\BaseService;
+use Motor\Admin\Models\Category;
+use Motor\Admin\Services\BaseService;
 use Motor\Core\Filter\Renderers\SelectRenderer;
 use Partymeister\Core\Models\Guest;
 

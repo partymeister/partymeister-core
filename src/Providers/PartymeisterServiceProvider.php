@@ -112,8 +112,8 @@ class PartymeisterServiceProvider extends ServiceProvider
 
     public function navigationItems()
     {
-        $config = $this->app['config']->get('motor-backend-navigation', []);
-        $this->app['config']->set('motor-backend-navigation', array_replace_recursive(require __DIR__.'/../../config/motor-backend-navigation.php', $config));
+        $config = $this->app['config']->get('motor-admin-navigation', []);
+        $this->app['config']->set('motor-admin-navigation', array_replace_recursive(require __DIR__.'/../../config/motor-admin-navigation.php', $config));
     }
 
     public function permissions()

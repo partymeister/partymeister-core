@@ -9,7 +9,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Motor\Admin\Models\User;
-use Motor\Backend\Models\Category;
+use Motor\Admin\Models\Category;
 use Partymeister\Competitions\Models\AccessKey;
 use Partymeister\Core\Models\Guest;
 

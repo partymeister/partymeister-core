@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
-use Motor\Backend\Models\Category;
+use Motor\Admin\Models\Category;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
@@ -40,9 +40,9 @@ use Motor\Core\Traits\Searchable;
  * @property int $updated_by
  * @property int|null $deleted_by
  * @property-read Category|null $category
- * @property-read \Motor\Backend\Models\User $creator
- * @property-read \Motor\Backend\Models\User|null $eraser
- * @property-read \Motor\Backend\Models\User $updater
+ * @property-read \Motor\Admin\Models\User $creator
+ * @property-read \Motor\Admin\Models\User|null $eraser
+ * @property-read \Motor\Admin\Models\User $updater
  *
  * @method static Builder|Guest filteredBy(Filter $filter, $column)
  * @method static Builder|Guest filteredByMultiple(Filter $filter)

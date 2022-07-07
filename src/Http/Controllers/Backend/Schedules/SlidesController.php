@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
-use Motor\Backend\Http\Controllers\Controller;
+use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Core\Http\Resources\ScheduleResource;
 use Partymeister\Core\Models\Schedule;
 use Partymeister\Core\Services\ScheduleService;

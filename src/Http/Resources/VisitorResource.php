@@ -3,7 +3,7 @@
 namespace Partymeister\Core\Http\Resources;
 
 use Illuminate\Support\Str;
-use Motor\Backend\Http\Resources\BaseResource;
+use Motor\Admin\Http\Resources\BaseResource;
 
 /**
  * @OA\Schema(

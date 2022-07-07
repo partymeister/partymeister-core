@@ -2,10 +2,10 @@
 
 namespace Partymeister\Core\Grids;
 
-use Motor\Backend\Grid\Grid;
-use Motor\Backend\Grid\Renderers\BooleanRenderer;
-use Motor\Backend\Grid\Renderers\DateRenderer;
-use Motor\Backend\Grid\Renderers\TranslateRenderer;
+use Motor\Admin\Grid\Grid;
+use Motor\Admin\Grid\Renderers\BooleanRenderer;
+use Motor\Admin\Grid\Renderers\DateRenderer;
+use Motor\Admin\Grid\Renderers\TranslateRenderer;
 
 /**
  * Class CallbackGrid

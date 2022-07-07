@@ -4,7 +4,7 @@ namespace Partymeister\Core\Http\Controllers\ApiRPC\Guests;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Motor\Backend\Http\Controllers\ApiController;
+use Motor\Admin\Http\Controllers\ApiController;
 use Partymeister\Core\Http\Requests\Backend\GuestRequest;
 use Partymeister\Core\Http\Resources\GuestResource;
 use Partymeister\Core\Models\Guest;

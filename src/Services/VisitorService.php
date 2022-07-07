@@ -4,7 +4,7 @@ namespace Partymeister\Core\Services;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Motor\Backend\Services\BaseService;
+use Motor\Admin\Services\BaseService;
 use Partymeister\Core\Models\Visitor;
 
 /**

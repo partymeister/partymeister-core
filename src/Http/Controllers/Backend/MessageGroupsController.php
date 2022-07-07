@@ -7,7 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
-use Motor\Backend\Http\Controllers\Controller;
+use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Core\Forms\Backend\MessageGroupForm;
 use Partymeister\Core\Grids\MessageGroupGrid;
 use Partymeister\Core\Http\Requests\Backend\MessageGroupRequest;

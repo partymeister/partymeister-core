@@ -16,7 +16,7 @@
 //});
 
 Route::group([
-    'middleware' => ['auth:sanctum', 'bindings', 'permission'],
+    'middleware' => ['auth:sanctum', 'bindings'],
     'namespace'  => 'Partymeister\Core\Http\Controllers\Api',
     'prefix'     => 'api',
     'as'         => 'api.',

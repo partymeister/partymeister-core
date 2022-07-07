@@ -2,8 +2,8 @@
 
 namespace Partymeister\Core\Grids;
 
-use Motor\Backend\Grid\Grid;
-use Motor\Backend\Grid\Renderers\CollectionRenderer;
+use Motor\Admin\Grid\Grid;
+use Motor\Admin\Grid\Renderers\CollectionRenderer;
 
 /**
  * Class MessageGroupGrid

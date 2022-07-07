@@ -7,7 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
-use Motor\Backend\Http\Controllers\Controller;
+use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Core\Forms\Backend\EventForm;
 use Partymeister\Core\Grids\EventGrid;
 use Partymeister\Core\Http\Requests\Backend\EventRequest;

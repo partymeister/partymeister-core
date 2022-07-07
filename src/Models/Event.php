@@ -34,11 +34,11 @@ use Motor\Core\Traits\Searchable;
  * @property int $created_by
  * @property int $updated_by
  * @property int|null $deleted_by
- * @property-read \Motor\Backend\Models\User $creator
- * @property-read \Motor\Backend\Models\User|null $eraser
+ * @property-read \Motor\Admin\Models\User $creator
+ * @property-read \Motor\Admin\Models\User|null $eraser
  * @property-read EventType|null $event_type
  * @property-read Schedule $schedule
- * @property-read \Motor\Backend\Models\User $updater
+ * @property-read \Motor\Admin\Models\User $updater
  *
  * @method static Builder|Event filteredBy(Filter $filter, $column)
  * @method static Builder|Event filteredByMultiple(Filter $filter)

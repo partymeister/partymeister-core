@@ -2,7 +2,7 @@
 
 namespace Partymeister\Core\Services;
 
-use Motor\Backend\Services\BaseService;
+use Motor\Admin\Services\BaseService;
 use Partymeister\Core\Models\EventType;
 
 /**

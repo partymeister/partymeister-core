@@ -3,7 +3,7 @@
 namespace Partymeister\Core\Forms\Backend;
 
 use Kris\LaravelFormBuilder\Form;
-use Motor\Backend\Models\Category;
+use Motor\Admin\Models\Category;
 
 /**
  * Class GuestForm

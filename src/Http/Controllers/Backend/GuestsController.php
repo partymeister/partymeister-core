@@ -7,7 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
-use Motor\Backend\Http\Controllers\Controller;
+use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Core\Forms\Backend\GuestForm;
 use Partymeister\Core\Grids\GuestGrid;
 use Partymeister\Core\Http\Requests\Backend\GuestRequest;

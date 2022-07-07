@@ -13,7 +13,7 @@ class CallbackPolicy
     /**
      * Perform pre-authorization checks.
      *
-     * @param  \Motor\Backend\Models\User  $user
+     * @param  \Motor\Admin\Models\User  $user
      * @param  string  $ability
      * @return void|bool
      */
@@ -27,7 +27,7 @@ class CallbackPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \Motor\Backend\Models\User  $user
+     * @param  \Motor\Admin\Models\User  $user
      * @return mixed
      */
     public function viewAny(User $user)
@@ -38,7 +38,7 @@ class CallbackPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \Motor\Backend\Models\User  $user
+     * @param  \Motor\Admin\Models\User  $user
      * @param  \Partymeister\Core\Models\Callback  $callback
      * @return mixed
      */
@@ -50,7 +50,7 @@ class CallbackPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \Motor\Backend\Models\User  $user
+     * @param  \Motor\Admin\Models\User  $user
      * @return mixed
      */
     public function create(User $user)
@@ -61,7 +61,7 @@ class CallbackPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \Motor\Backend\Models\User  $user
+     * @param  \Motor\Admin\Models\User  $user
      * @param  \Partymeister\Core\Models\Callback  $callback
      * @return mixed
      */
@@ -73,7 +73,7 @@ class CallbackPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \Motor\Backend\Models\User  $user
+     * @param  \Motor\Admin\Models\User  $user
      * @param  \Partymeister\Core\Models\Callback  $callback
      * @return mixed
      */
@@ -85,7 +85,7 @@ class CallbackPolicy
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \Motor\Backend\Models\User  $user
+     * @param  \Motor\Admin\Models\User  $user
      * @param  \Partymeister\Core\Models\Callback  $callback
      * @return mixed
      */
@@ -97,7 +97,7 @@ class CallbackPolicy
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \Motor\Backend\Models\User  $user
+     * @param  \Motor\Admin\Models\User  $user
      * @param  \Partymeister\Core\Models\Callback  $callback
      * @return mixed
      */
