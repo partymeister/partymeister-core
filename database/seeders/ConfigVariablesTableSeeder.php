@@ -28,10 +28,19 @@ class ConfigVariablesTableSeeder extends Seeder
         ]);
 
         DB::table('config_variables')->insert([
-            'package'    => 'motor-backend',
-            'group'      => 'motor-backend-project',
-            'name'       => 'name_frontend',
+            'package'    => 'motor-cms',
+            'group'      => 'motor-cms-frontend',
+            'name'       => 'name',
             'value'      => 'Random Demoparty',
+            'created_by' => User::get()->first()->id,
+            'updated_by' => User::get()->first()->id,
+        ]);
+
+        DB::table('config_variables')->insert([
+            'package'    => 'partymeister-frontend',
+            'group'      => 'partymeister-frontend',
+            'name'       => 'css',
+            'value'      => '/* INSERT YOUR CUSTOM CSS HERE */',
             'created_by' => User::get()->first()->id,
             'updated_by' => User::get()->first()->id,
         ]);
@@ -40,7 +49,7 @@ class ConfigVariablesTableSeeder extends Seeder
             'package'    => 'partymeister-competitions',
             'group'      => 'partymeister-competitions-voting',
             'name'       => 'deadline',
-            'value'      => '2019-12-31 23:59:59',
+            'value'      => date('Y').'-12-31 23:59:59',
             'created_by' => User::get()->first()->id,
             'updated_by' => User::get()->first()->id,
         ]);
