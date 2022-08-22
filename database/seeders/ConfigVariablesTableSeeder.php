@@ -53,5 +53,14 @@ class ConfigVariablesTableSeeder extends Seeder
             'created_by' => User::get()->first()->id,
             'updated_by' => User::get()->first()->id,
         ]);
+
+        DB::table('config_variables')->insert([
+            'package'    => 'partymeister-competitions',
+            'group'      => 'partymeister-competitions-voting',
+            'name'       => 'live-refresh-interval',
+            'value'      => '20000',
+            'created_by' => User::get()->first()->id,
+            'updated_by' => User::get()->first()->id,
+        ]);
     }
 }
