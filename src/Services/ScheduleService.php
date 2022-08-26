@@ -3,6 +3,7 @@
 namespace Partymeister\Core\Services;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 use Motor\Backend\Models\Category;
 use Motor\Backend\Services\BaseService;
 use Partymeister\Core\Models\Schedule;
@@ -82,8 +83,12 @@ class ScheduleService extends BaseService
                 $slide->clearMediaCollection('final');
                 $slide->addMedia(storage_path().'/preview_'.$slideName.'.png')
                       ->toMediaCollection('preview', 'media');
-                $slide->addMedia(storage_path().'/final_'.$slideName.'.png')
-                      ->toMediaCollection('final', 'media');
+                try {
+                    $slide->addMedia(storage_path().'/final_'.$slideName.'.png')
+                          ->toMediaCollection('final', 'media');
+                } catch (\Exception $e) {
+                    Log::warning("Can't generate screenshot for slide .".$slide->id, [$e->getMessage()]);
+                }
             }
 //            event(new SlideSaved($slide, 'slides'));
         }
