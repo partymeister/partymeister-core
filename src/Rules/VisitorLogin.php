@@ -42,6 +42,6 @@ class VisitorLogin implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'The validation error message. Das muss so!';
     }
 }
