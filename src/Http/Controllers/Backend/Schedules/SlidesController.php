@@ -42,6 +42,10 @@ class SlidesController extends Controller
                 $days[$date->format('l')] = [];
             }
 
+            if (!$event['is_visible'] || $event['is_organizer_only']) {
+                continue;
+            }
+
             $days[$date->format('l')][] = [
                 'name'  => addslashes(Arr::get($event, 'name')),
                 'type'  => addslashes(Arr::get($event, 'event_type.name')),
