@@ -1,8 +1,7 @@
 <?php
 
-use Culpa\Database\Schema\Blueprint;
-use Culpa\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateEventsTable extends Migration
 {
@@ -27,9 +26,9 @@ class CreateEventsTable extends Migration
             $table->integer('sort_position');
             $table->timestamps();
 
-            $table->createdBy();
-            $table->updatedBy();
-            $table->deletedBy(true);
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
+            $table->integer('deleted_by')->nullable();
 
             $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('cascade');
             $table->foreign('event_type_id')->references('id')->on('event_types')->onDelete('set null');

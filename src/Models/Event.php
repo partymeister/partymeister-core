@@ -2,18 +2,16 @@
 
 namespace Partymeister\Core\Models;
 
-use Culpa\Traits\Blameable;
-use Culpa\Traits\CreatedBy;
-use Culpa\Traits\DeletedBy;
-use Culpa\Traits\UpdatedBy;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
+use RichanFongdasen\EloquentBlameable\BlameableTrait;
 
 /**
  * Partymeister\Core\Models\Event
@@ -68,14 +66,8 @@ class Event extends Model
 {
     use Searchable;
     use Filterable;
-    use Blameable, CreatedBy, UpdatedBy, DeletedBy;
-
-    /**
-     * Columns for the Blameable trait
-     *
-     * @var array
-     */
-    protected $blameable = ['created', 'updated', 'deleted'];
+    use BlameableTrait;
+    use HasUuids;
 
     /**
      * Searchable columns for the searchable trait

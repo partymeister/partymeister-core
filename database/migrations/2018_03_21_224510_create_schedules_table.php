@@ -1,8 +1,7 @@
 <?php
 
-use Culpa\Database\Schema\Blueprint;
-use Culpa\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateSchedulesTable extends Migration
 {
@@ -18,9 +17,9 @@ class CreateSchedulesTable extends Migration
             $table->string('name');
             $table->timestamps();
 
-            $table->createdBy();
-            $table->updatedBy();
-            $table->deletedBy(true);
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
+            $table->integer('deleted_by')->nullable();
         });
     }
 

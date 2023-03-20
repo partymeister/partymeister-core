@@ -5,6 +5,7 @@ namespace Partymeister\Core\Models\Component;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Motor\CMS\Models\ComponentBaseModel;
@@ -32,6 +33,8 @@ use Partymeister\Core\Models\Schedule;
  */
 class ComponentSchedule extends ComponentBaseModel
 {
+    use HasUuids;
+
     /**
      * The attributes that are mass assignable.
      *

@@ -1,8 +1,7 @@
 <?php
 
-use Culpa\Database\Schema\Blueprint;
-use Culpa\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateComponentSchedulesTable extends Migration
 {
