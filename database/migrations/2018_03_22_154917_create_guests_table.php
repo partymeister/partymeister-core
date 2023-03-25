@@ -14,7 +14,7 @@ class CreateGuestsTable extends Migration
     {
         Schema::create('guests', function (Blueprint $table) {
             $table->id();
-            $table->integer('category_id')->unsigned()->index()->nullable();
+            $table->bigInteger('category_id')->unsigned()->index()->nullable();
             $table->string('name');
             $table->string('handle');
             $table->string('email');
@@ -30,9 +30,9 @@ class CreateGuestsTable extends Migration
             $table->datetime('arrived_at')->nullable();
             $table->timestamps();
 
-            $table->integer('created_by')->nullable();
-            $table->integer('updated_by')->nullable();
-            $table->integer('deleted_by')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->bigInteger('deleted_by')->nullable();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
         });

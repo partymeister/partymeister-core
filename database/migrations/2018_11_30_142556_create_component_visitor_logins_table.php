@@ -14,10 +14,10 @@ class CreateComponentVisitorLoginsTable extends Migration
     {
         Schema::create('component_visitor_logins', function (Blueprint $table) {
             $table->id();
-            $table->integer('visitor_registration_page_id')->unsigned()->nullable()->index();
-            $table->integer('entries_page_id')->unsigned()->nullable()->index();
-            $table->integer('voting_page_id')->unsigned()->nullable()->index();
-            $table->integer('comments_page_id')->unsigned()->nullable()->index();
+            $table->bigInteger('visitor_registration_page_id')->unsigned()->nullable()->index();
+            $table->bigInteger('entries_page_id')->unsigned()->nullable()->index();
+            $table->bigInteger('voting_page_id')->unsigned()->nullable()->index();
+            $table->bigInteger('comments_page_id')->unsigned()->nullable()->index();
             $table->timestamps();
         });
     }

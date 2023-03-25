@@ -14,8 +14,8 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->integer('schedule_id')->unsigned()->index();
-            $table->integer('event_type_id')->unsigned()->index()->nullable();
+            $table->bigInteger('schedule_id')->unsigned()->index();
+            $table->bigInteger('event_type_id')->unsigned()->index()->nullable();
             $table->string('name');
             $table->datetime('starts_at')->nullable();
             $table->datetime('ends_at')->nullable();
@@ -26,9 +26,9 @@ class CreateEventsTable extends Migration
             $table->integer('sort_position');
             $table->timestamps();
 
-            $table->integer('created_by')->nullable();
-            $table->integer('updated_by')->nullable();
-            $table->integer('deleted_by')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->bigInteger('deleted_by')->nullable();
 
             $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('cascade');
             $table->foreign('event_type_id')->references('id')->on('event_types')->onDelete('set null');

@@ -14,7 +14,7 @@ class CreateComponentSchedulesTable extends Migration
     {
         Schema::create('component_schedules', function (Blueprint $table) {
             $table->id();
-            $table->integer('schedule_id')->unsigned()->index();
+            $table->bigInteger('schedule_id')->unsigned()->index();
             $table->timestamps();
         });
     }

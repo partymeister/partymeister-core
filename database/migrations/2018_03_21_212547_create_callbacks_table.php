@@ -28,9 +28,9 @@ class CreateCallbacksTable extends Migration
             $table->dateTime('embargo_until')->nullable();
             $table->timestamps();
 
-            $table->integer('created_by')->nullable();
-            $table->integer('updated_by')->nullable();
-            $table->integer('deleted_by')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->bigInteger('deleted_by')->nullable();
         });
     }
 
