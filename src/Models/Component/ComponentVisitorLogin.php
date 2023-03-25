@@ -5,7 +5,7 @@ namespace Partymeister\Core\Models\Component;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Kra8\Snowflake\HasShortFlakePrimary;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Motor\CMS\Models\ComponentBaseModel;
@@ -43,7 +43,7 @@ use Motor\CMS\Models\PageVersionComponent;
 class ComponentVisitorLogin extends ComponentBaseModel
 {
 
-    use HasShortFlakePrimary;
+    use HasShortflakePrimary;
 
     /**
      * The attributes that are mass assignable.
