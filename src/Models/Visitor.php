@@ -5,7 +5,7 @@ namespace Partymeister\Core\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Kra8\Snowflake\HasSnowflakePrimary;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Carbon;
@@ -56,7 +56,7 @@ class Visitor extends Authenticatable
 {
     use Searchable;
     use Filterable;
-    use HasUuids;
+    use HasSnowflakePrimary;
 
     /**
      * @var string

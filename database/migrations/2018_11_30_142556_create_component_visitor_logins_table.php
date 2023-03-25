@@ -13,7 +13,7 @@ class CreateComponentVisitorLoginsTable extends Migration
     public function up()
     {
         Schema::create('component_visitor_logins', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->integer('visitor_registration_page_id')->unsigned()->nullable()->index();
             $table->integer('entries_page_id')->unsigned()->nullable()->index();
             $table->integer('voting_page_id')->unsigned()->nullable()->index();

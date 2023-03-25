@@ -13,7 +13,7 @@ class CreateGuestsTable extends Migration
     public function up()
     {
         Schema::create('guests', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->integer('category_id')->unsigned()->index()->nullable();
             $table->string('name');
             $table->string('handle');

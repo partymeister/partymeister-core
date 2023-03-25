@@ -13,7 +13,7 @@ class CreateMessageGroupsTable extends Migration
     public function up()
     {
         Schema::create('message_groups', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name');
             $table->string('uuid')->unique();
             $table->timestamps();

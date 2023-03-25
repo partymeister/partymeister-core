@@ -13,7 +13,7 @@ class CreateComponentSchedulesTable extends Migration
     public function up()
     {
         Schema::create('component_schedules', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->integer('schedule_id')->unsigned()->index();
             $table->timestamps();
         });
