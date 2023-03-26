@@ -12,9 +12,9 @@ Route::group([
 ], function () {
     Route::group(['middleware' => ['permission']], function () {
         Route::get('/', [
-            'as'   => 'dashboard.index',
+            'as'   => 'dashboard.redirect',
             'uses' => 'DashboardController@show',
-        ]);
+        ])->name('dashboard-redirect');
         Route::get('dashboard', 'DashboardController@show')
              ->name('dashboard.index');
 
