@@ -53,5 +53,11 @@ class ComponentVisitorLoginForm extends Form
             'empty_value' => trans('motor-backend::backend/global.please_choose'),
             'choices'     => $navigationItemOptions,
         ]);
+
+        $this->add('password_forgotten_page_id', 'select', [
+            'label'       => trans('partymeister-core::component/visitor-logins.password_forgotten_page'),
+            'empty_value' => trans('motor-backend::backend/global.please_choose'),
+            'choices'     => $navigationItemOptions,
+        ]);
     }
 }

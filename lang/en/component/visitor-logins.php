@@ -10,4 +10,5 @@ return [
     'entries_page'              => 'Entries page',
     'voting_page'               => 'Voting page',
     'comments_page'             => 'Comments page',
+    'password_forgotten_page'   => 'Password forgotten page',
 ];

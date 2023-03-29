@@ -42,6 +42,12 @@ class VisitorRegistrationForm extends Form
             'choices' => $countryList,
         ]);
 
+        $this->add('email', 'email', [
+            'value' => '',
+            'label' => trans('partymeister-core::backend/visitors.email'),
+            'rules' => 'required|email',
+        ]);
+
         $this->add('password', 'password', [
             'value' => '',
             'label' => trans('motor-backend::backend/users.password'),

@@ -13,6 +13,12 @@
                     register!</a>
             @endif
         </div>
+        @if (!is_null($component->password_forgotten_page))
+        <div>
+            <a href="{{route('frontend.pages.index', ['slug' => $component->password_forgotten_page->full_slug])}}">
+                Forgot your password?</a>
+        </div>
+        @endif
     </div>
     {!! form_end($visitorLoginForm) !!}
 @endif

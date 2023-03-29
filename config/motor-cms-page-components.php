@@ -79,5 +79,18 @@ return [
             ],
             'group'           => 'partymeister-core',
         ],
+        'password-forgotten'                 => [
+            'name'            => 'PasswordForgotten',
+            'description'     => 'Show PasswordForgotten component',
+            'view'            => 'partymeister-core::frontend.components.password-forgotten',
+            'component_class' => 'Partymeister\Core\Components\ComponentPasswordForgotten',
+            'compatibility'   => [
+
+            ],
+            'permissions'     => [
+
+            ],
+            'group'           => 'partymeister-core',
+        ],
     ],
 ];

@@ -55,6 +55,7 @@ class ComponentVisitorLogin extends ComponentBaseModel
         'entries_page_id',
         'voting_page_id',
         'comments_page_id',
+        'password_forgotten_page_id'
     ];
 
     /**
@@ -76,6 +77,14 @@ class ComponentVisitorLogin extends ComponentBaseModel
     public function visitor_registration_page()
     {
         return $this->belongsTo(Navigation::class, 'visitor_registration_page_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function password_forgotten_page()
+    {
+        return $this->belongsTo(Navigation::class, 'password_forgotten_page_id');
     }
 
     /**
