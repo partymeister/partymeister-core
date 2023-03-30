@@ -12,6 +12,7 @@ use Illuminate\Support\Carbon;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
+use Partymeister\Competitions\Models\AccessKey;
 use Partymeister\Competitions\Models\Entry;
 use Partymeister\Competitions\Models\Vote;
 
@@ -135,8 +136,15 @@ class Visitor extends Authenticatable
     }
 
     /**
-     * @return HasMany
+     * @return bool
      */
+    public function getIsRemoteAttribute() {
+        if ($this->access_key->is_remote || $this->access_key->is_satellite) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * @return HasMany
      */
@@ -154,5 +162,12 @@ class Visitor extends Authenticatable
     public function votes()
     {
         return $this->hasMany(Vote::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function access_key() {
+        return $this->hasOne(AccessKey::class);
     }
 }
