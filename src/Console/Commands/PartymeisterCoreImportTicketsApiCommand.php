@@ -70,10 +70,10 @@ class PartymeisterCoreImportTicketsApiCommand extends Command
                 $count = 0;
                 $amount = 0;
 
+                // Access key loop
                 foreach ($data as $order) {
-                    if (strtotime(Arr::get($order, 'Bestelldatum')) > strtotime('2020-03-23 00:00:00') && Arr::get($order, 'Storniert') == '0' && Arr::get($order, 'Bezahlt') != '0') {
-                        //$this->info('Order: '.Arr::get($order, 'Betreff').' is valid');
 
+                    if (Arr::get($order, 'Storniert') == '0' && Arr::get($order, 'Bezahlt') != '0') {
                         // Check shopping cart for a valid ticket (t-shirts don't count)
                         foreach (Arr::get($order, 'Warenkorb') as $item) {
                             if (strpos(Arr::get($item, 'Name'), 'T-Shirt') === false) {
@@ -87,6 +87,11 @@ class PartymeisterCoreImportTicketsApiCommand extends Command
                                     if (is_null($existingAccessKey)) {
                                         $accessKey = new AccessKey();
                                         $accessKey->access_key = $key;
+
+                                        if (strpos(Arr::get($item, 'Name'), 'Remote') !== false) {
+                                            $accessKey->is_remote = true;
+                                        }
+
                                         $accessKey->save();
                                         $this->info('Code: '.$key.' ('.Arr::get($item, 'Name').')');
                                     } else {
@@ -99,6 +104,141 @@ class PartymeisterCoreImportTicketsApiCommand extends Command
                 }
                 $this->info('Tickets: '.$count);
                 $this->info('Amount: '.$amount);
+
+                // Guest list loop
+                foreach ($data as $order) {
+                    if (Arr::get($order, 'Storniert') != '0' || Arr::get($order, 'Bezahlt') == '0' || (int)Arr::get($order, 'Versand') > 0) {
+                        continue;
+                    }
+
+                    if (count(Arr::get($order, 'Warenkorb')) > 1) {
+                        $this->info($order['Betreff'] . ' has more than one item');
+                    }
+
+                    foreach (Arr::get($order, 'Warenkorb') as $item) {
+                        if (Arr::get($item, 'Keys')) {
+                            foreach (Arr::get($item, 'Keys') as $key) {
+                                $record = Guest::where('ticket_code', $key)
+                                               ->first();
+                                if (! is_null($record)) {
+                                    $this->info('Ticket '.$key.' exists - overwriting');
+                                } else {
+                                    $record = new Guest();
+                                }
+
+                                $category = Category::where('scope', 'guest')
+                                                    ->where('name', $item['Name'])
+                                                    ->first();
+
+                                if (is_null($category)) {
+                                    // Get root
+                                    $root = Category::where('scope', 'guest')
+                                                    ->where('_lft', 1)
+                                                    ->first();
+
+                                    $category = new Category();
+                                    $category->name = $item['Name'];
+                                    $category->scope = 'guest';
+                                    $category->appendToNode($root)
+                                             ->save();
+                                }
+
+                                if (Arr::get($item, 'Discounts')) {
+                                    $record->comment = implode(', ', $item['Discounts']);
+                                }
+
+                                $record->ticket_order_number = $order['Betreff'];
+                                $record->company = $order['Firma'];
+                                $record->name = $order['Vorname'].' '.$order['Nachname'];
+                                $record->country = $order['Land'];
+                                $record->email = $order['Email'];
+                                $record->ticket_type = $item['Name'];
+                                $record->ticket_code = $key;
+                                $record->category_id = $category->id;
+
+                                $record->save();
+
+
+
+                            }
+
+                            //$this->info('keys found!');
+                        } else {
+                            $this->error($order['Betreff'] . ' - '.$item['Name']. ' - '. $order['Versandart']);
+                        }
+
+                    }
+
+
+                    //$record = Guest::where('ticket_code', utf8_encode($row[20]))
+                    //               ->first();
+                    //if (! is_null($record)) {
+                    //    $this->info('Skip ticket '.utf8_encode($row[20]));
+                    //    continue;
+                    //}
+                    //
+                    //$category = Category::where('scope', 'guest')
+                    //                    ->where('name', utf8_encode($row[19]))
+                    //                    ->first();
+                    //if (is_null($category)) {
+                    //    // Get root
+                    //    $root = Category::where('scope', 'guest')
+                    //                    ->where('_lft', 1)
+                    //                    ->first();
+                    //
+                    //    $category = new Category();
+                    //    $category->name = utf8_encode($row[19]);
+                    //    $category->scope = 'guest';
+                    //    $category->appendToNode($root)
+                    //             ->save();
+                    //}
+                    //
+                    //// Save row
+                    //$record = new Guest();
+                    //$record->ticket_order_number = $row[1];
+                    //$record->company = utf8_encode($row[2]);
+                    //$record->name = utf8_encode($row[4].' '.$row[5]);
+                    //$record->country = utf8_encode($row[9]);
+                    //$record->email = utf8_encode($row[10]);
+                    //$record->ticket_type = $row[19];
+                    //$record->ticket_code = $row[20];
+                    //$record->category_id = $category->id;
+                    //
+                    //$record->save();
+                    //
+                    //$this->info('Added ticket '.$row[20]);
+
+
+                    //// Check shopping cart for a valid ticket (t-shirts don't count)
+                        //foreach (Arr::get($order, 'Warenkorb') as $item) {
+                        //
+                        //    if (strpos(Arr::get($item, 'Name'), 'T-Shirt') === false) {
+                        //        $amount += ((int) Arr::get($item, 'Preis') * (int) Arr::get($item, 'Menge'));
+                        //        foreach (Arr::get($item, 'Keys', []) as $key) {
+                        //            $count++;
+                        //
+                        //            // Check if we already imported this key
+                        //            $existingAccessKey = AccessKey::where('access_key', $key)
+                        //                                          ->first();
+                        //            if (is_null($existingAccessKey)) {
+                        //                $accessKey = new AccessKey();
+                        //                $accessKey->access_key = $key;
+                        //
+                        //                if (strpos(Arr::get($item, 'Name'), 'Remote') !== false) {
+                        //                    $accessKey->is_remote = true;
+                        //                }
+                        //
+                        //                $accessKey->save();
+                        //                $this->info('Code: '.$key.' ('.Arr::get($item, 'Name').')');
+                        //            } else {
+                        //                $this->info('Code '.$key.' skipped');
+                        //            }
+                        //        }
+                        //    }
+                        //}
+                }
+
+
             } catch (\Exception $e) {
                 dd($e->getMessage());
                 Log::warning($e->getMessage());
