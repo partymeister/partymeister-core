@@ -25,6 +25,7 @@ return [
     'time_info'         => 'Timing',
 
     'actions'      => [
+        'competition_starts'     => 'Send notification and inform authors of missed preselection',
         'notification'           => 'Send notification',
         'live'                   => 'Advance live voting',
         'live_with_notification' => 'Adanvce live voting and send notification',

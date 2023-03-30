@@ -7,6 +7,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 use Motor\Backend\Http\Controllers\ApiController;
 use Partymeister\Competitions\Events\CompetitionSaved;
 use Partymeister\Competitions\Events\LiveVoteUpdated;
@@ -62,6 +63,20 @@ class SendController extends ApiController
                 event(new CompetitionSaved($competition));
 
                 break;
+            case 'competition_starts':
+
+                // Get entries that didn't pass preselection and opted in to receive an email
+                $payload = json_decode($callback->payload);
+                $competition = Competition::find($payload->competition_id);
+
+                foreach ($competition->unqualified_entries_with_opt_in as $entry) {
+                    Mail::to($entry->visitor->email)
+                        ->send(new \Partymeister\Competitions\Mail\EntryStatusInfo($entry));
+                }
+
+                $status = StuhlService::send($callback->body, $callback->title, '', EVENT_LEVEL_BORING, $callback->destination);
+
+                break;
             case 'notification':
                 $status = StuhlService::send($callback->body, $callback->title, '', EVENT_LEVEL_BORING, $callback->destination);
                 break;
@@ -95,11 +110,7 @@ class SendController extends ApiController
     }
 
     /**
-     * @param  Request  $request
-     * @return ResponseFactory|Response
-     */
-    /**
-     * @param  Request  $request
+     * @param Request $request
      * @return ResponseFactory|Response
      *
      * @throws GuzzleException

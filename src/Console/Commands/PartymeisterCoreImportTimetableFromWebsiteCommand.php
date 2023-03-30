@@ -38,7 +38,7 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
 
         // Get timetable
 
-        $data = file_get_contents('https://2022.revision-party.net/timetable.json');
+        $data = file_get_contents(config('partymeister-core.timetable_url'));
 
         if (! $data) {
             return false;
