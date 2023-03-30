@@ -116,6 +116,13 @@ class PartymeisterCoreImportTicketsApiCommand extends Command
                     }
 
                     foreach (Arr::get($order, 'Warenkorb') as $item) {
+
+                        // Filter out remote tickets
+                        if (strpos(strtolower(Arr::get($item, 'Name')), 'remote') !== false) {
+                            $this->info('Skipping remote ticket');
+                            continue;
+                        }
+
                         if (Arr::get($item, 'Keys')) {
                             foreach (Arr::get($item, 'Keys') as $key) {
                                 $record = Guest::where('ticket_code', $key)
@@ -157,9 +164,6 @@ class PartymeisterCoreImportTicketsApiCommand extends Command
                                 $record->category_id = $category->id;
 
                                 $record->save();
-
-
-
                             }
 
                             //$this->info('keys found!');
@@ -168,134 +172,14 @@ class PartymeisterCoreImportTicketsApiCommand extends Command
                         }
 
                     }
-
-
-                    //$record = Guest::where('ticket_code', utf8_encode($row[20]))
-                    //               ->first();
-                    //if (! is_null($record)) {
-                    //    $this->info('Skip ticket '.utf8_encode($row[20]));
-                    //    continue;
-                    //}
-                    //
-                    //$category = Category::where('scope', 'guest')
-                    //                    ->where('name', utf8_encode($row[19]))
-                    //                    ->first();
-                    //if (is_null($category)) {
-                    //    // Get root
-                    //    $root = Category::where('scope', 'guest')
-                    //                    ->where('_lft', 1)
-                    //                    ->first();
-                    //
-                    //    $category = new Category();
-                    //    $category->name = utf8_encode($row[19]);
-                    //    $category->scope = 'guest';
-                    //    $category->appendToNode($root)
-                    //             ->save();
-                    //}
-                    //
-                    //// Save row
-                    //$record = new Guest();
-                    //$record->ticket_order_number = $row[1];
-                    //$record->company = utf8_encode($row[2]);
-                    //$record->name = utf8_encode($row[4].' '.$row[5]);
-                    //$record->country = utf8_encode($row[9]);
-                    //$record->email = utf8_encode($row[10]);
-                    //$record->ticket_type = $row[19];
-                    //$record->ticket_code = $row[20];
-                    //$record->category_id = $category->id;
-                    //
-                    //$record->save();
-                    //
-                    //$this->info('Added ticket '.$row[20]);
-
-
-                    //// Check shopping cart for a valid ticket (t-shirts don't count)
-                        //foreach (Arr::get($order, 'Warenkorb') as $item) {
-                        //
-                        //    if (strpos(Arr::get($item, 'Name'), 'T-Shirt') === false) {
-                        //        $amount += ((int) Arr::get($item, 'Preis') * (int) Arr::get($item, 'Menge'));
-                        //        foreach (Arr::get($item, 'Keys', []) as $key) {
-                        //            $count++;
-                        //
-                        //            // Check if we already imported this key
-                        //            $existingAccessKey = AccessKey::where('access_key', $key)
-                        //                                          ->first();
-                        //            if (is_null($existingAccessKey)) {
-                        //                $accessKey = new AccessKey();
-                        //                $accessKey->access_key = $key;
-                        //
-                        //                if (strpos(Arr::get($item, 'Name'), 'Remote') !== false) {
-                        //                    $accessKey->is_remote = true;
-                        //                }
-                        //
-                        //                $accessKey->save();
-                        //                $this->info('Code: '.$key.' ('.Arr::get($item, 'Name').')');
-                        //            } else {
-                        //                $this->info('Code '.$key.' skipped');
-                        //            }
-                        //        }
-                        //    }
-                        //}
                 }
 
 
             } catch (\Exception $e) {
-                dd($e->getMessage());
                 Log::warning($e->getMessage());
             }
         } catch (\Exception $e) {
             Log::warning($e->getMessage());
-        }
-        dd('ENDE');
-
-        // Open file
-        if (($handle = fopen($this->argument('file'), 'r')) !== false) {
-            // Read every row and save it in the database, skipping already existing codes
-            while (($row = fgetcsv($handle, 2048, ';')) !== false) {
-                // Skip header
-                if ($row[0] == 'id') {
-                    continue;
-                }
-
-                $record = Guest::where('ticket_code', utf8_encode($row[20]))
-                               ->first();
-                if (! is_null($record)) {
-                    $this->info('Skip ticket '.utf8_encode($row[20]));
-                    continue;
-                }
-
-                $category = Category::where('scope', 'guest')
-                                    ->where('name', utf8_encode($row[19]))
-                                    ->first();
-                if (is_null($category)) {
-                    // Get root
-                    $root = Category::where('scope', 'guest')
-                                    ->where('_lft', 1)
-                                    ->first();
-
-                    $category = new Category();
-                    $category->name = utf8_encode($row[19]);
-                    $category->scope = 'guest';
-                    $category->appendToNode($root)
-                             ->save();
-                }
-
-                // Save row
-                $record = new Guest();
-                $record->ticket_order_number = $row[1];
-                $record->company = utf8_encode($row[2]);
-                $record->name = utf8_encode($row[4].' '.$row[5]);
-                $record->country = utf8_encode($row[9]);
-                $record->email = utf8_encode($row[10]);
-                $record->ticket_type = $row[19];
-                $record->ticket_code = $row[20];
-                $record->category_id = $category->id;
-
-                $record->save();
-
-                $this->info('Added ticket '.$row[20]);
-            }
-            fclose($handle);
         }
     }
 }

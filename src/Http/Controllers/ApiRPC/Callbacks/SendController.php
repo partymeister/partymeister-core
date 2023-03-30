@@ -117,6 +117,7 @@ class SendController extends ApiController
      */
     public function single(Request $request)
     {
+        dd("HIER");
         $status = StuhlService::send('TEST');
 
         return response($status);

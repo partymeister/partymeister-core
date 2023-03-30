@@ -3,6 +3,7 @@
 namespace Partymeister\Core\Http\Controllers\ApiRPC\Guests;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Motor\Backend\Http\Controllers\ApiController;
 use Partymeister\Core\Http\Requests\Backend\GuestRequest;
 use Partymeister\Core\Models\Guest;
@@ -16,7 +17,7 @@ class ScanTicketsController extends ApiController
      * @param  GuestRequest  $request
      * @return JsonResponse
      */
-    public function index(GuestRequest $request)
+    public function index(Request $request)
     {
         $guest = Guest::where('ticket_code', $request->get('ticket_code'))
                       ->first();
