@@ -91,6 +91,7 @@ class PartymeisterCoreImportTicketsApiCommand extends Command
                                         if (strpos(Arr::get($item, 'Name'), 'Remote') !== false) {
                                             $accessKey->is_remote = true;
                                         }
+                                        $accessKey->is_prepaid = true;
 
                                         $accessKey->save();
                                         $this->info('Code: '.$key.' ('.Arr::get($item, 'Name').')');
