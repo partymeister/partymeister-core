@@ -153,6 +153,18 @@ class Visitor extends Authenticatable
     }
 
     /**
+     * @return string
+     */
+    public function getRemoteTypeAttribute() {
+        if ($this->is_satellite) {
+            return 'Satellite';
+        } else if ($this->is_remote) {
+            return 'Remote';
+        }
+        return '';
+    }
+
+    /**
      * @return HasMany
      */
     public function entries()
