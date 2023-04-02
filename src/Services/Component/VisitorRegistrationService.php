@@ -23,7 +23,7 @@ class VisitorRegistrationService
             'name'               => $data['name'],
             'group'              => $data['group'],
             'country_iso_3166_1' => $data['country_iso_3166_1'],
-            //'email'              => $data['email'],
+            'email'              => $data['email'],
             'password'           => bcrypt($data['password']),
             'api_token'          => Str::random(60),
         ]);
