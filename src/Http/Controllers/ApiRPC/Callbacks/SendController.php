@@ -104,6 +104,7 @@ class SendController extends ApiController
         }
 
         $callback->has_fired = true;
+        $callback->fired_at = date('Y-m-d H:i:s');
         $callback->save();
 
         return response()->json($status);
