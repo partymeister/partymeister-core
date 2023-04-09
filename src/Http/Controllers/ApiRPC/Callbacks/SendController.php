@@ -7,6 +7,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Motor\Backend\Http\Controllers\ApiController;
 use Partymeister\Competitions\Events\CompetitionSaved;
@@ -70,8 +71,12 @@ class SendController extends ApiController
                 $competition = Competition::find($payload->competition_id);
 
                 foreach ($competition->unqualified_entries_with_opt_in as $entry) {
-                    Mail::to($entry->visitor->email)
-                        ->send(new \Partymeister\Competitions\Mail\EntryStatusInfo($entry));
+                    try {
+                        Mail::to($entry->visitor->email)
+                            ->send(new \Partymeister\Competitions\Mail\EntryStatusInfo($entry));
+                    } catch ($exception) {
+                        Log::error('Mail could not be sent to', [$entry->visitor->email, $exception]);
+                    }
                 }
 
                 $status = StuhlService::send($callback->body, $callback->title, '', EVENT_LEVEL_BORING, $callback->destination);
