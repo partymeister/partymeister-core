@@ -74,7 +74,7 @@ class SendController extends ApiController
                     try {
                         Mail::to($entry->visitor->email)
                             ->send(new \Partymeister\Competitions\Mail\EntryStatusInfo($entry));
-                    } catch ($exception) {
+                    } catch (\Exception $exception) {
                         Log::error('Mail could not be sent to', [$entry->visitor->email, $exception]);
                     }
                 }
