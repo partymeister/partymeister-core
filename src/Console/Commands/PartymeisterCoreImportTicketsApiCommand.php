@@ -169,6 +169,7 @@ class PartymeisterCoreImportTicketsApiCommand extends Command
 
                             //$this->info('keys found!');
                         } else {
+                            $this->error(json_encode($item));
                             $this->error($order['Betreff'] . ' - '.$item['Name']. ' - '. $order['Versandart']);
                         }
 
@@ -177,9 +178,11 @@ class PartymeisterCoreImportTicketsApiCommand extends Command
 
 
             } catch (\Exception $e) {
+                $this->error($e->getMessage());
                 Log::warning($e->getMessage());
             }
         } catch (\Exception $e) {
+            $this->error($e->getMessage());
             Log::warning($e->getMessage());
         }
     }
