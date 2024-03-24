@@ -3,6 +3,8 @@
 namespace Partymeister\Core\Components;
 
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
+use Carbon\CarbonTimeZone;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -53,11 +55,15 @@ class ComponentSchedules
     {
         $data = (new ScheduleResource($this->component->schedule->load('events')))->toArrayRecursive();
 
+        //$tz = CarbonTimeZone::create('Europe/Berlin'); // static way
+        //$carbon = new Carbon();
+        //$carbon->setTimezone($tz);
+
         foreach (Arr::get($data, 'events', []) as $event) {
             if (Arr::get($event, 'is_visible') == false) {
                 continue;
             }
-            $date = Carbon::createFromTimestamp(strtotime(Arr::get($event, 'starts_at')));
+            $date = CarbonImmutable::parse($event['starts_at'])->shiftTimezone('GMT')->setTimezone('Europe/Berlin');
             $dayKey = $date->format('l, F jS');
             $timeKey = $date->format('H:i');
             if (! isset($this->days[$dayKey])) {

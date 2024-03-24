@@ -67,7 +67,7 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
                         $e->schedule_id = 1;
                         $e->event_type_id = $this->categoryToEventIdMapping($event->category);
                         $e->name = $deadline;
-                        $e->starts_at = Carbon::parse($event->start)->utcOffset(60);
+                        $e->starts_at = Carbon::parse($event->start);
                         $e->is_visible = true;
                         $e->sort_position = $sortPosition;
                         $e->save();
@@ -77,7 +77,7 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
                     $e->schedule_id = 1;
                     $e->event_type_id = $this->categoryToEventIdMapping($event->category);
                     $e->name = $event->title;
-                    $e->starts_at = Carbon::parse($event->start)->utcOffset(60);
+                    $e->starts_at = Carbon::parse($event->start);
                     $e->is_visible = true;
                     $e->sort_position = $sortPosition;
                     $e->save();
