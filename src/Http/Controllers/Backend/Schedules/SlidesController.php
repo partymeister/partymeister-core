@@ -3,6 +3,7 @@
 namespace Partymeister\Core\Http\Controllers\Backend\Schedules;
 
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
@@ -37,7 +38,8 @@ class SlidesController extends Controller
         $data = $resource->toArrayRecursive();
 
         foreach (Arr::get($data, 'events') as $key => $event) {
-            $date = Carbon::createFromTimestamp(strtotime(Arr::get($event, 'starts_at')));
+
+            $date = CarbonImmutable::parse($event['starts_at'])->shiftTimezone('GMT')->setTimezone('Europe/Berlin');
             if (! isset($days[$date->format('l')])) {
                 $days[$date->format('l')] = [];
             }
