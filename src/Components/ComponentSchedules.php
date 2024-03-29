@@ -63,7 +63,7 @@ class ComponentSchedules
             if (Arr::get($event, 'is_visible') == false) {
                 continue;
             }
-            $date = CarbonImmutable::parse($event['starts_at'])->shiftTimezone('GMT')->setTimezone('Europe/Berlin');
+            $date = CarbonImmutable::parse($event['starts_at']);
             $dayKey = $date->format('l, F jS');
             $timeKey = $date->format('H:i');
             if (! isset($this->days[$dayKey])) {
