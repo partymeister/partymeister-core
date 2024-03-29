@@ -39,7 +39,8 @@ class SlidesController extends Controller
 
         foreach (Arr::get($data, 'events') as $key => $event) {
 
-            $date = CarbonImmutable::parse($event['starts_at']);
+            $date = CarbonImmutable::parse($event['starts_at'])->shiftTimezone('GMT')
+                                   ->setTimezone('Europe/Berlin');
             if (! isset($days[$date->format('l')])) {
                 $days[$date->format('l')] = [];
             }
