@@ -149,7 +149,10 @@ class Visitor extends Authenticatable
      * @return bool
      */
     public function getIsSatelliteAttribute() {
-        return $this->access_key->is_satellite;
+        if (!is_null($this->access_key) && $this->access_key->is_satellite) {
+            return $this->access_key->is_satellite;
+        }
+        return false;
     }
 
     /**
