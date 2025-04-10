@@ -15,6 +15,7 @@ use Motor\Core\Traits\Searchable;
 use Partymeister\Competitions\Models\AccessKey;
 use Partymeister\Competitions\Models\Entry;
 use Partymeister\Competitions\Models\Vote;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Partymeister\Core\Models\Visitor
@@ -58,6 +59,7 @@ class Visitor extends Authenticatable
     use Searchable;
     use Filterable;
     use HasShortflakePrimary;
+    use SoftDeletes;
 
     /**
      * @var string
