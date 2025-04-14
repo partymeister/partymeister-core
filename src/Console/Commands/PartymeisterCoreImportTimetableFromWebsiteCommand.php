@@ -5,6 +5,7 @@ namespace Partymeister\Core\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Motor\Backend\Models\User;
 use Partymeister\Core\Models\Event;
 
@@ -47,6 +48,7 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
         // Delete current timetable entries
         foreach (Event::where('schedule_id', 1)->get() as $event) {
             $event->delete();
+            Log::info('Deleted event: '.$event->name);
         }
 
         $dataJson = json_decode($data);

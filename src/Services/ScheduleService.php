@@ -81,9 +81,9 @@ class ScheduleService extends BaseService
 
                 $slide->clearMediaCollection('preview');
                 $slide->clearMediaCollection('final');
-                $slide->addMedia(storage_path().'/preview_'.$slideName.'.png')
-                      ->toMediaCollection('preview', 'media');
                 try {
+                    $slide->addMedia(storage_path().'/preview_'.$slideName.'.png')
+                          ->toMediaCollection('preview', 'media');
                     $slide->addMedia(storage_path().'/final_'.$slideName.'.png')
                           ->toMediaCollection('final', 'media');
                 } catch (\Exception $e) {
