@@ -36,6 +36,11 @@ Route::group([
 
         Route::resource('visitors', 'VisitorsController');
         Route::resource('message-groups', 'MessageGroupsController');
+
+        Route::get('events/{event}/playlist', 'Events\PlaylistsController@index')
+             ->name('events.playlist.index');
+        Route::post('events/{event}/playlist', 'Events\PlaylistsController@store')
+             ->name('events.playlist.store');
     });
 });
 

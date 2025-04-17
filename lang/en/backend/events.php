@@ -1,14 +1,16 @@
 <?php
 
 return [
-    'events'  => 'Events',
-    'event'   => 'Event',
-    'new'     => 'Create event',
-    'edit'    => 'Edit event',
-    'save'    => 'Save event',
-    'created' => 'Event created',
-    'updated' => 'Event updated',
-    'deleted' => 'Event deleted',
+    'events'           => 'Events',
+    'event'            => 'Event',
+    'new'              => 'Create event',
+    'edit'             => 'Edit event',
+    'save'             => 'Save event',
+    'created'          => 'Event created',
+    'updated'          => 'Event updated',
+    'deleted'          => 'Event deleted',
+    'playlist_preview' => 'Playlist preview',
+    'save_playlist'    => 'Save playlist',
 
     'name'                  => 'Name',
     'starts_at'             => 'Date and time',
