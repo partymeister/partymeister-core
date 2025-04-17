@@ -49,9 +49,9 @@ class PlaylistsController extends Controller
         $endTemplate = SlideTemplate::where('template_for', 'end')
                                     ->first();
 
-        $emptyTemplate = SlideTemplate::where('name', 'Empty')
+        $defaultTemplate = SlideTemplate::where('template_for', 'basic')->where('name', 'Empty')
                                     ->first();
 
-        return view('partymeister-core::backend.events.playlists.show', compact('event',  'comingupTemplate', 'nowTemplate', 'endTemplate', 'emptyTemplate'));
+        return view('partymeister-core::backend.events.playlists.show', compact('event',  'comingupTemplate', 'nowTemplate', 'endTemplate', 'defaultTemplate'));
     }
 }

@@ -53,15 +53,15 @@
                     <input type="hidden" name="cached_html_final[now]">
                     <input type="hidden" name="type[now]" value="now">
 
-                    <partymeister-slides-elements :readonly="true" :name="'slidemeister-event-empty'"
-                                                  id="slidemeister-event-empty"
+                    <partymeister-slides-elements :readonly="true" :name="'slidemeister-event-default'"
+                                                  id="slidemeister-event-default"
                                                   class="slidemeister-instance slide"></partymeister-slides-elements>
-                    <input type="hidden" name="slide[empty]">
-                    <input type="hidden" name="name[empty]"
-                           value="Empty">
-                    <input type="hidden" name="cached_html_preview[empty]">
-                    <input type="hidden" name="cached_html_final[empty]">
-                    <input type="hidden" name="type[empty]" value="empty">
+                    <input type="hidden" name="slide[default]">
+                    <input type="hidden" name="name[default]"
+                           value="default">
+                    <input type="hidden" name="cached_html_preview[default]">
+                    <input type="hidden" name="cached_html_final[default]">
+                    <input type="hidden" name="type[default]" value="default">
 
 
                     <partymeister-slides-elements :readonly="true" :name="'slidemeister-event-end'"
@@ -101,8 +101,8 @@
                 });
 
                 Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
-                    name: 'slidemeister-event-empty',
-                    elements: JSON.parse('{!! addslashes($emptyTemplate->definitions) !!}'),
+                    name: 'slidemeister-event-default',
+                    elements: JSON.parse('{!! addslashes($defaultTemplate->definitions) !!}'),
                 });
 
                 Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
@@ -140,10 +140,10 @@
                             $('input[name="cached_html_final[now]"]').val($('#slidemeister-event-now').html());
                             saveCounter++;
                         }
-                        if (data.name === 'slidemeister-event-empty') {
-                            $('input[name="slide[empty]"]').val(data.definitions_as_form_data);
-                            $('input[name="cached_html_preview[empty]"]').val($('#slidemeister-event-empty').html());
-                            $('input[name="cached_html_final[empty]"]').val($('#slidemeister-event-empty').html());
+                        if (data.name === 'slidemeister-event-default') {
+                            $('input[name="slide[default]"]').val(data.definitions_as_form_data);
+                            $('input[name="cached_html_preview[default]"]').val($('#slidemeister-event-default').html());
+                            $('input[name="cached_html_final[default]"]').val($('#slidemeister-event-default').html());
                             saveCounter++;
                         }
                         if (data.name === 'slidemeister-event-end') {
@@ -157,7 +157,7 @@
 
                     Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-event-comingup');
                     Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-event-now');
-                    Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-event-empty');
+                    Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-event-default');
                     Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-event-end');
                 });
             });
