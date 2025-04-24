@@ -12,8 +12,8 @@
     }
   ],
   "require": {
-    "motor-cms/motor-backend": "^1.4",
-    "spatie/browsershot": "^5.0"
+    "motor-cms/motor-backend": "^1.6",
+    "laravel/reverb": "^1.5"
   },
   "autoload": {
     "psr-4": {
