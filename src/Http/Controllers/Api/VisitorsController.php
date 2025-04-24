@@ -23,7 +23,9 @@ class VisitorsController extends ApiController
      *   tags={"VisitorsController"},
      *   path="/api/visitors",
      *   summary="Get visitor collection",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -31,15 +33,20 @@ class VisitorsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="array",
+     *
      *         @OA\Items(ref="#/components/schemas/VisitorResource")
      *       ),
+     *
      *       @OA\Property(
      *         property="meta",
      *         ref="#/components/schemas/PaginationMeta"
@@ -55,9 +62,11 @@ class VisitorsController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   )
      * )
@@ -69,7 +78,7 @@ class VisitorsController extends ApiController
     public function index()
     {
         $paginator = VisitorService::collection()
-                                   ->getPaginator();
+            ->getPaginator();
 
         return (new VisitorCollection($paginator))->additional(['message' => 'Visitor collection read']);
     }
@@ -79,10 +88,14 @@ class VisitorsController extends ApiController
      *   tags={"VisitorsController"},
      *   path="/api/visitors",
      *   summary="Create new visitor",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/VisitorRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -90,10 +103,13 @@ class VisitorsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -106,31 +122,34 @@ class VisitorsController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Store a newly created resource in storage.
      *
-     * @param  VisitorRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(VisitorRequest $request)
     {
         $result = VisitorService::create($request)
-                                ->getResult();
+            ->getResult();
 
         return (new VisitorResource($result))->additional(['message' => 'Visitor created'])
-                                             ->response()
-                                             ->setStatusCode(201);
+            ->response()
+            ->setStatusCode(201);
     }
 
     /**
@@ -138,7 +157,9 @@ class VisitorsController extends ApiController
      *   tags={"VisitorsController"},
      *   path="/api/visitors/{visitor}",
      *   summary="Get single visitor",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -146,17 +167,22 @@ class VisitorsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="visitor",
      *     parameter="visitor",
      *     description="Visitor id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -169,27 +195,30 @@ class VisitorsController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Display the specified resource.
      *
-     * @param  Visitor  $record
      * @return VisitorResource
      */
     public function show(Visitor $record)
     {
         $result = VisitorService::show($record)
-                                ->getResult();
+            ->getResult();
 
         return (new VisitorResource($result))->additional(['message' => 'Visitor read']);
     }
@@ -199,10 +228,14 @@ class VisitorsController extends ApiController
      *   tags={"VisitorsController"},
      *   path="/api/visitors/{visitor}",
      *   summary="Update an existing visitor",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/VisitorRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -210,17 +243,22 @@ class VisitorsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="visitor",
      *     parameter="visitor",
      *     description="Visitor id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -233,28 +271,30 @@ class VisitorsController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Update the specified resource in storage.
      *
-     * @param  VisitorRequest  $request
-     * @param  Visitor  $record
      * @return VisitorResource
      */
     public function update(VisitorRequest $request, Visitor $record)
     {
         $result = VisitorService::update($record, $request)
-                                ->getResult();
+            ->getResult();
 
         return (new VisitorResource($result))->additional(['message' => 'Visitor updated']);
     }
@@ -264,7 +304,9 @@ class VisitorsController extends ApiController
      *   tags={"VisitorsController"},
      *   path="/api/visitors/{visitor}",
      *   summary="Delete a visitor",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -272,17 +314,22 @@ class VisitorsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="visitor",
      *     parameter="visitor",
      *     description="Visitor id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -290,20 +337,27 @@ class VisitorsController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   ),
+     *
      *   @OA\Response(
      *     response="400",
      *     description="Bad request",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -315,13 +369,12 @@ class VisitorsController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param  Visitor  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Visitor $record)
     {
         $result = VisitorService::delete($record)
-                                ->getResult();
+            ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'Visitor deleted']);

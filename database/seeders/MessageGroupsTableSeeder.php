@@ -19,15 +19,15 @@ class MessageGroupsTableSeeder extends Seeder
     public function run()
     {
         DB::table('message_groups')->insert([
-            'name'       => 'Organizer',
-            'uuid'       => uniqid(),
+            'name' => 'Organizer',
+            'uuid' => uniqid(),
             'created_by' => User::get()->first()->id,
             'updated_by' => User::get()->first()->id,
         ]);
 
         DB::table('message_group_user')->insert([
             'message_group_id' => \Partymeister\Core\Models\MessageGroup::first()->id,
-            'user_id'          => User::first()->id,
+            'user_id' => User::first()->id,
         ]);
     }
 }

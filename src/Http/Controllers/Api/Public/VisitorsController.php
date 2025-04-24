@@ -20,15 +20,20 @@ class VisitorsController extends PublicApiController
      *   tags={"VisitorsController"},
      *   path="/api/public/visitors",
      *   summary="Get visitor collection",
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="array",
+     *
      *         @OA\Items(ref="#/components/schemas/PublicVisitorResource")
      *       ),
+     *
      *       @OA\Property(
      *         property="meta",
      *         ref="#/components/schemas/PaginationMeta"
@@ -44,9 +49,11 @@ class VisitorsController extends PublicApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   )
      * )
@@ -58,7 +65,7 @@ class VisitorsController extends PublicApiController
     public function index()
     {
         $paginator = VisitorService::collection()
-                                   ->getPaginator();
+            ->getPaginator();
 
         return (new VisitorCollection($paginator))->additional(['message' => 'Public visitor collection read']);
     }

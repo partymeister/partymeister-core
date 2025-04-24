@@ -27,7 +27,7 @@ class PartymeisterCoreApiMessageGroupTest extends TestCase
         'media',
     ];
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
@@ -95,10 +95,10 @@ class PartymeisterCoreApiMessageGroupTest extends TestCase
         $this->user->givePermissionTo($this->readPermission);
         $record = create_test_message_group();
         $this->json('GET', '/api/message_groups/'.$record->id.'?api_token='.$this->user->api_token)
-             ->seeStatusCode(200)
-             ->seeJson([
-                 'name' => $record->name,
-             ]);
+            ->seeStatusCode(200)
+            ->seeJson([
+                'name' => $record->name,
+            ]);
     }
 
     /** @test */
@@ -106,10 +106,10 @@ class PartymeisterCoreApiMessageGroupTest extends TestCase
     {
         $record = create_test_message_group();
         $this->json('GET', '/api/message_groups/'.$record->id.'?api_token='.$this->user->api_token)
-             ->seeStatusCode(403)
-             ->seeJson([
-                 'error' => 'Access denied.',
-             ]);
+            ->seeStatusCode(403)
+            ->seeJson([
+                'error' => 'Access denied.',
+            ]);
     }
 
     /** @test */
@@ -137,10 +137,10 @@ class PartymeisterCoreApiMessageGroupTest extends TestCase
         $this->user->givePermissionTo($this->readPermission);
         $records = create_test_message_group(10);
         $this->json('GET', '/api/message_groups?api_token='.$this->user->api_token.'&search='.$records[2]->name)
-             ->seeStatusCode(200)
-             ->seeJson([
-                 'name' => $records[2]->name,
-             ]);
+            ->seeStatusCode(200)
+            ->seeJson([
+                'name' => $records[2]->name,
+            ]);
     }
 
     /** @test */
@@ -149,10 +149,10 @@ class PartymeisterCoreApiMessageGroupTest extends TestCase
         $this->user->givePermissionTo($this->readPermission);
         create_test_message_group(50);
         $this->json('GET', '/api/message_groups?api_token='.$this->user->api_token.'&page=2')
-             ->seeStatusCode(200)
-             ->seeJson([
-                 'current_page' => 2,
-             ]);
+            ->seeStatusCode(200)
+            ->seeJson([
+                'current_page' => 2,
+            ]);
     }
 
     /** @test */
@@ -170,10 +170,10 @@ class PartymeisterCoreApiMessageGroupTest extends TestCase
         $this->user->givePermissionTo($this->writePermission);
         $record = create_test_message_group();
         $this->json('PATCH', '/api/message_groups/'.$record->id.'?api_token='.$this->user->api_token)
-             ->seeStatusCode(422)
-             ->seeJson([
-                 'name' => ['The name field is required.'],
-             ]);
+            ->seeStatusCode(422)
+            ->seeJson([
+                'name' => ['The name field is required.'],
+            ]);
     }
 
     /** @test */
@@ -181,10 +181,10 @@ class PartymeisterCoreApiMessageGroupTest extends TestCase
     {
         $record = create_test_message_group();
         $this->json('PATCH', '/api/message_groups/'.$record->id.'?api_token='.$this->user->api_token)
-             ->seeStatusCode(403)
-             ->seeJson([
-                 'error' => 'Access denied.',
-             ]);
+            ->seeStatusCode(403)
+            ->seeJson([
+                'error' => 'Access denied.',
+            ]);
     }
 
     /** @test */
@@ -204,10 +204,10 @@ class PartymeisterCoreApiMessageGroupTest extends TestCase
     {
         $this->user->givePermissionTo($this->deletePermission);
         $this->json('DELETE', '/api/message_groups/1?api_token='.$this->user->api_token)
-             ->seeStatusCode(404)
-             ->seeJson([
-                 'message' => 'Record not found',
-             ]);
+            ->seeStatusCode(404)
+            ->seeJson([
+                'message' => 'Record not found',
+            ]);
     }
 
     /** @test */
@@ -215,10 +215,10 @@ class PartymeisterCoreApiMessageGroupTest extends TestCase
     {
         $record = create_test_message_group();
         $this->json('DELETE', '/api/message_groups/'.$record->id.'?api_token='.$this->user->api_token)
-             ->seeStatusCode(403)
-             ->seeJson([
-                 'error' => 'Access denied.',
-             ]);
+            ->seeStatusCode(403)
+            ->seeJson([
+                'error' => 'Access denied.',
+            ]);
     }
 
     /** @test */
@@ -227,9 +227,9 @@ class PartymeisterCoreApiMessageGroupTest extends TestCase
         $this->user->givePermissionTo($this->deletePermission);
         $record = create_test_message_group();
         $this->json('DELETE', '/api/message_groups/'.$record->id.'?api_token='.$this->user->api_token)
-             ->seeStatusCode(200)
-             ->seeJson([
-                 'success' => true,
-             ]);
+            ->seeStatusCode(200)
+            ->seeJson([
+                'success' => true,
+            ]);
     }
 }

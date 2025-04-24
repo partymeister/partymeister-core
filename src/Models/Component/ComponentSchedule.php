@@ -5,9 +5,9 @@ namespace Partymeister\Core\Models\Component;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\CMS\Models\ComponentBaseModel;
 use Motor\CMS\Models\PageVersionComponent;
 use Partymeister\Core\Models\Schedule;
@@ -29,6 +29,7 @@ use Partymeister\Core\Models\Schedule;
  * @method static Builder|ComponentSchedule whereId($value)
  * @method static Builder|ComponentSchedule whereScheduleId($value)
  * @method static Builder|ComponentSchedule whereUpdatedAt($value)
+ *
  * @mixin Eloquent
  */
 class ComponentSchedule extends ComponentBaseModel
@@ -52,7 +53,7 @@ class ComponentSchedule extends ComponentBaseModel
     public function preview()
     {
         return [
-            'name'    => trans('partymeister-core::component/schedules.component'),
+            'name' => trans('partymeister-core::component/schedules.component'),
             'preview' => ! is_null($this->schedule) ? $this->schedule->name : 'nothing selected',
         ];
     }

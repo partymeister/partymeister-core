@@ -28,7 +28,7 @@ class PartymeisterCoreBackendGuestTest extends TestCase
         'media',
     ];
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
@@ -52,8 +52,8 @@ class PartymeisterCoreBackendGuestTest extends TestCase
     public function can_see_grid_without_guest()
     {
         $this->visit('/backend/guests')
-             ->see(trans('partymeister-core::backend/guests.guests'))
-             ->see(trans('motor-backend::backend/global.no_records'));
+            ->see(trans('partymeister-core::backend/guests.guests'))
+            ->see(trans('motor-backend::backend/global.no_records'));
     }
 
     /** @test */
@@ -68,12 +68,12 @@ class PartymeisterCoreBackendGuestTest extends TestCase
     {
         $record = create_test_guest();
         $this->visit('/backend/guests')
-             ->within('table', function () {
-                 $this->click(trans('motor-backend::backend/global.edit'));
-             })
-             ->seePageIs('/backend/guests/'.$record->id.'/edit')
-             ->click(trans('motor-backend::backend/global.back'))
-             ->seePageIs('/backend/guests');
+            ->within('table', function () {
+                $this->click(trans('motor-backend::backend/global.edit'));
+            })
+            ->seePageIs('/backend/guests/'.$record->id.'/edit')
+            ->click(trans('motor-backend::backend/global.back'))
+            ->seePageIs('/backend/guests');
     }
 
     /** @test */
@@ -82,14 +82,14 @@ class PartymeisterCoreBackendGuestTest extends TestCase
         $record = create_test_guest();
 
         $this->visit('/backend/guests/'.$record->id.'/edit')
-             ->see($record->name)
-             ->type('Updated Guest', 'name')
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/guests.save'));
-             })
-             ->see(trans('partymeister-core::backend/guests.updated'))
-             ->see('Updated Guest')
-             ->seePageIs('/backend/guests');
+            ->see($record->name)
+            ->type('Updated Guest', 'name')
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/guests.save'));
+            })
+            ->see(trans('partymeister-core::backend/guests.updated'))
+            ->see('Updated Guest')
+            ->seePageIs('/backend/guests');
 
         $record = Guest::find($record->id);
         $this->assertEquals('Updated Guest', $record->name);
@@ -99,34 +99,34 @@ class PartymeisterCoreBackendGuestTest extends TestCase
     public function can_click_the_guest_create_button()
     {
         $this->visit('/backend/guests')
-             ->click(trans('partymeister-core::backend/guests.new'))
-             ->seePageIs('/backend/guests/create');
+            ->click(trans('partymeister-core::backend/guests.new'))
+            ->seePageIs('/backend/guests/create');
     }
 
     /** @test */
     public function can_create_a_new_guest()
     {
         $this->visit('/backend/guests/create')
-             ->see(trans('partymeister-core::backend/guests.new'))
-             ->type('Create Guest Name', 'name')
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/guests.save'));
-             })
-             ->see(trans('partymeister-core::backend/guests.created'))
-             ->see('Create Guest Name')
-             ->seePageIs('/backend/guests');
+            ->see(trans('partymeister-core::backend/guests.new'))
+            ->type('Create Guest Name', 'name')
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/guests.save'));
+            })
+            ->see(trans('partymeister-core::backend/guests.created'))
+            ->see('Create Guest Name')
+            ->seePageIs('/backend/guests');
     }
 
     /** @test */
     public function cannot_create_a_new_guest_with_empty_fields()
     {
         $this->visit('/backend/guests/create')
-             ->see(trans('partymeister-core::backend/guests.new'))
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/guests.save'));
-             })
-             ->see('Data missing!')
-             ->seePageIs('/backend/guests/create');
+            ->see(trans('partymeister-core::backend/guests.new'))
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/guests.save'));
+            })
+            ->see('Data missing!')
+            ->seePageIs('/backend/guests/create');
     }
 
     /** @test */
@@ -134,14 +134,14 @@ class PartymeisterCoreBackendGuestTest extends TestCase
     {
         $record = create_test_guest();
         $this->visit('/backend/guests/'.$record->id.'/edit')
-             ->see(trans('partymeister-core::backend/guests.edit'))
-             ->type('Modified Guest Name', 'name')
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/guests.save'));
-             })
-             ->see(trans('partymeister-core::backend/guests.updated'))
-             ->see('Modified Guest Name')
-             ->seePageIs('/backend/guests');
+            ->see(trans('partymeister-core::backend/guests.edit'))
+            ->type('Modified Guest Name', 'name')
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/guests.save'));
+            })
+            ->see(trans('partymeister-core::backend/guests.updated'))
+            ->see('Modified Guest Name')
+            ->seePageIs('/backend/guests');
     }
 
     /** @test */
@@ -172,9 +172,9 @@ class PartymeisterCoreBackendGuestTest extends TestCase
     {
         $records = create_test_guest(10);
         $this->visit('/backend/guests')
-             ->type(substr($records[6]->name, 0, 3), 'search')
-             ->press('grid-search-button')
-             ->seeInField('search', substr($records[6]->name, 0, 3))
-             ->see($records[6]->name);
+            ->type(substr($records[6]->name, 0, 3), 'search')
+            ->press('grid-search-button')
+            ->seeInField('search', substr($records[6]->name, 0, 3))
+            ->see($records[6]->name);
     }
 }

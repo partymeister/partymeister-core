@@ -22,8 +22,7 @@ class PlaylistsController extends Controller
     use FormBuilderTrait;
 
     /**
-     * @param Competition $competition
-     * @param Request $request
+     * @param  Competition  $competition
      * @return RedirectResponse|Redirector
      */
     public function store(Event $event, Request $request)
@@ -36,22 +35,21 @@ class PlaylistsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Competition $event
-     * @param Request $request
+     * @param  Competition  $event
      * @return bool|Factory|\Illuminate\Http\JsonResponse|View|string
      */
     public function index(Event $event, Request $request)
     {
         $nowTemplate = SlideTemplate::where('template_for', 'now')
-                                    ->first();
+            ->first();
         $comingupTemplate = SlideTemplate::where('template_for', 'coming_up')
-                                         ->first();
+            ->first();
         $endTemplate = SlideTemplate::where('template_for', 'end')
-                                    ->first();
+            ->first();
 
         $defaultTemplate = SlideTemplate::where('template_for', 'basic')->where('name', 'Empty')
-                                    ->first();
+            ->first();
 
-        return view('partymeister-core::backend.events.playlists.show', compact('event',  'comingupTemplate', 'nowTemplate', 'endTemplate', 'defaultTemplate'));
+        return view('partymeister-core::backend.events.playlists.show', compact('event', 'comingupTemplate', 'nowTemplate', 'endTemplate', 'defaultTemplate'));
     }
 }

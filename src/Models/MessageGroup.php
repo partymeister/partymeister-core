@@ -5,10 +5,10 @@ namespace Partymeister\Core\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
@@ -45,14 +45,15 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @method static Builder|MessageGroup whereUpdatedAt($value)
  * @method static Builder|MessageGroup whereUpdatedBy($value)
  * @method static Builder|MessageGroup whereUuid($value)
+ *
  * @mixin Eloquent
  */
 class MessageGroup extends Model
 {
-    use Searchable;
-    use Filterable;
     use BlameableTrait;
+    use Filterable;
     use HasShortflakePrimary;
+    use Searchable;
 
     /**
      * Searchable columns for the searchable trait
@@ -77,7 +78,7 @@ class MessageGroup extends Model
     public function getUserCountAttribute()
     {
         return $this->users()
-                    ->count();
+            ->count();
     }
 
     /**

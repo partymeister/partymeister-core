@@ -32,7 +32,6 @@ class ComponentVisitorLoginsController extends ComponentController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
      * @return JsonResponse
      */
     public function store(Request $request)
@@ -51,7 +50,6 @@ class ComponentVisitorLoginsController extends ComponentController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  ComponentVisitorLogin  $record
      * @return JsonResponse
      */
     public function edit(ComponentVisitorLogin $record)
@@ -66,8 +64,6 @@ class ComponentVisitorLoginsController extends ComponentController
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  ComponentVisitorLogin  $record
      * @return JsonResponse
      */
     public function update(Request $request, ComponentVisitorLogin $record)

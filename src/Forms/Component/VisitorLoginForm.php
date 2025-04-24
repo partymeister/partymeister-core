@@ -19,9 +19,9 @@ class VisitorLoginForm extends Form
             'label' => trans('partymeister-core::backend/visitors.name'),
             'rules' => 'required',
         ])
-             ->add('password', 'password', [
-                 'label' => trans('motor-backend::backend/users.password'),
-                 'rules' => ['required', new VisitorLogin],
-             ]);
+            ->add('password', 'password', [
+                'label' => trans('motor-backend::backend/users.password'),
+                'rules' => ['required', new VisitorLogin],
+            ]);
     }
 }

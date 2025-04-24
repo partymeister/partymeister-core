@@ -48,8 +48,8 @@ class SchedulesController extends Controller
     public function create()
     {
         $form = $this->form(ScheduleForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.schedules.store',
+            'method' => 'POST',
+            'route' => 'backend.schedules.store',
             'enctype' => 'multipart/form-data',
         ]);
 
@@ -59,7 +59,6 @@ class SchedulesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ScheduleRequest  $request
      * @return RedirectResponse|Redirector
      */
     public function store(ScheduleRequest $request)
@@ -84,7 +83,6 @@ class SchedulesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Schedule  $record
      * @return Factory|View
      */
     public function show(Schedule $record)
@@ -95,16 +93,15 @@ class SchedulesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Schedule  $record
      * @return Factory|View
      */
     public function edit(Schedule $record)
     {
         $form = $this->form(ScheduleForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.schedules.update', [$record->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.schedules.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         return view('partymeister-core::backend.schedules.edit', compact('form'));
@@ -113,8 +110,6 @@ class SchedulesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  ScheduleRequest  $request
-     * @param  Schedule  $record
      * @return RedirectResponse|Redirector
      */
     public function update(ScheduleRequest $request, Schedule $record)
@@ -139,7 +134,6 @@ class SchedulesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Schedule  $record
      * @return RedirectResponse|Redirector
      */
     public function destroy(Schedule $record)

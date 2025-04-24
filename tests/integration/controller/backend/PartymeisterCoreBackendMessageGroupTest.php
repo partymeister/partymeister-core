@@ -28,7 +28,7 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
         'media',
     ];
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
@@ -52,8 +52,8 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
     public function can_see_grid_without_message_group()
     {
         $this->visit('/backend/message_groups')
-             ->see(trans('partymeister-core::backend/message_groups.message_groups'))
-             ->see(trans('motor-backend::backend/global.no_records'));
+            ->see(trans('partymeister-core::backend/message_groups.message_groups'))
+            ->see(trans('motor-backend::backend/global.no_records'));
     }
 
     /** @test */
@@ -61,8 +61,8 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
     {
         $record = create_test_message_group();
         $this->visit('/backend/message_groups')
-             ->see(trans('partymeister-core::backend/message_groups.message_groups'))
-             ->see($record->name);
+            ->see(trans('partymeister-core::backend/message_groups.message_groups'))
+            ->see($record->name);
     }
 
     /** @test */
@@ -70,12 +70,12 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
     {
         $record = create_test_message_group();
         $this->visit('/backend/message_groups')
-             ->within('table', function () {
-                 $this->click(trans('motor-backend::backend/global.edit'));
-             })
-             ->seePageIs('/backend/message_groups/'.$record->id.'/edit')
-             ->click(trans('motor-backend::backend/global.back'))
-             ->seePageIs('/backend/message_groups');
+            ->within('table', function () {
+                $this->click(trans('motor-backend::backend/global.edit'));
+            })
+            ->seePageIs('/backend/message_groups/'.$record->id.'/edit')
+            ->click(trans('motor-backend::backend/global.back'))
+            ->seePageIs('/backend/message_groups');
     }
 
     /** @test */
@@ -84,14 +84,14 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
         $record = create_test_message_group();
 
         $this->visit('/backend/message_groups/'.$record->id.'/edit')
-             ->see($record->name)
-             ->type('Updated Message group', 'name')
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/message_groups.save'));
-             })
-             ->see(trans('partymeister-core::backend/message_groups.updated'))
-             ->see('Updated Message group')
-             ->seePageIs('/backend/message_groups');
+            ->see($record->name)
+            ->type('Updated Message group', 'name')
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/message_groups.save'));
+            })
+            ->see(trans('partymeister-core::backend/message_groups.updated'))
+            ->see('Updated Message group')
+            ->seePageIs('/backend/message_groups');
 
         $record = MessageGroup::find($record->id);
         $this->assertEquals('Updated Message group', $record->name);
@@ -101,34 +101,34 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
     public function can_click_the_message_group_create_button()
     {
         $this->visit('/backend/message_groups')
-             ->click(trans('partymeister-core::backend/message_groups.new'))
-             ->seePageIs('/backend/message_groups/create');
+            ->click(trans('partymeister-core::backend/message_groups.new'))
+            ->seePageIs('/backend/message_groups/create');
     }
 
     /** @test */
     public function can_create_a_new_message_group()
     {
         $this->visit('/backend/message_groups/create')
-             ->see(trans('partymeister-core::backend/message_groups.new'))
-             ->type('Create Message group Name', 'name')
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/message_groups.save'));
-             })
-             ->see(trans('partymeister-core::backend/message_groups.created'))
-             ->see('Create Message group Name')
-             ->seePageIs('/backend/message_groups');
+            ->see(trans('partymeister-core::backend/message_groups.new'))
+            ->type('Create Message group Name', 'name')
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/message_groups.save'));
+            })
+            ->see(trans('partymeister-core::backend/message_groups.created'))
+            ->see('Create Message group Name')
+            ->seePageIs('/backend/message_groups');
     }
 
     /** @test */
     public function cannot_create_a_new_message_group_with_empty_fields()
     {
         $this->visit('/backend/message_groups/create')
-             ->see(trans('partymeister-core::backend/message_groups.new'))
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/message_groups.save'));
-             })
-             ->see('Data missing!')
-             ->seePageIs('/backend/message_groups/create');
+            ->see(trans('partymeister-core::backend/message_groups.new'))
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/message_groups.save'));
+            })
+            ->see('Data missing!')
+            ->seePageIs('/backend/message_groups/create');
     }
 
     /** @test */
@@ -136,14 +136,14 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
     {
         $record = create_test_message_group();
         $this->visit('/backend/message_groups/'.$record->id.'/edit')
-             ->see(trans('partymeister-core::backend/message_groups.edit'))
-             ->type('Modified Message group Name', 'name')
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/message_groups.save'));
-             })
-             ->see(trans('partymeister-core::backend/message_groups.updated'))
-             ->see('Modified Message group Name')
-             ->seePageIs('/backend/message_groups');
+            ->see(trans('partymeister-core::backend/message_groups.edit'))
+            ->type('Modified Message group Name', 'name')
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/message_groups.save'));
+            })
+            ->see(trans('partymeister-core::backend/message_groups.updated'))
+            ->see('Modified Message group Name')
+            ->seePageIs('/backend/message_groups');
     }
 
     /** @test */
@@ -174,9 +174,9 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
     {
         $records = create_test_message_group(10);
         $this->visit('/backend/message_groups')
-             ->type(substr($records[6]->name, 0, 3), 'search')
-             ->press('grid-search-button')
-             ->seeInField('search', substr($records[6]->name, 0, 3))
-             ->see($records[6]->name);
+            ->type(substr($records[6]->name, 0, 3), 'search')
+            ->press('grid-search-button')
+            ->seeInField('search', substr($records[6]->name, 0, 3))
+            ->see($records[6]->name);
     }
 }

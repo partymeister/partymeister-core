@@ -23,7 +23,9 @@ class CallbacksController extends ApiController
      *   tags={"CallbacksController"},
      *   path="/api/callbacks",
      *   summary="Get callback collection",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -31,15 +33,20 @@ class CallbacksController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="array",
+     *
      *         @OA\Items(ref="#/components/schemas/CallbackResource")
      *       ),
+     *
      *       @OA\Property(
      *         property="meta",
      *         ref="#/components/schemas/PaginationMeta"
@@ -55,9 +62,11 @@ class CallbacksController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   )
      * )
@@ -69,7 +78,7 @@ class CallbacksController extends ApiController
     public function index()
     {
         $paginator = CallbackService::collection()
-                                    ->getPaginator();
+            ->getPaginator();
 
         return (new CallbackCollection($paginator))->additional(['message' => 'Callback collection read']);
     }
@@ -79,10 +88,14 @@ class CallbacksController extends ApiController
      *   tags={"CallbacksController"},
      *   path="/api/callbacks",
      *   summary="Create new callback",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/CallbackRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -90,10 +103,13 @@ class CallbacksController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -106,31 +122,34 @@ class CallbacksController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Store a newly created resource in storage.
      *
-     * @param  CallbackRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(CallbackRequest $request)
     {
         $result = CallbackService::create($request)
-                                 ->getResult();
+            ->getResult();
 
         return (new CallbackResource($result))->additional(['message' => 'Callback created'])
-                                              ->response()
-                                              ->setStatusCode(201);
+            ->response()
+            ->setStatusCode(201);
     }
 
     /**
@@ -138,7 +157,9 @@ class CallbacksController extends ApiController
      *   tags={"CallbacksController"},
      *   path="/api/callbacks/{callback}",
      *   summary="Get single callback",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -146,17 +167,22 @@ class CallbacksController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="callback",
      *     parameter="callback",
      *     description="Callback id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -169,14 +195,18 @@ class CallbacksController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
@@ -189,7 +219,7 @@ class CallbacksController extends ApiController
     public function show(Callback $record)
     {
         $result = CallbackService::show($record)
-                                 ->getResult();
+            ->getResult();
 
         return (new CallbackResource($result))->additional(['message' => 'Callback read']);
     }
@@ -199,10 +229,14 @@ class CallbacksController extends ApiController
      *   tags={"CallbacksController"},
      *   path="/api/callbacks/{callback}",
      *   summary="Update an existing callback",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/CallbackRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -210,17 +244,22 @@ class CallbacksController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="callback",
      *     parameter="callback",
      *     description="Callback id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -233,28 +272,31 @@ class CallbacksController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Update the specified resource in storage.
      *
-     * @param  CallbackRequest  $request
      * @param  callable  $record
      * @return CallbackResource
      */
     public function update(CallbackRequest $request, Callback $record)
     {
         $result = CallbackService::update($record, $request)
-                                 ->getResult();
+            ->getResult();
 
         return (new CallbackResource($result))->additional(['message' => 'Callback updated']);
     }
@@ -264,7 +306,9 @@ class CallbacksController extends ApiController
      *   tags={"CallbacksController"},
      *   path="/api/callbacks/{callback}",
      *   summary="Delete a callback",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -272,17 +316,22 @@ class CallbacksController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="callback",
      *     parameter="callback",
      *     description="Callback id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -290,20 +339,27 @@ class CallbacksController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   ),
+     *
      *   @OA\Response(
      *     response="400",
      *     description="Bad request",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -321,7 +377,7 @@ class CallbacksController extends ApiController
     public function destroy(Callback $record)
     {
         $result = CallbackService::delete($record)
-                                 ->getResult();
+            ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'Callback deleted']);

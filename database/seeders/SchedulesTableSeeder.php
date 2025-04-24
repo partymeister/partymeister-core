@@ -19,7 +19,7 @@ class SchedulesTableSeeder extends Seeder
     public function run()
     {
         DB::table('schedules')->insert([
-            'name'       => 'Main Schedule',
+            'name' => 'Main Schedule',
             'created_by' => User::get()->first()->id,
             'updated_by' => User::get()->first()->id,
         ]);

@@ -8,6 +8,7 @@ use Motor\Backend\Http\Resources\BaseResource;
 /**
  * @OA\Schema(
  *   schema="EventResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -70,27 +71,27 @@ class EventResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'id'                => (int) $this->id,
-            'name'              => $this->name,
-            'schedule'          => new ScheduleResource($this->schedule),
-            'event_type'        => new EventTypeResource($this->event_type),
-            'starts_at'         => CarbonImmutable::parse($this->starts_at)
-                                                  ->shiftTimezone('GMT')
-                                                  ->setTimezone('Europe/Berlin'),
-            'ends_at'           => CarbonImmutable::parse($this->ends_at)
-                                                  ->shiftTimezone('GMT')
-                                                  ->setTimezone('Europe/Berlin'),
-            'is_visible'        => (bool) $this->is_visible,
+            'id' => (int) $this->id,
+            'name' => $this->name,
+            'schedule' => new ScheduleResource($this->schedule),
+            'event_type' => new EventTypeResource($this->event_type),
+            'starts_at' => CarbonImmutable::parse($this->starts_at)
+                ->shiftTimezone('GMT')
+                ->setTimezone('Europe/Berlin'),
+            'ends_at' => CarbonImmutable::parse($this->ends_at)
+                ->shiftTimezone('GMT')
+                ->setTimezone('Europe/Berlin'),
+            'is_visible' => (bool) $this->is_visible,
             'is_organizer_only' => (bool) $this->is_organizer_only,
-            'sort_position'     => (int) $this->sort_position,
-            'notify_minutes'    => (int) $this->notify_minutes,
-            'link'              => $this->link,
+            'sort_position' => (int) $this->sort_position,
+            'notify_minutes' => (int) $this->notify_minutes,
+            'link' => $this->link,
         ];
     }
 }

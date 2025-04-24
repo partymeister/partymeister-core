@@ -12,6 +12,7 @@ class ScheduleRequest extends Request
     /**
      * @OA\Schema(
      *   schema="ScheduleRequest",
+     *
      *   @OA\Property(
      *     property="name",
      *     type="string",

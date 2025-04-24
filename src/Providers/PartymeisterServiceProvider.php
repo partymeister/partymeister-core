@@ -46,9 +46,7 @@ class PartymeisterServiceProvider extends ServiceProvider
         merge_local_config_with_db_configuration_variables('partymeister-core');
     }
 
-    public function config()
-    {
-    }
+    public function config() {}
 
     public function routes()
     {

@@ -15,7 +15,7 @@ class MessageGroupGrid extends Grid
         $this->setDefaultSorting('name', 'ASC');
         $this->addColumn('name', trans('motor-backend::backend/global.name'), true);
         $this->addColumn('users', trans('motor-backend::backend/users.users'))
-             ->renderer(CollectionRenderer::class, ['column' => 'name']);
+            ->renderer(CollectionRenderer::class, ['column' => 'name']);
         $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.message-groups.edit');
         $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.message-groups.destroy');
     }

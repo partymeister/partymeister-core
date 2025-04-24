@@ -5,7 +5,6 @@ namespace Partymeister\Core\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
@@ -54,11 +53,11 @@ use Spatie\Permission\Models\Role;
  * @method static Builder|User wherePasswordLastChangedAt($value)
  * @method static Builder|User whereRememberToken($value)
  * @method static Builder|User whereUpdatedAt($value)
+ *
  * @mixin Eloquent
  */
 class User extends \Motor\Backend\Models\User
 {
-
     /**
      * @return BelongsToMany
      */

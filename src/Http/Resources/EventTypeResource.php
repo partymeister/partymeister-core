@@ -7,6 +7,7 @@ use Motor\Backend\Http\Resources\BaseResource;
 /**
  * @OA\Schema(
  *   schema="EventTypeResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -40,9 +41,9 @@ class EventTypeResource extends BaseResource
     public function toArray($request)
     {
         return [
-            'id'          => (int) $this->id,
-            'name'        => $this->name,
-            'web_color'   => $this->web_color,
+            'id' => (int) $this->id,
+            'name' => $this->name,
+            'web_color' => $this->web_color,
             'slide_color' => $this->slide_color,
         ];
     }

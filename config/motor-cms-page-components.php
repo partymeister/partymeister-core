@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'groups'     => [
-        'partymeister-core'    => [
+    'groups' => [
+        'partymeister-core' => [
             'name' => 'Partymeister core',
         ],
         'partymeister-website' => [
@@ -11,86 +11,86 @@ return [
     ],
     'components' => [
         'visitor-website-registrations' => [
-            'name'            => 'VisitorWebsiteRegistration',
-            'description'     => 'Show VisitorWebsiteRegistration component',
-            'view'            => 'partymeister-core::frontend.components.visitor-website-registration',
+            'name' => 'VisitorWebsiteRegistration',
+            'description' => 'Show VisitorWebsiteRegistration component',
+            'view' => 'partymeister-core::frontend.components.visitor-website-registration',
             'component_class' => 'Partymeister\Core\Components\ComponentVisitorWebsiteRegistrations',
-            'compatibility'   => [
+            'compatibility' => [
 
             ],
-            'permissions'     => [
+            'permissions' => [
 
             ],
-            'group'           => 'partymeister-website',
+            'group' => 'partymeister-website',
         ],
-        'schedule'                      => [
-            'name'            => 'Schedule',
-            'description'     => 'Show Schedule component',
-            'view'            => 'partymeister-core::frontend.components.schedule',
-            'route'           => 'component.schedules',
+        'schedule' => [
+            'name' => 'Schedule',
+            'description' => 'Show Schedule component',
+            'view' => 'partymeister-core::frontend.components.schedule',
+            'route' => 'component.schedules',
             'component_class' => 'Partymeister\Core\Components\ComponentSchedules',
-            'resource_class'  => 'Partymeister\Core\Http\Resources\Components\ScheduleResource',
-            'compatibility'   => [
+            'resource_class' => 'Partymeister\Core\Http\Resources\Components\ScheduleResource',
+            'compatibility' => [
 
             ],
-            'permissions'     => [
+            'permissions' => [
 
             ],
-            'group'           => 'partymeister-core',
+            'group' => 'partymeister-core',
         ],
-        'visitor-list'                  => [
-            'name'            => 'VisitorList',
-            'description'     => 'Show VisitorList component',
-            'view'            => 'partymeister-core::frontend.components.visitor-list',
+        'visitor-list' => [
+            'name' => 'VisitorList',
+            'description' => 'Show VisitorList component',
+            'view' => 'partymeister-core::frontend.components.visitor-list',
             'component_class' => 'Partymeister\Core\Components\ComponentVisitorLists',
-            'resource_class'  => 'Partymeister\Core\Http\Resources\Components\VisitorListResource',
-            'compatibility'   => [
+            'resource_class' => 'Partymeister\Core\Http\Resources\Components\VisitorListResource',
+            'compatibility' => [
 
             ],
-            'permissions'     => [
+            'permissions' => [
 
             ],
-            'group'           => 'partymeister-core',
+            'group' => 'partymeister-core',
         ],
-        'visitor-login'                 => [
-            'name'            => 'VisitorLogin',
-            'description'     => 'Show VisitorLogin component',
-            'view'            => 'partymeister-core::frontend.components.visitor-login',
-            'route'           => 'component.visitor-logins',
+        'visitor-login' => [
+            'name' => 'VisitorLogin',
+            'description' => 'Show VisitorLogin component',
+            'view' => 'partymeister-core::frontend.components.visitor-login',
+            'route' => 'component.visitor-logins',
             'component_class' => 'Partymeister\Core\Components\ComponentVisitorLogins',
-            'compatibility'   => [
+            'compatibility' => [
 
             ],
-            'permissions'     => [
+            'permissions' => [
 
             ],
-            'group'           => 'partymeister-core',
+            'group' => 'partymeister-core',
         ],
-        'visitor-registration'          => [
-            'name'            => 'VisitorRegistration',
-            'description'     => 'Show VisitorRegistration component',
-            'view'            => 'partymeister-core::frontend.components.visitor-registration',
+        'visitor-registration' => [
+            'name' => 'VisitorRegistration',
+            'description' => 'Show VisitorRegistration component',
+            'view' => 'partymeister-core::frontend.components.visitor-registration',
             'component_class' => 'Partymeister\Core\Components\ComponentVisitorRegistrations',
-            'compatibility'   => [
+            'compatibility' => [
 
             ],
-            'permissions'     => [
+            'permissions' => [
 
             ],
-            'group'           => 'partymeister-core',
+            'group' => 'partymeister-core',
         ],
-        'password-forgotten'                 => [
-            'name'            => 'PasswordForgotten',
-            'description'     => 'Show PasswordForgotten component',
-            'view'            => 'partymeister-core::frontend.components.password-forgotten',
+        'password-forgotten' => [
+            'name' => 'PasswordForgotten',
+            'description' => 'Show PasswordForgotten component',
+            'view' => 'partymeister-core::frontend.components.password-forgotten',
             'component_class' => 'Partymeister\Core\Components\ComponentPasswordForgotten',
-            'compatibility'   => [
+            'compatibility' => [
 
             ],
-            'permissions'     => [
+            'permissions' => [
 
             ],
-            'group'           => 'partymeister-core',
+            'group' => 'partymeister-core',
         ],
     ],
 ];

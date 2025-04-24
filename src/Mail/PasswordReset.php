@@ -30,7 +30,7 @@ class PasswordReset extends Mailable
     {
         return new Envelope(
             from: new Address(config('partymeister-core-visitor-registration.password_reset_from_email'), config('partymeister-core-visitor-registration.password_reset_from_name')),
-            subject: config('partymeister-core-visitor-registration.password_reset_subject_prefix') . 'PartyMeister password reset',
+            subject: config('partymeister-core-visitor-registration.password_reset_subject_prefix').'PartyMeister password reset',
         );
 
     }

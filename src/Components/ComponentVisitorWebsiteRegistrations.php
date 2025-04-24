@@ -23,20 +23,12 @@ class ComponentVisitorWebsiteRegistrations
      */
     protected $pageVersionComponent;
 
-    /**
-     * @var
-     */
     protected $visitorWebsiteRegistrationForm;
 
-    /**
-     * @var
-     */
     protected $request;
 
     /**
      * ComponentVisitorWebsiteRegistrations constructor.
-     *
-     * @param  PageVersionComponent  $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
@@ -44,7 +36,6 @@ class ComponentVisitorWebsiteRegistrations
     }
 
     /**
-     * @param  Request  $request
      * @return bool|Factory|RedirectResponse|View
      */
     public function index(Request $request)
@@ -52,8 +43,8 @@ class ComponentVisitorWebsiteRegistrations
         $this->request = $request;
 
         $this->visitorWebsiteRegistrationForm = $this->form(VisitorWebsiteRegistrationForm::class, [
-            'name'    => 'visitor-website-registration',
-            'method'  => 'POST',
+            'name' => 'visitor-website-registration',
+            'method' => 'POST',
             'enctype' => 'multipart/form-data',
         ]);
 

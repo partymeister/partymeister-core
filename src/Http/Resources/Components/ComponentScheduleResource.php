@@ -7,6 +7,7 @@ use Motor\Backend\Http\Resources\BaseResource;
 /**
  * @OA\Schema(
  *   schema="ComponentScheduleResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -30,7 +31,7 @@ class ComponentScheduleResource extends BaseResource
     public function toArray($request)
     {
         return [
-            'id'          => (int) $this->id,
+            'id' => (int) $this->id,
             'schedule_id' => (int) $this->schedule_id,
         ];
     }

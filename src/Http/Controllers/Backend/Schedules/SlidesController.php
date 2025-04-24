@@ -2,7 +2,6 @@
 
 namespace Partymeister\Core\Http\Controllers\Backend\Schedules;
 
-use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -25,14 +24,12 @@ class SlidesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Partymeister\Core\Models\Schedule  $record
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index(Request $request, Schedule $record)
     {
         $timetableTemplate = SlideTemplate::where('template_for', 'timetable')
-                                          ->first();
+            ->first();
 
         $resource = new ScheduleResource($record->load('events'));
         $data = $resource->toArrayRecursive();
@@ -40,20 +37,20 @@ class SlidesController extends Controller
         foreach (Arr::get($data, 'events') as $key => $event) {
 
             $date = CarbonImmutable::parse($event['starts_at'])->shiftTimezone('GMT')
-                                   ->setTimezone('Europe/Berlin');
+                ->setTimezone('Europe/Berlin');
             if (! isset($days[$date->format('l')])) {
                 $days[$date->format('l')] = [];
             }
 
-            if (!$event['is_visible'] || $event['is_organizer_only']) {
+            if (! $event['is_visible'] || $event['is_organizer_only']) {
                 continue;
             }
 
             $days[$date->format('l')][] = [
-                'name'  => addslashes(Arr::get($event, 'name')),
-                'type'  => addslashes(Arr::get($event, 'event_type.name')),
+                'name' => addslashes(Arr::get($event, 'name')),
+                'type' => addslashes(Arr::get($event, 'event_type.name')),
                 'color' => Arr::get($event, 'event_type.slide_color'),
-                'time'  => $date->format('H:i'),
+                'time' => $date->format('H:i'),
             ];
         }
 
@@ -65,8 +62,6 @@ class SlidesController extends Controller
     }
 
     /**
-     * @param  Schedule  $record
-     * @param  Request  $request
      * @return RedirectResponse|Redirector
      */
     public function store(Schedule $record, Request $request)

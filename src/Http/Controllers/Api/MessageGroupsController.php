@@ -25,7 +25,9 @@ class MessageGroupsController extends ApiController
      *   tags={"MessageGroupsController"},
      *   path="/api/message_groups",
      *   summary="Get message_group collection",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -33,15 +35,20 @@ class MessageGroupsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="array",
+     *
      *         @OA\Items(ref="#/components/schemas/MessageGroupResource")
      *       ),
+     *
      *       @OA\Property(
      *         property="meta",
      *         ref="#/components/schemas/PaginationMeta"
@@ -57,9 +64,11 @@ class MessageGroupsController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   )
      * )
@@ -71,7 +80,7 @@ class MessageGroupsController extends ApiController
     public function index()
     {
         $paginator = MessageGroupService::collection()
-                                        ->getPaginator();
+            ->getPaginator();
 
         return (new MessageGroupCollection($paginator))->additional(['message' => 'MessageGroup collection read']);
     }
@@ -81,10 +90,14 @@ class MessageGroupsController extends ApiController
      *   tags={"MessageGroupsController"},
      *   path="/api/message_groups",
      *   summary="Create new message_group",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/MessageGroupRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -92,10 +105,13 @@ class MessageGroupsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -108,31 +124,34 @@ class MessageGroupsController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Store a newly created resource in storage.
      *
-     * @param  MessageGroupRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(MessageGroupRequest $request)
     {
         $result = MessageGroupService::create($request)
-                                     ->getResult();
+            ->getResult();
 
         return (new MessageGroupResource($result))->additional(['message' => 'MessageGroup created'])
-                                                  ->response()
-                                                  ->setStatusCode(201);
+            ->response()
+            ->setStatusCode(201);
     }
 
     /**
@@ -140,7 +159,9 @@ class MessageGroupsController extends ApiController
      *   tags={"MessageGroupsController"},
      *   path="/api/message_groups/{message_group}",
      *   summary="Get single message_group",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -148,17 +169,22 @@ class MessageGroupsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="message_group",
      *     parameter="message_group",
      *     description="MessageGroup id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -171,27 +197,30 @@ class MessageGroupsController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Display the specified resource.
      *
-     * @param  MessageGroup  $record
      * @return MessageGroupResource
      */
     public function show(MessageGroup $record)
     {
         $result = MessageGroupService::show($record)
-                                     ->getResult();
+            ->getResult();
 
         return (new MessageGroupResource($result))->additional(['message' => 'MessageGroup read']);
     }
@@ -201,10 +230,14 @@ class MessageGroupsController extends ApiController
      *   tags={"MessageGroupsController"},
      *   path="/api/message_groups/{message_group}",
      *   summary="Update an existing message_group",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/MessageGroupRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -212,17 +245,22 @@ class MessageGroupsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="message_group",
      *     parameter="message_group",
      *     description="MessageGroup id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -235,28 +273,30 @@ class MessageGroupsController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Update the specified resource in storage.
      *
-     * @param  MessageGroupRequest  $request
-     * @param  MessageGroup  $record
      * @return MessageGroupResource
      */
     public function update(MessageGroupRequest $request, MessageGroup $record)
     {
         $result = MessageGroupService::update($record, $request)
-                                     ->getResult();
+            ->getResult();
 
         return (new MessageGroupResource($result))->additional(['message' => 'MessageGroup updated']);
     }
@@ -266,7 +306,9 @@ class MessageGroupsController extends ApiController
      *   tags={"MessageGroupsController"},
      *   path="/api/message_groups/{message_group}",
      *   summary="Delete a message_group",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -274,17 +316,22 @@ class MessageGroupsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="message_group",
      *     parameter="message_group",
      *     description="MessageGroup id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -292,20 +339,27 @@ class MessageGroupsController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   ),
+     *
      *   @OA\Response(
      *     response="400",
      *     description="Bad request",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -317,13 +371,12 @@ class MessageGroupsController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param  MessageGroup  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(MessageGroup $record)
     {
         $result = MessageGroupService::delete($record)
-                                     ->getResult();
+            ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'MessageGroup deleted']);

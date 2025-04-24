@@ -20,7 +20,7 @@ class VisitorRegistrationForm extends Form
             'label' => trans('partymeister-core::backend/visitors.name'),
             'rules' => ['required', 'max:255', Rule::unique('visitors', 'name')],
         ])
-             ->add('group', 'text', ['label' => trans('partymeister-core::backend/visitors.group')]);
+            ->add('group', 'text', ['label' => trans('partymeister-core::backend/visitors.group')]);
 
         if (config('partymeister-core-visitor-registration.require_access_key')) {
             $this->add('access_key', 'text', [
@@ -38,7 +38,7 @@ class VisitorRegistrationForm extends Form
         if (count($countryList) == 0) {
             $countryList = Countries::getNames();
         }
-        $this->add('country_iso_3166_1', 'select', ['label'   => trans('motor-backend::backend/global.address.country'),
+        $this->add('country_iso_3166_1', 'select', ['label' => trans('motor-backend::backend/global.address.country'),
             'choices' => $countryList,
         ]);
 
@@ -53,11 +53,11 @@ class VisitorRegistrationForm extends Form
             'label' => trans('motor-backend::backend/users.password'),
             'rules' => 'required|min:6|confirmed',
         ])
-             ->add('password_confirmation', 'password', [
-                 'value' => '',
-                 'label' => trans('motor-backend::backend/users.password_confirm'),
-                 'rules' => 'required|min:6',
-             ])
-             ->add('submit', 'submit', ['attr' => ['class' => 'success button expanded'], 'label' => 'Register']);
+            ->add('password_confirmation', 'password', [
+                'value' => '',
+                'label' => trans('motor-backend::backend/users.password_confirm'),
+                'rules' => 'required|min:6',
+            ])
+            ->add('submit', 'submit', ['attr' => ['class' => 'success button expanded'], 'label' => 'Register']);
     }
 }

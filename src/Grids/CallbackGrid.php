@@ -17,16 +17,16 @@ class CallbackGrid extends Grid
         $this->addColumn('name', trans('motor-backend::backend/global.name'), true);
         $this->setDefaultSorting('name', 'ASC');
         $this->addColumn('destination', trans('partymeister-core::backend/callbacks.destination'), true)
-             ->renderer(TranslateRenderer::class, ['file' => 'partymeister-core::backend/callbacks.destinations']);
+            ->renderer(TranslateRenderer::class, ['file' => 'partymeister-core::backend/callbacks.destinations']);
         $this->addColumn('embargo_until', trans('partymeister-core::backend/callbacks.embargo_until'), true)
-             ->renderer(DateRenderer::class, ['format' => 'Y-m-d H:i']);
+            ->renderer(DateRenderer::class, ['format' => 'Y-m-d H:i']);
         $this->addColumn('has_fired', trans('partymeister-core::backend/callbacks.has_fired'), true)
-             ->renderer(BooleanRenderer::class);
+            ->renderer(BooleanRenderer::class);
         $this->addColumn('is_timed', trans('partymeister-core::backend/callbacks.is_timed'), true)
-             ->renderer(BooleanRenderer::class);
+            ->renderer(BooleanRenderer::class);
         $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.callbacks.edit');
         $this->addDuplicateAction(trans('motor-backend::backend/global.duplicate'), 'backend.callbacks.duplicate')
-             ->needsPermissionTo('callbacks.write');
+            ->needsPermissionTo('callbacks.write');
         $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.callbacks.destroy');
     }
 }

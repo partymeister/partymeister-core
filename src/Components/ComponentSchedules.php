@@ -35,9 +35,6 @@ class ComponentSchedules
 
     /**
      * ComponentSchedules constructor.
-     *
-     * @param  PageVersionComponent  $pageVersionComponent
-     * @param  ComponentSchedule  $component
      */
     public function __construct(
         PageVersionComponent $pageVersionComponent,
@@ -48,23 +45,22 @@ class ComponentSchedules
     }
 
     /**
-     * @param  Request  $request
      * @return Factory|View
      */
     public function index(Request $request)
     {
         $data = (new ScheduleResource($this->component->schedule->load('events')))->toArrayRecursive();
 
-        //$tz = CarbonTimeZone::create('Europe/Berlin'); // static way
-        //$carbon = new Carbon();
-        //$carbon->setTimezone($tz);
+        // $tz = CarbonTimeZone::create('Europe/Berlin'); // static way
+        // $carbon = new Carbon();
+        // $carbon->setTimezone($tz);
 
         foreach (Arr::get($data, 'events', []) as $event) {
             if (Arr::get($event, 'is_visible') == false) {
                 continue;
             }
             $date = CarbonImmutable::parse($event['starts_at'])->shiftTimezone('GMT')
-                                   ->setTimezone('Europe/Berlin');
+                ->setTimezone('Europe/Berlin');
             $dayKey = $date->format('l, F jS');
             $timeKey = $date->format('H:i');
             if (! isset($this->days[$dayKey])) {
@@ -75,16 +71,16 @@ class ComponentSchedules
                 $this->days[$dayKey][$timeKey] = [];
             }
             $this->days[$dayKey][$timeKey][] = [
-                'web_color'   => Arr::get($event, 'event_type.web_color'),
+                'web_color' => Arr::get($event, 'event_type.web_color'),
                 'slide_color' => Arr::get($event, 'event_type.slide_color'),
-                'id'          => Arr::get($event, 'id'),
-                'typeid'      => Arr::get($event, 'event_type.id'),
-                'type'        => Arr::get($event, 'event_type.name'),
-                'name'        => Arr::get($event, 'name'),
+                'id' => Arr::get($event, 'id'),
+                'typeid' => Arr::get($event, 'event_type.id'),
+                'type' => Arr::get($event, 'event_type.name'),
+                'name' => Arr::get($event, 'name'),
                 'description' => '',
-                'link'        => '',
-                'starttime'   => $date->format('Y-m-d H:i'),
-                'endtime'     => '',
+                'link' => '',
+                'starttime' => $date->format('Y-m-d H:i'),
+                'endtime' => '',
             ];
         }
 
@@ -98,7 +94,7 @@ class ComponentSchedules
     {
         return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
             'component' => $this->component,
-            'days'      => $this->days,
+            'days' => $this->days,
         ]);
     }
 }

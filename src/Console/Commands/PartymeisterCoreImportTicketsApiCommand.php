@@ -49,7 +49,7 @@ class PartymeisterCoreImportTicketsApiCommand extends Command
             foreach (explode(',', config('partymeister-core-dt.shop')) as $shop) {
 
                 $loginRequest = new Request('POST', config('partymeister-core-dt.base_url').'/user/login', ['content-type' => 'application/json'], json_encode([
-                    'email'    => config('partymeister-core-dt.email'),
+                    'email' => config('partymeister-core-dt.email'),
                     'password' => config('partymeister-core-dt.password'),
                 ]));
 
@@ -62,8 +62,8 @@ class PartymeisterCoreImportTicketsApiCommand extends Command
 
                 $request = new Request('GET', config('partymeister-core-dt.base_url').'/order/getAll', [
                     'content-type' => 'application/json',
-                    'X-Shop'       => $shop,
-                    'X-Token'      => $token,
+                    'X-Shop' => $shop,
+                    'X-Token' => $token,
                 ]);
 
                 try {
@@ -85,9 +85,9 @@ class PartymeisterCoreImportTicketsApiCommand extends Command
 
                                         // Check if we already imported this key
                                         $existingAccessKey = AccessKey::where('access_key', $key)
-                                                                      ->first();
+                                            ->first();
                                         if (is_null($existingAccessKey)) {
-                                            $accessKey = new AccessKey();
+                                            $accessKey = new AccessKey;
                                             $accessKey->access_key = $key;
 
                                             if (strpos(Arr::get($item, 'Name'), 'Remote') !== false) {
@@ -123,34 +123,35 @@ class PartymeisterCoreImportTicketsApiCommand extends Command
                             // Filter out remote tickets
                             if (strpos(strtolower(Arr::get($item, 'Name')), 'remote') !== false) {
                                 $this->info('Skipping remote ticket');
+
                                 continue;
                             }
 
                             if (Arr::get($item, 'Keys')) {
                                 foreach (Arr::get($item, 'Keys') as $key) {
                                     $record = Guest::where('ticket_code', $key)
-                                                   ->first();
+                                        ->first();
                                     if (! is_null($record)) {
                                         $this->info('Ticket '.$key.' exists - overwriting');
                                     } else {
-                                        $record = new Guest();
+                                        $record = new Guest;
                                     }
 
                                     $category = Category::where('scope', 'guest')
-                                                        ->where('name', $item['Name'])
-                                                        ->first();
+                                        ->where('name', $item['Name'])
+                                        ->first();
 
                                     if (is_null($category)) {
                                         // Get root
                                         $root = Category::where('scope', 'guest')
-                                                        ->where('_lft', 1)
-                                                        ->first();
+                                            ->where('_lft', 1)
+                                            ->first();
 
-                                        $category = new Category();
+                                        $category = new Category;
                                         $category->name = $item['Name'];
                                         $category->scope = 'guest';
                                         $category->appendToNode($root)
-                                                 ->save();
+                                            ->save();
                                     }
 
                                     if (Arr::get($item, 'Discounts')) {
@@ -168,7 +169,7 @@ class PartymeisterCoreImportTicketsApiCommand extends Command
 
                                     $record->save();
                                 }
-                                //$this->info('keys found!');
+                                // $this->info('keys found!');
                             } else {
                                 $this->error(json_encode($item));
                                 $this->error($order['Betreff'].' - '.$item['Name'].' - '.$order['Versandart']);

@@ -28,7 +28,7 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
         'media',
     ];
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
@@ -52,8 +52,8 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
     public function can_see_grid_without_visitor()
     {
         $this->visit('/backend/visitors')
-             ->see(trans('partymeister-core::backend/visitors.visitors'))
-             ->see(trans('motor-backend::backend/global.no_records'));
+            ->see(trans('partymeister-core::backend/visitors.visitors'))
+            ->see(trans('motor-backend::backend/global.no_records'));
     }
 
     /** @test */
@@ -61,8 +61,8 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
     {
         $record = create_test_visitor();
         $this->visit('/backend/visitors')
-             ->see(trans('partymeister-core::backend/visitors.visitors'))
-             ->see($record->name);
+            ->see(trans('partymeister-core::backend/visitors.visitors'))
+            ->see($record->name);
     }
 
     /** @test */
@@ -70,12 +70,12 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
     {
         $record = create_test_visitor();
         $this->visit('/backend/visitors')
-             ->within('table', function () {
-                 $this->click(trans('motor-backend::backend/global.edit'));
-             })
-             ->seePageIs('/backend/visitors/'.$record->id.'/edit')
-             ->click(trans('motor-backend::backend/global.back'))
-             ->seePageIs('/backend/visitors');
+            ->within('table', function () {
+                $this->click(trans('motor-backend::backend/global.edit'));
+            })
+            ->seePageIs('/backend/visitors/'.$record->id.'/edit')
+            ->click(trans('motor-backend::backend/global.back'))
+            ->seePageIs('/backend/visitors');
     }
 
     /** @test */
@@ -84,14 +84,14 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
         $record = create_test_visitor();
 
         $this->visit('/backend/visitors/'.$record->id.'/edit')
-             ->see($record->name)
-             ->type('Updated Visitor', 'name')
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/visitors.save'));
-             })
-             ->see(trans('partymeister-core::backend/visitors.updated'))
-             ->see('Updated Visitor')
-             ->seePageIs('/backend/visitors');
+            ->see($record->name)
+            ->type('Updated Visitor', 'name')
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/visitors.save'));
+            })
+            ->see(trans('partymeister-core::backend/visitors.updated'))
+            ->see('Updated Visitor')
+            ->seePageIs('/backend/visitors');
 
         $record = Visitor::find($record->id);
         $this->assertEquals('Updated Visitor', $record->name);
@@ -101,34 +101,34 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
     public function can_click_the_visitor_create_button()
     {
         $this->visit('/backend/visitors')
-             ->click(trans('partymeister-core::backend/visitors.new'))
-             ->seePageIs('/backend/visitors/create');
+            ->click(trans('partymeister-core::backend/visitors.new'))
+            ->seePageIs('/backend/visitors/create');
     }
 
     /** @test */
     public function can_create_a_new_visitor()
     {
         $this->visit('/backend/visitors/create')
-             ->see(trans('partymeister-core::backend/visitors.new'))
-             ->type('Create Visitor Name', 'name')
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/visitors.save'));
-             })
-             ->see(trans('partymeister-core::backend/visitors.created'))
-             ->see('Create Visitor Name')
-             ->seePageIs('/backend/visitors');
+            ->see(trans('partymeister-core::backend/visitors.new'))
+            ->type('Create Visitor Name', 'name')
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/visitors.save'));
+            })
+            ->see(trans('partymeister-core::backend/visitors.created'))
+            ->see('Create Visitor Name')
+            ->seePageIs('/backend/visitors');
     }
 
     /** @test */
     public function cannot_create_a_new_visitor_with_empty_fields()
     {
         $this->visit('/backend/visitors/create')
-             ->see(trans('partymeister-core::backend/visitors.new'))
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/visitors.save'));
-             })
-             ->see('Data missing!')
-             ->seePageIs('/backend/visitors/create');
+            ->see(trans('partymeister-core::backend/visitors.new'))
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/visitors.save'));
+            })
+            ->see('Data missing!')
+            ->seePageIs('/backend/visitors/create');
     }
 
     /** @test */
@@ -136,14 +136,14 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
     {
         $record = create_test_visitor();
         $this->visit('/backend/visitors/'.$record->id.'/edit')
-             ->see(trans('partymeister-core::backend/visitors.edit'))
-             ->type('Modified Visitor Name', 'name')
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/visitors.save'));
-             })
-             ->see(trans('partymeister-core::backend/visitors.updated'))
-             ->see('Modified Visitor Name')
-             ->seePageIs('/backend/visitors');
+            ->see(trans('partymeister-core::backend/visitors.edit'))
+            ->type('Modified Visitor Name', 'name')
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/visitors.save'));
+            })
+            ->see(trans('partymeister-core::backend/visitors.updated'))
+            ->see('Modified Visitor Name')
+            ->seePageIs('/backend/visitors');
     }
 
     /** @test */
@@ -174,9 +174,9 @@ class PartymeisterCoreBackendVisitorTest extends TestCase
     {
         $records = create_test_visitor(10);
         $this->visit('/backend/visitors')
-             ->type(substr($records[6]->name, 0, 3), 'search')
-             ->press('grid-search-button')
-             ->seeInField('search', substr($records[6]->name, 0, 3))
-             ->see($records[6]->name);
+            ->type(substr($records[6]->name, 0, 3), 'search')
+            ->press('grid-search-button')
+            ->seeInField('search', substr($records[6]->name, 0, 3))
+            ->see($records[6]->name);
     }
 }

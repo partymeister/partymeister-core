@@ -29,27 +29,16 @@ class ComponentPasswordForgotten
      */
     protected $pageVersionComponent;
 
-    /**
-     * @var
-     */
     protected $passwordForgottenForm;
 
-    /**
-     * @var
-     */
     protected $passwordResetForm;
 
     protected $resetType = 'forgotten';
 
-    /**
-     * @var
-     */
     protected $request;
 
     /**
      * ComponentVisitorLists constructor.
-     *
-     * @param PageVersionComponent $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
@@ -57,7 +46,6 @@ class ComponentPasswordForgotten
     }
 
     /**
-     * @param Request $request
      * @return bool|Factory|RedirectResponse|View
      */
     public function index(Request $request)
@@ -65,18 +53,18 @@ class ComponentPasswordForgotten
         $this->request = $request;
 
         if ($this->request->get('t') !== null && $reset = PasswordReset::where('token', $this->request->get('t'))
-                                                                       ->first() !== null) {
+            ->first() !== null) {
             $this->resetType = 'reset';
             $this->passwordResetForm = $this->form(PasswordResetForm::class, [
-                'name'    => 'password-reset',
-                'method'  => 'POST',
-                'url'     => url('/password-forgotten?t='.$this->request->get('t')),
+                'name' => 'password-reset',
+                'method' => 'POST',
+                'url' => url('/password-forgotten?t='.$this->request->get('t')),
                 'enctype' => 'multipart/form-data',
             ]);
         } else {
             $this->passwordForgottenForm = $this->form(PasswordForgottenForm::class, [
-                'name'    => 'password-forgotten',
-                'method'  => 'POST',
+                'name' => 'password-forgotten',
+                'method' => 'POST',
                 'enctype' => 'multipart/form-data',
             ]);
         }
@@ -120,10 +108,10 @@ class ComponentPasswordForgotten
 
         // Remove old tokens with the same email address
         $passwordReset = PasswordReset::where('token', $this->request->get('t'))
-                                      ->first();
+            ->first();
 
         $visitor = Visitor::where('email', $passwordReset->email)
-                          ->first();
+            ->first();
 
         if (! is_null($visitor)) {
             $visitor->password = bcrypt(Arr::get($this->request, 'password-reset.password'));
@@ -132,7 +120,7 @@ class ComponentPasswordForgotten
 
         // Remove old tokens with the same email address
         PasswordReset::where('email', $visitor->email)
-                     ->delete();
+            ->delete();
 
         flash()->success('Your password has been changed. Have fun logging in!');
 
@@ -160,12 +148,12 @@ class ComponentPasswordForgotten
 
         // Remove old tokens with the same email address
         PasswordReset::where('email', $email)
-                     ->delete();
+            ->delete();
 
         // Save link in DB, send email
         $reset = PasswordReset::create([
-            'email'      => Arr::get($this->request, 'password-forgotten.email'),
-            'token'      => Str::uuid(),
+            'email' => Arr::get($this->request, 'password-forgotten.email'),
+            'token' => Str::uuid(),
             'created_at' => Carbon::now(),
         ]);
 
@@ -184,8 +172,8 @@ class ComponentPasswordForgotten
     {
         return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
             'passwordForgottenForm' => $this->passwordForgottenForm,
-            'passwordResetForm'     => $this->passwordResetForm,
-            'resetType'             => $this->resetType,
+            'passwordResetForm' => $this->passwordResetForm,
+            'resetType' => $this->resetType,
         ]);
     }
 }

@@ -7,6 +7,7 @@ use Motor\Backend\Http\Resources\BaseResource;
 /**
  * @OA\Schema(
  *   schema="MessageGroupResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -35,7 +36,7 @@ class MessageGroupResource extends BaseResource
     public function toArray($request)
     {
         return [
-            'id'   => (int) $this->id,
+            'id' => (int) $this->id,
             'name' => $this->name,
             'uuid' => $this->uuid,
         ];

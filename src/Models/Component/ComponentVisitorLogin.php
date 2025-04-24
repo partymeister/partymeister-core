@@ -5,9 +5,9 @@ namespace Partymeister\Core\Models\Component;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\CMS\Models\ComponentBaseModel;
 use Motor\CMS\Models\Navigation;
 use Motor\CMS\Models\PageVersionComponent;
@@ -38,11 +38,11 @@ use Motor\CMS\Models\PageVersionComponent;
  * @method static Builder|ComponentVisitorLogin whereUpdatedAt($value)
  * @method static Builder|ComponentVisitorLogin whereVisitorRegistrationPageId($value)
  * @method static Builder|ComponentVisitorLogin whereVotingPageId($value)
+ *
  * @mixin Eloquent
  */
 class ComponentVisitorLogin extends ComponentBaseModel
 {
-
     use HasShortflakePrimary;
 
     /**
@@ -55,7 +55,7 @@ class ComponentVisitorLogin extends ComponentBaseModel
         'entries_page_id',
         'voting_page_id',
         'comments_page_id',
-        'password_forgotten_page_id'
+        'password_forgotten_page_id',
     ];
 
     /**
@@ -66,7 +66,7 @@ class ComponentVisitorLogin extends ComponentBaseModel
     public function preview()
     {
         return [
-            'name'    => trans('partymeister-core::component/visitor-logins.component'),
+            'name' => trans('partymeister-core::component/visitor-logins.component'),
             'preview' => 'Preview for ComponentVisitorLogin component',
         ];
     }

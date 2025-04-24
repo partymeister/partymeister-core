@@ -21,9 +21,6 @@ class ScheduleService extends BaseService
     protected $model = Schedule::class;
 
     /**
-     * @param  Schedule  $schedule
-     * @param    $data
-     *
      * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\DiskDoesNotExist
      * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileDoesNotExist
      * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileIsTooBig
@@ -32,16 +29,16 @@ class ScheduleService extends BaseService
     {
         // 1. create a slide category for the timetable slides in case it does not exist yet
         $timetableCategory = Category::where('scope', 'slides')
-                                     ->where('name', 'Timetable')
-                                     ->first();
+            ->where('name', 'Timetable')
+            ->first();
         if (is_null($timetableCategory)) {
             $rootNode = Category::where('scope', 'slides')
-                                ->where('_lft', 1)
-                                ->first();
+                ->where('_lft', 1)
+                ->first();
             if (is_null($rootNode)) {
                 exit('Root node for slide category tree does not exist');
             }
-            $timetableCategory = new Category();
+            $timetableCategory = new Category;
             $timetableCategory->scope = 'slides';
             $timetableCategory->name = 'Timetable';
             $rootNode->appendNode($timetableCategory);
@@ -51,7 +48,7 @@ class ScheduleService extends BaseService
         $slideType = config('partymeister-core-slides.timetable.slide_type', 'default');
 
         if (config('partymeister-slides.screenshots')) {
-            $browser = new ScreenshotHelper();
+            $browser = new ScreenshotHelper;
         }
 
         foreach (Arr::get($data, 'slide', []) as $slideName => $definitions) {
@@ -59,10 +56,10 @@ class ScheduleService extends BaseService
 
             // 2. look for existing slides with the same name
             $slide = Slide::where('name', $name)
-                          ->where('category_id', $timetableCategory->id)
-                          ->first();
+                ->where('category_id', $timetableCategory->id)
+                ->first();
             if (is_null($slide)) {
-                $slide = new Slide();
+                $slide = new Slide;
             }
 
             $slide->category_id = $timetableCategory->id;
@@ -79,18 +76,18 @@ class ScheduleService extends BaseService
                 $browser->screenshot(config('app.url_internal').route('backend.slides.show', [$slide->id], false).'?preview=true', storage_path().'/preview_'.$slideName.'.png', $slide->id, Slide::class, 'preview');
                 $browser->screenshot(config('app.url_internal').route('backend.slides.show', [$slide->id], false), storage_path().'/final_'.$slideName.'.png', $slide->id, Slide::class, 'final');
 
-                //$slide->clearMediaCollection('preview');
-                //$slide->clearMediaCollection('final');
-                //try {
+                // $slide->clearMediaCollection('preview');
+                // $slide->clearMediaCollection('final');
+                // try {
                 //    $slide->addMedia(storage_path().'/preview_'.$slideName.'.png')
                 //          ->toMediaCollection('preview', 'media');
                 //    $slide->addMedia(storage_path().'/final_'.$slideName.'.png')
                 //          ->toMediaCollection('final', 'media');
-                //} catch (\Exception $e) {
+                // } catch (\Exception $e) {
                 //    Log::warning("Can't generate screenshot for slide .".$slide->id, [$e->getMessage()]);
-                //}
+                // }
             }
-//            event(new SlideSaved($slide, 'slides'));
+            //            event(new SlideSaved($slide, 'slides'));
         }
     }
 }

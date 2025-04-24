@@ -20,8 +20,8 @@ class EventService extends BaseService
     public function filters()
     {
         $this->filter->add(new SelectRenderer('event_type_id'))
-                     ->setOptionPrefix(trans('partymeister-core::backend/event_types.event_type'))
-                     ->setEmptyOption('-- '.trans('partymeister-core::backend/event_types.event_type').' --')
-                     ->setOptions(EventType::pluck('name', 'id'));
+            ->setOptionPrefix(trans('partymeister-core::backend/event_types.event_type'))
+            ->setEmptyOption('-- '.trans('partymeister-core::backend/event_types.event_type').' --')
+            ->setOptions(EventType::pluck('name', 'id'));
     }
 }

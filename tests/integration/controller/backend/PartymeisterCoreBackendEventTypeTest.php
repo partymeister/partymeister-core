@@ -28,7 +28,7 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
         'media',
     ];
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
@@ -52,8 +52,8 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
     public function can_see_grid_without_event_type()
     {
         $this->visit('/backend/event_types')
-             ->see(trans('partymeister-core::backend/event_types.event_types'))
-             ->see(trans('motor-backend::backend/global.no_records'));
+            ->see(trans('partymeister-core::backend/event_types.event_types'))
+            ->see(trans('motor-backend::backend/global.no_records'));
     }
 
     /** @test */
@@ -61,8 +61,8 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
     {
         $record = create_test_event_type();
         $this->visit('/backend/event_types')
-             ->see(trans('partymeister-core::backend/event_types.event_types'))
-             ->see($record->name);
+            ->see(trans('partymeister-core::backend/event_types.event_types'))
+            ->see($record->name);
     }
 
     /** @test */
@@ -70,12 +70,12 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
     {
         $record = create_test_event_type();
         $this->visit('/backend/event_types')
-             ->within('table', function () {
-                 $this->click(trans('motor-backend::backend/global.edit'));
-             })
-             ->seePageIs('/backend/event_types/'.$record->id.'/edit')
-             ->click(trans('motor-backend::backend/global.back'))
-             ->seePageIs('/backend/event_types');
+            ->within('table', function () {
+                $this->click(trans('motor-backend::backend/global.edit'));
+            })
+            ->seePageIs('/backend/event_types/'.$record->id.'/edit')
+            ->click(trans('motor-backend::backend/global.back'))
+            ->seePageIs('/backend/event_types');
     }
 
     /** @test */
@@ -84,14 +84,14 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
         $record = create_test_event_type();
 
         $this->visit('/backend/event_types/'.$record->id.'/edit')
-             ->see($record->name)
-             ->type('Updated Event type', 'name')
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/event_types.save'));
-             })
-             ->see(trans('partymeister-core::backend/event_types.updated'))
-             ->see('Updated Event type')
-             ->seePageIs('/backend/event_types');
+            ->see($record->name)
+            ->type('Updated Event type', 'name')
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/event_types.save'));
+            })
+            ->see(trans('partymeister-core::backend/event_types.updated'))
+            ->see('Updated Event type')
+            ->seePageIs('/backend/event_types');
 
         $record = EventType::find($record->id);
         $this->assertEquals('Updated Event type', $record->name);
@@ -101,34 +101,34 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
     public function can_click_the_event_type_create_button()
     {
         $this->visit('/backend/event_types')
-             ->click(trans('partymeister-core::backend/event_types.new'))
-             ->seePageIs('/backend/event_types/create');
+            ->click(trans('partymeister-core::backend/event_types.new'))
+            ->seePageIs('/backend/event_types/create');
     }
 
     /** @test */
     public function can_create_a_new_event_type()
     {
         $this->visit('/backend/event_types/create')
-             ->see(trans('partymeister-core::backend/event_types.new'))
-             ->type('Create Event type Name', 'name')
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/event_types.save'));
-             })
-             ->see(trans('partymeister-core::backend/event_types.created'))
-             ->see('Create Event type Name')
-             ->seePageIs('/backend/event_types');
+            ->see(trans('partymeister-core::backend/event_types.new'))
+            ->type('Create Event type Name', 'name')
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/event_types.save'));
+            })
+            ->see(trans('partymeister-core::backend/event_types.created'))
+            ->see('Create Event type Name')
+            ->seePageIs('/backend/event_types');
     }
 
     /** @test */
     public function cannot_create_a_new_event_type_with_empty_fields()
     {
         $this->visit('/backend/event_types/create')
-             ->see(trans('partymeister-core::backend/event_types.new'))
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/event_types.save'));
-             })
-             ->see('Data missing!')
-             ->seePageIs('/backend/event_types/create');
+            ->see(trans('partymeister-core::backend/event_types.new'))
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/event_types.save'));
+            })
+            ->see('Data missing!')
+            ->seePageIs('/backend/event_types/create');
     }
 
     /** @test */
@@ -136,14 +136,14 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
     {
         $record = create_test_event_type();
         $this->visit('/backend/event_types/'.$record->id.'/edit')
-             ->see(trans('partymeister-core::backend/event_types.edit'))
-             ->type('Modified Event type Name', 'name')
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/event_types.save'));
-             })
-             ->see(trans('partymeister-core::backend/event_types.updated'))
-             ->see('Modified Event type Name')
-             ->seePageIs('/backend/event_types');
+            ->see(trans('partymeister-core::backend/event_types.edit'))
+            ->type('Modified Event type Name', 'name')
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/event_types.save'));
+            })
+            ->see(trans('partymeister-core::backend/event_types.updated'))
+            ->see('Modified Event type Name')
+            ->seePageIs('/backend/event_types');
     }
 
     /** @test */
@@ -174,9 +174,9 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
     {
         $records = create_test_event_type(10);
         $this->visit('/backend/event_types')
-             ->type(substr($records[6]->name, 0, 3), 'search')
-             ->press('grid-search-button')
-             ->seeInField('search', substr($records[6]->name, 0, 3))
-             ->see($records[6]->name);
+            ->type(substr($records[6]->name, 0, 3), 'search')
+            ->press('grid-search-button')
+            ->seeInField('search', substr($records[6]->name, 0, 3))
+            ->see($records[6]->name);
     }
 }

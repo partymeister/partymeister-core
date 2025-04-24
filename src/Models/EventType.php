@@ -4,9 +4,9 @@ namespace Partymeister\Core\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
@@ -43,14 +43,15 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @method static Builder|EventType whereUpdatedAt($value)
  * @method static Builder|EventType whereUpdatedBy($value)
  * @method static Builder|EventType whereWebColor($value)
+ *
  * @mixin Eloquent
  */
 class EventType extends Model
 {
-    use Searchable;
-    use Filterable;
     use BlameableTrait;
+    use Filterable;
     use HasShortflakePrimary;
+    use Searchable;
 
     /**
      * Searchable columns for the searchable trait

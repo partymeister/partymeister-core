@@ -19,9 +19,9 @@ class CallbackService extends BaseService
     public function filters()
     {
         $this->filter->add(new SelectRenderer('destination'))
-                     ->setOptionPrefix(trans('partymeister-core::backend/callbacks.destination'))
-                     ->setEmptyOption('-- '.trans('partymeister-core::backend/callbacks.destination').' --')
-                     ->setOptions(trans('partymeister-core::backend/callbacks.destinations'));
+            ->setOptionPrefix(trans('partymeister-core::backend/callbacks.destination'))
+            ->setEmptyOption('-- '.trans('partymeister-core::backend/callbacks.destination').' --')
+            ->setOptions(trans('partymeister-core::backend/callbacks.destinations'));
     }
 
     public function beforeCreate()

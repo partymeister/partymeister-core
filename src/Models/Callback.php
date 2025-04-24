@@ -4,12 +4,13 @@ namespace Partymeister\Core\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
-use Motor\Core\Traits\Searchable;use RichanFongdasen\EloquentBlameable\BlameableTrait;
+use Motor\Core\Traits\Searchable;
+use RichanFongdasen\EloquentBlameable\BlameableTrait;
 
 /**
  * Partymeister\Core\Models\Callback
@@ -60,14 +61,15 @@ use Motor\Core\Traits\Searchable;use RichanFongdasen\EloquentBlameable\Blameable
  * @method static Builder|Callback whereTitle($value)
  * @method static Builder|Callback whereUpdatedAt($value)
  * @method static Builder|Callback whereUpdatedBy($value)
+ *
  * @mixin Eloquent
  */
 class Callback extends Model
 {
-    use Searchable;
-    use Filterable;
     use BlameableTrait;
+    use Filterable;
     use HasShortflakePrimary;
+    use Searchable;
 
     /**
      * Searchable columns for the searchable trait

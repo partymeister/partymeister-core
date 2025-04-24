@@ -48,8 +48,8 @@ class GuestsController extends Controller
     public function create()
     {
         $form = $this->form(GuestForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.guests.store',
+            'method' => 'POST',
+            'route' => 'backend.guests.store',
             'enctype' => 'multipart/form-data',
         ]);
 
@@ -59,7 +59,6 @@ class GuestsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  GuestRequest  $request
      * @return RedirectResponse|Redirector
      */
     public function store(GuestRequest $request)
@@ -83,8 +82,6 @@ class GuestsController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param $id
      */
     public function show($id)
     {
@@ -94,16 +91,15 @@ class GuestsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Guest  $record
      * @return Factory|View
      */
     public function edit(Guest $record)
     {
         $form = $this->form(GuestForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.guests.update', [$record->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.guests.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         return view('partymeister-core::backend.guests.edit', compact('form'));
@@ -112,8 +108,6 @@ class GuestsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  GuestRequest  $request
-     * @param  Guest  $record
      * @return RedirectResponse|Redirector
      */
     public function update(GuestRequest $request, Guest $record)
@@ -138,7 +132,6 @@ class GuestsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Guest  $record
      * @return RedirectResponse|Redirector
      */
     public function destroy(Guest $record)

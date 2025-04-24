@@ -5,10 +5,10 @@ namespace Partymeister\Core\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
@@ -43,14 +43,15 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @method static Builder|Schedule whereName($value)
  * @method static Builder|Schedule whereUpdatedAt($value)
  * @method static Builder|Schedule whereUpdatedBy($value)
+ *
  * @mixin Eloquent
  */
 class Schedule extends Model
 {
-    use Searchable;
-    use Filterable;
     use BlameableTrait;
+    use Filterable;
     use HasShortflakePrimary;
+    use Searchable;
 
     /**
      * Searchable columns for the searchable trait
@@ -76,7 +77,7 @@ class Schedule extends Model
     public function getEventCountAttribute()
     {
         return $this->events()
-                    ->count();
+            ->count();
     }
 
     /**
@@ -85,9 +86,9 @@ class Schedule extends Model
     public function events()
     {
         return $this->hasMany(Event::class)
-                    ->orderBy('starts_at', 'ASC')
-                    ->orderBy('sort_position', 'ASC')
-                    ->orderBy('event_type_id', 'ASC')
-                    ->orderBy('name', 'ASC');
+            ->orderBy('starts_at', 'ASC')
+            ->orderBy('sort_position', 'ASC')
+            ->orderBy('event_type_id', 'ASC')
+            ->orderBy('name', 'ASC');
     }
 }

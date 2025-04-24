@@ -12,6 +12,7 @@
     }
   ],
   "require": {
+    "php": "^8.4",
     "motor-cms/motor-backend": "^1.6",
     "laravel/reverb": "^1.5"
   },

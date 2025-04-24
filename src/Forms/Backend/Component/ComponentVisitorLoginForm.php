@@ -16,9 +16,9 @@ class ComponentVisitorLoginForm extends Form
     public function buildForm()
     {
         $nodes = Navigation::where('scope', 'main')
-                           ->where('parent_id', '!=', null)
-                           ->defaultOrder()
-                           ->get();
+            ->where('parent_id', '!=', null)
+            ->defaultOrder()
+            ->get();
 
         $navigationItemOptions = [];
 
@@ -31,33 +31,33 @@ class ComponentVisitorLoginForm extends Form
         }
 
         $this->add('visitor_registration_page_id', 'select', [
-            'label'       => trans('partymeister-core::component/visitor-logins.visitor_registration_page'),
+            'label' => trans('partymeister-core::component/visitor-logins.visitor_registration_page'),
             'empty_value' => trans('motor-backend::backend/global.please_choose'),
-            'choices'     => $navigationItemOptions,
+            'choices' => $navigationItemOptions,
         ]);
 
         $this->add('entries_page_id', 'select', [
-            'label'       => trans('partymeister-core::component/visitor-logins.entries_page'),
+            'label' => trans('partymeister-core::component/visitor-logins.entries_page'),
             'empty_value' => trans('motor-backend::backend/global.please_choose'),
-            'choices'     => $navigationItemOptions,
+            'choices' => $navigationItemOptions,
         ]);
 
         $this->add('voting_page_id', 'select', [
-            'label'       => trans('partymeister-core::component/visitor-logins.voting_page'),
+            'label' => trans('partymeister-core::component/visitor-logins.voting_page'),
             'empty_value' => trans('motor-backend::backend/global.please_choose'),
-            'choices'     => $navigationItemOptions,
+            'choices' => $navigationItemOptions,
         ]);
 
         $this->add('comments_page_id', 'select', [
-            'label'       => trans('partymeister-core::component/visitor-logins.comments_page'),
+            'label' => trans('partymeister-core::component/visitor-logins.comments_page'),
             'empty_value' => trans('motor-backend::backend/global.please_choose'),
-            'choices'     => $navigationItemOptions,
+            'choices' => $navigationItemOptions,
         ]);
 
         $this->add('password_forgotten_page_id', 'select', [
-            'label'       => trans('partymeister-core::component/visitor-logins.password_forgotten_page'),
+            'label' => trans('partymeister-core::component/visitor-logins.password_forgotten_page'),
             'empty_value' => trans('motor-backend::backend/global.please_choose'),
-            'choices'     => $navigationItemOptions,
+            'choices' => $navigationItemOptions,
         ]);
     }
 }

@@ -24,7 +24,6 @@ use Partymeister\Core\Services\StuhlService;
 class SendController extends ApiController
 {
     /**
-     * @param $hash
      * @return ResponseFactory|JsonResponse|Response
      *
      * @throws GuzzleException
@@ -35,7 +34,7 @@ class SendController extends ApiController
             return $this->single(request());
         }
         $callback = Callback::where('hash', $hash)
-                            ->first();
+            ->first();
         if (is_null($callback)) {
             return response(404);
         }
@@ -94,7 +93,7 @@ class SendController extends ApiController
                 }
                 $l = LiveVote::first();
                 if (is_null($l)) {
-                    $l = new LiveVote();
+                    $l = new LiveVote;
                 }
                 $l->entry_id = $payload->entry_id;
                 $l->competition_id = $payload->competition_id;
@@ -116,14 +115,13 @@ class SendController extends ApiController
     }
 
     /**
-     * @param Request $request
      * @return ResponseFactory|Response
      *
      * @throws GuzzleException
      */
     public function single(Request $request)
     {
-        dd("HIER");
+        dd('HIER');
         $status = StuhlService::send('TEST');
 
         return response($status);

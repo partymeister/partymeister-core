@@ -12,6 +12,7 @@ class VisitorRequest extends Request
     /**
      * @OA\Schema(
      *   schema="VisitorRequest",
+     *
      *   @OA\Property(
      *     property="name",
      *     type="string",
@@ -64,12 +65,12 @@ class VisitorRequest extends Request
     public function rules()
     {
         return [
-            'name'               => 'required',
-            'group'              => 'nullable',
+            'name' => 'required',
+            'group' => 'nullable',
             'country_iso_3166_1' => 'required',
-            'email'              => 'nullable|unique:visitors,email',
-            'password'           => 'nullable',
-            'additional_data'    => 'nullable|json',
+            'email' => 'nullable|unique:visitors,email',
+            'password' => 'nullable',
+            'additional_data' => 'nullable|json',
         ];
     }
 }

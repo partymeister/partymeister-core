@@ -12,6 +12,7 @@
     }
   ],
   "require": {
+    "php": "^8.4",
     "laravel/reverb": "^1.5"
   },
   "autoload": {

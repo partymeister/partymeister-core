@@ -18,15 +18,10 @@ class ComponentVisitorLists
      */
     protected $pageVersionComponent;
 
-    /**
-     * @var
-     */
     protected $visitors;
 
     /**
      * ComponentVisitorLists constructor.
-     *
-     * @param  PageVersionComponent  $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
@@ -34,13 +29,12 @@ class ComponentVisitorLists
     }
 
     /**
-     * @param  Request  $request
      * @return Factory|View
      */
     public function index(Request $request)
     {
         $this->visitors = Visitor::orderBy('created_at', 'DESC')
-                                 ->get();
+            ->get();
 
         return $this->render();
     }

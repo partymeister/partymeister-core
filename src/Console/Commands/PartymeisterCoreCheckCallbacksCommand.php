@@ -39,9 +39,9 @@ class PartymeisterCoreCheckCallbacksCommand extends Command
         Auth::login(User::first());
 
         $callbacks = Callback::where('is_timed', true)
-                             ->where('has_fired', false)
-                             ->where('embargo_until', '<', date('Y-m-d H:i:s'))
-                             ->get();
+            ->where('has_fired', false)
+            ->where('embargo_until', '<', date('Y-m-d H:i:s'))
+            ->get();
 
         foreach ($callbacks as $callback) {
             Log::info('Firing callback '.$callback->name);

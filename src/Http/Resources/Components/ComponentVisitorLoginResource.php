@@ -7,6 +7,7 @@ use Motor\Backend\Http\Resources\BaseResource;
 /**
  * @OA\Schema(
  *   schema="ComponentVisitorLoginResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -45,11 +46,11 @@ class ComponentVisitorLoginResource extends BaseResource
     public function toArray($request)
     {
         return [
-            'id'                           => (int) $this->id,
+            'id' => (int) $this->id,
             'visitor_registration_page_id' => $this->visitor_registration_page_id,
-            'entries_page_id'              => $this->entries_page_id,
-            'voting_page_id'               => $this->voting_page_id,
-            'comments_page_id'             => $this->comments_page_id,
+            'entries_page_id' => $this->entries_page_id,
+            'voting_page_id' => $this->voting_page_id,
+            'comments_page_id' => $this->comments_page_id,
         ];
     }
 }

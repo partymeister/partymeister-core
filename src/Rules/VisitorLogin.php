@@ -13,9 +13,7 @@ class VisitorLogin implements Rule
      *
      * @return void
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * Determine if the validation rule passes.
@@ -30,7 +28,7 @@ class VisitorLogin implements Rule
 
         $guard = Auth::guard('visitor');
 
-        return $guard->attempt(['name'     => $name,
+        return $guard->attempt(['name' => $name,
             'password' => $value,
         ], true); // second parameter is the "remember flag"
     }

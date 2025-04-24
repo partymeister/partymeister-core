@@ -65,7 +65,7 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
                     foreach ($deadlines as $deadline) {
                         $sortPosition += 10;
 
-                        $e = new Event();
+                        $e = new Event;
                         $e->schedule_id = 1;
                         $e->event_type_id = $this->categoryToEventIdMapping($event->category);
                         $e->name = $deadline;
@@ -75,7 +75,7 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
                         $e->save();
                     }
                 } else {
-                    $e = new Event();
+                    $e = new Event;
                     $e->schedule_id = 1;
                     $e->event_type_id = $this->categoryToEventIdMapping($event->category);
                     $e->name = $event->title;

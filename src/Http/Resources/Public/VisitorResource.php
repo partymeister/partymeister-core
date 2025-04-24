@@ -7,6 +7,7 @@ use Motor\Backend\Http\Resources\BaseResource;
 /**
  * @OA\Schema(
  *   schema="PublicVisitorResource",
+ *
  *   @OA\Property(
  *     property="name",
  *     type="string",
@@ -35,8 +36,8 @@ class VisitorResource extends BaseResource
     public function toArray($request)
     {
         return [
-            'name'               => $this->name,
-            'group'              => $this->group,
+            'name' => $this->name,
+            'group' => $this->group,
             'country_iso_3166_1' => $this->country_iso_3166_1,
         ];
     }

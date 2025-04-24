@@ -33,18 +33,11 @@ class StuhlService
      */
     public static $debug = false;
 
-    /**
-     * @var
-     */
     public static $host;
 
-    /**
-     * @var
-     */
     public static $password;
 
     /**
-     * @param    $message
      * @param  string  $title
      * @param  string  $link
      * @param  string  $level
@@ -75,15 +68,15 @@ class StuhlService
         }
 
         $data_string = json_encode([
-            'key'         => self::$password,
-            'level'       => strtolower($level),
-            'title'       => $title,
-            'link'        => $link,
-            'message'     => $message,
+            'key' => self::$password,
+            'level' => strtolower($level),
+            'title' => $title,
+            'link' => $link,
+            'message' => $message,
             'destination' => $destination,
         ]);
 
-        $client = new Client();
+        $client = new Client;
 
         $request = new Request('POST', self::$host, ['content-type' => 'application/json'], $data_string);
 
