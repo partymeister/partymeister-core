@@ -8,7 +8,15 @@ Route::group([
 ], function () {
     Route::apiResource('callbacks', 'CallbacksController');
     Route::apiResource('schedules', 'SchedulesController');
+    Route::get('schedules/{schedule}/playlist-data', 'SchedulePlaylistController@show')
+         ->name('schedules.playlist-data');
+    Route::post('schedules/{schedule}/playlist', 'SchedulePlaylistController@store')
+         ->name('schedules.playlist.store');
     Route::apiResource('events', 'EventsController');
+    Route::get('events/{event}/playlist-data', 'EventPlaylistController@show')
+         ->name('events.playlist-data');
+    Route::post('events/{event}/playlist', 'EventPlaylistController@store')
+         ->name('events.playlist.store');
     Route::apiResource('event_types', 'EventTypesController');
     Route::apiResource('guests', 'GuestsController');
     Route::apiResource('visitors', 'VisitorsController');
