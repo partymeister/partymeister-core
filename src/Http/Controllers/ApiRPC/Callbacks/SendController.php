@@ -41,7 +41,7 @@ class SendController extends ApiController
         }
 
         if ($callback->has_fired) {
-            return response('Already fired', 403);
+            return response()->json(['status' => 'already_fired', 'fired_at' => $callback->fired_at], 200);
         }
 
         $status = 'THIS SHOULD NOT HAPPEN';
