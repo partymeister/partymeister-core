@@ -37,7 +37,7 @@ class EventGrid extends Grid
              ->renderer(BooleanRenderer::class);
         $this->setDefaultSorting('starts_at', 'ASC');
 
-        $this->addAction(trans('partymeister-slides::backend/playlists.new'), 'backend.events.playlist.index', ['class' => 'btn-primary']);
+        $this->addAction(trans('partymeister-slides::backend/playlists.new'), 'backend.slidemeister-generator.event', ['class' => 'btn-success', 'target' => '_blank']);
 
         $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.events.edit');
         $this->addDuplicateAction(trans('motor-backend::backend/global.duplicate'), 'backend.events.duplicate')

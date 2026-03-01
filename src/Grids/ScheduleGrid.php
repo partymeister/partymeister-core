@@ -14,7 +14,7 @@ class ScheduleGrid extends Grid
         $this->addColumn('name', trans('motor-backend::backend/global.name'), true);
         $this->addColumn('event_count', trans('partymeister-core::backend/events.events'), true);
 
-        $this->addAction(trans('partymeister-core::backend/schedules.generate_slides'), 'backend.schedules.slides.index', ['class' => 'btn-primary'])
+        $this->addAction(trans('partymeister-core::backend/schedules.generate_slides'), 'backend.slidemeister-generator.schedule', ['class' => 'btn-success', 'target' => '_blank'])
              ->needsPermissionTo('schedules.read')
              ->onCondition('event_count', 0, '>');
         $this->addAction(trans('motor-backend::backend/global.show'), 'backend.schedules.show', ['class' => 'btn-primary'])
