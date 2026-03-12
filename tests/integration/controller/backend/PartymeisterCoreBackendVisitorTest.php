@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Partymeister\Core\Integration\Controller\Backend;
+
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Partymeister\Core\Models\Visitor;
 

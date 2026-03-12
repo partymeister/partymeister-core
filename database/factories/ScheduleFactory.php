@@ -1,6 +1,6 @@
 <?php
 
-namespace Motor\Backend\Database\Factories;
+namespace Partymeister\Core\Database\Factories;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Database\Eloquent\Factories\Factory;

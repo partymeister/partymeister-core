@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Partymeister\Core\Integration\Controller\Api;
+
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class PartymeisterCoreApiMessageGroupTest extends TestCase
