@@ -50,7 +50,7 @@ class ScheduleService extends BaseService
         // 3. save slides
         $slideType = config('partymeister-core-slides.timetable.slide_type', 'default');
 
-        if (config('partymeister-slides.screenshots')) {
+        if (config('partymeister-slides.generate_screenshots')) {
             $browser = new ScreenshotHelper();
         }
 
