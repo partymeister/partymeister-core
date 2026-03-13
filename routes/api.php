@@ -8,10 +8,6 @@ Route::group([
 ], function () {
     Route::apiResource('callbacks', 'CallbacksController');
     Route::apiResource('schedules', 'SchedulesController');
-    Route::get('schedules/{schedule}/playlist-data', 'SchedulePlaylistController@show')
-         ->name('schedules.playlist-data');
-    Route::post('schedules/{schedule}/playlist', 'SchedulePlaylistController@store')
-         ->name('schedules.playlist.store');
     Route::apiResource('events', 'EventsController');
     Route::get('events/{event}/playlist-data', 'EventPlaylistController@show')
          ->name('events.playlist-data');
