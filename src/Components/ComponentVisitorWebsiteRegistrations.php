@@ -49,6 +49,10 @@ class ComponentVisitorWebsiteRegistrations
      */
     public function index(Request $request)
     {
+        if (! config('partymeister-core.visitor_login_enabled', false)) {
+            return view('partymeister-core::frontend.components.visitor-login-disabled');
+        }
+
         $this->request = $request;
 
         $this->visitorWebsiteRegistrationForm = $this->form(VisitorWebsiteRegistrationForm::class, [
