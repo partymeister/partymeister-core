@@ -37,9 +37,17 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
     {
         Auth::login(User::find(1));
 
-        // Get timetable
+        // Prefer local file (mounted via K8s volume), fall back to URL
+        $localPath = public_path('timetable/timetable.json');
 
-        $data = file_get_contents(config('partymeister-core.timetable_url'));
+        if (file_exists($localPath)) {
+            $data = file_get_contents($localPath);
+            Log::info('Importing timetable from local file: '.$localPath);
+        } else {
+            $url = config('partymeister-core.timetable_url');
+            $data = file_get_contents($url);
+            Log::info('Importing timetable from URL: '.$url);
+        }
 
         if (! $data) {
             return false;
