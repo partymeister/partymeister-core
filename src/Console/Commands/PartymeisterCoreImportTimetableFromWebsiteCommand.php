@@ -37,8 +37,8 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
     {
         Auth::login(User::find(1));
 
-        // Prefer local file (mounted via K8s volume), fall back to URL
-        $localPath = public_path('timetable/timetable.json');
+        // Prefer local file (mounted via K8s volume at /data/timetable), fall back to URL
+        $localPath = '/data/timetable/timetable.json';
 
         if (file_exists($localPath)) {
             $data = file_get_contents($localPath);
