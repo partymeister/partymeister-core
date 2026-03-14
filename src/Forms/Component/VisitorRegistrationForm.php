@@ -45,7 +45,7 @@ class VisitorRegistrationForm extends Form
         $this->add('email', 'email', [
             'value' => '',
             'label' => trans('partymeister-core::backend/visitors.email'),
-            'rules' => 'required|email',
+            'rules' => ['required', 'email', Rule::unique('visitors', 'email')],
         ]);
 
         $this->add('password', 'password', [

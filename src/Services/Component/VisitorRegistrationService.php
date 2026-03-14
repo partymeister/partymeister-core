@@ -19,6 +19,12 @@ class VisitorRegistrationService
      */
     public static function register($data)
     {
+        if (Visitor::where('email', $data['email'])->exists()) {
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                'visitor-registration.email' => [trans('partymeister-core::component/visitor-registrations.email_already_registered')],
+            ]);
+        }
+
         $visitor = Visitor::create([
             'name'               => $data['name'],
             'group'              => $data['group'],

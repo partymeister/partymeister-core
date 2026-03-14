@@ -88,7 +88,15 @@ class ComponentVisitorRegistrations
                 ->withErrors($this->visitorRegistrationForm->getErrors())
                 ->withInput();
         }
-        VisitorRegistrationService::register($this->request->get('visitor-registration'));
+
+        try {
+            VisitorRegistrationService::register($this->request->get('visitor-registration'));
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()
+                ->back()
+                ->withErrors($e->errors())
+                ->withInput();
+        }
 
         return redirect()->back();
     }
