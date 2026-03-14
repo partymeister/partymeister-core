@@ -1,12 +1,12 @@
 @foreach ($days as $dayKey => $times)
     <h4>{{$dayKey}}</h4>
-    <table class="w-full text-left text-sm">
+    <table class="w-full text-left">
         <tbody>
         @foreach ($times as $hourKey => $events)
             <tr>
                 <td class="align-top w-[10%] px-4 py-3 border-t border-border text-text"><strong>{{$hourKey}}</strong></td>
                 <td class="px-4 py-3 border-t border-border">
-                    <table class="w-full text-left text-sm mb-0 pb-0 [&_tbody]:border-none [&_tr]:border-b-0 [&_td]:pt-0 [&_td]:pb-1">
+                    <table class="w-full text-left mb-0 pb-0 [&_tbody]:border-none [&_tr]:border-b-0 [&_td]:pt-0 [&_td]:pb-1">
                         <tbody>
                         @foreach($events as $event)
                             <tr>

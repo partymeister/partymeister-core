@@ -1,6 +1,6 @@
-<h4>Register for the party</h4>
+<h3>Register for the party</h3>
 @foreach (session('flash_notification', collect())->toArray() as $message)
-    <div class="rounded-lg border border-success/30 bg-success/10 px-4 py-3 text-sm text-success">
+    <div class="rounded-lg border border-success/40 border-l-4 border-l-success bg-success/15 px-4 py-3 text-success">
         <p>
             {{$message['message']}}
         </p>
