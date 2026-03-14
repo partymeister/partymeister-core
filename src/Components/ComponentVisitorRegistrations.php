@@ -50,7 +50,7 @@ class ComponentVisitorRegistrations
     public function index(Request $request)
     {
         if (! config('partymeister-core.visitor_login_enabled', false)) {
-            return view('partymeister-core::frontend.components.visitor-login-disabled');
+            return view('partymeister-core::frontend.components.visitor-login-disabled-tw');
         }
 
         $this->request = $request;

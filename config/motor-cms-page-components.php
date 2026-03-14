@@ -13,7 +13,7 @@ return [
         'visitor-website-registrations' => [
             'name'            => 'VisitorWebsiteRegistration',
             'description'     => 'Show VisitorWebsiteRegistration component',
-            'view'            => 'partymeister-core::frontend.components.visitor-website-registration',
+            'view'            => 'partymeister-core::frontend.components.visitor-website-registration-tw',
             'component_class' => 'Partymeister\Core\Components\ComponentVisitorWebsiteRegistrations',
             'compatibility'   => [
 
@@ -26,7 +26,7 @@ return [
         'schedule'                      => [
             'name'            => 'Schedule',
             'description'     => 'Show Schedule component',
-            'view'            => 'partymeister-core::frontend.components.schedule',
+            'view'            => 'partymeister-core::frontend.components.schedule-tw',
             'route'           => 'component.schedules',
             'component_class' => 'Partymeister\Core\Components\ComponentSchedules',
             'resource_class'  => 'Partymeister\Core\Http\Resources\Components\ScheduleResource',
@@ -41,7 +41,7 @@ return [
         'visitor-list'                  => [
             'name'            => 'VisitorList',
             'description'     => 'Show VisitorList component',
-            'view'            => 'partymeister-core::frontend.components.visitor-list',
+            'view'            => 'partymeister-core::frontend.components.visitor-list-tw',
             'component_class' => 'Partymeister\Core\Components\ComponentVisitorLists',
             'resource_class'  => 'Partymeister\Core\Http\Resources\Components\VisitorListResource',
             'compatibility'   => [
@@ -55,7 +55,7 @@ return [
         'visitor-login'                 => [
             'name'            => 'VisitorLogin',
             'description'     => 'Show VisitorLogin component',
-            'view'            => 'partymeister-core::frontend.components.visitor-login',
+            'view'            => 'partymeister-core::frontend.components.visitor-login-tw',
             'route'           => 'component.visitor-logins',
             'component_class' => 'Partymeister\Core\Components\ComponentVisitorLogins',
             'compatibility'   => [
@@ -69,7 +69,7 @@ return [
         'visitor-registration'          => [
             'name'            => 'VisitorRegistration',
             'description'     => 'Show VisitorRegistration component',
-            'view'            => 'partymeister-core::frontend.components.visitor-registration',
+            'view'            => 'partymeister-core::frontend.components.visitor-registration-tw',
             'component_class' => 'Partymeister\Core\Components\ComponentVisitorRegistrations',
             'compatibility'   => [
 
@@ -82,7 +82,7 @@ return [
         'password-forgotten'                 => [
             'name'            => 'PasswordForgotten',
             'description'     => 'Show PasswordForgotten component',
-            'view'            => 'partymeister-core::frontend.components.password-forgotten',
+            'view'            => 'partymeister-core::frontend.components.password-forgotten-tw',
             'component_class' => 'Partymeister\Core\Components\ComponentPasswordForgotten',
             'compatibility'   => [
 

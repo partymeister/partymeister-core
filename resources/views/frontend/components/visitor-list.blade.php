@@ -1,3 +1,4 @@
+
 <div class="callout primary">
     <p>
         @if ($visitors->count() == 1)
