@@ -42,7 +42,7 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
 
         if (file_exists($localPath)) {
             $data = file_get_contents($localPath);
-            Log::info('Importing timetable from local file: '.$localPath);
+            Log::debug('Importing timetable from local file: '.$localPath);
         } else {
             $url = config('partymeister-core.timetable_url');
             if (empty($url)) {
@@ -56,7 +56,7 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
                 $this->error('Failed to fetch timetable from: '.$url);
                 return;
             }
-            Log::info('Importing timetable from URL: '.$url);
+            Log::debug('Importing timetable from URL: '.$url);
         }
 
         if (! $data) {
@@ -66,7 +66,7 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
         // Delete current timetable entries
         foreach (Event::where('schedule_id', 1)->get() as $event) {
             $event->delete();
-            Log::info('Deleted event: '.$event->name);
+            Log::debug('Deleted event: '.$event->name);
         }
 
         $dataJson = json_decode($data);

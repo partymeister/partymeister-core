@@ -79,18 +79,7 @@ class ScheduleService extends BaseService
                 $browser->screenshot(config('app.url_internal').route('backend.slides.show', [$slide->id], false).'?preview=true', storage_path().'/preview_'.$slideName.'.png', $slide->id, Slide::class, 'preview');
                 $browser->screenshot(config('app.url_internal').route('backend.slides.show', [$slide->id], false), storage_path().'/final_'.$slideName.'.png', $slide->id, Slide::class, 'final');
 
-                //$slide->clearMediaCollection('preview');
-                //$slide->clearMediaCollection('final');
-                //try {
-                //    $slide->addMedia(storage_path().'/preview_'.$slideName.'.png')
-                //          ->toMediaCollection('preview', 'media');
-                //    $slide->addMedia(storage_path().'/final_'.$slideName.'.png')
-                //          ->toMediaCollection('final', 'media');
-                //} catch (\Exception $e) {
-                //    Log::warning("Can't generate screenshot for slide .".$slide->id, [$e->getMessage()]);
-                //}
             }
-//            event(new SlideSaved($slide, 'slides'));
         }
     }
 }

@@ -44,7 +44,7 @@ class PartymeisterCoreCheckCallbacksCommand extends Command
                              ->get();
 
         foreach ($callbacks as $callback) {
-            Log::info('Firing callback '.$callback->name);
+            Log::debug('Firing callback '.$callback->name);
 
             if ($callback->action == 'notification') {
                 StuhlService::send($callback->body, $callback->title, '', EVENT_LEVEL_BORING, $callback->destination);
