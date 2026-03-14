@@ -1,14 +1,14 @@
 @if (!isset($visitor) || is_null($visitor))
     <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)]">
         <div class="p-5">
-            <h3 class="mb-3">Login</h3>
+            <h3 class="mb-4">Login</h3>
             {!! form_start($visitorLoginForm) !!}
             {!! form_until($visitorLoginForm, 'password') !!}
             <div class="mt-4 flex gap-2">
-                <button type="submit" class="inline-flex items-center justify-center rounded-lg bg-accent px-5 py-2 font-medium text-body hover:bg-accent-hover shadow-[0_2px_4px_rgba(224,192,89,0.2)] transition-colors">{{ trans('motor-backend::backend/login.sign_in') }}</button>
+                <button type="submit" class="inline-flex items-center justify-center rounded-lg bg-accent px-6 py-2.5 font-medium text-body hover:bg-accent-hover shadow-[0_2px_4px_rgba(224,192,89,0.2)] transition-colors">{{ trans('motor-backend::backend/login.sign_in') }}</button>
                 @if (!is_null($component->visitor_registration_page))
                     <a href="{{route('frontend.pages.index', ['slug' => $component->visitor_registration_page->full_slug])}}"
-                       class="inline-flex items-center justify-center rounded-lg px-5 py-2 font-medium text-text hover:text-heading hover:bg-surface-raised transition-colors">or register!</a>
+                       class="inline-flex items-center justify-center rounded-lg px-6 py-2.5 font-medium text-text hover:text-heading hover:bg-surface-raised transition-colors">or register!</a>
                 @endif
             </div>
             @if (!is_null($component->password_forgotten_page))
@@ -24,7 +24,7 @@
 @if (isset($visitor) && !is_null($visitor))
     <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)]">
         <div class="p-5">
-            <h3 class="mb-3">Hello {{$visitor->name}}</h3>
+            <h3 class="mb-4">Hello {{$visitor->name}}</h3>
             @if (!is_null($component->entries_page))
                 @if ($visitor->new_comments > 0)
                     <a href="{{route('frontend.pages.index', ['slug' => $component->entries_page->full_slug])}}"
@@ -71,12 +71,12 @@
                         </li>
                     @endif
                     <li>
-                        <a href="#" x-on:click.prevent="logout()"
+                        <button type="button" x-on:click="logout()"
                            class="block rounded-lg px-3 py-2 text-text hover:text-heading hover:bg-surface-raised transition-colors">
                             <svg class="inline-block w-4 h-4 mr-1.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/>
                             </svg> {{ trans('motor-backend::backend/login.sign_out') }}
-                        </a>
+                        </button>
                     </li>
                 </ul>
             </form>

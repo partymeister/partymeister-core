@@ -1,5 +1,7 @@
 @foreach ($days as $dayKey => $times)
-    <h4>{{$dayKey}}</h4>
+    <div class="mb-8 last:mb-0">
+    <h4 class="mb-2">{{$dayKey}}</h4>
+    <div class="overflow-x-auto">
     <table class="w-full text-left">
         <tbody>
         @foreach ($times as $hourKey => $events)
@@ -26,4 +28,6 @@
         @endforeach
         </tbody>
     </table>
+    </div>
+    </div>
 @endforeach
