@@ -83,7 +83,7 @@
 
 @if (!isset($message))
     @section('view_scripts')
-        <script>
+        <script type="module">
             $(document).ready(function () {
                 Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
                     name: 'slidemeister-event-comingup',

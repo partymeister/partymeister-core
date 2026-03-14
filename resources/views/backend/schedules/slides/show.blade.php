@@ -49,7 +49,7 @@
 @endsection
 
 @section('view_scripts')
-    <script>
+    <script type="module">
         $(document).ready(function () {
             @foreach ($days as $dayIndex => $day)
                 @foreach ($day as $eventBlockIndex => $eventBlock)

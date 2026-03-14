@@ -24,7 +24,7 @@
 @endsection
 
 @section('view_scripts')
-    <script type="text/javascript">
+    <script type="module">
         $('.delete-record').click(function (e) {
             if (!confirm('{{ trans('motor-backend::backend/global.delete_question') }}')) {
                 e.preventDefault();
