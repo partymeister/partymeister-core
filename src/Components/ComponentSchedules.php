@@ -53,7 +53,7 @@ class ComponentSchedules
      */
     public function index(Request $request)
     {
-        $data = (new ScheduleResource($this->component->schedule->load('events')))->toArrayRecursive();
+        $data = (new ScheduleResource($this->component->schedule->load('events.event_type')))->toArrayRecursive();
 
         //$tz = CarbonTimeZone::create('Europe/Berlin'); // static way
         //$carbon = new Carbon();
