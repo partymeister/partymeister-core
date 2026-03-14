@@ -1,6 +1,6 @@
 @if (!isset($visitor) || is_null($visitor))
     @foreach (session('flash_notification', collect())->toArray() as $message)
-        <div class="alert alert-success">
+        <div class="rounded-lg border border-success/30 bg-success/10 px-4 py-3 text-sm text-success">
             <p>
                 {{$message['message']}}
             </p>
@@ -15,7 +15,7 @@
         <div class="flex flex-wrap">
             <div class="w-full">
                 <button type="submit"
-                        class="btn btn-success btn-block">{{ trans('partymeister-core::backend/visitors.request-password') }}</button>
+                        class="w-full inline-flex items-center justify-center rounded-lg bg-success px-5 py-2.5 text-sm font-semibold text-body hover:bg-success/90 transition-colors">{{ trans('partymeister-core::backend/visitors.request-password') }}</button>
             </div>
         </div>
         {!! form_end($passwordForgottenForm) !!}
@@ -28,7 +28,7 @@
         <div class="flex flex-wrap">
             <div class="w-full">
                 <button type="submit"
-                        class="btn btn-success btn-block">{{ trans('partymeister-core::backend/visitors.reset-password') }}</button>
+                        class="w-full inline-flex items-center justify-center rounded-lg bg-success px-5 py-2.5 text-sm font-semibold text-body hover:bg-success/90 transition-colors">{{ trans('partymeister-core::backend/visitors.reset-password') }}</button>
             </div>
         </div>
         {!! form_end($passwordResetForm) !!}
