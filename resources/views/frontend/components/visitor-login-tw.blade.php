@@ -6,7 +6,7 @@
             {!! form_until($visitorLoginForm, 'password') !!}
             <div class="mt-4 flex gap-2">
                 <button type="submit" class="inline-flex items-center justify-center rounded-lg bg-accent px-6 py-2.5 font-medium text-body hover:bg-accent-hover shadow-[0_2px_4px_rgba(224,192,89,0.2)] transition-colors">{{ trans('motor-backend::backend/login.sign_in') }}</button>
-                @if (!is_null($component->visitor_registration_page))
+                @if (config('partymeister-core.visitor_registration_enabled', false) && !is_null($component->visitor_registration_page))
                     <a href="{{route('frontend.pages.index', ['slug' => $component->visitor_registration_page->full_slug])}}"
                        class="inline-flex items-center justify-center rounded-lg px-6 py-2.5 font-medium text-text hover:text-heading hover:bg-surface-raised transition-colors">or register!</a>
                 @endif

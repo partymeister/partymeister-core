@@ -5,7 +5,7 @@
         </svg>
         <div>
             <h3>Patience please</h3>
-            <div>Login is currently disabled. Please check back later!</div>
+            <div>Registration is currently disabled. Please check back later!</div>
         </div>
     </div>
 </div>

@@ -49,8 +49,8 @@ class ComponentVisitorRegistrations
      */
     public function index(Request $request)
     {
-        if (! config('partymeister-core.visitor_login_enabled', false)) {
-            return view('partymeister-core::frontend.components.visitor-login-disabled-tw');
+        if (! config('partymeister-core.visitor_registration_enabled', false)) {
+            return view('partymeister-core::frontend.components.visitor-registration-disabled-tw');
         }
 
         $this->request = $request;
