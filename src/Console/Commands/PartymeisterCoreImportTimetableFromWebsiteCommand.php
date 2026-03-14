@@ -45,7 +45,17 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
             Log::info('Importing timetable from local file: '.$localPath);
         } else {
             $url = config('partymeister-core.timetable_url');
-            $data = file_get_contents($url);
+            if (empty($url)) {
+                Log::error('Timetable import: no source available — local file not found and PM_CORE_TIMETABLE_URL not set');
+                $this->error('No timetable source: /data/timetable/timetable.json not found and PM_CORE_TIMETABLE_URL not set');
+                return;
+            }
+            $data = @file_get_contents($url);
+            if ($data === false) {
+                Log::error('Timetable import: failed to fetch from URL: '.$url);
+                $this->error('Failed to fetch timetable from: '.$url);
+                return;
+            }
             Log::info('Importing timetable from URL: '.$url);
         }
 
