@@ -39,7 +39,8 @@ class ComponentVisitorLists
      */
     public function index(Request $request)
     {
-        $this->visitors = Visitor::orderBy('created_at', 'DESC')
+        $this->visitors = Visitor::with('access_key')
+                                 ->orderBy('created_at', 'DESC')
                                  ->get();
 
         return $this->render();
