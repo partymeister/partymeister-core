@@ -5,6 +5,7 @@ namespace Partymeister\Core\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Motor\Backend\Models\User;
 use Partymeister\Core\Models\Event;
@@ -65,13 +66,34 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
             return false;
         }
 
+        $dataJson = json_decode($data);
+
+        // Build a content fingerprint from the fields that affect slides
+        $fingerprint = '';
+        foreach ($dataJson->timetable as $day) {
+            foreach ($day->events as $event) {
+                $fingerprint .= strtolower($event->category).'|'.$event->title.'|'.$event->start."\n";
+            }
+        }
+        $hash = md5($fingerprint);
+        $cacheKey = 'timetable:import:hash';
+        $previousHash = Cache::get($cacheKey);
+
+        if ($previousHash === $hash) {
+            $this->info('Timetable unchanged (hash: '.$hash.'), skipping import');
+            Log::debug('Timetable import skipped — content hash unchanged: '.$hash);
+
+            return;
+        }
+
+        $this->info('Timetable changed (hash: '.$hash.', previous: '.($previousHash ?? 'none').')');
+        Log::info('Timetable content changed — importing (hash: '.$hash.', previous: '.($previousHash ?? 'none').')');
+
         // Delete current timetable entries
         foreach (Event::where('schedule_id', 1)->get() as $event) {
             $event->delete();
             Log::debug('Deleted event: '.$event->name);
         }
-
-        $dataJson = json_decode($data);
 
         $sortPosition = 0;
 
@@ -106,6 +128,8 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
                 }
             }
         }
+
+        Cache::forever($cacheKey, $hash);
 
         // Trigger timetable slide regeneration via headless browser
         if (config('partymeister-slides.generate_screenshots')) {
