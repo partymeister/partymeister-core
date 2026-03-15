@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Motor\Backend\Models\User;
 use Partymeister\Core\Models\Event;
+use Partymeister\Core\Models\Schedule;
+use Partymeister\Slides\Helpers\ScreenshotHelper;
 
 /**
  * Class PartymeisterCoreImportTimetableFromWebsiteCommand
@@ -102,6 +104,18 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
                     $e->sort_position = $sortPosition;
                     $e->save();
                 }
+            }
+        }
+
+        // Trigger timetable slide regeneration via headless browser
+        if (config('partymeister-slides.generate_screenshots')) {
+            $schedule = Schedule::find(1);
+            if ($schedule) {
+                $browser = new ScreenshotHelper();
+                $url = config('app.url_internal').'/internal/generate/schedule/'.$schedule->id;
+                $browser->generate($url);
+                Log::info('Queued timetable slide regeneration for schedule: '.$schedule->name);
+                $this->info('Queued timetable slide regeneration');
             }
         }
     }
