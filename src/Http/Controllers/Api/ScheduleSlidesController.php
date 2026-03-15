@@ -57,6 +57,13 @@ class ScheduleSlidesController extends Controller
 
     public function store(Schedule $schedule, Request $request): JsonResponse
     {
+        $request->validate([
+            'slides' => 'required|array',
+            'slides.*.key' => 'required|string',
+            'slides.*.name' => 'required|string',
+            'slides.*.definitions' => 'required|string',
+        ]);
+
         $data = [
             'slide' => [],
             'name' => [],
