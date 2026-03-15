@@ -45,6 +45,7 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
 
         if (file_exists($localPath)) {
             $data = file_get_contents($localPath);
+            $this->info('Source: local file ('.$localPath.')');
             Log::debug('Importing timetable from local file: '.$localPath);
         } else {
             $url = config('partymeister-core.timetable_url');
@@ -59,6 +60,7 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
                 $this->error('Failed to fetch timetable from: '.$url);
                 return;
             }
+            $this->info('Source: remote URL ('.$url.')');
             Log::debug('Importing timetable from URL: '.$url);
         }
 
