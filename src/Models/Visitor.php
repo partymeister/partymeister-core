@@ -9,6 +9,7 @@ use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Carbon;
+use Laravel\Sanctum\HasApiTokens;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
@@ -56,6 +57,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Visitor extends Authenticatable
 {
+    use HasApiTokens;
     use Searchable;
     use Filterable;
     use HasShortflakePrimary;
