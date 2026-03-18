@@ -138,7 +138,7 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
             $schedule = Schedule::find(1);
             if ($schedule) {
                 $browser = new ScreenshotHelper();
-                $url = config('app.url_internal').'/internal/generate/schedule/'.$schedule->id;
+                $url = config('app.url_internal').'/internal/generate/schedule/'.$schedule->id.'?secret='.urlencode(config('partymeister-slides.screenshot_secret', ''));
                 $browser->generate($url);
                 Log::info('Queued timetable slide regeneration for schedule: '.$schedule->name);
                 $this->info('Queued timetable slide regeneration');

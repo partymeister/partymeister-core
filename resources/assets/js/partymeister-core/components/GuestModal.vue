@@ -68,7 +68,8 @@
         },
         methods: {
             nl2br: function (string) {
-                return (string + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br>$2');
+                const escaped = (string + '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+                return escaped.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br>$2');
             },
             update: function (element, data) {
                 this.element = element;
