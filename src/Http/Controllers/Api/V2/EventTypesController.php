@@ -13,13 +13,24 @@ use Partymeister\Core\Http\Resources\V2\EventTypeResource;
 use Partymeister\Core\Models\EventType;
 use Partymeister\Core\Services\EventTypeService;
 
+/**
+ * @tags Event Types
+ */
 class EventTypesController extends ApiController
 {
+    protected string $model = EventType::class;
+
+    protected string $modelResource = 'event_type';
+
+    /**
+     * @response Illuminate\Http\Resources\Json\AnonymousResourceCollection<Illuminate\Pagination\LengthAwarePaginator<EventTypeResource>>
+     */
     public function index(EventTypeGetRequest $request): EventTypeCollection
     {
         $paginator = EventTypeService::collection()->getPaginator();
 
-        return new EventTypeCollection($paginator);
+        return (new EventTypeCollection($paginator))
+            ->additional(['meta' => ['message' => 'Event types retrieved']]);
     }
 
     public function store(EventTypePostRequest $request): JsonResponse
@@ -27,29 +38,35 @@ class EventTypesController extends ApiController
         $result = EventTypeService::create($request)->getResult();
 
         return (new EventTypeResource($result))
-            ->additional(['meta' => ['message' => 'EventType created']])
+            ->additional(['meta' => ['message' => 'Event type created']])
             ->response()
             ->setStatusCode(201);
     }
 
-    public function show(EventTypeGetRequest $request, EventType $event_type): EventTypeResource
+    public function show(EventType $event_type): EventTypeResource
     {
         $result = EventTypeService::show($event_type)->getResult();
 
-        return new EventTypeResource($result);
+        return (new EventTypeResource($result))
+            ->additional(['meta' => ['message' => 'Event type retrieved']]);
     }
 
     public function update(EventTypePatchRequest $request, EventType $event_type): EventTypeResource
     {
         $result = EventTypeService::update($event_type, $request)->getResult();
 
-        return new EventTypeResource($result);
+        return (new EventTypeResource($result))
+            ->additional(['meta' => ['message' => 'Event type updated']]);
     }
 
     public function destroy(EventType $event_type): Response
     {
-        EventTypeService::delete($event_type);
+        $result = EventTypeService::delete($event_type)->getResult();
 
-        return $this->noContentResponse();
+        if ($result) {
+            return $this->noContentResponse();
+        }
+
+        abort(404, 'Problem deleting event type');
     }
 }
