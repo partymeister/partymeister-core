@@ -2,6 +2,8 @@
 
 use Motor\Core\Http\Middleware\V2\V2ErrorHandler;
 use Partymeister\Core\Http\Controllers\Api\V2;
+use Partymeister\Core\Http\Controllers\Api\V2\Auth;
+use Partymeister\Core\Http\Controllers\Api\V2\PublicApi;
 use Partymeister\Core\Http\Controllers\Api\V2\Rpc;
 
 // V2 API routes
@@ -30,6 +32,33 @@ Route::prefix('api/v2/rpc')
         Route::post('events/{event}/playlist', [Rpc\Events\PlaylistController::class, 'store'])->name('events.playlist.store');
         Route::get('schedules/{schedule}/playlist', [Rpc\Schedules\PlaylistController::class, 'show'])->name('schedules.playlist.show');
         Route::post('schedules/{schedule}/playlist', [Rpc\Schedules\PlaylistController::class, 'store'])->name('schedules.playlist.store');
+    });
+
+// V2 Auth routes (visitor authentication)
+Route::prefix('api/v2/auth')
+    ->name('v2.auth.')
+    ->middleware([V2ErrorHandler::class])
+    ->group(function () {
+        Route::post('login', [Auth\LoginController::class, 'store'])->name('login');
+        Route::post('register', [Auth\RegisterController::class, 'store'])->name('register');
+        Route::post('logout', [Auth\LogoutController::class, 'store'])->middleware('auth:sanctum')->name('logout');
+        Route::post('password/forgot', [Auth\PasswordForgotController::class, 'store'])->name('password.forgot');
+        Route::post('password/reset', [Auth\PasswordResetController::class, 'store'])->name('password.reset');
+        Route::get('me', [Auth\MeController::class, 'show'])->middleware('auth:sanctum')->name('me');
+    });
+
+// V2 Public routes (unauthenticated, read-only)
+Route::prefix('api/v2/public')
+    ->name('v2.public.')
+    ->middleware([V2ErrorHandler::class, 'bindings'])
+    ->group(function () {
+        Route::get('event-types', [PublicApi\EventTypesController::class, 'index'])->name('event-types.index');
+        Route::get('event-types/{event_type}', [PublicApi\EventTypesController::class, 'show'])->name('event-types.show');
+        Route::get('events', [PublicApi\EventsController::class, 'index'])->name('events.index');
+        Route::get('events/{event}', [PublicApi\EventsController::class, 'show'])->name('events.show');
+        Route::get('schedules', [PublicApi\SchedulesController::class, 'index'])->name('schedules.index');
+        Route::get('schedules/{schedule}', [PublicApi\SchedulesController::class, 'show'])->name('schedules.show');
+        Route::get('visitors', [PublicApi\VisitorsController::class, 'index'])->name('visitors.index');
     });
 
 // Legacy API routes (kept as reference)
