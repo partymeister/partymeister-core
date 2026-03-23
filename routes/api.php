@@ -2,6 +2,7 @@
 
 use Motor\Core\Http\Middleware\V2\V2ErrorHandler;
 use Partymeister\Core\Http\Controllers\Api\V2;
+use Partymeister\Core\Http\Controllers\Api\V2\Rpc;
 
 // V2 API routes
 Route::prefix('api/v2')
@@ -15,6 +16,20 @@ Route::prefix('api/v2')
         Route::apiResource('guests', V2\GuestsController::class);
         Route::apiResource('callbacks', V2\CallbacksController::class);
         Route::apiResource('message-groups', V2\MessageGroupsController::class);
+    });
+
+// V2 RPC routes
+Route::prefix('api/v2/rpc')
+    ->name('v2.rpc.')
+    ->middleware([V2ErrorHandler::class, 'auth:sanctum', 'bindings'])
+    ->group(function () {
+        Route::post('callbacks/{callback}/fire', Rpc\Callbacks\FireController::class)->name('callbacks.fire');
+        Route::post('callbacks/send-test', Rpc\Callbacks\SendTestController::class)->name('callbacks.send-test');
+        Route::post('guests/scan-ticket', Rpc\Guests\ScanTicketController::class)->name('guests.scan-ticket');
+        Route::get('events/{event}/playlist', [Rpc\Events\PlaylistController::class, 'show'])->name('events.playlist.show');
+        Route::post('events/{event}/playlist', [Rpc\Events\PlaylistController::class, 'store'])->name('events.playlist.store');
+        Route::get('schedules/{schedule}/playlist', [Rpc\Schedules\PlaylistController::class, 'show'])->name('schedules.playlist.show');
+        Route::post('schedules/{schedule}/playlist', [Rpc\Schedules\PlaylistController::class, 'store'])->name('schedules.playlist.store');
     });
 
 // Legacy API routes (kept as reference)
