@@ -15,7 +15,7 @@ class ScheduleResource extends BaseResource
         return [
             'id' => (int) $this->id,
             'name' => $this->name,
-            'events' => EventCollection::make($this->whenLoaded('events')),
+            'events' => EventResource::collection($this->whenLoaded('events')),
             'created_at' => $this->created_at?->toIso8601String(),
             'updated_at' => $this->updated_at?->toIso8601String(),
         ];

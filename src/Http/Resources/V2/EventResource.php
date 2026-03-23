@@ -22,8 +22,10 @@ class EventResource extends BaseResource
             'sort_position' => $this->sort_position,
             'notify_minutes' => $this->notify_minutes,
             'link' => $this->link,
+            'event_type_id' => $this->event_type_id,
             'event_type' => EventTypeResource::make($this->whenLoaded('event_type')),
             'schedule_id' => $this->schedule_id,
+            'schedule' => ScheduleResource::make($this->whenLoaded('schedule')),
             'created_at' => $this->created_at?->toIso8601String(),
             'updated_at' => $this->updated_at?->toIso8601String(),
         ];
