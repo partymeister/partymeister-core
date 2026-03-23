@@ -1,5 +1,17 @@
 <?php
 
+use Motor\Core\Http\Middleware\V2\V2ErrorHandler;
+use Partymeister\Core\Http\Controllers\Api\V2;
+
+// V2 API routes
+Route::prefix('api/v2')
+    ->name('v2.')
+    ->middleware([V2ErrorHandler::class, 'auth:sanctum', 'bindings'])
+    ->group(function () {
+        Route::apiResource('event-types', V2\EventTypesController::class);
+    });
+
+// Legacy API routes (kept as reference)
 Route::group([
     'middleware' => ['auth:api', 'bindings', 'permission'],
     'namespace'  => 'Partymeister\Core\Http\Controllers\Api',

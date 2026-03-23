@@ -10,8 +10,5 @@ use Partymeister\Core\Models\EventType;
  */
 class EventTypeService extends BaseService
 {
-    /**
-     * @var string
-     */
-    protected $model = EventType::class;
+    protected string $model = EventType::class;
 }

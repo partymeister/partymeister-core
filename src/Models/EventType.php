@@ -4,6 +4,7 @@ namespace Partymeister\Core\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -47,6 +48,7 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  */
 class EventType extends Model
 {
+    use HasFactory;
     use Searchable;
     use Filterable;
     use BlameableTrait;
