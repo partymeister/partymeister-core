@@ -17,7 +17,7 @@ class EventService extends BaseService
      */
     protected string $model = Event::class;
 
-    public function filters()
+    public function filters(): void
     {
         $this->filter->add(new SelectRenderer('event_type_id'))
                      ->setOptionPrefix(trans('partymeister-core::backend/event_types.event_type'))

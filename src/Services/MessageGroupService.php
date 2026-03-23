@@ -17,12 +17,12 @@ class MessageGroupService extends BaseService
      */
     protected string $model = MessageGroup::class;
 
-    public function beforeCreate()
+    public function beforeCreate(): void
     {
         $this->record->uuid = uniqid();
     }
 
-    public function afterCreate()
+    public function afterCreate(): void
     {
         $this->addUsers();
     }
@@ -35,7 +35,7 @@ class MessageGroupService extends BaseService
         }
     }
 
-    public function afterUpdate()
+    public function afterUpdate(): void
     {
         if (is_array(Arr::get($this->data, 'users'))) {
             foreach (User::all() as $user) {

@@ -17,7 +17,7 @@ class GuestService extends BaseService
      */
     protected string $model = Guest::class;
 
-    public function filters()
+    public function filters(): void
     {
         $categories = Category::where('scope', 'guest')
                               ->where('_lft', '>', 1)

@@ -9,6 +9,12 @@ Route::prefix('api/v2')
     ->middleware([V2ErrorHandler::class, 'auth:sanctum', 'bindings'])
     ->group(function () {
         Route::apiResource('event-types', V2\EventTypesController::class);
+        Route::apiResource('events', V2\EventsController::class);
+        Route::apiResource('schedules', V2\SchedulesController::class);
+        Route::apiResource('visitors', V2\VisitorsController::class);
+        Route::apiResource('guests', V2\GuestsController::class);
+        Route::apiResource('callbacks', V2\CallbacksController::class);
+        Route::apiResource('message-groups', V2\MessageGroupsController::class);
     });
 
 // Legacy API routes (kept as reference)

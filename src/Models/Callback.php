@@ -100,4 +100,15 @@ class Callback extends Model
         'has_fired',
         'is_timed',
     ];
+
+    protected $attributes = [
+        'action' => '',
+        'payload' => '{}',
+        'title' => '',
+        'body' => '',
+        'link' => '',
+        'destination' => '',
+        'has_fired' => false,
+        'is_timed' => false,
+    ];
 }

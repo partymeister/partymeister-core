@@ -17,16 +17,19 @@ class VisitorService extends BaseService
      */
     protected string $model = Visitor::class;
 
-    public function beforeCreate()
+    public function beforeCreate(): void
     {
         $this->data['password'] = bcrypt($this->data['password']);
         $this->data['api_token'] = Str::random(60);
-        if ($this->data['email'] == '') {
+        if (! Arr::has($this->data, 'additional_data')) {
+            $this->data['additional_data'] = [];
+        }
+        if (Arr::get($this->data, 'email') == '') {
             $this->data['email'] = null;
         }
     }
 
-    public function beforeUpdate()
+    public function beforeUpdate(): void
     {
         // Special case to filter out the users api token when calling over the api
         if (Arr::get($this->data, 'api_token')) {
@@ -39,7 +42,7 @@ class VisitorService extends BaseService
             $this->data['password'] = bcrypt($this->data['password']);
         }
 
-        if ($this->data['email'] == '') {
+        if (Arr::get($this->data, 'email') == '') {
             $this->data['email'] = null;
         }
     }
