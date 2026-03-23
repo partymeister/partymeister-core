@@ -55,7 +55,7 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
     {
         $this->visit('/backend/callbacks')
              ->see(trans('partymeister-core::backend/callbacks.callbacks'))
-             ->see(trans('motor-backend::backend/global.no_records'));
+             ->see(trans('motor-admin::backend/global.no_records'));
     }
 
     /** @test */
@@ -73,10 +73,10 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
         $record = create_test_callback();
         $this->visit('/backend/callbacks')
              ->within('table', function () {
-                 $this->click(trans('motor-backend::backend/global.edit'));
+                 $this->click(trans('motor-admin::backend/global.edit'));
              })
              ->seePageIs('/backend/callbacks/'.$record->id.'/edit')
-             ->click(trans('motor-backend::backend/global.back'))
+             ->click(trans('motor-admin::backend/global.back'))
              ->seePageIs('/backend/callbacks');
     }
 
@@ -156,7 +156,7 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
         $this->assertCount(1, Callback::all());
 
         $this->visit('/backend/callbacks')->within('table', function () {
-            $this->press(trans('motor-backend::backend/global.delete'));
+            $this->press(trans('motor-admin::backend/global.delete'));
         })->seePageIs('/backend/callbacks')->see(trans('partymeister-core::backend/callbacks.deleted'));
 
         $this->assertCount(0, Callback::all());

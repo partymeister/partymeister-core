@@ -3,7 +3,7 @@
 namespace Partymeister\Core\Forms\Backend;
 
 use Kris\LaravelFormBuilder\Form;
-use Motor\Backend\Models\Category;
+use Motor\Admin\Models\Category;
 
 /**
  * Class GuestForm
@@ -16,7 +16,7 @@ class GuestForm extends Form
     public function buildForm()
     {
         $this->add('category_id', 'select', [
-            'label'   => trans('motor-backend::backend/categories.category'),
+            'label'   => trans('motor-admin::backend/categories.category'),
             'rules'   => 'required',
             'choices' => Category::where('scope', 'guest')
                                  ->where('_lft', '>', 1)
@@ -24,7 +24,7 @@ class GuestForm extends Form
                                  ->pluck('name', 'id')
                                  ->toArray(),
         ])
-             ->add('name', 'text', ['label' => trans('motor-backend::backend/global.name'), 'rules' => 'required'])
+             ->add('name', 'text', ['label' => trans('motor-admin::backend/global.name'), 'rules' => 'required'])
              ->add('handle', 'text', ['label' => trans('partymeister-core::backend/guests.handle')])
              ->add('email', 'text', ['label' => trans('partymeister-core::backend/guests.email')])
              ->add('company', 'text', ['label' => trans('partymeister-core::backend/guests.company')])

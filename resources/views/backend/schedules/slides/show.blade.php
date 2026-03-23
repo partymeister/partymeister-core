@@ -1,4 +1,4 @@
-@extends('motor-backend::layouts.backend')
+@extends('motor-admin::layouts.backend')
 @section('view_styles')
     @include('partymeister-slides::layouts.partials.slide_fonts')
     <style type="text/css">
@@ -15,14 +15,14 @@
     </style>
 @append
 @section('htmlheader_title')
-    {{ trans('motor-backend::backend/global.home') }}
+    {{ trans('motor-admin::backend/global.home') }}
 @endsection
 
 @section('contentheader_title')
     {{ trans('partymeister-core::backend/schedules.slides_preview') }}
     <button class="btn btn-sm btn-success float-right schedule-slides-save"
             disabled>{{trans('partymeister-core::backend/schedules.save_slides')}}</button>
-    {!! link_to_route('backend.schedules.index', trans('motor-backend::backend/global.back'), [], ['class' => 'pull-right float-right btn btn-sm btn-danger']) !!}
+    {!! link_to_route('backend.schedules.index', trans('motor-admin::backend/global.back'), [], ['class' => 'pull-right float-right btn btn-sm btn-danger']) !!}
 @endsection
 
 @section('main-content')

@@ -24,11 +24,11 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @property int $created_by
  * @property int $updated_by
  * @property int|null $deleted_by
- * @property-read \Motor\Backend\Models\User $creator
- * @property-read \Motor\Backend\Models\User|null $eraser
+ * @property-read \Motor\Admin\Models\User $creator
+ * @property-read \Motor\Admin\Models\User|null $eraser
  * @property-read Collection|Event[] $events
  * @property-read mixed $event_count
- * @property-read \Motor\Backend\Models\User $updater
+ * @property-read \Motor\Admin\Models\User $updater
  *
  * @method static Builder|Schedule filteredBy(Filter $filter, $column)
  * @method static Builder|Schedule filteredByMultiple(Filter $filter)

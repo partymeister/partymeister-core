@@ -14,7 +14,7 @@ class CallbackForm extends Form
      */
     public function buildForm()
     {
-        $this->add('name', 'text', ['label' => trans('motor-backend::backend/global.name'), 'rules' => 'required'])
+        $this->add('name', 'text', ['label' => trans('motor-admin::backend/global.name'), 'rules' => 'required'])
              ->add('action', 'select', [
                  'label'   => trans('partymeister-core::backend/callbacks.action'),
                  'choices' => (trans('partymeister-core::backend/callbacks.actions')),

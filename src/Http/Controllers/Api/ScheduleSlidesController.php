@@ -5,7 +5,7 @@ namespace Partymeister\Core\Http\Controllers\Api;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Motor\Backend\Http\Controllers\Controller;
+use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Core\Models\Schedule;
 use Partymeister\Core\Services\ScheduleService;
 use Partymeister\Slides\Models\SlideTemplate;

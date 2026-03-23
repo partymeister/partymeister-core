@@ -2,10 +2,10 @@
 
 namespace Partymeister\Core\Grids;
 
-use Motor\Backend\Grid\Grid;
-use Motor\Backend\Grid\Renderers\BooleanRenderer;
-use Motor\Backend\Grid\Renderers\DateRenderer;
-use Motor\Backend\Grid\Renderers\TranslateRenderer;
+use Motor\Admin\Grid\Grid;
+use Motor\Admin\Grid\Renderers\BooleanRenderer;
+use Motor\Admin\Grid\Renderers\DateRenderer;
+use Motor\Admin\Grid\Renderers\TranslateRenderer;
 
 /**
  * Class CallbackGrid
@@ -14,7 +14,7 @@ class CallbackGrid extends Grid
 {
     protected function setup()
     {
-        $this->addColumn('name', trans('motor-backend::backend/global.name'), true);
+        $this->addColumn('name', trans('motor-admin::backend/global.name'), true);
         $this->setDefaultSorting('name', 'ASC');
         $this->addColumn('destination', trans('partymeister-core::backend/callbacks.destination'), true)
              ->renderer(TranslateRenderer::class, ['file' => 'partymeister-core::backend/callbacks.destinations']);
@@ -24,9 +24,9 @@ class CallbackGrid extends Grid
              ->renderer(BooleanRenderer::class);
         $this->addColumn('is_timed', trans('partymeister-core::backend/callbacks.is_timed'), true)
              ->renderer(BooleanRenderer::class);
-        $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.callbacks.edit');
-        $this->addDuplicateAction(trans('motor-backend::backend/global.duplicate'), 'backend.callbacks.duplicate')
+        $this->addEditAction(trans('motor-admin::backend/global.edit'), 'backend.callbacks.edit');
+        $this->addDuplicateAction(trans('motor-admin::backend/global.duplicate'), 'backend.callbacks.duplicate')
              ->needsPermissionTo('callbacks.write');
-        $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.callbacks.destroy');
+        $this->addDeleteAction(trans('motor-admin::backend/global.delete'), 'backend.callbacks.destroy');
     }
 }

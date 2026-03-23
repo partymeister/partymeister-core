@@ -20,12 +20,12 @@ class VisitorForm extends Form
             'rules' => 'required',
         ])
              ->add('group', 'text', ['label' => trans('partymeister-core::backend/visitors.group')])
-             ->add('email', 'text', ['label' => trans('motor-backend::backend/users.email')])
+             ->add('email', 'text', ['label' => trans('motor-admin::backend/users.email')])
              ->add('country_iso_3166_1', 'select2', [
-                 'label'   => trans('motor-backend::backend/global.address.country'),
+                 'label'   => trans('motor-admin::backend/global.address.country'),
                  'choices' => Countries::getNames(),
              ])
-             ->add('password', 'password', ['value' => '', 'label' => trans('motor-backend::backend/users.password')])
+             ->add('password', 'password', ['value' => '', 'label' => trans('motor-admin::backend/users.password')])
              ->add('submit', 'submit', [
                  'attr'  => ['class' => 'btn btn-primary'],
                  'label' => trans('partymeister-core::backend/visitors.save'),

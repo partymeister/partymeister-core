@@ -20,7 +20,7 @@ class VisitorLoginForm extends Form
             'rules' => 'required',
         ])
              ->add('password', 'password', [
-                 'label' => trans('motor-backend::backend/users.password'),
+                 'label' => trans('motor-admin::backend/users.password'),
                  'rules' => ['required', new VisitorLogin],
              ]);
     }

@@ -1,7 +1,7 @@
 {!! form_start($form) !!}
 <div class="@boxWrapper box-primary">
     <div class="@boxHeader with-border">
-        <h3 class="box-title">{{ trans('motor-backend::backend/global.base_info') }}</h3>
+        <h3 class="box-title">{{ trans('motor-admin::backend/global.base_info') }}</h3>
     </div>
     <div class="@boxBody">
         {!! form_row($form->name) !!}

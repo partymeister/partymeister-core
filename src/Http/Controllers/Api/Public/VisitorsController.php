@@ -2,7 +2,7 @@
 
 namespace Partymeister\Core\Http\Controllers\Api\Public;
 
-use Motor\Backend\Http\Controllers\PublicApiController;
+use Motor\Admin\Http\Controllers\PublicApiController;
 use Partymeister\Core\Http\Resources\Public\VisitorCollection;
 use Partymeister\Core\Services\VisitorService;
 

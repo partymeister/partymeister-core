@@ -17,12 +17,12 @@ class PasswordResetForm extends Form
 
         $this->add('password', 'password', [
             'value' => '',
-            'label' => trans('motor-backend::backend/users.password'),
+            'label' => trans('motor-admin::backend/users.password'),
             'rules' => 'required|min:6|confirmed',
         ])
              ->add('password_confirmation', 'password', [
                  'value' => '',
-                 'label' => trans('motor-backend::backend/users.password_confirm'),
+                 'label' => trans('motor-admin::backend/users.password_confirm'),
                  'rules' => 'required|min:6',
              ]);
     }

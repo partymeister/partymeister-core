@@ -55,7 +55,7 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
     {
         $this->visit('/backend/message_groups')
              ->see(trans('partymeister-core::backend/message_groups.message_groups'))
-             ->see(trans('motor-backend::backend/global.no_records'));
+             ->see(trans('motor-admin::backend/global.no_records'));
     }
 
     /** @test */
@@ -73,10 +73,10 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
         $record = create_test_message_group();
         $this->visit('/backend/message_groups')
              ->within('table', function () {
-                 $this->click(trans('motor-backend::backend/global.edit'));
+                 $this->click(trans('motor-admin::backend/global.edit'));
              })
              ->seePageIs('/backend/message_groups/'.$record->id.'/edit')
-             ->click(trans('motor-backend::backend/global.back'))
+             ->click(trans('motor-admin::backend/global.back'))
              ->seePageIs('/backend/message_groups');
     }
 
@@ -156,7 +156,7 @@ class PartymeisterCoreBackendMessageGroupTest extends TestCase
         $this->assertCount(1, MessageGroup::all());
 
         $this->visit('/backend/message_groups')->within('table', function () {
-            $this->press(trans('motor-backend::backend/global.delete'));
+            $this->press(trans('motor-admin::backend/global.delete'));
         })->seePageIs('/backend/message_groups')->see(trans('partymeister-core::backend/message_groups.deleted'));
 
         $this->assertCount(0, MessageGroup::all());

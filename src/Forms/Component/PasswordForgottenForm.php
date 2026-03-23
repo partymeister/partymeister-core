@@ -16,7 +16,7 @@ class PasswordForgottenForm extends Form
     public function buildForm()
     {
         $this->add('email', 'email', [
-            'label' => trans('motor-backend::backend/global.contact.email'),
+            'label' => trans('motor-admin::backend/global.contact.email'),
             'rules' => ['required', 'email', new VisitorEmail()],
         ]);
     }

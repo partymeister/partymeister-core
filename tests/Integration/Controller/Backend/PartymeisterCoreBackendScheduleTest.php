@@ -55,7 +55,7 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
     {
         $this->visit('/backend/schedules')
              ->see(trans('partymeister-core::backend/schedules.schedules'))
-             ->see(trans('motor-backend::backend/global.no_records'));
+             ->see(trans('motor-admin::backend/global.no_records'));
     }
 
     /** @test */
@@ -73,10 +73,10 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
         $record = create_test_schedule();
         $this->visit('/backend/schedules')
              ->within('table', function () {
-                 $this->click(trans('motor-backend::backend/global.edit'));
+                 $this->click(trans('motor-admin::backend/global.edit'));
              })
              ->seePageIs('/backend/schedules/'.$record->id.'/edit')
-             ->click(trans('motor-backend::backend/global.back'))
+             ->click(trans('motor-admin::backend/global.back'))
              ->seePageIs('/backend/schedules');
     }
 
@@ -156,7 +156,7 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
         $this->assertCount(1, Schedule::all());
 
         $this->visit('/backend/schedules')->within('table', function () {
-            $this->press(trans('motor-backend::backend/global.delete'));
+            $this->press(trans('motor-admin::backend/global.delete'));
         })->seePageIs('/backend/schedules')->see(trans('partymeister-core::backend/schedules.deleted'));
 
         $this->assertCount(0, Schedule::all());

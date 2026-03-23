@@ -16,7 +16,7 @@ class EventForm extends Form
      */
     public function buildForm()
     {
-        $this->add('name', 'text', ['label' => trans('motor-backend::backend/global.name'), 'rules' => 'required'])
+        $this->add('name', 'text', ['label' => trans('motor-admin::backend/global.name'), 'rules' => 'required'])
              ->add('schedule_id', 'select', [
                  'label'   => trans('partymeister-core::backend/schedules.schedule'),
                  'choices' => Schedule::pluck('name', 'id')

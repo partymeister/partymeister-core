@@ -2,7 +2,7 @@
 
 namespace Partymeister\Core\Http\Controllers\Api;
 
-use Motor\Backend\Http\Controllers\ApiController;
+use Motor\Admin\Http\Controllers\ApiController;
 use Partymeister\Core\Http\Requests\Backend\CallbackRequest;
 use Partymeister\Core\Http\Resources\CallbackCollection;
 use Partymeister\Core\Http\Resources\CallbackResource;

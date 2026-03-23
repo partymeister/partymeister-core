@@ -32,9 +32,9 @@ use Motor\Core\Traits\Searchable;use RichanFongdasen\EloquentBlameable\Blameable
  * @property int $created_by
  * @property int $updated_by
  * @property int|null $deleted_by
- * @property-read \Motor\Backend\Models\User $creator
- * @property-read \Motor\Backend\Models\User|null $eraser
- * @property-read \Motor\Backend\Models\User $updater
+ * @property-read \Motor\Admin\Models\User $creator
+ * @property-read \Motor\Admin\Models\User|null $eraser
+ * @property-read \Motor\Admin\Models\User $updater
  *
  * @method static Builder|Callback filteredBy(Filter $filter, $column)
  * @method static Builder|Callback filteredByMultiple(Filter $filter)

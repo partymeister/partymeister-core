@@ -4,7 +4,7 @@ namespace Partymeister\Core\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Motor\Backend\Models\User;
+use Motor\Admin\Models\User;
 
 /**
  * Class AccountsTableSeeder
@@ -19,8 +19,8 @@ class ConfigVariablesTableSeeder extends Seeder
     public function run()
     {
         DB::table('config_variables')->insert([
-            'package'    => 'motor-backend',
-            'group'      => 'motor-backend-project',
+            'package'    => 'motor-admin',
+            'group'      => 'motor-admin-project',
             'name'       => 'name',
             'value'      => 'Partymeister 3.0',
             'created_by' => User::get()->first()->id,

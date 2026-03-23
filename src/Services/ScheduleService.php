@@ -4,8 +4,8 @@ namespace Partymeister\Core\Services;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
-use Motor\Backend\Models\Category;
-use Motor\Backend\Services\BaseService;
+use Motor\Admin\Models\Category;
+use Motor\Admin\Services\BaseService;
 use Partymeister\Core\Models\Schedule;
 use Partymeister\Slides\Helpers\ScreenshotHelper;
 use Partymeister\Slides\Models\Slide;

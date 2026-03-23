@@ -1,11 +1,11 @@
-@extends('motor-backend::layouts.backend')
+@extends('motor-admin::layouts.backend')
 
 @section('htmlheader_title')
-    {{ trans('motor-backend::backend.global.home') }}
+    {{ trans('motor-admin::backend.global.home') }}
 @endsection
 
 @section('contentheader_title')
-    {{ trans('motor-backend::backend/global.dashboard') }}
+    {{ trans('motor-admin::backend/global.dashboard') }}
 @endsection
 
 @section('main-content')

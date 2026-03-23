@@ -22,7 +22,7 @@ class VisitorWebsiteRegistrationForm extends Form
         ])
              ->add('group', 'text', ['label' => trans('partymeister-core::backend/visitors.group')])
              ->add('country_iso_3166_1', 'select', [
-                 'label'         => trans('motor-backend::backend/global.address.country'),
+                 'label'         => trans('motor-admin::backend/global.address.country'),
                  'default_value' => (isset($_SERVER['GEOIP_COUNTRY_CODE']) ? $_SERVER['GEOIP_COUNTRY_CODE'] : 'DE'),
                  'choices'       => Countries::getNames(),
              ])

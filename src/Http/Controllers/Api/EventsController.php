@@ -2,7 +2,7 @@
 
 namespace Partymeister\Core\Http\Controllers\Api;
 
-use Motor\Backend\Http\Controllers\ApiController;
+use Motor\Admin\Http\Controllers\ApiController;
 use Partymeister\Core\Http\Requests\Backend\EventRequest;
 use Partymeister\Core\Http\Resources\EventCollection;
 use Partymeister\Core\Http\Resources\EventResource;

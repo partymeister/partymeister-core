@@ -3,7 +3,7 @@
 namespace Partymeister\Core\Services;
 
 use Illuminate\Support\Arr;
-use Motor\Backend\Services\BaseService;
+use Motor\Admin\Services\BaseService;
 use Partymeister\Core\Models\MessageGroup;
 use Partymeister\Core\Models\User;
 

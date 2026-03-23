@@ -99,7 +99,7 @@ class PartymeisterServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../../resources/lang' => resource_path('lang/vendor/partymeister-core'),
-        ], 'motor-backend-translations');
+        ], 'motor-admin-translations');
     }
 
     public function views()
@@ -108,19 +108,19 @@ class PartymeisterServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../../resources/views' => resource_path('views/vendor/partymeister-core'),
-        ], 'motor-backend-views');
+        ], 'motor-admin-views');
     }
 
     public function navigationItems()
     {
-        $config = $this->app['config']->get('motor-backend-navigation', []);
-        $this->app['config']->set('motor-backend-navigation', array_replace_recursive(require __DIR__.'/../../config/motor-backend-navigation.php', $config));
+        $config = $this->app['config']->get('motor-admin-navigation', []);
+        $this->app['config']->set('motor-admin-navigation', array_replace_recursive(require __DIR__.'/../../config/motor-admin-navigation.php', $config));
     }
 
     public function permissions()
     {
-        $config = $this->app['config']->get('motor-backend-permissions', []);
-        $this->app['config']->set('motor-backend-permissions', array_replace_recursive(require __DIR__.'/../../config/motor-backend-permissions.php', $config));
+        $config = $this->app['config']->get('motor-admin-permissions', []);
+        $this->app['config']->set('motor-admin-permissions', array_replace_recursive(require __DIR__.'/../../config/motor-admin-permissions.php', $config));
     }
 
     public function registerCommands()

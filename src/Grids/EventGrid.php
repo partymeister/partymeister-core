@@ -2,10 +2,10 @@
 
 namespace Partymeister\Core\Grids;
 
-use Motor\Backend\Grid\Grid;
-use Motor\Backend\Grid\Renderers\BladeRenderer;
-use Motor\Backend\Grid\Renderers\BooleanRenderer;
-use Motor\Backend\Grid\Renderers\DateRenderer;
+use Motor\Admin\Grid\Grid;
+use Motor\Admin\Grid\Renderers\BladeRenderer;
+use Motor\Admin\Grid\Renderers\BooleanRenderer;
+use Motor\Admin\Grid\Renderers\DateRenderer;
 
 /**
  * Class EventGrid
@@ -14,7 +14,7 @@ class EventGrid extends Grid
 {
     protected function setup()
     {
-        $this->addColumn('name', trans('motor-backend::backend/global.name'), true);
+        $this->addColumn('name', trans('motor-admin::backend/global.name'), true);
 
         $this->addColumn('event_type.name', trans('partymeister-core::backend/event_types.event_type'))
              ->renderer(BladeRenderer::class, ['template' => 'partymeister-core::grid.event_type']);
@@ -39,9 +39,9 @@ class EventGrid extends Grid
 
         $this->addAction(trans('partymeister-slides::backend/playlists.new'), 'backend.slidemeister-generator.event', ['class' => 'btn-success', 'target' => '_blank']);
 
-        $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.events.edit');
-        $this->addDuplicateAction(trans('motor-backend::backend/global.duplicate'), 'backend.events.duplicate')
+        $this->addEditAction(trans('motor-admin::backend/global.edit'), 'backend.events.edit');
+        $this->addDuplicateAction(trans('motor-admin::backend/global.duplicate'), 'backend.events.duplicate')
              ->needsPermissionTo('events.write');
-        $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.events.destroy');
+        $this->addDeleteAction(trans('motor-admin::backend/global.delete'), 'backend.events.destroy');
     }
 }

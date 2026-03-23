@@ -4,8 +4,8 @@ namespace Partymeister\Core\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
-use Motor\Backend\Models\Category;
-use Motor\Backend\Models\User;
+use Motor\Admin\Models\Category;
+use Motor\Admin\Models\User;
 use Partymeister\Core\Models\Guest;
 
 /**

@@ -7,7 +7,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
-use Motor\Backend\Models\User;
+use Motor\Admin\Models\User;
 use Partymeister\Core\Models\Event;
 use Partymeister\Core\Models\Schedule;
 use Partymeister\Slides\Helpers\ScreenshotHelper;

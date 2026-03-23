@@ -92,7 +92,7 @@
         </table>
     </div>
 </div>
-<script src="{{mix('js/motor-backend.js')}}"></script>
+<script src="{{mix('js/motor-admin.js')}}"></script>
 <script>
     let Clock = {
         template: "<div>@{{hours}}:@{{minutes}}:@{{seconds}}</div>",

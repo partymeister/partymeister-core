@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
-use Motor\Backend\Http\Controllers\Controller;
+use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Competitions\Models\Competition;
 use Partymeister\Core\Models\Event;
 use Partymeister\Slides\Models\SlideTemplate;

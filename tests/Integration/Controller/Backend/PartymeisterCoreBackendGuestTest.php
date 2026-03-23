@@ -55,7 +55,7 @@ class PartymeisterCoreBackendGuestTest extends TestCase
     {
         $this->visit('/backend/guests')
              ->see(trans('partymeister-core::backend/guests.guests'))
-             ->see(trans('motor-backend::backend/global.no_records'));
+             ->see(trans('motor-admin::backend/global.no_records'));
     }
 
     /** @test */
@@ -71,10 +71,10 @@ class PartymeisterCoreBackendGuestTest extends TestCase
         $record = create_test_guest();
         $this->visit('/backend/guests')
              ->within('table', function () {
-                 $this->click(trans('motor-backend::backend/global.edit'));
+                 $this->click(trans('motor-admin::backend/global.edit'));
              })
              ->seePageIs('/backend/guests/'.$record->id.'/edit')
-             ->click(trans('motor-backend::backend/global.back'))
+             ->click(trans('motor-admin::backend/global.back'))
              ->seePageIs('/backend/guests');
     }
 
@@ -154,7 +154,7 @@ class PartymeisterCoreBackendGuestTest extends TestCase
         $this->assertCount(1, Guest::all());
 
         $this->visit('/backend/guests')->within('table', function () {
-            $this->press(trans('motor-backend::backend/global.delete'));
+            $this->press(trans('motor-admin::backend/global.delete'));
         })->seePageIs('/backend/guests')->see(trans('partymeister-core::backend/guests.deleted'));
 
         $this->assertCount(0, Guest::all());

@@ -2,9 +2,9 @@
 
 namespace Partymeister\Core\Grids;
 
-use Motor\Backend\Grid\Grid;
-use Motor\Backend\Grid\Renderers\BladeRenderer;
-use Motor\Backend\Grid\Renderers\BooleanRenderer;
+use Motor\Admin\Grid\Grid;
+use Motor\Admin\Grid\Renderers\BladeRenderer;
+use Motor\Admin\Grid\Renderers\BooleanRenderer;
 
 /**
  * Class GuestGrid
@@ -13,7 +13,7 @@ class GuestGrid extends Grid
 {
     protected function setup()
     {
-        $this->addColumn('category.name', trans('motor-backend::backend/categories.category'));
+        $this->addColumn('category.name', trans('motor-admin::backend/categories.category'));
         $this->addColumn('name', trans('partymeister-core::backend/guests.name'), true);
         $this->addColumn('handle', trans('partymeister-core::backend/guests.handle'), true);
         $this->addColumn('company', trans('partymeister-core::backend/guests.company'), true);
@@ -25,7 +25,7 @@ class GuestGrid extends Grid
              ->renderer(BladeRenderer::class, ['template' => 'partymeister-core::grid.guest_has_arrived']);
 
         $this->setDefaultSorting('category_id', 'ASC');
-        $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.guests.edit');
-        $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.guests.destroy');
+        $this->addEditAction(trans('motor-admin::backend/global.edit'), 'backend.guests.edit');
+        $this->addDeleteAction(trans('motor-admin::backend/global.delete'), 'backend.guests.destroy');
     }
 }

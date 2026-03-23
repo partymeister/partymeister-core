@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
-use Motor\Backend\Models\PasswordReset;
+use Motor\Admin\Models\PasswordReset;
 use Motor\CMS\Models\PageVersionComponent;
 use Partymeister\Core\Forms\Component\PasswordForgottenForm;
 use Partymeister\Core\Forms\Component\PasswordResetForm;

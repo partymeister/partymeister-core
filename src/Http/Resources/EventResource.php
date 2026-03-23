@@ -3,7 +3,7 @@
 namespace Partymeister\Core\Http\Resources;
 
 use Carbon\CarbonImmutable;
-use Motor\Backend\Http\Resources\BaseResource;
+use Motor\Admin\Http\Resources\BaseResource;
 
 /**
  * @OA\Schema(

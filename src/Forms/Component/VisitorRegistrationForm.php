@@ -38,7 +38,7 @@ class VisitorRegistrationForm extends Form
         if (count($countryList) == 0) {
             $countryList = Countries::getNames();
         }
-        $this->add('country_iso_3166_1', 'select', ['label'   => trans('motor-backend::backend/global.address.country'),
+        $this->add('country_iso_3166_1', 'select', ['label'   => trans('motor-admin::backend/global.address.country'),
             'choices' => $countryList,
         ]);
 
@@ -50,12 +50,12 @@ class VisitorRegistrationForm extends Form
 
         $this->add('password', 'password', [
             'value' => '',
-            'label' => trans('motor-backend::backend/users.password'),
+            'label' => trans('motor-admin::backend/users.password'),
             'rules' => 'required|min:6|confirmed',
         ])
              ->add('password_confirmation', 'password', [
                  'value' => '',
-                 'label' => trans('motor-backend::backend/users.password_confirm'),
+                 'label' => trans('motor-admin::backend/users.password_confirm'),
                  'rules' => 'required|min:6',
              ])
              ->add('submit', 'submit', ['attr' => ['class' => 'success button expanded'], 'label' => 'Register']);

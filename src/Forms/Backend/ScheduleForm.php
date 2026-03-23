@@ -14,7 +14,7 @@ class ScheduleForm extends Form
      */
     public function buildForm()
     {
-        $this->add('name', 'text', ['label' => trans('motor-backend::backend/global.name'), 'rules' => 'required'])
+        $this->add('name', 'text', ['label' => trans('motor-admin::backend/global.name'), 'rules' => 'required'])
              ->add('submit', 'submit', [
                  'attr'  => ['class' => 'btn btn-primary'],
                  'label' => trans('partymeister-core::backend/schedules.save'),

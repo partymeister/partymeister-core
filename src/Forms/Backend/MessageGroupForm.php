@@ -23,9 +23,9 @@ class MessageGroupForm extends Form
             }
         }
 
-        $this->add('name', 'text', ['label' => trans('motor-backend::backend/global.name'), 'rules' => 'required'])
+        $this->add('name', 'text', ['label' => trans('motor-admin::backend/global.name'), 'rules' => 'required'])
              ->add('users', 'choice', [
-                 'label'          => trans('motor-backend::backend/users.users'),
+                 'label'          => trans('motor-admin::backend/users.users'),
                  'choice_options' => [
                      'wrapper'    => ['class' => 'choice-wrapper'],
                      'label_attr' => ['class' => 'label-class'],

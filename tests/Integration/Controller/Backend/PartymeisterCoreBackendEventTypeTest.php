@@ -55,7 +55,7 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
     {
         $this->visit('/backend/event_types')
              ->see(trans('partymeister-core::backend/event_types.event_types'))
-             ->see(trans('motor-backend::backend/global.no_records'));
+             ->see(trans('motor-admin::backend/global.no_records'));
     }
 
     /** @test */
@@ -73,10 +73,10 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
         $record = create_test_event_type();
         $this->visit('/backend/event_types')
              ->within('table', function () {
-                 $this->click(trans('motor-backend::backend/global.edit'));
+                 $this->click(trans('motor-admin::backend/global.edit'));
              })
              ->seePageIs('/backend/event_types/'.$record->id.'/edit')
-             ->click(trans('motor-backend::backend/global.back'))
+             ->click(trans('motor-admin::backend/global.back'))
              ->seePageIs('/backend/event_types');
     }
 
@@ -156,7 +156,7 @@ class PartymeisterCoreBackendEventTypeTest extends TestCase
         $this->assertCount(1, EventType::all());
 
         $this->visit('/backend/event_types')->within('table', function () {
-            $this->press(trans('motor-backend::backend/global.delete'));
+            $this->press(trans('motor-admin::backend/global.delete'));
         })->seePageIs('/backend/event_types')->see(trans('partymeister-core::backend/event_types.deleted'));
 
         $this->assertCount(0, EventType::all());

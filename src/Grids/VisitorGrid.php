@@ -2,7 +2,7 @@
 
 namespace Partymeister\Core\Grids;
 
-use Motor\Backend\Grid\Grid;
+use Motor\Admin\Grid\Grid;
 
 /**
  * Class VisitorGrid
@@ -13,9 +13,9 @@ class VisitorGrid extends Grid
     {
         $this->addColumn('name', trans('partymeister-core::backend/visitors.name'), true);
         $this->addColumn('group', trans('partymeister-core::backend/visitors.group'), true);
-        $this->addColumn('country_iso_3166_1', trans('motor-backend::backend/global.address.country'), true);
+        $this->addColumn('country_iso_3166_1', trans('motor-admin::backend/global.address.country'), true);
         $this->setDefaultSorting('created_at', 'DESC');
-        $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.visitors.edit');
-        $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.visitors.destroy');
+        $this->addEditAction(trans('motor-admin::backend/global.edit'), 'backend.visitors.edit');
+        $this->addDeleteAction(trans('motor-admin::backend/global.delete'), 'backend.visitors.destroy');
     }
 }
