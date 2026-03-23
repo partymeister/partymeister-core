@@ -13,7 +13,7 @@ class ComponentVisitorLoginService extends ComponentBaseService
     /**
      * @var string
      */
-    protected $model = ComponentVisitorLogin::class;
+    protected string $model = ComponentVisitorLogin::class;
 
     /**
      * @var string

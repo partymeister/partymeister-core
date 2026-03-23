@@ -15,7 +15,7 @@ class MessageGroupService extends BaseService
     /**
      * @var string
      */
-    protected $model = MessageGroup::class;
+    protected string $model = MessageGroup::class;
 
     public function beforeCreate()
     {

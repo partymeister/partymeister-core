@@ -14,7 +14,7 @@ class CallbackService extends BaseService
     /**
      * @var string
      */
-    protected $model = Callback::class;
+    protected string $model = Callback::class;
 
     public function filters()
     {

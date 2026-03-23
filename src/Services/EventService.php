@@ -15,7 +15,7 @@ class EventService extends BaseService
     /**
      * @var string
      */
-    protected $model = Event::class;
+    protected string $model = Event::class;
 
     public function filters()
     {

@@ -15,7 +15,7 @@ class VisitorService extends BaseService
     /**
      * @var string
      */
-    protected $model = Visitor::class;
+    protected string $model = Visitor::class;
 
     public function beforeCreate()
     {

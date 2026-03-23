@@ -18,7 +18,7 @@ class ScheduleService extends BaseService
     /**
      * @var string
      */
-    protected $model = Schedule::class;
+    protected string $model = Schedule::class;
 
     /**
      * @param  Schedule  $schedule

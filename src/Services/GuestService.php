@@ -15,7 +15,7 @@ class GuestService extends BaseService
     /**
      * @var string
      */
-    protected $model = Guest::class;
+    protected string $model = Guest::class;
 
     public function filters()
     {

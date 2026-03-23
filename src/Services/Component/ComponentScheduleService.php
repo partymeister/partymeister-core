@@ -13,7 +13,7 @@ class ComponentScheduleService extends ComponentBaseService
     /**
      * @var string
      */
-    protected $model = ComponentSchedule::class;
+    protected string $model = ComponentSchedule::class;
 
     /**
      * @var string
