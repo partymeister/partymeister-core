@@ -20,6 +20,8 @@ class ScheduleService extends BaseService
      */
     protected string $model = Schedule::class;
 
+    protected array $loadColumns = ['events', 'events.event_type'];
+
     /**
      * @param  Schedule  $schedule
      * @param    $data

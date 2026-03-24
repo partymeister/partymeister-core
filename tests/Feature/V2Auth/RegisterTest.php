@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Schema;
+use Partymeister\Competitions\Models\AccessKey;
 use Partymeister\Core\Models\Visitor;
 
 pest()->group('V2', 'V2Auth', 'Register');
@@ -65,7 +66,7 @@ describe('V2 Auth Register', function () {
         }
 
         // Create an unassigned access key
-        \Partymeister\Competitions\Models\AccessKey::create([
+        AccessKey::create([
             'access_key' => 'VALID-KEY-123',
             'visitor_id' => null,
             'ip_address' => '',

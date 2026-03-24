@@ -45,7 +45,7 @@ beforeEach(function () {
     ]);
 
     // Create root category node for slides scope (needed by ScheduleService::generateSlides)
-    $root = new Category();
+    $root = new Category;
     $root->scope = 'slides';
     $root->name = 'Slides';
     $root->saveAsRoot();

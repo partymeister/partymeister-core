@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Partymeister\Competitions\Events\CompetitionSaved;
 use Partymeister\Competitions\Events\LiveVoteUpdated;
+use Partymeister\Competitions\Mail\EntryStatusInfo;
 use Partymeister\Competitions\Models\Competition;
 use Partymeister\Competitions\Models\Entry;
 use Partymeister\Competitions\Models\LiveVote;
@@ -67,7 +68,7 @@ class FireController extends Controller
                 foreach ($competition->unqualified_entries_with_opt_in as $entry) {
                     try {
                         Mail::to($entry->visitor->email)
-                            ->send(new \Partymeister\Competitions\Mail\EntryStatusInfo($entry));
+                            ->send(new EntryStatusInfo($entry));
                     } catch (\Exception $exception) {
                         Log::error('Mail could not be sent to', [$entry->visitor->email, $exception]);
                     }
@@ -93,7 +94,7 @@ class FireController extends Controller
 
                 $l = LiveVote::first();
                 if (is_null($l)) {
-                    $l = new LiveVote();
+                    $l = new LiveVote;
                 }
                 $l->entry_id = $payload->entry_id;
                 $l->competition_id = $payload->competition_id;

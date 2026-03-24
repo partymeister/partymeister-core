@@ -17,6 +17,8 @@ class EventService extends BaseService
      */
     protected string $model = Event::class;
 
+    protected array $loadColumns = ['event_type', 'schedule'];
+
     public function filters(): void
     {
         $this->filter->add(new SelectRenderer('event_type_id'))

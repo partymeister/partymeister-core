@@ -17,6 +17,8 @@ class MessageGroupService extends BaseService
      */
     protected string $model = MessageGroup::class;
 
+    protected array $loadColumns = ['users'];
+
     public function beforeCreate(): void
     {
         $this->record->uuid = uniqid();

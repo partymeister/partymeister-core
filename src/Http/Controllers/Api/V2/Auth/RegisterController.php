@@ -56,7 +56,7 @@ class RegisterController extends Controller
         }
 
         // Create visitor
-        $visitor = new Visitor();
+        $visitor = new Visitor;
         $visitor->name = $name;
         $visitor->password = bcrypt($request->input('password'));
         $visitor->group = $request->input('group', '');
