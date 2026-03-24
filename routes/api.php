@@ -39,11 +39,11 @@ Route::prefix('api/v2/auth')
     ->name('v2.auth.')
     ->middleware([V2ErrorHandler::class])
     ->group(function () {
-        Route::post('login', [Auth\LoginController::class, 'store'])->name('login');
-        Route::post('register', [Auth\RegisterController::class, 'store'])->name('register');
+        Route::post('login', [Auth\LoginController::class, 'store'])->middleware('throttle:5,1')->name('login');
+        Route::post('register', [Auth\RegisterController::class, 'store'])->middleware('throttle:5,1')->name('register');
         Route::post('logout', [Auth\LogoutController::class, 'store'])->middleware('auth:sanctum')->name('logout');
-        Route::post('password/forgot', [Auth\PasswordForgotController::class, 'store'])->name('password.forgot');
-        Route::post('password/reset', [Auth\PasswordResetController::class, 'store'])->name('password.reset');
+        Route::post('password/forgot', [Auth\PasswordForgotController::class, 'store'])->middleware('throttle:3,1')->name('password.forgot');
+        Route::post('password/reset', [Auth\PasswordResetController::class, 'store'])->middleware('throttle:5,1')->name('password.reset');
         Route::get('me', [Auth\MeController::class, 'show'])->middleware('auth:sanctum')->name('me');
     });
 

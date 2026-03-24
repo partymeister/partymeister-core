@@ -3,8 +3,8 @@
 namespace Partymeister\Core\Http\Controllers\Api\V2\PublicApi;
 
 use Motor\Core\Http\Controllers\Api\V2\ApiController;
-use Partymeister\Core\Http\Resources\V2\VisitorCollection;
-use Partymeister\Core\Http\Resources\V2\VisitorResource;
+use Partymeister\Core\Http\Resources\V2\PublicVisitorCollection;
+use Partymeister\Core\Http\Resources\V2\PublicVisitorResource;
 use Partymeister\Core\Services\VisitorService;
 
 /**
@@ -13,13 +13,13 @@ use Partymeister\Core\Services\VisitorService;
 class VisitorsController extends ApiController
 {
     /**
-     * @response Illuminate\Http\Resources\Json\AnonymousResourceCollection<Illuminate\Pagination\LengthAwarePaginator<VisitorResource>>
+     * @response Illuminate\Http\Resources\Json\AnonymousResourceCollection<Illuminate\Pagination\LengthAwarePaginator<PublicVisitorResource>>
      */
-    public function index(): VisitorCollection
+    public function index(): PublicVisitorCollection
     {
         $paginator = VisitorService::collection()->getPaginator();
 
-        return (new VisitorCollection($paginator))
+        return (new PublicVisitorCollection($paginator))
             ->additional(['meta' => ['message' => 'Visitors retrieved']]);
     }
 }

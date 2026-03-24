@@ -38,7 +38,7 @@ describe('V2 Auth Login', function () {
             ->assertJsonPath('data.visitor.name', 'testvisitor');
     });
 
-    it('returns 403 on wrong password', function () {
+    it('returns 401 on wrong password', function () {
         config(['partymeister-core.visitor_login_enabled' => true]);
 
         $response = $this->postJson('/api/v2/auth/login', [
@@ -46,7 +46,7 @@ describe('V2 Auth Login', function () {
             'password' => 'wrongpassword',
         ]);
 
-        $response->assertStatus(403)
+        $response->assertStatus(401)
             ->assertJsonPath('meta.api_version', 'v2')
             ->assertJsonPath('error.code', 'invalid_credentials');
     });

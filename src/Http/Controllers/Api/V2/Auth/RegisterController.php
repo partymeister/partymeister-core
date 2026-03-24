@@ -83,6 +83,6 @@ class RegisterController extends Controller
                 'api_version' => 'v2',
                 'message' => 'Registration successful',
             ],
-        ], 200);
+        ], 201);
     }
 }

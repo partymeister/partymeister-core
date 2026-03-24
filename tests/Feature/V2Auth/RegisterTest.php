@@ -79,7 +79,7 @@ describe('V2 Auth Register', function () {
             'country_iso_3166_1' => 'DE',
         ]);
 
-        $response->assertStatus(200)
+        $response->assertStatus(201)
             ->assertJsonPath('meta.api_version', 'v2')
             ->assertJsonPath('meta.message', 'Registration successful')
             ->assertJsonStructure([

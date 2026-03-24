@@ -36,10 +36,10 @@ class LoginController extends Controller
                     'message' => 'Login unsuccessful',
                 ],
                 'meta' => ['api_version' => 'v2'],
-            ], 403);
+            ], 401);
         }
 
-        $visitor = Visitor::where('name', $name)->first();
+        $visitor = Auth::guard('visitor')->user();
 
         // Revoke any existing tokens for this visitor
         $visitor->tokens()->delete();

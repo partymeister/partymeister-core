@@ -28,11 +28,13 @@ describe('V2 Public Visitors API', function () {
         $response->assertJsonPath('meta.message', 'Visitors retrieved');
     });
 
-    it('does not expose password or api_token', function () {
+    it('does not expose password, api_token, or email', function () {
         $response = $this->getJson('/api/v2/public/visitors');
 
         $response->assertOk()
             ->assertJsonMissing(['password'])
-            ->assertJsonMissing(['api_token']);
+            ->assertJsonMissing(['api_token'])
+            ->assertJsonMissing(['email'])
+            ->assertJsonMissing(['additional_data']);
     });
 });
