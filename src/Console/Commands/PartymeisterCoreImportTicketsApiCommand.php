@@ -161,7 +161,7 @@ class PartymeisterCoreImportTicketsApiCommand extends Command
                                     $record->company = $order['Firma'];
                                     $record->name = $order['Vorname'].' '.$order['Nachname'];
                                     $record->country = $order['Land'];
-                                    $record->email = $order['Email'];
+                                    $record->email = Arr::get($order, 'Email', '');
                                     $record->ticket_type = $item['Name'];
                                     $record->ticket_code = $key;
                                     $record->category_id = $category->id;
