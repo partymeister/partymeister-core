@@ -5,6 +5,7 @@ namespace Partymeister\Core\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
@@ -13,6 +14,7 @@ use Motor\Admin\Models\User;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
+use Partymeister\Core\Database\Factories\ScheduleFactory;
 use RichanFongdasen\EloquentBlameable\BlameableTrait;
 
 /**
@@ -51,8 +53,14 @@ class Schedule extends Model
 {
     use BlameableTrait;
     use Filterable;
+    use HasFactory;
     use HasShortflakePrimary;
     use Searchable;
+
+    protected static function newFactory()
+    {
+        return ScheduleFactory::new();
+    }
 
     /**
      * Searchable columns for the searchable trait

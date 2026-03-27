@@ -14,12 +14,16 @@ beforeEach(function () {
     ]);
     $user->assignRole($role);
 
-    Schedule::create(['name' => 'Friday Schedule']);
-    Schedule::create(['name' => 'Saturday Schedule']);
-    Schedule::create(['name' => 'Sunday Schedule']);
+    Schedule::factory()->create(['name' => 'Friday Schedule']);
+    Schedule::factory()->create(['name' => 'Saturday Schedule']);
+    Schedule::factory()->create(['name' => 'Sunday Schedule']);
 });
 
 describe('V2 Schedules API', function () {
+
+    it('requires authentication', function () {
+        assertV2RequiresAuth('/api/v2/schedules');
+    });
 
     it('includes api_version v2 in response meta', function () {
         $response = $this->asAdmin()->getJson('/api/v2/schedules');

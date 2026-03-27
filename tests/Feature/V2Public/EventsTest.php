@@ -7,28 +7,20 @@ use Partymeister\Core\Models\Schedule;
 pest()->group('V2', 'V2Public', 'Event');
 
 beforeEach(function () {
-    $eventType = EventType::create(['name' => 'Competition', 'web_color' => '#63a848', 'slide_color' => '#3c692c']);
-    $schedule = Schedule::create(['name' => 'Main Schedule']);
+    $eventType = EventType::factory()->create(['name' => 'Competition', 'web_color' => '#63a848', 'slide_color' => '#3c692c']);
+    $schedule = Schedule::factory()->create(['name' => 'Main Schedule']);
 
-    Event::create([
+    Event::factory()->create([
         'name' => 'Opening Ceremony',
         'schedule_id' => $schedule->id,
         'event_type_id' => $eventType->id,
-        'is_visible' => 1,
-        'is_organizer_only' => 0,
         'sort_position' => 1,
-        'notify_minutes' => 0,
-        'link' => '',
     ]);
-    Event::create([
+    Event::factory()->create([
         'name' => 'Music Compo',
         'schedule_id' => $schedule->id,
         'event_type_id' => $eventType->id,
-        'is_visible' => 1,
-        'is_organizer_only' => 0,
         'sort_position' => 2,
-        'notify_minutes' => 0,
-        'link' => '',
     ]);
 });
 

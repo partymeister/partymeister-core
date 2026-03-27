@@ -12,6 +12,7 @@ use Motor\Admin\Models\User;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
+use Partymeister\Core\Database\Factories\EventTypeFactory;
 use RichanFongdasen\EloquentBlameable\BlameableTrait;
 
 /**
@@ -55,6 +56,11 @@ class EventType extends Model
     use HasFactory;
     use HasShortflakePrimary;
     use Searchable;
+
+    protected static function newFactory()
+    {
+        return EventTypeFactory::new();
+    }
 
     /**
      * Searchable columns for the searchable trait

@@ -14,20 +14,16 @@ beforeEach(function () {
     ]);
     $user->assignRole($role);
 
-    $g1 = new MessageGroup(['name' => 'Group Alpha']);
-    $g1->uuid = uniqid();
-    $g1->save();
-
-    $g2 = new MessageGroup(['name' => 'Group Beta']);
-    $g2->uuid = uniqid();
-    $g2->save();
-
-    $g3 = new MessageGroup(['name' => 'Group Gamma']);
-    $g3->uuid = uniqid();
-    $g3->save();
+    MessageGroup::factory()->create(['name' => 'Group Alpha']);
+    MessageGroup::factory()->create(['name' => 'Group Beta']);
+    MessageGroup::factory()->create(['name' => 'Group Gamma']);
 });
 
 describe('V2 MessageGroups API', function () {
+
+    it('requires authentication', function () {
+        assertV2RequiresAuth('/api/v2/message-groups');
+    });
 
     it('includes api_version v2 in response meta', function () {
         $response = $this->asAdmin()->getJson('/api/v2/message-groups');

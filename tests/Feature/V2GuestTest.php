@@ -17,12 +17,17 @@ beforeEach(function () {
     // Authenticate so BlameableTrait can set created_by/updated_by
     auth()->login($user);
 
-    Guest::create(['name' => 'Guest One', 'handle' => 'guest1', 'email' => 'guest1@example.com', 'company' => 'CompanyA', 'country' => 'DE', 'ticket_code' => 'TC001', 'ticket_type' => 'VIP', 'ticket_order_number' => 'ORD001', 'has_badge' => false, 'has_arrived' => false, 'ticket_code_scanned' => false, 'comment' => '']);
-    Guest::create(['name' => 'Guest Two', 'handle' => 'guest2', 'email' => 'guest2@example.com', 'company' => 'CompanyB', 'country' => 'US', 'ticket_code' => 'TC002', 'ticket_type' => 'Regular', 'ticket_order_number' => 'ORD002', 'has_badge' => false, 'has_arrived' => false, 'ticket_code_scanned' => false, 'comment' => '']);
-    Guest::create(['name' => 'Guest Three', 'handle' => 'guest3', 'email' => 'guest3@example.com', 'company' => 'CompanyC', 'country' => 'GB', 'ticket_code' => 'TC003', 'ticket_type' => 'Regular', 'ticket_order_number' => 'ORD003', 'has_badge' => false, 'has_arrived' => true, 'ticket_code_scanned' => false, 'comment' => '']);
+    Guest::factory()->create(['name' => 'Guest One', 'handle' => 'guest1', 'email' => 'guest1@example.com', 'company' => 'CompanyA', 'country' => 'DE', 'ticket_code' => 'TC001', 'ticket_type' => 'VIP', 'ticket_order_number' => 'ORD001', 'has_badge' => false, 'has_arrived' => false, 'ticket_code_scanned' => false, 'comment' => '']);
+    Guest::factory()->create(['name' => 'Guest Two', 'handle' => 'guest2', 'email' => 'guest2@example.com', 'company' => 'CompanyB', 'country' => 'US', 'ticket_code' => 'TC002', 'ticket_type' => 'Regular', 'ticket_order_number' => 'ORD002', 'has_badge' => false, 'has_arrived' => false, 'ticket_code_scanned' => false, 'comment' => '']);
+    Guest::factory()->create(['name' => 'Guest Three', 'handle' => 'guest3', 'email' => 'guest3@example.com', 'company' => 'CompanyC', 'country' => 'GB', 'ticket_code' => 'TC003', 'ticket_type' => 'Regular', 'ticket_order_number' => 'ORD003', 'has_badge' => false, 'has_arrived' => true, 'ticket_code_scanned' => false, 'comment' => '']);
 });
 
 describe('V2 Guests API', function () {
+
+    it('requires authentication', function () {
+        auth()->logout();
+        assertV2RequiresAuth('/api/v2/guests');
+    });
 
     it('includes api_version v2 in response meta', function () {
         $response = $this->asAdmin()->getJson('/api/v2/guests');

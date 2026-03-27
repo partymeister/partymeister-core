@@ -25,7 +25,7 @@ describe('V2 Auth Register', function () {
     it('returns 409 when name is already taken', function () {
         config(['partymeister-core.visitor_registration_enabled' => true]);
 
-        Visitor::create([
+        Visitor::factory()->create([
             'name' => 'existingvisitor',
             'password' => bcrypt('secret123'),
             'api_token' => 'test-token',
@@ -66,7 +66,7 @@ describe('V2 Auth Register', function () {
         }
 
         // Create an unassigned access key
-        AccessKey::create([
+        AccessKey::factory()->create([
             'access_key' => 'VALID-KEY-123',
             'visitor_id' => null,
             'ip_address' => '',

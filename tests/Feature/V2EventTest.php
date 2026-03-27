@@ -16,42 +16,34 @@ beforeEach(function () {
     ]);
     $user->assignRole($role);
 
-    $eventType = EventType::create(['name' => 'Competition', 'web_color' => '#63a848', 'slide_color' => '#3c692c']);
-    $schedule = Schedule::create(['name' => 'Main Schedule']);
+    $eventType = EventType::factory()->create(['name' => 'Competition', 'web_color' => '#63a848', 'slide_color' => '#3c692c']);
+    $schedule = Schedule::factory()->create(['name' => 'Main Schedule']);
 
-    Event::create([
+    Event::factory()->create([
         'name' => 'Opening Ceremony',
         'schedule_id' => $schedule->id,
         'event_type_id' => $eventType->id,
-        'is_visible' => 1,
-        'is_organizer_only' => 0,
         'sort_position' => 1,
-        'notify_minutes' => 0,
-        'link' => '',
     ]);
-    Event::create([
+    Event::factory()->create([
         'name' => 'Music Compo',
         'schedule_id' => $schedule->id,
         'event_type_id' => $eventType->id,
-        'is_visible' => 1,
-        'is_organizer_only' => 0,
         'sort_position' => 2,
-        'notify_minutes' => 0,
-        'link' => '',
     ]);
-    Event::create([
+    Event::factory()->create([
         'name' => 'Closing Ceremony',
         'schedule_id' => $schedule->id,
         'event_type_id' => $eventType->id,
-        'is_visible' => 1,
-        'is_organizer_only' => 0,
         'sort_position' => 3,
-        'notify_minutes' => 0,
-        'link' => '',
     ]);
 });
 
 describe('V2 Events API', function () {
+
+    it('requires authentication', function () {
+        assertV2RequiresAuth('/api/v2/events');
+    });
 
     it('includes api_version v2 in response meta', function () {
         $response = $this->asAdmin()->getJson('/api/v2/events');

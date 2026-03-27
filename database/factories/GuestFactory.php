@@ -7,22 +7,23 @@ use Partymeister\Core\Models\Guest;
 
 class GuestFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = Guest::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition()
+    public function definition(): array
     {
         return [
-            'name' => $this->faker->word,
+            'name' => $this->faker->name(),
+            'handle' => $this->faker->unique()->userName(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'company' => $this->faker->company(),
+            'country' => $this->faker->countryCode(),
+            'ticket_code' => strtoupper($this->faker->unique()->bothify('??###')),
+            'ticket_type' => $this->faker->randomElement(['VIP', 'Regular']),
+            'ticket_order_number' => strtoupper($this->faker->unique()->bothify('ORD###')),
+            'has_badge' => false,
+            'has_arrived' => false,
+            'ticket_code_scanned' => false,
+            'comment' => '',
         ];
     }
 }

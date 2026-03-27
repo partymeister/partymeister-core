@@ -5,9 +5,9 @@ use Partymeister\Core\Models\Schedule;
 pest()->group('V2', 'V2Public', 'Schedule');
 
 beforeEach(function () {
-    Schedule::create(['name' => 'Friday Schedule']);
-    Schedule::create(['name' => 'Saturday Schedule']);
-    Schedule::create(['name' => 'Sunday Schedule']);
+    Schedule::factory()->create(['name' => 'Friday Schedule']);
+    Schedule::factory()->create(['name' => 'Saturday Schedule']);
+    Schedule::factory()->create(['name' => 'Sunday Schedule']);
 });
 
 describe('V2 Public Schedules API', function () {

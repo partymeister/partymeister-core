@@ -5,7 +5,7 @@ use Partymeister\Core\Models\Visitor;
 pest()->group('V2', 'V2Auth', 'Login');
 
 beforeEach(function () {
-    Visitor::create([
+    Visitor::factory()->create([
         'name' => 'testvisitor',
         'password' => bcrypt('secret123'),
         'group' => 'TestGroup',

@@ -28,7 +28,7 @@ describe('V2 Auth Password Forgot', function () {
     it('sends a reset email when visitor email exists', function () {
         Mail::fake();
 
-        Visitor::create([
+        Visitor::factory()->create([
             'name' => 'resetuser',
             'password' => bcrypt('oldpassword'),
             'email' => 'reset@example.com',
@@ -58,7 +58,7 @@ describe('V2 Auth Password Forgot', function () {
 describe('V2 Auth Password Reset', function () {
 
     it('resets password with valid token', function () {
-        $visitor = Visitor::create([
+        $visitor = Visitor::factory()->create([
             'name' => 'resetuser',
             'password' => bcrypt('oldpassword'),
             'email' => 'reset@example.com',
@@ -103,7 +103,7 @@ describe('V2 Auth Password Reset', function () {
     });
 
     it('returns 404 for expired token', function () {
-        Visitor::create([
+        Visitor::factory()->create([
             'name' => 'resetuser',
             'password' => bcrypt('oldpassword'),
             'email' => 'reset@example.com',

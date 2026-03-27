@@ -5,6 +5,7 @@ namespace Partymeister\Core\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -18,6 +19,7 @@ use Motor\Core\Traits\Searchable;
 use Partymeister\Competitions\Models\AccessKey;
 use Partymeister\Competitions\Models\Entry;
 use Partymeister\Competitions\Models\Vote;
+use Partymeister\Core\Database\Factories\VisitorFactory;
 
 /**
  * Partymeister\Core\Models\Visitor
@@ -61,9 +63,15 @@ class Visitor extends Authenticatable
 {
     use Filterable;
     use HasApiTokens;
+    use HasFactory;
     use HasShortflakePrimary;
     use Searchable;
     use SoftDeletes;
+
+    protected static function newFactory()
+    {
+        return VisitorFactory::new();
+    }
 
     /**
      * @var string

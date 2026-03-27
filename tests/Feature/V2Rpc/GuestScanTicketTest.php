@@ -17,7 +17,7 @@ beforeEach(function () {
     // Authenticate so BlameableTrait can set created_by/updated_by
     auth()->login($user);
 
-    Guest::create([
+    Guest::factory()->create([
         'name' => 'Scannable Guest',
         'handle' => 'scannable',
         'email' => 'scan@example.com',
@@ -32,7 +32,7 @@ beforeEach(function () {
         'comment' => '',
     ]);
 
-    Guest::create([
+    Guest::factory()->create([
         'name' => 'Already Scanned',
         'handle' => 'scanned',
         'email' => 'scanned@example.com',
@@ -48,7 +48,7 @@ beforeEach(function () {
         'comment' => '',
     ]);
 
-    Guest::create([
+    Guest::factory()->create([
         'name' => 'Already Arrived',
         'handle' => 'arrived',
         'email' => 'arrived@example.com',

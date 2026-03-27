@@ -14,12 +14,16 @@ beforeEach(function () {
     ]);
     $user->assignRole($role);
 
-    Callback::create(['name' => 'Test Callback 1', 'action' => 'notify', 'payload' => '{}', 'title' => 'Title 1', 'body' => 'Body 1', 'link' => '', 'destination' => 'slack', 'hash' => 'hash1', 'is_timed' => false, 'has_fired' => false]);
-    Callback::create(['name' => 'Test Callback 2', 'action' => 'notify', 'payload' => '{}', 'title' => 'Title 2', 'body' => 'Body 2', 'link' => '', 'destination' => 'telegram', 'hash' => 'hash2', 'is_timed' => true, 'has_fired' => false]);
-    Callback::create(['name' => 'Test Callback 3', 'action' => 'notify', 'payload' => '{}', 'title' => 'Title 3', 'body' => 'Body 3', 'link' => '', 'destination' => 'slack', 'hash' => 'hash3', 'is_timed' => false, 'has_fired' => true]);
+    Callback::factory()->create(['name' => 'Test Callback 1', 'action' => 'notify', 'payload' => '{}', 'title' => 'Title 1', 'body' => 'Body 1', 'link' => '', 'destination' => 'slack', 'hash' => 'hash1', 'is_timed' => false, 'has_fired' => false]);
+    Callback::factory()->create(['name' => 'Test Callback 2', 'action' => 'notify', 'payload' => '{}', 'title' => 'Title 2', 'body' => 'Body 2', 'link' => '', 'destination' => 'telegram', 'hash' => 'hash2', 'is_timed' => true, 'has_fired' => false]);
+    Callback::factory()->create(['name' => 'Test Callback 3', 'action' => 'notify', 'payload' => '{}', 'title' => 'Title 3', 'body' => 'Body 3', 'link' => '', 'destination' => 'slack', 'hash' => 'hash3', 'is_timed' => false, 'has_fired' => true]);
 });
 
 describe('V2 Callbacks API', function () {
+
+    it('requires authentication', function () {
+        assertV2RequiresAuth('/api/v2/callbacks');
+    });
 
     it('includes api_version v2 in response meta', function () {
         $response = $this->asAdmin()->getJson('/api/v2/callbacks');

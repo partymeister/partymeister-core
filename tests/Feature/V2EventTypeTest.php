@@ -14,12 +14,16 @@ beforeEach(function () {
     ]);
     $user->assignRole($role);
 
-    EventType::create(['name' => 'Competition', 'web_color' => '#63a848', 'slide_color' => '#3c692c']);
-    EventType::create(['name' => 'Deadline', 'web_color' => '#e5554a', 'slide_color' => '#e5554a']);
-    EventType::create(['name' => 'Event', 'web_color' => '#fad028', 'slide_color' => '#fad028']);
+    EventType::factory()->create(['name' => 'Competition', 'web_color' => '#63a848', 'slide_color' => '#3c692c']);
+    EventType::factory()->create(['name' => 'Deadline', 'web_color' => '#e5554a', 'slide_color' => '#e5554a']);
+    EventType::factory()->create(['name' => 'Event', 'web_color' => '#fad028', 'slide_color' => '#fad028']);
 });
 
 describe('V2 EventTypes API', function () {
+
+    it('requires authentication', function () {
+        assertV2RequiresAuth('/api/v2/event-types');
+    });
 
     it('includes api_version v2 in response meta', function () {
         $response = $this->asAdmin()->getJson('/api/v2/event-types');

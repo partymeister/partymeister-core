@@ -18,7 +18,7 @@ beforeEach(function () {
 describe('V2 RPC Callback Fire', function () {
 
     it('fires a notification callback successfully', function () {
-        $callback = Callback::create([
+        $callback = Callback::factory()->create([
             'name' => 'Test Fire',
             'action' => 'notification',
             'payload' => '{}',
@@ -43,7 +43,7 @@ describe('V2 RPC Callback Fire', function () {
     });
 
     it('returns already_fired status for a fired callback', function () {
-        $callback = Callback::create([
+        $callback = Callback::factory()->create([
             'name' => 'Already Fired',
             'action' => 'notification',
             'payload' => '{}',
@@ -68,7 +68,7 @@ describe('V2 RPC Callback Fire', function () {
     });
 
     it('returns 403 when embargo time has not been reached', function () {
-        $callback = Callback::create([
+        $callback = Callback::factory()->create([
             'name' => 'Embargo Test',
             'action' => 'notification',
             'payload' => '{}',
