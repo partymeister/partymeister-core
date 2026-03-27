@@ -2,21 +2,12 @@
 
 namespace Partymeister\Core\Http\Requests\Api\V2;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class EventTypePatchRequest extends FormRequest
+class EventTypePatchRequest extends EventTypePostRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
-        return [
-            'name' => 'sometimes|required|string|max:255',
-            'web_color' => 'nullable|string|max:255',
-            'slide_color' => 'nullable|string|max:255',
-        ];
+        return collect(parent::rules())
+            ->mapWithKeys(fn ($rule, $key) => [$key => 'sometimes|'.$rule])
+            ->all();
     }
 }

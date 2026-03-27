@@ -61,8 +61,10 @@ describe('V2 RPC Callback Fire', function () {
 
         $response->assertStatus(200)
             ->assertJsonPath('meta.api_version', 'v2')
-            ->assertJsonPath('data.status', 'already_fired')
-            ->assertJsonPath('data.fired_at', '2026-01-01 12:00:00');
+            ->assertJsonPath('data.status', 'already_fired');
+
+        $firedAt = $response->json('data.fired_at');
+        expect($firedAt)->toStartWith('2026-01-01T12:00:00');
     });
 
     it('returns 403 when embargo time has not been reached', function () {

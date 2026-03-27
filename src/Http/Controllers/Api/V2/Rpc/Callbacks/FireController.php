@@ -2,6 +2,7 @@
 
 namespace Partymeister\Core\Http\Controllers\Api\V2\Rpc\Callbacks;
 
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
@@ -26,13 +27,13 @@ class FireController extends Controller
             return response()->json([
                 'data' => [
                     'status' => 'already_fired',
-                    'fired_at' => $callback->fired_at,
+                    'fired_at' => Carbon::parse($callback->fired_at)->toIso8601String(),
                 ],
                 'meta' => ['api_version' => 'v2', 'message' => 'Callback has already been fired'],
             ], 200);
         }
 
-        if ($callback->is_timed && strtotime($callback->embargo_until) > time()) {
+        if ($callback->is_timed && Carbon::parse($callback->embargo_until)->isFuture()) {
             return response()->json([
                 'data' => null,
                 'meta' => [
@@ -108,7 +109,7 @@ class FireController extends Controller
         }
 
         $callback->has_fired = true;
-        $callback->fired_at = date('Y-m-d H:i:s');
+        $callback->fired_at = now();
         $callback->save();
 
         return response()->json([

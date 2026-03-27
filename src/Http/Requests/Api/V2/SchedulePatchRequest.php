@@ -2,19 +2,12 @@
 
 namespace Partymeister\Core\Http\Requests\Api\V2;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class SchedulePatchRequest extends FormRequest
+class SchedulePatchRequest extends SchedulePostRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
-        return [
-            'name' => 'sometimes|required|string|max:255',
-        ];
+        return collect(parent::rules())
+            ->mapWithKeys(fn ($rule, $key) => [$key => 'sometimes|'.$rule])
+            ->all();
     }
 }
