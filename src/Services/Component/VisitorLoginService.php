@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 class VisitorLoginService
 {
     /**
-     * @param $data
      * @return bool
      */
     public static function validateLogin($data)

@@ -2,6 +2,6 @@
 
 return [
     'partymeister' => 'Partymeister',
-    'latest'       => 'Latest',
-    'created_at'   => 'Created at',
+    'latest' => 'Latest',
+    'created_at' => 'Created at',
 ];

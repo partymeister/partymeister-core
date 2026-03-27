@@ -4,12 +4,14 @@ namespace Partymeister\Core\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
+use Motor\Admin\Models\User;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
-use Motor\Core\Traits\Searchable;use RichanFongdasen\EloquentBlameable\BlameableTrait;
+use Motor\Core\Traits\Searchable;
+use RichanFongdasen\EloquentBlameable\BlameableTrait;
 
 /**
  * Partymeister\Core\Models\Callback
@@ -32,9 +34,9 @@ use Motor\Core\Traits\Searchable;use RichanFongdasen\EloquentBlameable\Blameable
  * @property int $created_by
  * @property int $updated_by
  * @property int|null $deleted_by
- * @property-read \Motor\Admin\Models\User $creator
- * @property-read \Motor\Admin\Models\User|null $eraser
- * @property-read \Motor\Admin\Models\User $updater
+ * @property-read User $creator
+ * @property-read User|null $eraser
+ * @property-read User $updater
  *
  * @method static Builder|Callback filteredBy(Filter $filter, $column)
  * @method static Builder|Callback filteredByMultiple(Filter $filter)
@@ -60,14 +62,15 @@ use Motor\Core\Traits\Searchable;use RichanFongdasen\EloquentBlameable\Blameable
  * @method static Builder|Callback whereTitle($value)
  * @method static Builder|Callback whereUpdatedAt($value)
  * @method static Builder|Callback whereUpdatedBy($value)
+ *
  * @mixin Eloquent
  */
 class Callback extends Model
 {
-    use Searchable;
-    use Filterable;
     use BlameableTrait;
+    use Filterable;
     use HasShortflakePrimary;
+    use Searchable;
 
     /**
      * Searchable columns for the searchable trait

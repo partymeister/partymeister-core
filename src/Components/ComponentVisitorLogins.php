@@ -29,21 +29,12 @@ class ComponentVisitorLogins
      */
     protected $component;
 
-    /**
-     * @var
-     */
     protected $visitorLoginForm;
 
-    /**
-     * @var
-     */
     protected $request;
 
     /**
      * ComponentVisitorLogins constructor.
-     *
-     * @param  PageVersionComponent  $pageVersionComponent
-     * @param  ComponentVisitorLogin  $component
      */
     public function __construct(
         PageVersionComponent $pageVersionComponent,
@@ -54,7 +45,6 @@ class ComponentVisitorLogins
     }
 
     /**
-     * @param  Request  $request
      * @return bool|Factory|RedirectResponse|View
      */
     public function index(Request $request)
@@ -66,8 +56,8 @@ class ComponentVisitorLogins
         $this->request = $request;
 
         $this->visitorLoginForm = $this->form(VisitorLoginForm::class, [
-            'name'    => 'visitor-login',
-            'method'  => 'POST',
+            'name' => 'visitor-login',
+            'method' => 'POST',
             'enctype' => 'multipart/form-data',
         ]);
 
@@ -90,7 +80,7 @@ class ComponentVisitorLogins
     {
         if ($this->request->get('logout') && VisitorLoginService::logout()) {
             $this->request->session()
-                          ->invalidate();
+                ->invalidate();
 
             return redirect()->back();
         }
@@ -106,7 +96,7 @@ class ComponentVisitorLogins
                 ->withInput();
         }
         $this->request->session()
-                      ->regenerate();
+            ->regenerate();
 
         return redirect()->back();
     }
@@ -118,7 +108,7 @@ class ComponentVisitorLogins
     {
         return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
             'visitorLoginForm' => $this->visitorLoginForm,
-            'component'        => $this->component,
+            'component' => $this->component,
         ]);
     }
 }

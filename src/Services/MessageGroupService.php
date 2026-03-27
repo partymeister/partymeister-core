@@ -12,9 +12,6 @@ use Partymeister\Core\Models\User;
  */
 class MessageGroupService extends BaseService
 {
-    /**
-     * @var string
-     */
     protected string $model = MessageGroup::class;
 
     protected array $loadColumns = ['users'];
@@ -33,7 +30,7 @@ class MessageGroupService extends BaseService
     {
         foreach (Arr::get($this->data, 'users', []) as $user) {
             $this->record->users()
-                         ->attach($user);
+                ->attach($user);
         }
     }
 
@@ -42,7 +39,7 @@ class MessageGroupService extends BaseService
         if (is_array(Arr::get($this->data, 'users'))) {
             foreach (User::all() as $user) {
                 $this->record->users()
-                             ->detach($user);
+                    ->detach($user);
             }
         }
         $this->addUsers();

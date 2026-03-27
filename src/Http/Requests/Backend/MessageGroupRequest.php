@@ -14,6 +14,7 @@ class MessageGroupRequest extends Request
     /**
      * @OA\Schema(
      *   schema="MessageGroupRequest",
+     *
      *   @OA\Property(
      *     property="name",
      *     type="string",

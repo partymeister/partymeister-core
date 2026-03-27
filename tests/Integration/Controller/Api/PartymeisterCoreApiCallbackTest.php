@@ -29,7 +29,7 @@ class PartymeisterCoreApiCallbackTest extends TestCase
         'media',
     ];
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
@@ -97,10 +97,10 @@ class PartymeisterCoreApiCallbackTest extends TestCase
         $this->user->givePermissionTo($this->readPermission);
         $record = create_test_callback();
         $this->json('GET', '/api/callbacks/'.$record->id.'?api_token='.$this->user->api_token)
-             ->seeStatusCode(200)
-             ->seeJson([
-                 'name' => $record->name,
-             ]);
+            ->seeStatusCode(200)
+            ->seeJson([
+                'name' => $record->name,
+            ]);
     }
 
     /** @test */
@@ -108,10 +108,10 @@ class PartymeisterCoreApiCallbackTest extends TestCase
     {
         $record = create_test_callback();
         $this->json('GET', '/api/callbacks/'.$record->id.'?api_token='.$this->user->api_token)
-             ->seeStatusCode(403)
-             ->seeJson([
-                 'error' => 'Access denied.',
-             ]);
+            ->seeStatusCode(403)
+            ->seeJson([
+                'error' => 'Access denied.',
+            ]);
     }
 
     /** @test */
@@ -139,10 +139,10 @@ class PartymeisterCoreApiCallbackTest extends TestCase
         $this->user->givePermissionTo($this->readPermission);
         $records = create_test_callback(10);
         $this->json('GET', '/api/callbacks?api_token='.$this->user->api_token.'&search='.$records[2]->name)
-             ->seeStatusCode(200)
-             ->seeJson([
-                 'name' => $records[2]->name,
-             ]);
+            ->seeStatusCode(200)
+            ->seeJson([
+                'name' => $records[2]->name,
+            ]);
     }
 
     /** @test */
@@ -151,10 +151,10 @@ class PartymeisterCoreApiCallbackTest extends TestCase
         $this->user->givePermissionTo($this->readPermission);
         create_test_callback(50);
         $this->json('GET', '/api/callbacks?api_token='.$this->user->api_token.'&page=2')
-             ->seeStatusCode(200)
-             ->seeJson([
-                 'current_page' => 2,
-             ]);
+            ->seeStatusCode(200)
+            ->seeJson([
+                'current_page' => 2,
+            ]);
     }
 
     /** @test */
@@ -172,10 +172,10 @@ class PartymeisterCoreApiCallbackTest extends TestCase
         $this->user->givePermissionTo($this->writePermission);
         $record = create_test_callback();
         $this->json('PATCH', '/api/callbacks/'.$record->id.'?api_token='.$this->user->api_token)
-             ->seeStatusCode(422)
-             ->seeJson([
-                 'name' => ['The name field is required.'],
-             ]);
+            ->seeStatusCode(422)
+            ->seeJson([
+                'name' => ['The name field is required.'],
+            ]);
     }
 
     /** @test */
@@ -183,10 +183,10 @@ class PartymeisterCoreApiCallbackTest extends TestCase
     {
         $record = create_test_callback();
         $this->json('PATCH', '/api/callbacks/'.$record->id.'?api_token='.$this->user->api_token)
-             ->seeStatusCode(403)
-             ->seeJson([
-                 'error' => 'Access denied.',
-             ]);
+            ->seeStatusCode(403)
+            ->seeJson([
+                'error' => 'Access denied.',
+            ]);
     }
 
     /** @test */
@@ -215,10 +215,10 @@ class PartymeisterCoreApiCallbackTest extends TestCase
     {
         $record = create_test_callback();
         $this->json('DELETE', '/api/callbacks/'.$record->id.'?api_token='.$this->user->api_token)
-             ->seeStatusCode(403)
-             ->seeJson([
-                 'error' => 'Access denied.',
-             ]);
+            ->seeStatusCode(403)
+            ->seeJson([
+                'error' => 'Access denied.',
+            ]);
     }
 
     /** @test */
@@ -227,9 +227,9 @@ class PartymeisterCoreApiCallbackTest extends TestCase
         $this->user->givePermissionTo($this->deletePermission);
         $record = create_test_callback();
         $this->json('DELETE', '/api/callbacks/'.$record->id.'?api_token='.$this->user->api_token)
-             ->seeStatusCode(200)
-             ->seeJson([
-                 'success' => true,
-             ]);
+            ->seeStatusCode(200)
+            ->seeJson([
+                'success' => true,
+            ]);
     }
 }

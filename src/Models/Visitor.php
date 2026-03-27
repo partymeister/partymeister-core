@@ -5,10 +5,12 @@ namespace Partymeister\Core\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Laravel\Sanctum\HasApiTokens;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
@@ -16,7 +18,6 @@ use Motor\Core\Traits\Searchable;
 use Partymeister\Competitions\Models\AccessKey;
 use Partymeister\Competitions\Models\Entry;
 use Partymeister\Competitions\Models\Vote;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Partymeister\Core\Models\Visitor
@@ -53,14 +54,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static Builder|Visitor wherePassword($value)
  * @method static Builder|Visitor whereRememberToken($value)
  * @method static Builder|Visitor whereUpdatedAt($value)
+ *
  * @mixin Eloquent
  */
 class Visitor extends Authenticatable
 {
-    use HasApiTokens;
-    use Searchable;
     use Filterable;
+    use HasApiTokens;
     use HasShortflakePrimary;
+    use Searchable;
     use SoftDeletes;
 
     /**
@@ -130,10 +132,10 @@ class Visitor extends Authenticatable
     {
         $numberOfComments = 0;
         foreach ($this->entries()
-                      ->get() as $entry) {
+            ->get() as $entry) {
             $numberOfComments += $entry->comments()
-                                       ->where('read_by_visitor', false)
-                                       ->count();
+                ->where('read_by_visitor', false)
+                ->count();
         }
 
         return $numberOfComments;
@@ -142,32 +144,38 @@ class Visitor extends Authenticatable
     /**
      * @return bool
      */
-    public function getIsRemoteAttribute() {
-        if (!is_null($this->access_key) && ($this->access_key->is_remote || $this->access_key->is_satellite)) {
+    public function getIsRemoteAttribute()
+    {
+        if (! is_null($this->access_key) && ($this->access_key->is_remote || $this->access_key->is_satellite)) {
             return true;
         }
+
         return false;
     }
 
     /**
      * @return bool
      */
-    public function getIsSatelliteAttribute() {
-        if (!is_null($this->access_key) && $this->access_key->is_satellite) {
+    public function getIsSatelliteAttribute()
+    {
+        if (! is_null($this->access_key) && $this->access_key->is_satellite) {
             return $this->access_key->is_satellite;
         }
+
         return false;
     }
 
     /**
      * @return string
      */
-    public function getRemoteTypeAttribute() {
+    public function getRemoteTypeAttribute()
+    {
         if ($this->is_satellite) {
             return 'Satellite';
-        } else if ($this->is_remote) {
+        } elseif ($this->is_remote) {
             return 'Remote';
         }
+
         return '';
     }
 
@@ -191,9 +199,10 @@ class Visitor extends Authenticatable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function access_key() {
+    public function access_key()
+    {
         return $this->hasOne(AccessKey::class);
     }
 }

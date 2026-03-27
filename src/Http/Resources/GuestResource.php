@@ -2,11 +2,13 @@
 
 namespace Partymeister\Core\Http\Resources;
 
+use Illuminate\Http\Request;
 use Motor\Admin\Http\Resources\BaseResource;
 
 /**
  * @OA\Schema(
  *   schema="GuestResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -89,27 +91,27 @@ class GuestResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'id'                  => (int) $this->id,
-            'category_id'         => (int) $this->category_id,
-            'name'                => $this->name,
-            'handle'              => $this->handle,
-            'email'               => $this->email,
-            'company'             => $this->company,
-            'country'             => $this->country,
-            'ticket_code'         => $this->ticket_code,
-            'ticket_type'         => $this->ticket_type,
+            'id' => (int) $this->id,
+            'category_id' => (int) $this->category_id,
+            'name' => $this->name,
+            'handle' => $this->handle,
+            'email' => $this->email,
+            'company' => $this->company,
+            'country' => $this->country,
+            'ticket_code' => $this->ticket_code,
+            'ticket_type' => $this->ticket_type,
             'ticket_order_number' => $this->ticket_order_number,
-            'has_badge'           => (bool) $this->has_badge,
-            'has_arrived'         => (bool) $this->has_arrived,
+            'has_badge' => (bool) $this->has_badge,
+            'has_arrived' => (bool) $this->has_arrived,
             'ticket_code_scanned' => (bool) $this->ticket_code_scanned,
-            'comment'             => $this->comment,
-            'arrived_at'          => $this->arrived_at,
+            'comment' => $this->comment,
+            'arrived_at' => $this->arrived_at,
         ];
     }
 }

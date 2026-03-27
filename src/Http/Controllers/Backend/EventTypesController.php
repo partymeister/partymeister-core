@@ -2,6 +2,7 @@
 
 namespace Partymeister\Core\Http\Controllers\Backend;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
@@ -43,13 +44,13 @@ class EventTypesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
         $form = $this->form(EventTypeForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.event_types.store',
+            'method' => 'POST',
+            'route' => 'backend.event_types.store',
             'enctype' => 'multipart/form-data',
         ]);
 
@@ -59,7 +60,6 @@ class EventTypesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  EventTypeRequest  $request
      * @return RedirectResponse|Redirector
      */
     public function store(EventTypeRequest $request)
@@ -83,8 +83,6 @@ class EventTypesController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param $id
      */
     public function show($id)
     {
@@ -94,16 +92,15 @@ class EventTypesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  EventType  $record
      * @return Factory|View
      */
     public function edit(EventType $record)
     {
         $form = $this->form(EventTypeForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.event_types.update', [$record->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.event_types.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         return view('partymeister-core::backend.event_types.edit', compact('form'));
@@ -112,8 +109,6 @@ class EventTypesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  EventTypeRequest  $request
-     * @param  EventType  $record
      * @return RedirectResponse|Redirector
      */
     public function update(EventTypeRequest $request, EventType $record)
@@ -138,7 +133,6 @@ class EventTypesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  EventType  $record
      * @return RedirectResponse|Redirector
      */
     public function destroy(EventType $record)

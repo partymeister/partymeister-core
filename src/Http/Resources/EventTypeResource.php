@@ -2,11 +2,13 @@
 
 namespace Partymeister\Core\Http\Resources;
 
+use Illuminate\Http\Request;
 use Motor\Admin\Http\Resources\BaseResource;
 
 /**
  * @OA\Schema(
  *   schema="EventTypeResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -34,15 +36,15 @@ class EventTypeResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'id'          => (int) $this->id,
-            'name'        => $this->name,
-            'web_color'   => $this->web_color,
+            'id' => (int) $this->id,
+            'name' => $this->name,
+            'web_color' => $this->web_color,
             'slide_color' => $this->slide_color,
         ];
     }

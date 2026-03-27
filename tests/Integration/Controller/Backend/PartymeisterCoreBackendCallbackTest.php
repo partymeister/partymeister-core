@@ -30,7 +30,7 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
         'media',
     ];
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
@@ -54,8 +54,8 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
     public function can_see_grid_without_callback()
     {
         $this->visit('/backend/callbacks')
-             ->see(trans('partymeister-core::backend/callbacks.callbacks'))
-             ->see(trans('motor-admin::backend/global.no_records'));
+            ->see(trans('partymeister-core::backend/callbacks.callbacks'))
+            ->see(trans('motor-admin::backend/global.no_records'));
     }
 
     /** @test */
@@ -63,8 +63,8 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
     {
         $record = create_test_callback();
         $this->visit('/backend/callbacks')
-             ->see(trans('partymeister-core::backend/callbacks.callbacks'))
-             ->see($record->name);
+            ->see(trans('partymeister-core::backend/callbacks.callbacks'))
+            ->see($record->name);
     }
 
     /** @test */
@@ -72,12 +72,12 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
     {
         $record = create_test_callback();
         $this->visit('/backend/callbacks')
-             ->within('table', function () {
-                 $this->click(trans('motor-admin::backend/global.edit'));
-             })
-             ->seePageIs('/backend/callbacks/'.$record->id.'/edit')
-             ->click(trans('motor-admin::backend/global.back'))
-             ->seePageIs('/backend/callbacks');
+            ->within('table', function () {
+                $this->click(trans('motor-admin::backend/global.edit'));
+            })
+            ->seePageIs('/backend/callbacks/'.$record->id.'/edit')
+            ->click(trans('motor-admin::backend/global.back'))
+            ->seePageIs('/backend/callbacks');
     }
 
     /** @test */
@@ -86,14 +86,14 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
         $record = create_test_callback();
 
         $this->visit('/backend/callbacks/'.$record->id.'/edit')
-             ->see($record->name)
-             ->type('Updated Callback', 'name')
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/callbacks.save'));
-             })
-             ->see(trans('partymeister-core::backend/callbacks.updated'))
-             ->see('Updated Callback')
-             ->seePageIs('/backend/callbacks');
+            ->see($record->name)
+            ->type('Updated Callback', 'name')
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/callbacks.save'));
+            })
+            ->see(trans('partymeister-core::backend/callbacks.updated'))
+            ->see('Updated Callback')
+            ->seePageIs('/backend/callbacks');
 
         $record = Callback::find($record->id);
         $this->assertEquals('Updated Callback', $record->name);
@@ -103,34 +103,34 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
     public function can_click_the_callback_create_button()
     {
         $this->visit('/backend/callbacks')
-             ->click(trans('partymeister-core::backend/callbacks.new'))
-             ->seePageIs('/backend/callbacks/create');
+            ->click(trans('partymeister-core::backend/callbacks.new'))
+            ->seePageIs('/backend/callbacks/create');
     }
 
     /** @test */
     public function can_create_a_new_callback()
     {
         $this->visit('/backend/callbacks/create')
-             ->see(trans('partymeister-core::backend/callbacks.new'))
-             ->type('Create Callback Name', 'name')
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/callbacks.save'));
-             })
-             ->see(trans('partymeister-core::backend/callbacks.created'))
-             ->see('Create Callback Name')
-             ->seePageIs('/backend/callbacks');
+            ->see(trans('partymeister-core::backend/callbacks.new'))
+            ->type('Create Callback Name', 'name')
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/callbacks.save'));
+            })
+            ->see(trans('partymeister-core::backend/callbacks.created'))
+            ->see('Create Callback Name')
+            ->seePageIs('/backend/callbacks');
     }
 
     /** @test */
     public function cannot_create_a_new_callback_with_empty_fields()
     {
         $this->visit('/backend/callbacks/create')
-             ->see(trans('partymeister-core::backend/callbacks.new'))
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/callbacks.save'));
-             })
-             ->see('Data missing!')
-             ->seePageIs('/backend/callbacks/create');
+            ->see(trans('partymeister-core::backend/callbacks.new'))
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/callbacks.save'));
+            })
+            ->see('Data missing!')
+            ->seePageIs('/backend/callbacks/create');
     }
 
     /** @test */
@@ -138,14 +138,14 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
     {
         $record = create_test_callback();
         $this->visit('/backend/callbacks/'.$record->id.'/edit')
-             ->see(trans('partymeister-core::backend/callbacks.edit'))
-             ->type('Modified Callback Name', 'name')
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/callbacks.save'));
-             })
-             ->see(trans('partymeister-core::backend/callbacks.updated'))
-             ->see('Modified Callback Name')
-             ->seePageIs('/backend/callbacks');
+            ->see(trans('partymeister-core::backend/callbacks.edit'))
+            ->type('Modified Callback Name', 'name')
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/callbacks.save'));
+            })
+            ->see(trans('partymeister-core::backend/callbacks.updated'))
+            ->see('Modified Callback Name')
+            ->seePageIs('/backend/callbacks');
     }
 
     /** @test */
@@ -176,9 +176,9 @@ class PartymeisterCoreBackendCallbackTest extends TestCase
     {
         $records = create_test_callback(10);
         $this->visit('/backend/callbacks')
-             ->type(substr($records[6]->name, 0, 3), 'search')
-             ->press('grid-search-button')
-             ->seeInField('search', substr($records[6]->name, 0, 3))
-             ->see($records[6]->name);
+            ->type(substr($records[6]->name, 0, 3), 'search')
+            ->press('grid-search-button')
+            ->seeInField('search', substr($records[6]->name, 0, 3))
+            ->see($records[6]->name);
     }
 }

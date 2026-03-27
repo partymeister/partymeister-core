@@ -2,13 +2,13 @@
 
 namespace Partymeister\Core\Http\Controllers\Api\V2\Auth;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Core\Http\Requests\Api\V2\Auth\PasswordForgotRequest;
+use Partymeister\Core\Http\Resources\V2\Auth\MessageResource;
 use Partymeister\Core\Mail\PasswordReset;
 use Partymeister\Core\Models\Visitor;
 
@@ -17,7 +17,7 @@ use Partymeister\Core\Models\Visitor;
  */
 class PasswordForgotController extends Controller
 {
-    public function store(PasswordForgotRequest $request): JsonResponse
+    public function store(PasswordForgotRequest $request): MessageResource
     {
         $email = $request->input('email');
         $visitor = Visitor::where('email', $email)->first();
@@ -39,12 +39,7 @@ class PasswordForgotController extends Controller
         }
 
         // Always return 200 to not reveal if email exists
-        return response()->json([
-            'data' => null,
-            'meta' => [
-                'api_version' => 'v2',
-                'message' => 'If the email exists, a reset link has been sent',
-            ],
-        ], 200);
+        return (new MessageResource)
+            ->additional(['meta' => ['message' => 'If the email exists, a reset link has been sent']]);
     }
 }

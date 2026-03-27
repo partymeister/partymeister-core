@@ -64,21 +64,21 @@ Route::prefix('api/v2/public')
 // Legacy API routes (kept as reference)
 Route::group([
     'middleware' => ['auth:api', 'bindings', 'permission'],
-    'namespace'  => 'Partymeister\Core\Http\Controllers\Api',
-    'prefix'     => 'api',
-    'as'         => 'api.',
+    'namespace' => 'Partymeister\Core\Http\Controllers\Api',
+    'prefix' => 'api',
+    'as' => 'api.',
 ], function () {
     Route::apiResource('callbacks', 'CallbacksController');
     Route::apiResource('schedules', 'SchedulesController');
     Route::get('schedules/{schedule}/playlist-data', 'ScheduleSlidesController@show')
-         ->name('schedules.slides.show');
+        ->name('schedules.slides.show');
     Route::post('schedules/{schedule}/playlist', 'ScheduleSlidesController@store')
-         ->name('schedules.slides.store');
+        ->name('schedules.slides.store');
     Route::apiResource('events', 'EventsController');
     Route::get('events/{event}/playlist-data', 'EventPlaylistController@show')
-         ->name('events.playlist-data');
+        ->name('events.playlist-data');
     Route::post('events/{event}/playlist', 'EventPlaylistController@store')
-         ->name('events.playlist.store');
+        ->name('events.playlist.store');
     Route::apiResource('event_types', 'EventTypesController');
     Route::apiResource('guests', 'GuestsController');
     Route::apiResource('visitors', 'VisitorsController');
@@ -87,41 +87,41 @@ Route::group([
 
 Route::group([
     'middleware' => ['bindings'],
-    'namespace'  => 'Partymeister\Core\Http\Controllers\Api\Public',
-    'prefix'     => 'api/public',
-    'as'         => 'api.public.',
+    'namespace' => 'Partymeister\Core\Http\Controllers\Api\Public',
+    'prefix' => 'api/public',
+    'as' => 'api.public.',
 ], function () {
     Route::apiResource('visitors', 'VisitorsController')->only(['index']);
 });
 
 Route::group([
     'middleware' => ['bindings'],
-    'namespace'  => 'Partymeister\Core\Http\Controllers\ApiRPC',
-    'prefix'     => 'api-rpc',
-    'as'         => 'api-rpc.',
+    'namespace' => 'Partymeister\Core\Http\Controllers\ApiRPC',
+    'prefix' => 'api-rpc',
+    'as' => 'api-rpc.',
 ], function () {
     Route::post('callback/single', 'Callbacks\SendController@single')
-         ->name('callback.single');
+        ->name('callback.single');
     Route::get('callback/{hash}', 'Callbacks\SendController@callback')
-         ->name('callback.callback');
+        ->name('callback.callback');
 });
 
 Route::group([
     'middleware' => ['web', 'web_auth', 'bindings'],
-    'namespace'  => 'Partymeister\Core\Http\Controllers\Api',
-    'prefix'     => 'ajax',
-    'as'         => 'ajax.',
+    'namespace' => 'Partymeister\Core\Http\Controllers\Api',
+    'prefix' => 'ajax',
+    'as' => 'ajax.',
 ], function () {
     Route::get('schedules/{schedule}', 'SchedulesController@show')
-         ->name('schedules.show');
+        ->name('schedules.show');
 });
 
 Route::group([
     'middleware' => ['web', 'web_auth', 'bindings'],
-    'namespace'  => 'Partymeister\Core\Http\Controllers\ApiRPC',
-    'prefix'     => 'ajax',
-    'as'         => 'ajax.',
+    'namespace' => 'Partymeister\Core\Http\Controllers\ApiRPC',
+    'prefix' => 'ajax',
+    'as' => 'ajax.',
 ], function () {
     Route::post('guests/scan_tickets', 'Guests\ScanTicketsController@index')
-         ->name('guests.scan_tickets.index');
+        ->name('guests.scan_tickets.index');
 });

@@ -53,12 +53,14 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
             if (empty($url)) {
                 Log::error('Timetable import: no source available — local file not found and PM_CORE_TIMETABLE_URL not set');
                 $this->error('No timetable source: /data/timetable/timetable.json not found and PM_CORE_TIMETABLE_URL not set');
+
                 return;
             }
             $data = @file_get_contents($url);
             if ($data === false) {
                 Log::error('Timetable import: failed to fetch from URL: '.$url);
                 $this->error('Failed to fetch timetable from: '.$url);
+
                 return;
             }
             $this->info('Source: remote URL ('.$url.')');
@@ -111,7 +113,7 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
                         foreach ($deadlines as $deadline) {
                             $sortPosition += 10;
 
-                            $e = new Event();
+                            $e = new Event;
                             $e->schedule_id = 1;
                             $e->event_type_id = $this->categoryToEventIdMapping($event->category);
                             $e->name = $deadline;
@@ -121,7 +123,7 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
                             $e->save();
                         }
                     } else {
-                        $e = new Event();
+                        $e = new Event;
                         $e->schedule_id = 1;
                         $e->event_type_id = $this->categoryToEventIdMapping($event->category);
                         $e->name = $event->title;
@@ -140,7 +142,7 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
         if (config('partymeister-slides.generate_screenshots')) {
             $schedule = Schedule::find(1);
             if ($schedule) {
-                $browser = new ScreenshotHelper();
+                $browser = new ScreenshotHelper;
                 $url = config('app.url_internal').'/internal/generate/schedule/'.$schedule->id.'?secret='.urlencode(config('partymeister-slides.screenshot_secret', ''));
                 $browser->generate($url);
                 Log::info('Queued timetable slide regeneration for schedule: '.$schedule->name);

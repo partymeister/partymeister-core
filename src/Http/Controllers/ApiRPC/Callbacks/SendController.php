@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use Motor\Admin\Http\Controllers\ApiController;
 use Partymeister\Competitions\Events\CompetitionSaved;
 use Partymeister\Competitions\Events\LiveVoteUpdated;
+use Partymeister\Competitions\Mail\EntryStatusInfo;
 use Partymeister\Competitions\Models\Competition;
 use Partymeister\Competitions\Models\Entry;
 use Partymeister\Competitions\Models\LiveVote;
@@ -24,7 +25,6 @@ use Partymeister\Core\Services\StuhlService;
 class SendController extends ApiController
 {
     /**
-     * @param $hash
      * @return ResponseFactory|JsonResponse|Response
      *
      * @throws GuzzleException
@@ -35,7 +35,7 @@ class SendController extends ApiController
             return $this->single(request());
         }
         $callback = Callback::where('hash', $hash)
-                            ->first();
+            ->first();
         if (is_null($callback)) {
             return response(404);
         }
@@ -73,7 +73,7 @@ class SendController extends ApiController
                 foreach ($competition->unqualified_entries_with_opt_in as $entry) {
                     try {
                         Mail::to($entry->visitor->email)
-                            ->send(new \Partymeister\Competitions\Mail\EntryStatusInfo($entry));
+                            ->send(new EntryStatusInfo($entry));
                     } catch (\Exception $exception) {
                         Log::error('Mail could not be sent to', [$entry->visitor->email, $exception]);
                     }
@@ -94,7 +94,7 @@ class SendController extends ApiController
                 }
                 $l = LiveVote::first();
                 if (is_null($l)) {
-                    $l = new LiveVote();
+                    $l = new LiveVote;
                 }
                 $l->entry_id = $payload->entry_id;
                 $l->competition_id = $payload->competition_id;
@@ -116,7 +116,6 @@ class SendController extends ApiController
     }
 
     /**
-     * @param Request $request
      * @return ResponseFactory|Response
      *
      * @throws GuzzleException

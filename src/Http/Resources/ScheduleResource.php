@@ -2,11 +2,13 @@
 
 namespace Partymeister\Core\Http\Resources;
 
+use Illuminate\Http\Request;
 use Motor\Admin\Http\Resources\BaseResource;
 
 /**
  * @OA\Schema(
  *   schema="ScheduleResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -24,14 +26,14 @@ class ScheduleResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'id'     => (int) $this->id,
-            'name'   => $this->name,
+            'id' => (int) $this->id,
+            'name' => $this->name,
             'events' => EventResource::collection($this->whenLoaded('events')),
         ];
     }

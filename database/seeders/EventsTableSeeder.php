@@ -21,25 +21,25 @@ class EventsTableSeeder extends Seeder
     public function run()
     {
         DB::table('events')->insert([
-            'schedule_id'   => Schedule::first()->id,
+            'schedule_id' => Schedule::first()->id,
             'event_type_id' => EventType::where('name', 'Event')->first()->id,
-            'name'          => 'Doors open',
-            'starts_at'     => date('Y-m-d').' 14:00:00',
-            'is_visible'    => true,
+            'name' => 'Doors open',
+            'starts_at' => date('Y-m-d').' 14:00:00',
+            'is_visible' => true,
             'sort_position' => 10,
-            'created_by'    => User::get()->first()->id,
-            'updated_by'    => User::get()->first()->id,
+            'created_by' => User::get()->first()->id,
+            'updated_by' => User::get()->first()->id,
         ]);
 
         DB::table('events')->insert([
-            'schedule_id'   => Schedule::first()->id,
+            'schedule_id' => Schedule::first()->id,
             'event_type_id' => EventType::where('name', 'Event')->first()->id,
-            'name'          => 'Doors close',
-            'starts_at'     => date('Y-m-d').' 22:00:00',
-            'is_visible'    => true,
+            'name' => 'Doors close',
+            'starts_at' => date('Y-m-d').' 22:00:00',
+            'is_visible' => true,
             'sort_position' => 10,
-            'created_by'    => User::get()->first()->id,
-            'updated_by'    => User::get()->first()->id,
+            'created_by' => User::get()->first()->id,
+            'updated_by' => User::get()->first()->id,
         ]);
     }
 }

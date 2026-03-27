@@ -4,10 +4,11 @@ namespace Partymeister\Core\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
+use Motor\Admin\Models\User;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
@@ -32,11 +33,11 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @property int $created_by
  * @property int $updated_by
  * @property int|null $deleted_by
- * @property-read \Motor\Admin\Models\User $creator
- * @property-read \Motor\Admin\Models\User|null $eraser
+ * @property-read User $creator
+ * @property-read User|null $eraser
  * @property-read EventType|null $event_type
  * @property-read Schedule $schedule
- * @property-read \Motor\Admin\Models\User $updater
+ * @property-read User $updater
  *
  * @method static Builder|Event filteredBy(Filter $filter, $column)
  * @method static Builder|Event filteredByMultiple(Filter $filter)
@@ -60,14 +61,15 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @method static Builder|Event whereStartsAt($value)
  * @method static Builder|Event whereUpdatedAt($value)
  * @method static Builder|Event whereUpdatedBy($value)
+ *
  * @mixin Eloquent
  */
 class Event extends Model
 {
-    use Searchable;
-    use Filterable;
     use BlameableTrait;
+    use Filterable;
     use HasShortflakePrimary;
+    use Searchable;
 
     /**
      * Searchable columns for the searchable trait

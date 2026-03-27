@@ -2,6 +2,7 @@
 
 namespace Partymeister\Core\Http\Controllers\Backend;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
@@ -43,13 +44,13 @@ class MessageGroupsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
         $form = $this->form(MessageGroupForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.message-groups.store',
+            'method' => 'POST',
+            'route' => 'backend.message-groups.store',
             'enctype' => 'multipart/form-data',
         ]);
 
@@ -59,7 +60,6 @@ class MessageGroupsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  MessageGroupRequest  $request
      * @return RedirectResponse|Redirector
      */
     public function store(MessageGroupRequest $request)
@@ -83,8 +83,6 @@ class MessageGroupsController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param $id
      */
     public function show($id)
     {
@@ -94,16 +92,15 @@ class MessageGroupsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  MessageGroup  $record
      * @return Factory|View
      */
     public function edit(MessageGroup $record)
     {
         $form = $this->form(MessageGroupForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.message-groups.update', [$record->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.message-groups.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         return view('partymeister-core::backend.message-groups.edit', compact('form'));
@@ -112,8 +109,6 @@ class MessageGroupsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  MessageGroupRequest  $request
-     * @param  MessageGroup  $record
      * @return RedirectResponse|Redirector
      */
     public function update(MessageGroupRequest $request, MessageGroup $record)
@@ -138,7 +133,6 @@ class MessageGroupsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  MessageGroup  $record
      * @return RedirectResponse|Redirector
      */
     public function destroy(MessageGroup $record)

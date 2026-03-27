@@ -10,9 +10,6 @@ use Partymeister\Core\Models\Component\ComponentVisitorLogin;
  */
 class ComponentVisitorLoginService extends ComponentBaseService
 {
-    /**
-     * @var string
-     */
     protected string $model = ComponentVisitorLogin::class;
 
     /**

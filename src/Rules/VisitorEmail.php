@@ -13,9 +13,7 @@ class VisitorEmail implements Rule
      *
      * @return void
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * Determine if the validation rule passes.
@@ -28,7 +26,7 @@ class VisitorEmail implements Rule
     {
         $visitor = Visitor::where('email', Arr::get(request()->all(), 'password-forgotten.email'))->first();
 
-        return !is_null($visitor);
+        return ! is_null($visitor);
     }
 
     /**

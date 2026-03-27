@@ -2,6 +2,7 @@
 
 namespace Partymeister\Core\Http\Controllers\Backend;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
@@ -43,15 +44,15 @@ class VisitorsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
         $form = $this->form(VisitorForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.visitors.store',
+            'method' => 'POST',
+            'route' => 'backend.visitors.store',
             'enctype' => 'multipart/form-data',
-            'model'   => ['country_iso_3166_1' => 'DE'],
+            'model' => ['country_iso_3166_1' => 'DE'],
         ]);
 
         return view('partymeister-core::backend.visitors.create', compact('form'));
@@ -60,7 +61,6 @@ class VisitorsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  VisitorRequest  $request
      * @return RedirectResponse|Redirector
      */
     public function store(VisitorRequest $request)
@@ -84,8 +84,6 @@ class VisitorsController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param $id
      */
     public function show($id)
     {
@@ -95,16 +93,15 @@ class VisitorsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Visitor  $record
      * @return Factory|View
      */
     public function edit(Visitor $record)
     {
         $form = $this->form(VisitorForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.visitors.update', [$record->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.visitors.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         return view('partymeister-core::backend.visitors.edit', compact('form'));
@@ -113,8 +110,6 @@ class VisitorsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  VisitorRequest  $request
-     * @param  Visitor  $record
      * @return RedirectResponse|Redirector
      */
     public function update(VisitorRequest $request, Visitor $record)
@@ -139,7 +134,6 @@ class VisitorsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Visitor  $record
      * @return RedirectResponse|Redirector
      */
     public function destroy(Visitor $record)

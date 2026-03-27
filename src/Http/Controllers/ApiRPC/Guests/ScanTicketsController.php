@@ -20,7 +20,7 @@ class ScanTicketsController extends ApiController
     public function index(Request $request)
     {
         $guest = Guest::where('ticket_code', $request->get('ticket_code'))
-                      ->first();
+            ->first();
         if (is_null($guest)) {
             return response()->json([
                 'error' => trans('partymeister-core::backend/guests.ticket_code_not_found', ['ticket_code' => $request->get('ticket_code')]),
@@ -31,7 +31,7 @@ class ScanTicketsController extends ApiController
             return response()->json([
                 'error' => trans('partymeister-core::backend/guests.ticket_code_already_scanned', [
                     'ticket_code' => $request->get('ticket_code'),
-                    'date'        => $guest->arrived_at,
+                    'date' => $guest->arrived_at,
                 ]),
             ], 404);
         }

@@ -2,6 +2,7 @@
 
 namespace Partymeister\Core\Http\Controllers\Api;
 
+use Illuminate\Http\JsonResponse;
 use Motor\Admin\Http\Controllers\ApiController;
 use Partymeister\Core\Http\Requests\Backend\GuestRequest;
 use Partymeister\Core\Http\Resources\GuestCollection;
@@ -23,7 +24,9 @@ class GuestsController extends ApiController
      *   tags={"GuestsController"},
      *   path="/api/guests",
      *   summary="Get guest collection",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -31,15 +34,20 @@ class GuestsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="array",
+     *
      *         @OA\Items(ref="#/components/schemas/GuestResource")
      *       ),
+     *
      *       @OA\Property(
      *         property="meta",
      *         ref="#/components/schemas/PaginationMeta"
@@ -55,9 +63,11 @@ class GuestsController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   )
      * )
@@ -69,7 +79,7 @@ class GuestsController extends ApiController
     public function index()
     {
         $paginator = GuestService::collection()
-                                 ->getPaginator();
+            ->getPaginator();
 
         return (new GuestCollection($paginator))->additional(['message' => 'Guest collection read']);
     }
@@ -79,10 +89,14 @@ class GuestsController extends ApiController
      *   tags={"GuestsController"},
      *   path="/api/guests",
      *   summary="Create new guest",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/GuestRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -90,10 +104,13 @@ class GuestsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -106,31 +123,34 @@ class GuestsController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Store a newly created resource in storage.
      *
-     * @param  GuestRequest  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function store(GuestRequest $request)
     {
         $result = GuestService::create($request)
-                              ->getResult();
+            ->getResult();
 
         return (new GuestResource($result))->additional(['message' => 'Guest created'])
-                                           ->response()
-                                           ->setStatusCode(201);
+            ->response()
+            ->setStatusCode(201);
     }
 
     /**
@@ -138,7 +158,9 @@ class GuestsController extends ApiController
      *   tags={"GuestsController"},
      *   path="/api/guests/{guest}",
      *   summary="Get single guest",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -146,17 +168,22 @@ class GuestsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="guest",
      *     parameter="guest",
      *     description="Guest id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -169,27 +196,30 @@ class GuestsController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Display the specified resource.
      *
-     * @param  Guest  $record
      * @return GuestResource
      */
     public function show(Guest $record)
     {
         $result = GuestService::show($record)
-                              ->getResult();
+            ->getResult();
 
         return (new GuestResource($result))->additional(['message' => 'Guest read']);
     }
@@ -199,10 +229,14 @@ class GuestsController extends ApiController
      *   tags={"GuestsController"},
      *   path="/api/guests/{guest}",
      *   summary="Update an existing guest",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/GuestRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -210,17 +244,22 @@ class GuestsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="guest",
      *     parameter="guest",
      *     description="Guest id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -233,28 +272,30 @@ class GuestsController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Update the specified resource in storage.
      *
-     * @param  GuestRequest  $request
-     * @param  Guest  $record
      * @return GuestResource
      */
     public function update(GuestRequest $request, Guest $record)
     {
         $result = GuestService::update($record, $request)
-                              ->getResult();
+            ->getResult();
 
         return (new GuestResource($result))->additional(['message' => 'Guest updated']);
     }
@@ -264,7 +305,9 @@ class GuestsController extends ApiController
      *   tags={"GuestsController"},
      *   path="/api/guests/{guest}",
      *   summary="Delete a guest",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -272,17 +315,22 @@ class GuestsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="guest",
      *     parameter="guest",
      *     description="Guest id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -290,20 +338,27 @@ class GuestsController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   ),
+     *
      *   @OA\Response(
      *     response="400",
      *     description="Bad request",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -315,13 +370,12 @@ class GuestsController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param  Guest  $record
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function destroy(Guest $record)
     {
         $result = GuestService::delete($record)
-                              ->getResult();
+            ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'Guest deleted']);

@@ -12,6 +12,7 @@ class CallbackRequest extends Request
     /**
      * @OA\Schema(
      *   schema="CallbackRequest",
+     *
      *   @OA\Property(
      *     property="name",
      *     type="string",
@@ -89,16 +90,16 @@ class CallbackRequest extends Request
     public function rules()
     {
         return [
-            'name'          => 'required',
-            'action'        => 'required|in:'.implode(',', array_flip(trans('partymeister-core::backend/callbacks.actions'))),
-            'payload'       => 'nullable',
-            'title'         => 'required',
-            'body'          => 'nullable',
-            'link'          => 'nullable|url',
-            'destination'   => 'required|in:'.implode(',', array_flip(trans('partymeister-core::backend/callbacks.destinations'))),
-            'is_timed'      => 'nullable|boolean',
-            'has_fired'     => 'nullable|boolean',
-            'fired_at'      => 'nullable|date_format:Y-m-d H:i:s',
+            'name' => 'required',
+            'action' => 'required|in:'.implode(',', array_flip(trans('partymeister-core::backend/callbacks.actions'))),
+            'payload' => 'nullable',
+            'title' => 'required',
+            'body' => 'nullable',
+            'link' => 'nullable|url',
+            'destination' => 'required|in:'.implode(',', array_flip(trans('partymeister-core::backend/callbacks.destinations'))),
+            'is_timed' => 'nullable|boolean',
+            'has_fired' => 'nullable|boolean',
+            'fired_at' => 'nullable|date_format:Y-m-d H:i:s',
             'embargo_until' => 'nullable|date_format:Y-m-d H:i:s',
         ];
     }

@@ -30,7 +30,7 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
         'media',
     ];
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
@@ -54,8 +54,8 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
     public function can_see_grid_without_schedule()
     {
         $this->visit('/backend/schedules')
-             ->see(trans('partymeister-core::backend/schedules.schedules'))
-             ->see(trans('motor-admin::backend/global.no_records'));
+            ->see(trans('partymeister-core::backend/schedules.schedules'))
+            ->see(trans('motor-admin::backend/global.no_records'));
     }
 
     /** @test */
@@ -63,8 +63,8 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
     {
         $record = create_test_schedule();
         $this->visit('/backend/schedules')
-             ->see(trans('partymeister-core::backend/schedules.schedules'))
-             ->see($record->name);
+            ->see(trans('partymeister-core::backend/schedules.schedules'))
+            ->see($record->name);
     }
 
     /** @test */
@@ -72,12 +72,12 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
     {
         $record = create_test_schedule();
         $this->visit('/backend/schedules')
-             ->within('table', function () {
-                 $this->click(trans('motor-admin::backend/global.edit'));
-             })
-             ->seePageIs('/backend/schedules/'.$record->id.'/edit')
-             ->click(trans('motor-admin::backend/global.back'))
-             ->seePageIs('/backend/schedules');
+            ->within('table', function () {
+                $this->click(trans('motor-admin::backend/global.edit'));
+            })
+            ->seePageIs('/backend/schedules/'.$record->id.'/edit')
+            ->click(trans('motor-admin::backend/global.back'))
+            ->seePageIs('/backend/schedules');
     }
 
     /** @test */
@@ -86,14 +86,14 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
         $record = create_test_schedule();
 
         $this->visit('/backend/schedules/'.$record->id.'/edit')
-             ->see($record->name)
-             ->type('Updated Schedule', 'name')
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/schedules.save'));
-             })
-             ->see(trans('partymeister-core::backend/schedules.updated'))
-             ->see('Updated Schedule')
-             ->seePageIs('/backend/schedules');
+            ->see($record->name)
+            ->type('Updated Schedule', 'name')
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/schedules.save'));
+            })
+            ->see(trans('partymeister-core::backend/schedules.updated'))
+            ->see('Updated Schedule')
+            ->seePageIs('/backend/schedules');
 
         $record = Schedule::find($record->id);
         $this->assertEquals('Updated Schedule', $record->name);
@@ -103,34 +103,34 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
     public function can_click_the_schedule_create_button()
     {
         $this->visit('/backend/schedules')
-             ->click(trans('partymeister-core::backend/schedules.new'))
-             ->seePageIs('/backend/schedules/create');
+            ->click(trans('partymeister-core::backend/schedules.new'))
+            ->seePageIs('/backend/schedules/create');
     }
 
     /** @test */
     public function can_create_a_new_schedule()
     {
         $this->visit('/backend/schedules/create')
-             ->see(trans('partymeister-core::backend/schedules.new'))
-             ->type('Create Schedule Name', 'name')
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/schedules.save'));
-             })
-             ->see(trans('partymeister-core::backend/schedules.created'))
-             ->see('Create Schedule Name')
-             ->seePageIs('/backend/schedules');
+            ->see(trans('partymeister-core::backend/schedules.new'))
+            ->type('Create Schedule Name', 'name')
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/schedules.save'));
+            })
+            ->see(trans('partymeister-core::backend/schedules.created'))
+            ->see('Create Schedule Name')
+            ->seePageIs('/backend/schedules');
     }
 
     /** @test */
     public function cannot_create_a_new_schedule_with_empty_fields()
     {
         $this->visit('/backend/schedules/create')
-             ->see(trans('partymeister-core::backend/schedules.new'))
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/schedules.save'));
-             })
-             ->see('Data missing!')
-             ->seePageIs('/backend/schedules/create');
+            ->see(trans('partymeister-core::backend/schedules.new'))
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/schedules.save'));
+            })
+            ->see('Data missing!')
+            ->seePageIs('/backend/schedules/create');
     }
 
     /** @test */
@@ -138,14 +138,14 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
     {
         $record = create_test_schedule();
         $this->visit('/backend/schedules/'.$record->id.'/edit')
-             ->see(trans('partymeister-core::backend/schedules.edit'))
-             ->type('Modified Schedule Name', 'name')
-             ->within('.box-footer', function () {
-                 $this->press(trans('partymeister-core::backend/schedules.save'));
-             })
-             ->see(trans('partymeister-core::backend/schedules.updated'))
-             ->see('Modified Schedule Name')
-             ->seePageIs('/backend/schedules');
+            ->see(trans('partymeister-core::backend/schedules.edit'))
+            ->type('Modified Schedule Name', 'name')
+            ->within('.box-footer', function () {
+                $this->press(trans('partymeister-core::backend/schedules.save'));
+            })
+            ->see(trans('partymeister-core::backend/schedules.updated'))
+            ->see('Modified Schedule Name')
+            ->seePageIs('/backend/schedules');
     }
 
     /** @test */
@@ -176,9 +176,9 @@ class PartymeisterCoreBackendScheduleTest extends TestCase
     {
         $records = create_test_schedule(10);
         $this->visit('/backend/schedules')
-             ->type(substr($records[6]->name, 0, 3), 'search')
-             ->press('grid-search-button')
-             ->seeInField('search', substr($records[6]->name, 0, 3))
-             ->see($records[6]->name);
+            ->type(substr($records[6]->name, 0, 3), 'search')
+            ->press('grid-search-button')
+            ->seeInField('search', substr($records[6]->name, 0, 3))
+            ->see($records[6]->name);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Partymeister\Core\Http\Resources;
 
+use Illuminate\Http\Request;
 use Motor\Admin\Http\Resources\BaseCollection;
 
 class CallbackCollection extends BaseCollection
@@ -9,7 +10,7 @@ class CallbackCollection extends BaseCollection
     /**
      * Transform the resource collection into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return array
      */
     public function toArray($request)

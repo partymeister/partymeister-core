@@ -2,11 +2,13 @@
 
 namespace Partymeister\Core\Http\Resources;
 
+use Illuminate\Http\Request;
 use Motor\Admin\Http\Resources\BaseResource;
 
 /**
  * @OA\Schema(
  *   schema="CallbackResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -79,25 +81,25 @@ class CallbackResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'id'            => (int) $this->id,
-            'name'          => $this->name,
-            'action'        => $this->action,
-            'payload'       => $this->payload,
-            'title'         => $this->title,
-            'body'          => $this->body,
-            'link'          => $this->link,
-            'destination'   => $this->destination,
-            'hash'          => $this->hash,
+            'id' => (int) $this->id,
+            'name' => $this->name,
+            'action' => $this->action,
+            'payload' => $this->payload,
+            'title' => $this->title,
+            'body' => $this->body,
+            'link' => $this->link,
+            'destination' => $this->destination,
+            'hash' => $this->hash,
             'embargo_until' => $this->embargo_until,
-            'fired_at'      => (bool) $this->fired_at,
-            'has_fired'     => (bool) $this->has_fired,
-            'is_timed'      => (bool) $this->is_timed,
+            'fired_at' => (bool) $this->fired_at,
+            'has_fired' => (bool) $this->has_fired,
+            'is_timed' => (bool) $this->is_timed,
         ];
     }
 }

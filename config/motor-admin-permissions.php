@@ -1,54 +1,54 @@
 <?php
 
 return [
-    'partymeister'   => [
-        'name'   => 'partymeister-core::backend/partymeister.partymeister',
+    'partymeister' => [
+        'name' => 'partymeister-core::backend/partymeister.partymeister',
         'values' => [
             'read',
         ],
     ],
-    'callbacks'      => [
-        'name'   => 'partymeister-core::backend/callbacks.callbacks',
-        'values' => [
-            'read',
-            'write',
-            'delete',
-        ],
-    ],
-    'schedules'      => [
-        'name'   => 'partymeister-core::backend/schedules.schedules',
+    'callbacks' => [
+        'name' => 'partymeister-core::backend/callbacks.callbacks',
         'values' => [
             'read',
             'write',
             'delete',
         ],
     ],
-    'events'         => [
-        'name'   => 'partymeister-core::backend/events.events',
+    'schedules' => [
+        'name' => 'partymeister-core::backend/schedules.schedules',
         'values' => [
             'read',
             'write',
             'delete',
         ],
     ],
-    'event_types'    => [
-        'name'   => 'partymeister-core::backend/event_types.event_types',
+    'events' => [
+        'name' => 'partymeister-core::backend/events.events',
         'values' => [
             'read',
             'write',
             'delete',
         ],
     ],
-    'guests'         => [
-        'name'   => 'partymeister-core::backend/guests.guests',
+    'event_types' => [
+        'name' => 'partymeister-core::backend/event_types.event_types',
         'values' => [
             'read',
             'write',
             'delete',
         ],
     ],
-    'visitors'       => [
-        'name'   => 'partymeister-core::backend/visitors.visitors',
+    'guests' => [
+        'name' => 'partymeister-core::backend/guests.guests',
+        'values' => [
+            'read',
+            'write',
+            'delete',
+        ],
+    ],
+    'visitors' => [
+        'name' => 'partymeister-core::backend/visitors.visitors',
         'values' => [
             'read',
             'write',
@@ -56,7 +56,7 @@ return [
         ],
     ],
     'message_groups' => [
-        'name'   => 'partymeister-core::backend/message_groups.message_groups',
+        'name' => 'partymeister-core::backend/message_groups.message_groups',
         'values' => [
             'read',
             'write',

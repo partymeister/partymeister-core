@@ -12,6 +12,7 @@ class EventTypeRequest extends Request
     /**
      * @OA\Schema(
      *   schema="EventTypeRequest",
+     *
      *   @OA\Property(
      *     property="name",
      *     type="string",
@@ -49,8 +50,8 @@ class EventTypeRequest extends Request
     public function rules()
     {
         return [
-            'name'        => 'required',
-            'web_color'   => 'nullable',
+            'name' => 'required',
+            'web_color' => 'nullable',
             'slide_color' => 'nullable',
         ];
     }

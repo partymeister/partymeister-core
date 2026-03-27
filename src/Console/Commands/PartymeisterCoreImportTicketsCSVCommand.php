@@ -46,30 +46,31 @@ class PartymeisterCoreImportTicketsCSVCommand extends Command
                 }
 
                 $record = Guest::where('ticket_code', utf8_encode($row[20]))
-                               ->first();
+                    ->first();
                 if (! is_null($record)) {
                     $this->info('Skip ticket '.utf8_encode($row[20]));
+
                     continue;
                 }
 
                 $category = Category::where('scope', 'guest')
-                                    ->where('name', utf8_encode($row[19]))
-                                    ->first();
+                    ->where('name', utf8_encode($row[19]))
+                    ->first();
                 if (is_null($category)) {
                     // Get root
                     $root = Category::where('scope', 'guest')
-                                    ->where('_lft', 1)
-                                    ->first();
+                        ->where('_lft', 1)
+                        ->first();
 
-                    $category = new Category();
+                    $category = new Category;
                     $category->name = utf8_encode($row[19]);
                     $category->scope = 'guest';
                     $category->appendToNode($root)
-                             ->save();
+                        ->save();
                 }
 
                 // Save row
-                $record = new Guest();
+                $record = new Guest;
                 $record->ticket_order_number = $row[1];
                 $record->company = utf8_encode($row[2]);
                 $record->name = utf8_encode($row[4].' '.$row[5]);

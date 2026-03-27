@@ -31,9 +31,6 @@ class ComponentSchedules
 
     /**
      * ComponentSchedules constructor.
-     *
-     * @param  PageVersionComponent  $pageVersionComponent
-     * @param  ComponentSchedule  $component
      */
     public function __construct(
         PageVersionComponent $pageVersionComponent,
@@ -44,7 +41,6 @@ class ComponentSchedules
     }
 
     /**
-     * @param  Request  $request
      * @return Factory|View
      */
     public function index(Request $request)
@@ -57,21 +53,21 @@ class ComponentSchedules
 
         foreach ($events as $event) {
             $date = CarbonImmutable::parse($event->starts_at)->shiftTimezone('GMT')
-                                   ->setTimezone('Europe/Berlin');
+                ->setTimezone('Europe/Berlin');
             $dayKey = $date->format('l, F jS');
             $timeKey = $date->format('H:i');
 
             $this->days[$dayKey][$timeKey][] = [
-                'web_color'   => $event->event_type->web_color,
+                'web_color' => $event->event_type->web_color,
                 'slide_color' => $event->event_type->slide_color,
-                'id'          => $event->id,
-                'typeid'      => $event->event_type->id,
-                'type'        => $event->event_type->name,
-                'name'        => $event->name,
+                'id' => $event->id,
+                'typeid' => $event->event_type->id,
+                'type' => $event->event_type->name,
+                'name' => $event->name,
                 'description' => '',
-                'link'        => '',
-                'starttime'   => $date->format('Y-m-d H:i'),
-                'endtime'     => '',
+                'link' => '',
+                'starttime' => $date->format('Y-m-d H:i'),
+                'endtime' => '',
             ];
         }
 
@@ -85,7 +81,7 @@ class ComponentSchedules
     {
         return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
             'component' => $this->component,
-            'days'      => $this->days,
+            'days' => $this->days,
         ]);
     }
 }

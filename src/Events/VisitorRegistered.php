@@ -19,8 +19,6 @@ class VisitorRegistered
 
     /**
      * VisitorRegistered constructor.
-     *
-     * @param  Visitor  $visitor
      */
     public function __construct(Visitor $visitor)
     {

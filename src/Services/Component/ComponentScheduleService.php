@@ -10,9 +10,6 @@ use Partymeister\Core\Models\Component\ComponentSchedule;
  */
 class ComponentScheduleService extends ComponentBaseService
 {
-    /**
-     * @var string
-     */
     protected string $model = ComponentSchedule::class;
 
     /**

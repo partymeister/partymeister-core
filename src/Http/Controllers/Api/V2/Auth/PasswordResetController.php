@@ -7,6 +7,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Core\Http\Requests\Api\V2\Auth\PasswordResetRequest;
+use Partymeister\Core\Http\Resources\V2\Auth\MessageResource;
 use Partymeister\Core\Models\Visitor;
 
 /**
@@ -14,7 +15,7 @@ use Partymeister\Core\Models\Visitor;
  */
 class PasswordResetController extends Controller
 {
-    public function store(PasswordResetRequest $request): JsonResponse
+    public function store(PasswordResetRequest $request): JsonResponse|MessageResource
     {
         $token = $request->input('token');
 
@@ -65,12 +66,7 @@ class PasswordResetController extends Controller
         // Delete all reset tokens for this email
         DB::table('password_resets')->where('email', $resetRecord->email)->delete();
 
-        return response()->json([
-            'data' => null,
-            'meta' => [
-                'api_version' => 'v2',
-                'message' => 'Password has been reset',
-            ],
-        ], 200);
+        return (new MessageResource)
+            ->additional(['meta' => ['message' => 'Password has been reset']]);
     }
 }

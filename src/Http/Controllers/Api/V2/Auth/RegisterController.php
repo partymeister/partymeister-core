@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Competitions\Models\AccessKey;
 use Partymeister\Core\Http\Requests\Api\V2\Auth\RegisterRequest;
-use Partymeister\Core\Http\Resources\V2\VisitorResource;
+use Partymeister\Core\Http\Resources\V2\Auth\AuthVisitorResource;
 use Partymeister\Core\Models\Visitor;
 
 /**
@@ -15,7 +15,7 @@ use Partymeister\Core\Models\Visitor;
  */
 class RegisterController extends Controller
 {
-    public function store(RegisterRequest $request): JsonResponse
+    public function store(RegisterRequest $request): JsonResponse|AuthVisitorResource
     {
         if (! config('partymeister-core.visitor_registration_enabled', false)) {
             return response()->json([
@@ -74,15 +74,9 @@ class RegisterController extends Controller
         // Create a Sanctum personal access token
         $token = $visitor->createToken('mobile-app')->plainTextToken;
 
-        return response()->json([
-            'data' => [
-                'visitor' => (new VisitorResource($visitor))->toArray($request),
-                'token' => $token,
-            ],
-            'meta' => [
-                'api_version' => 'v2',
-                'message' => 'Registration successful',
-            ],
-        ], 201);
+        return (new AuthVisitorResource($visitor, $token))
+            ->additional(['meta' => ['message' => 'Registration successful']])
+            ->response()
+            ->setStatusCode(201);
     }
 }

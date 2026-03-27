@@ -6,15 +6,14 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Core\Http\Requests\Api\V2\Auth\LoginRequest;
-use Partymeister\Core\Http\Resources\V2\VisitorResource;
-use Partymeister\Core\Models\Visitor;
+use Partymeister\Core\Http\Resources\V2\Auth\AuthVisitorResource;
 
 /**
  * @tags Visitor Auth
  */
 class LoginController extends Controller
 {
-    public function store(LoginRequest $request): JsonResponse
+    public function store(LoginRequest $request): JsonResponse|AuthVisitorResource
     {
         if (! config('partymeister-core.visitor_login_enabled', false)) {
             return response()->json([
@@ -47,15 +46,7 @@ class LoginController extends Controller
         // Create a new Sanctum personal access token
         $token = $visitor->createToken('mobile-app')->plainTextToken;
 
-        return response()->json([
-            'data' => [
-                'visitor' => (new VisitorResource($visitor))->toArray($request),
-                'token' => $token,
-            ],
-            'meta' => [
-                'api_version' => 'v2',
-                'message' => 'Login successful',
-            ],
-        ], 200);
+        return (new AuthVisitorResource($visitor, $token))
+            ->additional(['meta' => ['message' => 'Login successful']]);
     }
 }

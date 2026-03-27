@@ -12,6 +12,7 @@ class GuestRequest extends Request
     /**
      * @OA\Schema(
      *   schema="GuestRequest",
+     *
      *   @OA\Property(
      *     property="name",
      *     type="string",
@@ -107,26 +108,26 @@ class GuestRequest extends Request
         switch ($this->method()) {
             case 'POST':
                 return [
-                    'category_id'         => 'required|integer|exists:categories,id',
-                    'name'                => 'required',
-                    'handle'              => 'nullable',
-                    'email'               => 'nullable|email',
-                    'company'             => 'nullable',
-                    'country'             => 'nullable',
-                    'ticket_code'         => 'nullable',
-                    'ticket_type'         => 'nullable',
+                    'category_id' => 'required|integer|exists:categories,id',
+                    'name' => 'required',
+                    'handle' => 'nullable',
+                    'email' => 'nullable|email',
+                    'company' => 'nullable',
+                    'country' => 'nullable',
+                    'ticket_code' => 'nullable',
+                    'ticket_type' => 'nullable',
                     'ticket_order_number' => 'nullable',
-                    'has_badge'           => 'nullable|boolean',
-                    'has_arrived'         => 'nullable|boolean',
+                    'has_badge' => 'nullable|boolean',
+                    'has_arrived' => 'nullable|boolean',
                     'ticket_code_scanned' => 'nullable|boolean',
-                    'comment'             => 'nullable',
-                    'arrived_at'          => 'nullable|date_format:Y-m-d H:i:s',
+                    'comment' => 'nullable',
+                    'arrived_at' => 'nullable|date_format:Y-m-d H:i:s',
                 ];
             case 'PUT':
             case 'PATCH':
                 return [
                     'category_id' => 'nullable|integer|exists:categories,id',
-                    'arrived_at'  => 'nullable|date_format:Y-m-d H:i:s',
+                    'arrived_at' => 'nullable|date_format:Y-m-d H:i:s',
                 ];
         }
     }

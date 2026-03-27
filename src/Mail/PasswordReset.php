@@ -5,6 +5,7 @@ namespace Partymeister\Core\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -30,7 +31,7 @@ class PasswordReset extends Mailable
     {
         return new Envelope(
             from: new Address(config('partymeister-core-visitor-registration.password_reset_from_email'), config('partymeister-core-visitor-registration.password_reset_from_name')),
-            subject: config('partymeister-core-visitor-registration.password_reset_subject_prefix') . 'PartyMeister password reset',
+            subject: config('partymeister-core-visitor-registration.password_reset_subject_prefix').'PartyMeister password reset',
         );
 
     }
@@ -52,7 +53,7 @@ class PasswordReset extends Mailable
     /**
      * Get the attachments for the message.
      *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     * @return array<int, Attachment>
      */
     public function attachments(): array
     {

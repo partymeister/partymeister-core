@@ -62,10 +62,10 @@ class CallbacksController extends Controller
     public function create(Callback $record)
     {
         $form = $this->form(CallbackForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.callbacks.store',
+            'method' => 'POST',
+            'route' => 'backend.callbacks.store',
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         return view('partymeister-core::backend.callbacks.create', compact('form'));
@@ -74,7 +74,6 @@ class CallbacksController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  CallbackRequest  $request
      * @return RedirectResponse|Redirector
      */
     public function store(CallbackRequest $request)
@@ -98,8 +97,6 @@ class CallbacksController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param $id
      */
     public function show($id)
     {
@@ -115,10 +112,10 @@ class CallbacksController extends Controller
     public function edit(Callback $record)
     {
         $form = $this->form(CallbackForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.callbacks.update', [$record->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.callbacks.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         return view('partymeister-core::backend.callbacks.edit', compact('form'));
@@ -127,7 +124,6 @@ class CallbacksController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  CallbackRequest  $request
      * @param  callable  $record
      * @return RedirectResponse|Redirector
      */

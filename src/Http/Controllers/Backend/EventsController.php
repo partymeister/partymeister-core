@@ -43,7 +43,6 @@ class EventsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  EventRequest  $request
      * @return RedirectResponse|Redirector
      */
     public function store(EventRequest $request)
@@ -66,7 +65,6 @@ class EventsController extends Controller
     }
 
     /**
-     * @param  Event  $record
      * @return Factory|View
      */
     public function duplicate(Event $record)
@@ -80,16 +78,15 @@ class EventsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param  Event  $record
      * @return Factory|View
      */
     public function create(Event $record)
     {
         $form = $this->form(EventForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.events.store',
+            'method' => 'POST',
+            'route' => 'backend.events.store',
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         return view('partymeister-core::backend.events.create', compact('form'));
@@ -97,8 +94,6 @@ class EventsController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param $id
      */
     public function show($id)
     {
@@ -108,16 +103,15 @@ class EventsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Event  $record
      * @return Factory|View
      */
     public function edit(Event $record)
     {
         $form = $this->form(EventForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.events.update', [$record->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.events.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         return view('partymeister-core::backend.events.edit', compact('form'));
@@ -126,8 +120,6 @@ class EventsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  EventRequest  $request
-     * @param  Event  $record
      * @return RedirectResponse|Redirector
      */
     public function update(EventRequest $request, Event $record)
@@ -152,7 +144,6 @@ class EventsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Event  $record
      * @return RedirectResponse|Redirector
      */
     public function destroy(Event $record)

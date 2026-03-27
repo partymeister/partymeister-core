@@ -12,9 +12,6 @@ use Partymeister\Core\Models\Visitor;
  */
 class VisitorService extends BaseService
 {
-    /**
-     * @var string
-     */
     protected string $model = Visitor::class;
 
     public function beforeCreate(): void
