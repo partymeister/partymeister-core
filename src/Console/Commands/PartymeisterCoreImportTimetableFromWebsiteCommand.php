@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Motor\Admin\Models\User;
 use Partymeister\Core\Models\Event;
@@ -22,7 +23,7 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'partymeister:core:import:timetable';
+    protected $signature = 'partymeister:core:import:timetable {--force : Force import even if timetable content is unchanged}';
 
     /**
      * The console command description.
@@ -81,8 +82,8 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
         $cacheKey = 'timetable:import:hash';
         $previousHash = Cache::get($cacheKey);
 
-        if ($previousHash === $hash) {
-            $this->info('Timetable unchanged (hash: '.$hash.'), skipping import');
+        if ($previousHash === $hash && ! $this->option('force')) {
+            $this->info('Timetable unchanged (hash: '.$hash.'), skipping import (use --force to override)');
             Log::debug('Timetable import skipped — content hash unchanged: '.$hash);
 
             return;
@@ -91,45 +92,47 @@ class PartymeisterCoreImportTimetableFromWebsiteCommand extends Command
         $this->info('Timetable changed (hash: '.$hash.', previous: '.($previousHash ?? 'none').')');
         Log::info('Timetable content changed — importing (hash: '.$hash.', previous: '.($previousHash ?? 'none').')');
 
-        // Delete current timetable entries
-        foreach (Event::where('schedule_id', 1)->get() as $event) {
-            $event->delete();
-            Log::debug('Deleted event: '.$event->name);
-        }
+        DB::transaction(function () use ($dataJson) {
+            // Delete current timetable entries
+            foreach (Event::where('schedule_id', 1)->get() as $event) {
+                $event->delete();
+                Log::debug('Deleted event: '.$event->name);
+            }
 
-        $sortPosition = 0;
+            $sortPosition = 0;
 
-        foreach ($dataJson->timetable as $day) {
-            foreach ($day->events as $event) {
-                $sortPosition += 10;
+            foreach ($dataJson->timetable as $day) {
+                foreach ($day->events as $event) {
+                    $sortPosition += 10;
 
-                if (strtolower($event->category) === 'deadline') {
-                    $deadlines = explode("\n", $event->title);
+                    if (strtolower($event->category) === 'deadline') {
+                        $deadlines = explode("\n", $event->title);
 
-                    foreach ($deadlines as $deadline) {
-                        $sortPosition += 10;
+                        foreach ($deadlines as $deadline) {
+                            $sortPosition += 10;
 
+                            $e = new Event();
+                            $e->schedule_id = 1;
+                            $e->event_type_id = $this->categoryToEventIdMapping($event->category);
+                            $e->name = $deadline;
+                            $e->starts_at = Carbon::parse($event->start);
+                            $e->is_visible = true;
+                            $e->sort_position = $sortPosition;
+                            $e->save();
+                        }
+                    } else {
                         $e = new Event();
                         $e->schedule_id = 1;
                         $e->event_type_id = $this->categoryToEventIdMapping($event->category);
-                        $e->name = $deadline;
+                        $e->name = $event->title;
                         $e->starts_at = Carbon::parse($event->start);
                         $e->is_visible = true;
                         $e->sort_position = $sortPosition;
                         $e->save();
                     }
-                } else {
-                    $e = new Event();
-                    $e->schedule_id = 1;
-                    $e->event_type_id = $this->categoryToEventIdMapping($event->category);
-                    $e->name = $event->title;
-                    $e->starts_at = Carbon::parse($event->start);
-                    $e->is_visible = true;
-                    $e->sort_position = $sortPosition;
-                    $e->save();
                 }
             }
-        }
+        });
 
         Cache::forever($cacheKey, $hash);
 
