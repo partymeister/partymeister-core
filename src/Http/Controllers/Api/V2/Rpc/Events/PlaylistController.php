@@ -70,7 +70,7 @@ class PlaylistController extends Controller
             }
         }
 
-        PlaylistService::generateEventPlaylist($event, $data);
+        app(PlaylistService::class)->generateEventPlaylist($event, $data);
 
         return response()->json([
             'data' => ['status' => 'ok'],

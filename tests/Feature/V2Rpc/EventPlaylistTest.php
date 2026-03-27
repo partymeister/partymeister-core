@@ -4,6 +4,7 @@ use Motor\Admin\Models\User;
 use Partymeister\Core\Models\Event;
 use Partymeister\Core\Models\EventType;
 use Partymeister\Core\Models\Schedule;
+use Partymeister\Slides\Services\PlaylistService;
 use Spatie\Permission\Models\Role;
 
 pest()->group('V2', 'V2Rpc', 'EventPlaylist');
@@ -51,10 +52,11 @@ describe('V2 RPC Event Playlist API', function () {
     it('POST returns status ok', function () {
         $event = Event::first();
 
-        $mock = Mockery::mock('alias:Partymeister\Slides\Services\PlaylistService');
-        $mock->shouldReceive('generateEventPlaylist')
-            ->once()
-            ->andReturnNull();
+        $this->mock(PlaylistService::class, function ($mock) {
+            $mock->shouldReceive('generateEventPlaylist')
+                ->once()
+                ->andReturnNull();
+        });
 
         $response = $this->asAdmin()->postJson('/api/v2/rpc/events/'.$event->id.'/playlist', [
             'slides' => [],
