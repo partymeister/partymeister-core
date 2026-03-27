@@ -2,7 +2,7 @@
 
 namespace Partymeister\Core\Http\Controllers\Api\V2\PublicApi;
 
-use Motor\Core\Http\Controllers\Api\V2\ApiController;
+use Illuminate\Routing\Controller;
 use Partymeister\Core\Http\Resources\V2\PublicVisitorCollection;
 use Partymeister\Core\Http\Resources\V2\PublicVisitorResource;
 use Partymeister\Core\Services\VisitorService;
@@ -10,7 +10,7 @@ use Partymeister\Core\Services\VisitorService;
 /**
  * @tags Public
  */
-class VisitorsController extends ApiController
+class VisitorsController extends Controller
 {
     /**
      * @response Illuminate\Http\Resources\Json\AnonymousResourceCollection<Illuminate\Pagination\LengthAwarePaginator<PublicVisitorResource>>

@@ -4,7 +4,7 @@ namespace Partymeister\Core\Http\Controllers\Api\V2\Rpc\Events;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Motor\Admin\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use Partymeister\Core\Models\Event;
 use Partymeister\Slides\Models\SlideTemplate;
 use Partymeister\Slides\Services\PlaylistService;

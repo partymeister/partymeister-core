@@ -2,7 +2,7 @@
 
 namespace Partymeister\Core\Http\Controllers\Api\V2\PublicApi;
 
-use Motor\Core\Http\Controllers\Api\V2\ApiController;
+use Illuminate\Routing\Controller;
 use Partymeister\Core\Http\Resources\V2\EventTypeCollection;
 use Partymeister\Core\Http\Resources\V2\EventTypeResource;
 use Partymeister\Core\Models\EventType;
@@ -11,7 +11,7 @@ use Partymeister\Core\Services\EventTypeService;
 /**
  * @tags Public
  */
-class EventTypesController extends ApiController
+class EventTypesController extends Controller
 {
     /**
      * @response Illuminate\Http\Resources\Json\AnonymousResourceCollection<Illuminate\Pagination\LengthAwarePaginator<EventTypeResource>>
