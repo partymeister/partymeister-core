@@ -10,7 +10,7 @@ use Partymeister\Slides\Models\SlideTemplate;
 use Partymeister\Slides\Services\PlaylistService;
 
 /**
- * @tags Events
+ * @tags Core: Events
  */
 class PlaylistController extends Controller
 {

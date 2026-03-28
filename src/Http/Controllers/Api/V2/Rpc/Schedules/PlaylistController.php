@@ -11,7 +11,7 @@ use Partymeister\Core\Services\ScheduleService;
 use Partymeister\Slides\Models\SlideTemplate;
 
 /**
- * @tags Schedules
+ * @tags Core: Schedules
  */
 class PlaylistController extends Controller
 {

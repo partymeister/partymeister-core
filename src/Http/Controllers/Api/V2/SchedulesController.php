@@ -14,7 +14,7 @@ use Partymeister\Core\Models\Schedule;
 use Partymeister\Core\Services\ScheduleService;
 
 /**
- * @tags Schedules
+ * @tags Core: Schedules
  */
 class SchedulesController extends ApiController
 {

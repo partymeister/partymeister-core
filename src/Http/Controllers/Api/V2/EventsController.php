@@ -14,7 +14,7 @@ use Partymeister\Core\Models\Event;
 use Partymeister\Core\Services\EventService;
 
 /**
- * @tags Events
+ * @tags Core: Events
  */
 class EventsController extends ApiController
 {

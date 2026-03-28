@@ -8,7 +8,7 @@ use Partymeister\Core\Http\Resources\V2\PublicVisitorResource;
 use Partymeister\Core\Services\VisitorService;
 
 /**
- * @tags Public
+ * @tags Core: Public
  */
 class VisitorsController extends Controller
 {

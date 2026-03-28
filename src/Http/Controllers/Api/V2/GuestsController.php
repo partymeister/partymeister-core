@@ -14,7 +14,7 @@ use Partymeister\Core\Models\Guest;
 use Partymeister\Core\Services\GuestService;
 
 /**
- * @tags Guests
+ * @tags Core: Guests
  */
 class GuestsController extends ApiController
 {

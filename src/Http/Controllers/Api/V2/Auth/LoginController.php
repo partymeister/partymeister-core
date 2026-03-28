@@ -9,7 +9,7 @@ use Partymeister\Core\Http\Requests\Api\V2\Auth\LoginRequest;
 use Partymeister\Core\Http\Resources\V2\Auth\AuthVisitorResource;
 
 /**
- * @tags Visitor Auth
+ * @tags Core: Visitor Auth
  */
 class LoginController extends Controller
 {

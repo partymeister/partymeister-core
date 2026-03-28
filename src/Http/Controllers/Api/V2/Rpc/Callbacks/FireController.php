@@ -17,7 +17,7 @@ use Partymeister\Core\Models\Callback;
 use Partymeister\Core\Services\StuhlService;
 
 /**
- * @tags Callbacks
+ * @tags Core: Callbacks
  */
 class FireController extends Controller
 {

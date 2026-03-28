@@ -13,7 +13,7 @@ use Partymeister\Core\Mail\PasswordReset;
 use Partymeister\Core\Models\Visitor;
 
 /**
- * @tags Visitor Auth
+ * @tags Core: Visitor Auth
  */
 class PasswordForgotController extends Controller
 {

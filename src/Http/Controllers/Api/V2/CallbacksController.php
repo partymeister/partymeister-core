@@ -14,7 +14,7 @@ use Partymeister\Core\Models\Callback;
 use Partymeister\Core\Services\CallbackService;
 
 /**
- * @tags Callbacks
+ * @tags Core: Callbacks
  */
 class CallbacksController extends ApiController
 {

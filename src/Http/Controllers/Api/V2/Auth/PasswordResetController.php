@@ -11,7 +11,7 @@ use Partymeister\Core\Http\Resources\V2\Auth\MessageResource;
 use Partymeister\Core\Models\Visitor;
 
 /**
- * @tags Visitor Auth
+ * @tags Core: Visitor Auth
  */
 class PasswordResetController extends Controller
 {

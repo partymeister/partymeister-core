@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 use Partymeister\Core\Services\StuhlService;
 
 /**
- * @tags Callbacks
+ * @tags Core: Callbacks
  */
 class SendTestController extends Controller
 {

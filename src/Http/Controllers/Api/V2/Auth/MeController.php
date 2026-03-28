@@ -7,7 +7,7 @@ use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Core\Http\Resources\V2\VisitorResource;
 
 /**
- * @tags Visitor Auth
+ * @tags Core: Visitor Auth
  */
 class MeController extends Controller
 {

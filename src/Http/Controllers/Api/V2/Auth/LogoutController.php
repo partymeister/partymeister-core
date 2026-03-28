@@ -7,7 +7,7 @@ use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Core\Http\Resources\V2\Auth\MessageResource;
 
 /**
- * @tags Visitor Auth
+ * @tags Core: Visitor Auth
  */
 class LogoutController extends Controller
 {

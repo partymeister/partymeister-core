@@ -14,7 +14,7 @@ use Partymeister\Core\Models\MessageGroup;
 use Partymeister\Core\Services\MessageGroupService;
 
 /**
- * @tags Message Groups
+ * @tags Core: Message Groups
  */
 class MessageGroupsController extends ApiController
 {

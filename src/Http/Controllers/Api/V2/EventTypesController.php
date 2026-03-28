@@ -14,7 +14,7 @@ use Partymeister\Core\Models\EventType;
 use Partymeister\Core\Services\EventTypeService;
 
 /**
- * @tags Event Types
+ * @tags Core: Event Types
  */
 class EventTypesController extends ApiController
 {

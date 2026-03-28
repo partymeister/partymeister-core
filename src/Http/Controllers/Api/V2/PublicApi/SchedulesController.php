@@ -9,7 +9,7 @@ use Partymeister\Core\Models\Schedule;
 use Partymeister\Core\Services\ScheduleService;
 
 /**
- * @tags Public
+ * @tags Core: Public
  */
 class SchedulesController extends Controller
 {

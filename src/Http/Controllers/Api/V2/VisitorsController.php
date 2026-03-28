@@ -14,7 +14,7 @@ use Partymeister\Core\Models\Visitor;
 use Partymeister\Core\Services\VisitorService;
 
 /**
- * @tags Visitors
+ * @tags Core: Visitors
  */
 class VisitorsController extends ApiController
 {

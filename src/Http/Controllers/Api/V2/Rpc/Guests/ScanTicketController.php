@@ -10,7 +10,7 @@ use Partymeister\Core\Http\Resources\V2\GuestResource;
 use Partymeister\Core\Models\Guest;
 
 /**
- * @tags Guests
+ * @tags Core: Guests
  */
 class ScanTicketController extends Controller
 {

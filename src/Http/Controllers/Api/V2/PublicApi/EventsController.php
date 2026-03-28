@@ -9,7 +9,7 @@ use Partymeister\Core\Models\Event;
 use Partymeister\Core\Services\EventService;
 
 /**
- * @tags Public
+ * @tags Core: Public
  */
 class EventsController extends Controller
 {
