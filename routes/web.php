@@ -1,5 +1,6 @@
 <?php
-
+// Legacy backend web routes commented out — backend uses V2 API
+/*
 Route::group([
     'as' => 'backend.',
     'prefix' => 'backend',
@@ -85,3 +86,4 @@ Route::group([
     Route::patch('visitor-logins/{component_visitor_login}', 'ComponentVisitorLoginsController@update')
         ->name('visitor-logins.update');
 });
+*/

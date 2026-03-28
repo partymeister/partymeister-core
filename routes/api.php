@@ -61,7 +61,8 @@ Route::prefix('api/v2/public')
         Route::get('visitors', [PublicApi\VisitorsController::class, 'index'])->name('visitors.index');
     });
 
-// Legacy API routes (kept as reference)
+// V1 routes commented out — V2 API is the active API
+/*
 Route::group([
     'middleware' => ['auth:api', 'bindings', 'permission'],
     'namespace' => 'Partymeister\Core\Http\Controllers\Api',
@@ -125,3 +126,4 @@ Route::group([
     Route::post('guests/scan_tickets', 'Guests\ScanTicketsController@index')
         ->name('guests.scan_tickets.index');
 });
+*/
