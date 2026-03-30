@@ -2,9 +2,9 @@
 
 namespace Partymeister\Core\Components;
 
-use Carbon\CarbonImmutable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Motor\CMS\Models\PageVersionComponent;
 use Partymeister\Core\Models\Component\ComponentSchedule;
@@ -23,11 +23,6 @@ class ComponentSchedules
      * @var PageVersionComponent
      */
     protected $pageVersionComponent;
-
-    /**
-     * @var array
-     */
-    protected $days = [];
 
     /**
      * ComponentSchedules constructor.
@@ -49,43 +44,40 @@ class ComponentSchedules
      */
     public function index(Request $request)
     {
-        $events = $this->component->schedule->events()
-            ->with('event_type')
-            ->where('is_visible', true)
-            ->orderBy('starts_at')
-            ->get();
+        $timetableJson = $this->loadTimetableJson();
 
-        foreach ($events as $event) {
-            $date = CarbonImmutable::parse($event->starts_at)->shiftTimezone('GMT')
-                                   ->setTimezone('Europe/Berlin');
-            $dayKey = $date->format('l, F jS');
-            $timeKey = $date->format('H:i');
-
-            $this->days[$dayKey][$timeKey][] = [
-                'web_color'   => $event->event_type->web_color,
-                'slide_color' => $event->event_type->slide_color,
-                'id'          => $event->id,
-                'typeid'      => $event->event_type->id,
-                'type'        => $event->event_type->name,
-                'name'        => $event->name,
-                'description' => '',
-                'link'        => '',
-                'starttime'   => $date->format('Y-m-d H:i'),
-                'endtime'     => '',
-            ];
-        }
-
-        return $this->render();
+        return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
+            'component'     => $this->component,
+            'timetableJson' => $timetableJson,
+        ]);
     }
 
     /**
-     * @return Factory|View
+     * Load timetable JSON from local file or remote URL.
+     * Same source priority as the import command.
      */
-    public function render()
+    private function loadTimetableJson(): string
     {
-        return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
-            'component' => $this->component,
-            'days'      => $this->days,
-        ]);
+        $localPath = '/data/timetable/timetable.json';
+
+        if (file_exists($localPath)) {
+            $data = file_get_contents($localPath);
+            if ($data !== false) {
+                return $data;
+            }
+        }
+
+        $url = config('partymeister-core.timetable_url');
+        if (! empty($url)) {
+            $data = @file_get_contents($url);
+            if ($data !== false) {
+                return $data;
+            }
+            Log::warning('Timetable component: failed to fetch from URL: '.$url);
+        }
+
+        Log::warning('Timetable component: no timetable source available');
+
+        return json_encode(['timetable' => []]);
     }
 }

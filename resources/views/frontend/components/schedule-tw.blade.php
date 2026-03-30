@@ -1,33 +1,166 @@
-@foreach ($days as $dayKey => $times)
-    <div class="mb-8 last:mb-0">
-    <h4 class="mb-2">{{$dayKey}}</h4>
-    <div class="overflow-x-auto">
-    <table class="w-full text-left">
-        <tbody>
-        @foreach ($times as $hourKey => $events)
-            <tr>
-                <td class="align-top w-[10%] px-4 py-3 border-t border-border text-text"><strong>{{$hourKey}}</strong></td>
-                <td class="px-4 py-3 border-t border-border">
-                    <table class="w-full text-left mb-0 pb-0 [&_tbody]:border-none [&_tr]:border-b-0 [&_td]:pt-0 [&_td]:pb-1">
-                        <tbody>
-                        @foreach($events as $event)
-                            <tr>
-                                <td class="w-[100px] border-t-0">
-                                    <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium"
-                                          style="color: black;background-color: {{$event['web_color']}}">{{$event['type']}}</span>
-                                </td>
-                                <td class="border-t-0 text-text">
-                                    {{$event['name']}}
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+<div x-data="timetable()" x-cloak>
+    <div class="mb-6 flex items-center gap-3">
+        <label class="text-sm font-medium text-text">Timezone:</label>
+        <select x-model="selectedTimezone"
+                class="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm text-text">
+            <template x-for="tz in timezones" :key="tz.value">
+                <option :value="tz.value" x-text="tz.label" :selected="tz.value === selectedTimezone"></option>
+            </template>
+        </select>
     </div>
-    </div>
-@endforeach
+
+    <template x-for="day in groupedTimetable" :key="day.day">
+        <div class="mb-8 last:mb-0">
+            <h4 class="mb-2" x-text="day.day"></h4>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <tbody>
+                    <template x-for="(row, rowIndex) in day.rows" :key="rowIndex">
+                        <tr>
+                            <td class="align-top w-[10%] px-4 py-3 border-t border-border text-text">
+                                <strong x-text="row.time"></strong>
+                            </td>
+                            <td class="px-4 py-3 border-t border-border">
+                                <table class="w-full text-left mb-0 pb-0 [&_tbody]:border-none [&_tr]:border-b-0 [&_td]:pt-0 [&_td]:pb-1">
+                                    <tbody>
+                                    <template x-for="(event, eventIndex) in row.events" :key="eventIndex">
+                                        <tr>
+                                            <td class="w-[100px] border-t-0 align-top">
+                                                <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium"
+                                                      :style="{ color: 'black', backgroundColor: event.backgroundColor }"
+                                                      x-text="event.category"></span>
+                                            </td>
+                                            <td class="border-t-0 text-text" x-html="lineBreaks(event.title)"></td>
+                                        </tr>
+                                    </template>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </template>
+</div>
+
+<script type="module">
+document.addEventListener('alpine:init', () => {
+    const timetableData = @json(json_decode($timetableJson))
+
+    const tzList = [
+        { label: 'Baker Island (GMT-12)',     value: 'Etc/GMT+12' },
+        { label: 'Pago Pago (GMT-11)',        value: 'Pacific/Pago_Pago' },
+        { label: 'Honolulu (GMT-10)',         value: 'Pacific/Honolulu' },
+        { label: 'Anchorage (GMT-9)',         value: 'America/Anchorage' },
+        { label: 'Los Angeles (GMT-8)',       value: 'America/Los_Angeles' },
+        { label: 'Denver (GMT-7)',            value: 'America/Denver' },
+        { label: 'Chicago (GMT-6)',           value: 'America/Chicago' },
+        { label: 'New York (GMT-5)',          value: 'America/New_York' },
+        { label: 'Santiago (GMT-4)',          value: 'America/Santiago' },
+        { label: 'Buenos Aires (GMT-3)',      value: 'America/Argentina/Buenos_Aires' },
+        { label: 'South Georgia (GMT-2)',     value: 'Atlantic/South_Georgia' },
+        { label: 'Azores (GMT-1)',            value: 'Atlantic/Azores' },
+        { label: 'London (GMT)',              value: 'Europe/London' },
+        { label: 'Berlin (GMT+1)',            value: 'Europe/Berlin' },
+        { label: 'Helsinki (GMT+2)',          value: 'Europe/Helsinki' },
+        { label: 'Moscow (GMT+3)',            value: 'Europe/Moscow' },
+        { label: 'Dubai (GMT+4)',             value: 'Asia/Dubai' },
+        { label: 'Karachi (GMT+5)',           value: 'Asia/Karachi' },
+        { label: 'Mumbai (GMT+5:30)',         value: 'Asia/Kolkata' },
+        { label: 'Kathmandu (GMT+5:45)',      value: 'Asia/Kathmandu' },
+        { label: 'Dhaka (GMT+6)',             value: 'Asia/Dhaka' },
+        { label: 'Bangkok (GMT+7)',           value: 'Asia/Bangkok' },
+        { label: 'Shanghai (GMT+8)',          value: 'Asia/Shanghai' },
+        { label: 'Tokyo (GMT+9)',             value: 'Asia/Tokyo' },
+        { label: 'Sydney (GMT+10)',           value: 'Australia/Sydney' },
+        { label: 'Noumea (GMT+11)',           value: 'Pacific/Noumea' },
+        { label: 'Auckland (GMT+12)',         value: 'Pacific/Auckland' },
+        { label: 'Apia (GMT+13)',             value: 'Pacific/Apia' },
+        { label: 'Kiritimati (GMT+14)',       value: 'Pacific/Kiritimati' },
+    ]
+
+    function detectTimezone() {
+        let localTz = Intl.DateTimeFormat().resolvedOptions().timeZone
+        let localOffset = new Date().getTimezoneOffset()
+        let match = tzList.find(tz => tz.value === localTz)
+        if (!match) {
+            match = tzList.find(tz => {
+                let fmt = new Intl.DateTimeFormat('en-GB', { timeZone: tz.value, timeZoneName: 'shortOffset' })
+                let parts = fmt.formatToParts(new Date())
+                let offsetStr = parts.find(p => p.type === 'timeZoneName').value
+                let m = offsetStr.match(/GMT([+-])(\d{1,2})(?::(\d{2}))?/)
+                if (!m && offsetStr === 'GMT') return localOffset === 0
+                if (!m) return false
+                let mins = (parseInt(m[2]) * 60 + (m[3] ? parseInt(m[3]) : 0)) * (m[1] === '+' ? -1 : 1)
+                return mins === localOffset
+            })
+        }
+        return match ? match.value : 'Europe/Berlin'
+    }
+
+    Alpine.data('timetable', () => ({
+        selectedTimezone: detectTimezone(),
+        timezones: tzList,
+
+        get groupedTimetable() {
+            if (!timetableData?.timetable) return []
+            let dayMap = new Map()
+            let dayOrder = []
+
+            for (const day of timetableData.timetable) {
+                for (const event of day.events) {
+                    let d = new Date(event.start)
+                    let dayName = d.toLocaleDateString('en-GB', {
+                        weekday: 'long',
+                        day: 'numeric',
+                        month: 'long',
+                        timeZone: this.selectedTimezone
+                    })
+                    // Capitalize first letter to match "Friday, 3 April" style
+                    dayName = dayName.replace(/^\w/, c => c.toUpperCase())
+                    if (!dayMap.has(dayName)) {
+                        dayMap.set(dayName, [])
+                        dayOrder.push(dayName)
+                    }
+                    dayMap.get(dayName).push(event)
+                }
+            }
+
+            return dayOrder.map(dayName => {
+                // Group events by time for the nested table layout
+                let timeMap = new Map()
+                let timeOrder = []
+                for (const event of dayMap.get(dayName)) {
+                    let time = this.formatTime(event.start)
+                    if (!timeMap.has(time)) {
+                        timeMap.set(time, [])
+                        timeOrder.push(time)
+                    }
+                    timeMap.get(time).push(event)
+                }
+                let rows = timeOrder.map(time => ({
+                    time,
+                    events: timeMap.get(time)
+                }))
+                return { day: dayName, rows }
+            })
+        },
+
+        formatTime(dateStr) {
+            return new Date(dateStr).toLocaleTimeString('en-GB', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false,
+                timeZone: this.selectedTimezone
+            })
+        },
+
+        lineBreaks(str) {
+            if (!str) return ''
+            return str.replaceAll('\n', '<br>')
+        }
+    }))
+})
+</script>
