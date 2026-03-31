@@ -49,37 +49,45 @@
 document.addEventListener('alpine:init', () => {
     const timetableData = @json(json_decode($timetableJson))
 
-    const tzList = [
-        { label: 'Baker Island (GMT-12)',     value: 'Etc/GMT+12' },
-        { label: 'Pago Pago (GMT-11)',        value: 'Pacific/Pago_Pago' },
-        { label: 'Honolulu (GMT-10)',         value: 'Pacific/Honolulu' },
-        { label: 'Anchorage (GMT-9)',         value: 'America/Anchorage' },
-        { label: 'Los Angeles (GMT-8)',       value: 'America/Los_Angeles' },
-        { label: 'Denver (GMT-7)',            value: 'America/Denver' },
-        { label: 'Chicago (GMT-6)',           value: 'America/Chicago' },
-        { label: 'New York (GMT-5)',          value: 'America/New_York' },
-        { label: 'Santiago (GMT-4)',          value: 'America/Santiago' },
-        { label: 'Buenos Aires (GMT-3)',      value: 'America/Argentina/Buenos_Aires' },
-        { label: 'South Georgia (GMT-2)',     value: 'Atlantic/South_Georgia' },
-        { label: 'Azores (GMT-1)',            value: 'Atlantic/Azores' },
-        { label: 'London (GMT)',              value: 'Europe/London' },
-        { label: 'Berlin (GMT+1)',            value: 'Europe/Berlin' },
-        { label: 'Helsinki (GMT+2)',          value: 'Europe/Helsinki' },
-        { label: 'Moscow (GMT+3)',            value: 'Europe/Moscow' },
-        { label: 'Dubai (GMT+4)',             value: 'Asia/Dubai' },
-        { label: 'Karachi (GMT+5)',           value: 'Asia/Karachi' },
-        { label: 'Mumbai (GMT+5:30)',         value: 'Asia/Kolkata' },
-        { label: 'Kathmandu (GMT+5:45)',      value: 'Asia/Kathmandu' },
-        { label: 'Dhaka (GMT+6)',             value: 'Asia/Dhaka' },
-        { label: 'Bangkok (GMT+7)',           value: 'Asia/Bangkok' },
-        { label: 'Shanghai (GMT+8)',          value: 'Asia/Shanghai' },
-        { label: 'Tokyo (GMT+9)',             value: 'Asia/Tokyo' },
-        { label: 'Sydney (GMT+10)',           value: 'Australia/Sydney' },
-        { label: 'Noumea (GMT+11)',           value: 'Pacific/Noumea' },
-        { label: 'Auckland (GMT+12)',         value: 'Pacific/Auckland' },
-        { label: 'Apia (GMT+13)',             value: 'Pacific/Apia' },
-        { label: 'Kiritimati (GMT+14)',       value: 'Pacific/Kiritimati' },
+    const tzCities = [
+        { city: 'Baker Island',  value: 'Etc/GMT+12' },
+        { city: 'Pago Pago',     value: 'Pacific/Pago_Pago' },
+        { city: 'Honolulu',      value: 'Pacific/Honolulu' },
+        { city: 'Anchorage',     value: 'America/Anchorage' },
+        { city: 'Los Angeles',   value: 'America/Los_Angeles' },
+        { city: 'Denver',        value: 'America/Denver' },
+        { city: 'Chicago',       value: 'America/Chicago' },
+        { city: 'New York',      value: 'America/New_York' },
+        { city: 'Santiago',      value: 'America/Santiago' },
+        { city: 'Buenos Aires',  value: 'America/Argentina/Buenos_Aires' },
+        { city: 'South Georgia', value: 'Atlantic/South_Georgia' },
+        { city: 'Azores',        value: 'Atlantic/Azores' },
+        { city: 'London',        value: 'Europe/London' },
+        { city: 'Saarbrücken',   value: 'Europe/Berlin' },
+        { city: 'Helsinki',      value: 'Europe/Helsinki' },
+        { city: 'Moscow',        value: 'Europe/Moscow' },
+        { city: 'Dubai',         value: 'Asia/Dubai' },
+        { city: 'Karachi',       value: 'Asia/Karachi' },
+        { city: 'Mumbai',        value: 'Asia/Kolkata' },
+        { city: 'Kathmandu',     value: 'Asia/Kathmandu' },
+        { city: 'Dhaka',         value: 'Asia/Dhaka' },
+        { city: 'Bangkok',       value: 'Asia/Bangkok' },
+        { city: 'Shanghai',      value: 'Asia/Shanghai' },
+        { city: 'Tokyo',         value: 'Asia/Tokyo' },
+        { city: 'Sydney',        value: 'Australia/Sydney' },
+        { city: 'Noumea',        value: 'Pacific/Noumea' },
+        { city: 'Auckland',      value: 'Pacific/Auckland' },
+        { city: 'Apia',          value: 'Pacific/Apia' },
+        { city: 'Kiritimati',    value: 'Pacific/Kiritimati' },
     ]
+
+    const now = new Date()
+    const tzList = tzCities.map(tz => {
+        let fmt = new Intl.DateTimeFormat('en-GB', { timeZone: tz.value, timeZoneName: 'shortOffset' })
+        let parts = fmt.formatToParts(now)
+        let offset = parts.find(p => p.type === 'timeZoneName').value
+        return { label: tz.city + ' (' + offset + ')', value: tz.value }
+    })
 
     function detectTimezone() {
         let localTz = Intl.DateTimeFormat().resolvedOptions().timeZone
