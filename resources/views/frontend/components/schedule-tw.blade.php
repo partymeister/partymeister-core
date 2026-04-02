@@ -118,20 +118,24 @@ document.addEventListener('alpine:init', () => {
             let dayOrder = []
 
             for (const day of timetableData.timetable) {
-                for (const event of day.events) {
-                    let d = new Date(event.start)
-                    let dayName = d.toLocaleDateString('en-GB', {
-                        weekday: 'long',
+                // Use the day label from the JSON (party days, not calendar dates)
+                // Append the calendar date of the first event for context
+                let firstEvent = day.events[0]
+                let dateStr = firstEvent
+                    ? new Date(firstEvent.start).toLocaleDateString('en-GB', {
                         day: 'numeric',
                         month: 'long',
                         timeZone: this.selectedTimezone
                     })
-                    // Capitalize first letter to match "Friday, 3 April" style
-                    dayName = dayName.replace(/^\w/, c => c.toUpperCase())
-                    if (!dayMap.has(dayName)) {
-                        dayMap.set(dayName, [])
-                        dayOrder.push(dayName)
-                    }
+                    : ''
+                let dayName = day.day.charAt(0) + day.day.slice(1).toLowerCase()
+                if (dateStr) dayName += ', ' + dateStr
+
+                if (!dayMap.has(dayName)) {
+                    dayMap.set(dayName, [])
+                    dayOrder.push(dayName)
+                }
+                for (const event of day.events) {
                     dayMap.get(dayName).push(event)
                 }
             }
