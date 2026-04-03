@@ -68,7 +68,6 @@
 </head>
 
 <body>
-<div id="app"></div>
 <div id="schedule-container">
     <div id="clock">
         <clock></clock>
@@ -92,63 +91,55 @@
         </table>
     </div>
 </div>
-<script src="{{mix('js/motor-backend.js')}}"></script>
-<script>
-    let Clock = {
+@vite(['resources/assets/js/app.js'])
+<script type="module">
+    const Clock = {
         template: "<div>@{{hours}}:@{{minutes}}:@{{seconds}}</div>",
-        data: function data() {
+        data() {
             return {
                 hours: '',
                 minutes: '',
                 seconds: '',
             };
         },
-        mounted: function ready() {
+        mounted() {
             this.updateDateTime();
         },
-
         methods: {
-            updateDateTime: function updateDateTime() {
-                let self = this;
-                let now = new Date();
-
-                self.hours = now.getHours();
-                self.minutes = self.getZeroPad(now.getMinutes());
-                self.seconds = self.getZeroPad(now.getSeconds());
-
-                setTimeout(self.updateDateTime, 1000);
+            updateDateTime() {
+                const now = new Date();
+                this.hours = now.getHours();
+                this.minutes = this.getZeroPad(now.getMinutes());
+                this.seconds = this.getZeroPad(now.getSeconds());
+                setTimeout(() => this.updateDateTime(), 1000);
             },
-            getZeroPad: function getZeroPad(n) {
+            getZeroPad(n) {
                 return (parseInt(n, 10) >= 10 ? '' : '0') + n;
             }
         }
     };
 
-    let Countdown = {
-        template: '<div :class="cssClass">@{{hours}}:@{{minutes}}:@{{seconds}}</div>',
+    const Countdown = {
+        template: '<div>@{{hours}}:@{{minutes}}:@{{seconds}}</div>',
         props: ['date', 'index'],
-        data: function data() {
+        data() {
             return {
                 hours: '',
                 minutes: '',
                 seconds: '',
-                cssClass: '',
             };
         },
-        mounted: function ready() {
+        mounted() {
             this.updateDateTime();
         },
-
         methods: {
-            updateDateTime: function updateDateTime() {
-                let self = this;
-                let now = new Date();
-                let target = new Date(this.date);
-
+            updateDateTime() {
+                const now = new Date();
+                const target = new Date(this.date);
                 let seconds = Math.ceil(((target.getTime() - now.getTime()) / 1000));
 
                 if (seconds < 1800) {
-                    app.$emit('event-blink', {index: this.index});
+                    this.$root.setEventBlink(this.index);
                 }
 
                 let negative = false;
@@ -162,66 +153,63 @@
                 let minutes = Math.floor(seconds / 60);
                 seconds -= minutes * 60;
 
-                self.hours = self.getZeroPad(hours);
-                self.minutes = self.getZeroPad(minutes);
-                self.seconds = self.getZeroPad(seconds);
+                this.hours = this.getZeroPad(hours);
+                this.minutes = this.getZeroPad(minutes);
+                this.seconds = this.getZeroPad(seconds);
 
                 if (negative) {
-                    self.hours = 'since ' + self.getZeroPad(hours);
-
+                    this.hours = 'since ' + this.getZeroPad(hours);
                 }
 
-                setTimeout(self.updateDateTime, 1000);
+                setTimeout(() => this.updateDateTime(), 1000);
             },
-            getZeroPad: function getZeroPad(n) {
+            getZeroPad(n) {
                 return (parseInt(n, 10) >= 10 ? '' : '0') + n;
             }
         }
     };
 
-    let app = new Vue({
-        el: '#schedule-container',
-        data: {
-            events: [],
-            filteredEvents: []
+    const app = Vue.createApp({
+        data() {
+            return {
+                events: [],
+                filteredEvents: []
+            };
         },
         components: {
-            Clock: Clock,
-            Countdown: Countdown
+            Clock,
+            Countdown
         },
         methods: {
-            formatDate: function (dateString) {
-                let date = new Date(dateString);
+            formatDate(dateString) {
+                const date = new Date(dateString);
                 return date.getFullYear() + '-' + this.getZeroPad(date.getUTCMonth() + 1) + '-' + this.getZeroPad(date.getDate()) + ' ' + this.getZeroPad(date.getHours()) + ':' + this.getZeroPad(date.getMinutes());
             },
-            getZeroPad: function getZeroPad(n) {
+            getZeroPad(n) {
                 return (parseInt(n, 10) >= 10 ? '' : '0') + n;
             },
-            filterEvents: function () {
+            filterEvents() {
                 this.filteredEvents = this.events.filter(function (event) {
-                    let now = new Date();
-                    let target = new Date(event.starts_at);
-                    if (event.is_visible && (Math.ceil(((target.getTime() - now.getTime()) / 1000)) > (-3 * 3600))) {
-                        return true;
-                    }
-                    return false;
+                    const now = new Date();
+                    const target = new Date(event.starts_at);
+                    return event.is_visible && (Math.ceil(((target.getTime() - now.getTime()) / 1000)) > (-3 * 3600));
                 });
+            },
+            setEventBlink(index) {
+                this.events[index].blink = true;
             }
         },
-        mounted: function () {
+        mounted() {
+            const self = this;
             axios.get('{{ route('ajax.schedules.show', ['schedule' => $record ]) }}').then(function (response) {
-                app.events = response.data.data.events;
-                app.filterEvents();
-            });
-            this.$on('event-blink', function (data) {
-                Vue.set(this.events[data.index], 'blink', true);
+                self.events = response.data.data.events;
+                self.filterEvents();
             });
             setInterval(function () {
-                app.filterEvents();
+                self.filterEvents();
             }, 1000 * 60 * 15);
         }
-
-    });
+    }).mount('#schedule-container');
 </script>
 </body>
 </html>
