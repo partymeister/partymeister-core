@@ -8,7 +8,6 @@ use Partymeister\Core\Console\Commands\PartymeisterCoreCheckCallbacksCommand;
 use Partymeister\Core\Console\Commands\PartymeisterCoreImportTicketsApiCommand;
 use Partymeister\Core\Console\Commands\PartymeisterCoreImportTicketsCSVCommand;
 use Partymeister\Core\Console\Commands\PartymeisterCoreImportTimetableFromWebsiteCommand;
-use Partymeister\Core\Http\Middleware\Frontend\Visitor;
 use Partymeister\Core\Models\Callback;
 use Partymeister\Core\Models\Component\ComponentSchedule;
 use Partymeister\Core\Models\Component\ComponentVisitorLogin;
@@ -17,6 +16,7 @@ use Partymeister\Core\Models\EventType;
 use Partymeister\Core\Models\Guest;
 use Partymeister\Core\Models\MessageGroup;
 use Partymeister\Core\Models\Schedule;
+use Partymeister\Core\Models\Visitor;
 
 /**
  * Class PartymeisterServiceProvider
@@ -30,8 +30,6 @@ class PartymeisterServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        app('router')->pushMiddlewareToGroup('frontend', Visitor::class);
-
         $this->config();
         $this->routes();
         $this->routeModelBindings();
@@ -42,7 +40,6 @@ class PartymeisterServiceProvider extends ServiceProvider
         $this->registerCommands();
         $this->migrations();
         $this->publishResourceAssets();
-        $this->components();
         merge_local_config_with_db_configuration_variables('partymeister-core');
     }
 
@@ -51,7 +48,6 @@ class PartymeisterServiceProvider extends ServiceProvider
     public function routes()
     {
         if (! $this->app->routesAreCached()) {
-            require __DIR__.'/../../routes/web.php';
             require __DIR__.'/../../routes/api.php';
         }
     }
@@ -75,7 +71,7 @@ class PartymeisterServiceProvider extends ServiceProvider
             return Guest::findOrFail($id);
         });
         Route::bind('visitor', function ($id) {
-            return \Partymeister\Core\Models\Visitor::findOrFail($id);
+            return Visitor::findOrFail($id);
         });
         Route::bind('message_group', function ($id) {
             return MessageGroup::findOrFail($id);
@@ -145,11 +141,5 @@ class PartymeisterServiceProvider extends ServiceProvider
         ];
 
         $this->publishes($assets, 'partymeister-core-install-resources');
-    }
-
-    public function components()
-    {
-        $config = $this->app['config']->get('motor-cms-page-components', []);
-        $this->app['config']->set('motor-cms-page-components', array_replace_recursive(require __DIR__.'/../../config/motor-cms-page-components.php', $config));
     }
 }
