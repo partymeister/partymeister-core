@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Kra8\Snowflake\HasShortflakePrimary;
+use Mattiverse\Userstamps\Traits\Userstamps;
 use Motor\Admin\Models\User;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
 use Partymeister\Core\Database\Factories\EventTypeFactory;
-use RichanFongdasen\EloquentBlameable\BlameableTrait;
 
 /**
  * Partymeister\Core\Models\EventType
@@ -51,11 +51,11 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  */
 class EventType extends Model
 {
-    use BlameableTrait;
     use Filterable;
     use HasFactory;
     use HasShortflakePrimary;
     use Searchable;
+    use Userstamps;
 
     protected static function newFactory()
     {
